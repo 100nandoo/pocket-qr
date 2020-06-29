@@ -1,13 +1,12 @@
 package com.nandoo.pocketqr.features.barcode.ui
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.features.barcode.domain.Barcode
 import com.nandoo.pocketqr.features.barcode.domain.BarcodeType
+import kotlinx.android.synthetic.main.barcode_list_item.view.*
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-28.
@@ -20,25 +19,19 @@ enum class BarcodeItemView(val id: Int) {
 open class BarcodeItem(val barcode: Barcode) : AbstractItem<BarcodeItem.ViewHolder>() {
 
     class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view) {
-        private val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
-        private val tvTitle = view.findViewById<TextView>(R.id.tv_title)
-        private val tvSubtitle = view.findViewById<TextView>(R.id.tv_subtitle)
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-            ivIcon.setImageResource(item.barcode.type.getIcon())
-            tvTitle.text = item.barcode.title
-            tvSubtitle.text = item.barcode.rawValue
+            itemView.iv_icon.setImageResource(item.barcode.type.getIcon())
+            itemView.tv_title.text = item.barcode.title
+            itemView.tv_subtitle.text = item.barcode.rawValue
         }
 
-        override fun unbindView(item: BarcodeItem) {
-            tvTitle.text = null
-            tvSubtitle.text = null
-        }
+        override fun unbindView(item: BarcodeItem) = Unit
     }
 
     override var identifier: Long
         get() = barcode.id.toLong()
-        set(value) {}
+        set(_) {}
 
     override val layoutRes: Int
         get() = R.layout.barcode_list_item

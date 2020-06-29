@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.fondesa.recyclerviewdivider.RecyclerViewDivider
 import com.fondesa.recyclerviewdivider.addDivider
 import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.mikepenz.fastadapter.FastAdapter

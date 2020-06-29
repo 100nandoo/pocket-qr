@@ -1,6 +1,7 @@
 package com.nandoo.pocketqr.features.barcode.domain
 
 import com.nandoo.pocketqr.common.extension.rawValueToUri
+import com.nandoo.pocketqr.common.extension.rawValueToUrl
 import com.nandoo.pocketqr.features.barcode.data.BarcodeEntity
 import java.util.*
 
@@ -35,6 +36,6 @@ private fun BarcodeEntity.generateTitle(): String = when (this.generateType()) {
     BarcodeType.EMAIL -> this.rawValue.rawValueToUri()?.path ?: this.rawValue
     BarcodeType.ISBN -> this.rawValue
     BarcodeType.PHONE -> this.rawValue.rawValueToUri()?.path ?: this.rawValue
-    BarcodeType.URL -> this.rawValue.rawValueToUri()?.authority ?: this.rawValue
+    BarcodeType.URL -> this.rawValue.rawValueToUrl()?.host ?: this.rawValue
     else -> rawValue
 }

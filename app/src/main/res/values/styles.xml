@@ -13,6 +13,11 @@
         <item name="android:fontFamily">@font/work_sans_bold</item>
     </style>
 
+    <style name="TypefaceH6">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
     <style name="TypefaceSubtitle1">
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/work_sans</item>

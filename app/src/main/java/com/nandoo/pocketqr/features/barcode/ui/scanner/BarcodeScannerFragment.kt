@@ -12,11 +12,14 @@ import com.afollestad.assent.askForPermissions
 import com.afollestad.assent.showSystemAppDetailsPage
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.ml.vision.FirebaseVision
+import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.common.AppPreferences
+import com.nandoo.pocketqr.common.extension.actionView
 import com.nandoo.pocketqr.ui.settings.SettingsFragment
-import com.nandoo.pocketqr.util.FirebaseVisionUtil
+import com.nandoo.pocketqr.util.MLKitVision
 import com.nandoo.pocketqr.util.PocketQrUtil
 import com.otaliastudios.cameraview.controls.Audio
 import com.otaliastudios.cameraview.frame.Frame
@@ -113,9 +116,15 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun frameProcessor(frame: Frame) {
-        val firebaseVisionImage = FirebaseVisionUtil.toFirebaseVisionImage(frame)
+        val options = BarcodeScannerOptions.Builder()
+            .setBarcodeFormats(
+                Barcode.FORMAT_QR_CODE,
+                Barcode.FORMAT_AZTEC
+            ).build()
 
-        FirebaseVision.getInstance().visionBarcodeDetector.detectInImage(firebaseVisionImage)
+        val scanner = BarcodeScanning.getClient(options)
+
+        scanner.process(MLKitVision.toInputImage(frame))
             .addOnSuccessListener { barcodes ->
 
                 if (barcodes.isNotEmpty()) {

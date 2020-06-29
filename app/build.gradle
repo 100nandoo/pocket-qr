@@ -92,7 +92,6 @@ dependencies {
     implementation FirebaseLibraries.core
     implementation FirebaseLibraries.analytics
 
-    implementation FirebaseLibraries.mlVision
     implementation FirebaseLibraries.qrCode
 
     /**

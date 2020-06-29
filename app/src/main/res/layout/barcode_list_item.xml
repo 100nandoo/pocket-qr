@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/material_color_white"
-    android:foreground="?attr/selectableItemBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_white_rounded_effect"
     android:layout_marginStart="@dimen/material_baseline_grid_1x"
     android:layout_marginEnd="@dimen/material_baseline_grid_1x"
     android:gravity="center_vertical"
@@ -17,7 +17,7 @@
         android:layout_height="@dimen/material_baseline_grid_3x"
         android:layout_marginStart="@dimen/material_baseline_grid_1x"
         android:contentDescription="icon"
-        android:tint="@color/secondaryColor"
+        app:tint="@color/secondaryColor"
         tools:src="@drawable/ic_barcode_url" />
 
     <LinearLayout
@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/TypefaceH5"
+            style="@style/TypefaceH6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
@@ -37,7 +37,7 @@
 
         <TextView
             android:id="@+id/tv_subtitle"
-            style="@style/TypefaceSubtitle1"
+            style="@style/TypefaceSubtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"

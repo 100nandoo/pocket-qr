@@ -41,13 +41,13 @@ object Versions {
     object Firebase {
         val core = "17.4.2"
         val mlVision = "24.0.3"
-        val qrCode = "16.1.1"
+        val qrCode = "16.0.0"
     }
 
     val assent = "3.0.0-RC4"
-    val cameraView = "2.6.1"
-    val fastAdapter = "5.0.2"
-    val koin = "2.1.5"
+    val cameraView = "2.6.2"
+    val fastAdapter = "5.1.0"
+    val koin = "2.1.6"
     val materialValues = "1.1.1"
     val rvDivider = "3.3.0"
     val timber = "4.7.1"
@@ -58,7 +58,7 @@ object Versions {
     val junitExt = "1.1.1"
 
     // Debug
-    val leakCanary = "2.3"
+    val leakCanary = "2.4"
 }
 
 object Libraries {
@@ -115,8 +115,7 @@ object FirebaseLibraries {
     val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
     val analytics = "com.google.firebase:firebase-analytics:${Versions.Firebase.core}"
 
-    val mlVision = "com.google.firebase:firebase-ml-vision:${Versions.Firebase.mlVision}"
-    val qrCode = "com.google.firebase:firebase-ml-vision-barcode-model:${Versions.Firebase.qrCode}"
+    val qrCode = "com.google.mlkit:barcode-scanning:${Versions.Firebase.qrCode}"
 }
 
 object ProjectLibraries {
