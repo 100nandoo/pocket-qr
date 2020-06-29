@@ -11,8 +11,13 @@
         android:label="@string/qr_code"
         tools:layout="@layout/barcode_scanner_fragment" >
         <action
-            android:id="@+id/action_qrcodeScannerFragment_to_barcodeHistoryFragment"
+            android:id="@+id/action_to_barcodeHistoryFragment"
             app:destination="@id/barcodeHistoryFragment" />
+
+        <action
+            android:id="@+id/action_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+
     </fragment>
 
     <fragment

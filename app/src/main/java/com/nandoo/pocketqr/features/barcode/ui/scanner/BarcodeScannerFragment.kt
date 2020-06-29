@@ -17,7 +17,6 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.common.AppPreferences
-import com.nandoo.pocketqr.common.extension.actionView
 import com.nandoo.pocketqr.ui.settings.SettingsFragment
 import com.nandoo.pocketqr.util.MLKitVision
 import com.nandoo.pocketqr.util.PocketQrUtil
@@ -56,8 +55,8 @@ class BarcodeScannerFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.item_barcode_history -> {
-                findNavController().navigate(BarcodeScannerFragmentDirections.actionQrcodeScannerFragmentToBarcodeHistoryFragment())
+            R.id.item_settings -> {
+                findNavController().navigate(BarcodeScannerFragmentDirections.actionToSettingsFragment())
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -72,6 +71,12 @@ class BarcodeScannerFragment : Fragment() {
     private fun initUi() {
         if (viewModel.openBarcodeHistoryFirst.not()) {
             setHasOptionsMenu(true)
+        }
+
+        extended_fab.apply {
+            setOnClickListener {
+                findNavController().navigate(BarcodeScannerFragmentDirections.actionToBarcodeHistoryFragment())
+            }
         }
     }
 

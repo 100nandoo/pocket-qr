@@ -30,18 +30,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun initUi() {
         val context = preferenceManager.context
         preferenceManager.createPreferenceScreen(context).let { screen ->
-            PreferenceCategory(context).let { qrCodeCategory ->
-                qrCodeCategory.key = CATEGORY_BARCODE
-                qrCodeCategory.title = getString(R.string.qr_code)
-                screen.addPreference(qrCodeCategory)
-
-                qrCodeCategory.addPreference(
-                    SwitchPreference(context).apply {
-                        key = BARCODE_OPEN_HISTORY_FIRST
-                        title = getString(R.string.open_qr_code_history_first)
-                    }
-                )
-            }
+//            PreferenceCategory(context).let { qrCodeCategory ->
+//                qrCodeCategory.key = CATEGORY_BARCODE
+//                qrCodeCategory.title = getString(R.string.qr_code)
+//                screen.addPreference(qrCodeCategory)
+//
+//                qrCodeCategory.addPreference(
+//                    SwitchPreference(context).apply {
+//                        key = BARCODE_OPEN_HISTORY_FIRST
+//                        title = getString(R.string.open_qr_code_history_first)
+//                    }
+//                )
+//            }
 
             PreferenceCategory(context).let { aboutCategory ->
                 aboutCategory.key = CATEGORY_ABOUT

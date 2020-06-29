@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/qr_code_parent"
@@ -11,17 +11,15 @@
         android:id="@+id/camera_view_kit"
         android:layout_width="@dimen/material_increment_5x"
         android:layout_height="@dimen/material_increment_5x"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toTopOf="@id/guideline_center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:adjustViewBounds="true" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_center"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/material_baseline_grid_2x"
+        android:contentDescription="@string/history"
+        app:icon="@drawable/ic_barcode_history" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
