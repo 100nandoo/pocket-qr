@@ -3,17 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
     android:background="@color/material_color_white"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_marginStart="@dimen/material_baseline_grid_1x"
+    android:layout_marginEnd="@dimen/material_baseline_grid_1x"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="@dimen/material_baseline_grid_1x">
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:contentDescription="icon"
-        android:layout_marginStart="@dimen/material_baseline_grid_1x"
         android:layout_width="@dimen/material_baseline_grid_3x"
         android:layout_height="@dimen/material_baseline_grid_3x"
+        android:layout_marginStart="@dimen/material_baseline_grid_1x"
+        android:contentDescription="icon"
         android:tint="@color/secondaryColor"
         tools:src="@drawable/ic_barcode_url" />
 

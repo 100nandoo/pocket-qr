@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/material_baseline_grid_1x"
     tools:context=".features.barcode.ui.history.BarcodeHistoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView

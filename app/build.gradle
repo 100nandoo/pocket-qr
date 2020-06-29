@@ -115,6 +115,9 @@ dependencies {
     // Material Value
     implementation Libraries.materialValues
 
+    // RecyclerView Divider
+    implementation Libraries.rvDivider
+
     // Timber
     implementation Libraries.timber
 

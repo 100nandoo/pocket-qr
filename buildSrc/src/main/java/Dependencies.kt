@@ -49,6 +49,7 @@ object Versions {
     val fastAdapter = "5.0.2"
     val koin = "2.1.5"
     val materialValues = "1.1.1"
+    val rvDivider = "3.3.0"
     val timber = "4.7.1"
 
     // Tests
@@ -72,6 +73,7 @@ object Libraries {
 
     val materialValues = "blue.aodev:material-values:${Versions.materialValues}"
 
+    val rvDivider = "com.github.fondesa:recycler-view-divider:${Versions.rvDivider}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }
 

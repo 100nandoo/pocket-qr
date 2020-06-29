@@ -4,15 +4,20 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.fondesa.recyclerviewdivider.RecyclerViewDivider
+import com.fondesa.recyclerviewdivider.addDivider
+import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.common.AppPreferences
 import com.nandoo.pocketqr.common.extension.actionView
+import com.nandoo.pocketqr.common.extension.dpToPx
 import com.nandoo.pocketqr.common.extension.shortToast
 import com.nandoo.pocketqr.features.barcode.ui.BarcodeItem
 import com.nandoo.pocketqr.ui.settings.SettingsFragment
@@ -74,6 +79,14 @@ class BarcodeHistoryFragment : Fragment() {
 
         rv_barcode_history.run {
             adapter = fastAdapter
+            addDivider()
+
+            context.dividerBuilder()
+                .color(ContextCompat.getColor(requireContext(), R.color.material_color_grey_100))
+                .size(8.dpToPx)
+                .showFirstDivider()
+                .build()
+                .addTo(this)
 
         }
 
