@@ -1,37 +1,133 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.gms.google-services'
+
+apply from: '../android_commons.gradle'
+
+def keystorePropertiesFile = file("../../signing/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
 
     defaultConfig {
-        applicationId "com.nandoo.pocketqr"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        applicationId Misc.appId
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions ProductFlavors.dimensions
+    productFlavors {
+        dev {
+            resConfigs "en", "xxhdpi"
+            versionNameSuffix ProductFlavors.devSuffix
+        }
+        full {
+            dimension "default"
+            versionNameSuffix ProductFlavors.fullSuffix
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation KotlinLibraries.kotlin
+
+    /**
+     * ==================== Android ====================
+     */
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.core
+    implementation AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.material
+
+    implementation AndroidLibraries.lifecycleExt
+    implementation AndroidLibraries.viewModel
+
+    implementation AndroidLibraries.navigationFrag
+    implementation AndroidLibraries.navigation
+
+    implementation AndroidLibraries.preference
+
+    implementation AndroidLibraries.roomRuntime
+    implementation AndroidLibraries.room
+    kapt AndroidLibraries.roomCompiler
+
+    /**
+     * ==================== Firebase ====================
+     */
+    implementation FirebaseLibraries.core
+    implementation FirebaseLibraries.analytics
+
+    implementation FirebaseLibraries.mlVision
+    implementation FirebaseLibraries.qrCode
+
+    /**
+     * ================= 3rd Party Libs ==================
+     */
+    // Assent
+    implementation Libraries.assent
+
+    // Camera
+    api Libraries.cameraView
+
+    // Fast adapter
+    implementation Libraries.fastAdapter
+    implementation Libraries.fastAdapterDiff
+
+    // Koin
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+
+    // Material Value
+    implementation Libraries.materialValues
+
+    // Timber
+    implementation Libraries.timber
+
+    /**
+     * ===================== Tests =======================
+     */
+    androidTestImplementation TestLibraries.espresso
+    testImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.junitExt
+
+    /**
+     * ===================== Debug ======================
+     */
+    debugImplementation DebugLibraries.leakCanary
 
 }

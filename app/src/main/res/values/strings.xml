@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Pocket QR</string>
+
+    <!-- Main -->
+    <string name="settings">Settings</string>
+
+    <!--  General  -->
+    <string name="allow">Allow</string>
+    <string name="open">Open</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+
+    <!--  Permission  -->
+    <string name="permission_required">Permission Required</string>
+    <string name="please_allow_access">Please allow access permission for %s.</string>
+    <string name="camera">camera</string>
+
+    <!--  Barcode  -->
+    <string name="qr_code">QR Code</string>
+    <string name="history">History</string>
+    <string name="copied">Copied!</string>
+
+    <!--  Settings  -->
+    <string name="open_qr_code_history_first">Open QR Code history first</string>
+
+    <string name="about">About</string>
+    <string name="build_version">Build version</string>
 </resources>

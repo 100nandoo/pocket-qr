@@ -1,10 +1,35 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="android:windowBackground">@color/material_color_grey_100</item>
+    </style>
+
+    <style name="TypefaceH5">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/work_sans_bold</item>
+    </style>
+
+    <style name="TypefaceSubtitle1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/work_sans</item>
+    </style>
+
+    <style name="TypefaceSubtitle2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
+    <style name="TypefaceButton">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:textColorPrimary">@color/material_color_white</item>
     </style>
 
 </resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@color/material_color_white"
+    android:orientation="horizontal"
+    android:padding="@dimen/material_baseline_grid_1x">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:contentDescription="icon"
+        android:layout_marginStart="@dimen/material_baseline_grid_1x"
+        android:layout_width="@dimen/material_baseline_grid_3x"
+        android:layout_height="@dimen/material_baseline_grid_3x"
+        android:tint="@color/secondaryColor"
+        tools:src="@drawable/ic_barcode_url" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TypefaceH5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_baseline_grid_2x"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="Reddit" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            style="@style/TypefaceSubtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_baseline_grid_2x"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="www.reddit.com/r/askmeanything/thisisverylongurl/soincancheckconat" />
+
+    </LinearLayout>
+
+</LinearLayout>

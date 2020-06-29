@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/qrcodeScannerFragment">
+
+    <fragment
+        android:id="@+id/qrcodeScannerFragment"
+        android:name="com.nandoo.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment"
+        android:label="@string/qr_code"
+        tools:layout="@layout/barcode_scanner_fragment" >
+        <action
+            android:id="@+id/action_qrcodeScannerFragment_to_barcodeHistoryFragment"
+            app:destination="@id/barcodeHistoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/barcodeHistoryFragment"
+        android:name="com.nandoo.pocketqr.features.barcode.ui.history.BarcodeHistoryFragment"
+        android:label="@string/history"
+        tools:layout="@layout/barcode_history_fragment">
+        <action
+            android:id="@+id/action_barcodeHistoryFragment_to_qrcodeScannerFragment"
+            app:destination="@id/qrcodeScannerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.nandoo.pocketqr.ui.settings.SettingsFragment"
+        android:label="@string/settings" />
+</navigation>
