@@ -1,25 +1,20 @@
 package com.nandoo.pocketqr.features.barcode.ui.history
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.fondesa.recyclerviewdivider.addDivider
-import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.common.AppPreferences
 import com.nandoo.pocketqr.common.extension.actionView
-import com.nandoo.pocketqr.common.extension.dpToPx
 import com.nandoo.pocketqr.common.extension.shortToast
 import com.nandoo.pocketqr.features.barcode.ui.BarcodeItem
 import com.nandoo.pocketqr.ui.settings.SettingsFragment
+import com.nandoo.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,7 +25,7 @@ class BarcodeHistoryFragment : Fragment() {
 
     private val appPreferences: AppPreferences by inject()
 
-    private val clipboardManager: ClipboardManager by inject()
+    private val pocketQrUtil: PocketQrUtil by inject()
 
     private val itemAdapter: ItemAdapter<BarcodeItem> by lazy {
         ItemAdapter<BarcodeItem>()
@@ -86,8 +81,7 @@ class BarcodeHistoryFragment : Fragment() {
         }
 
         fastAdapter.onLongClickListener = { _, _, item, _ ->
-            val clip = ClipData.newPlainText(getString(R.string.app_name), item.subtitle)
-            clipboardManager.setPrimaryClip(clip)
+            pocketQrUtil.copyToClipboard(item.subtitle)
             this.requireContext().shortToast(R.string.copied)
             false
         }

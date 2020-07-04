@@ -11,6 +11,7 @@ import com.nandoo.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.nandoo.pocketqr.features.barcode.ui.history.BarcodeHistoryViewModel
 import com.nandoo.pocketqr.features.barcode.ui.scanner.BarcodeScannerViewModel
 import com.nandoo.pocketqr.ui.settings.SettingsViewModel
+import com.nandoo.pocketqr.util.PocketQrUtil
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -26,6 +27,7 @@ val appModule: Module = module {
     single { PreferenceManager.getDefaultSharedPreferences(androidApplication()) }
     single { AppPreferences(get()) }
     single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
+    single { PocketQrUtil(androidContext(), get()) }
     viewModel { SettingsViewModel() }
 }
 

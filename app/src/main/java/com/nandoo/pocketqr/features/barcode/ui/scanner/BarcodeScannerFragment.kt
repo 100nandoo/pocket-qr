@@ -32,6 +32,8 @@ class BarcodeScannerFragment : Fragment() {
 
     private val appPreferences: AppPreferences by inject()
 
+    private val pocketQrUtil: PocketQrUtil by inject()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_scanner_fragment, container, false)
     }
@@ -94,7 +96,7 @@ class BarcodeScannerFragment : Fragment() {
                         }.show()
                 }
                 else -> {
-                    PocketQrUtil.Ui.permissionSnackbar(
+                    pocketQrUtil.permissionSnackbar(
                         qr_code_parent,
                         getString(R.string.please_allow_access, getString(R.string.camera))
                     ) { requestPermission() }
