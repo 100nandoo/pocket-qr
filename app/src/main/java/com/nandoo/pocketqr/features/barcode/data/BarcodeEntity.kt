@@ -10,6 +10,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class BarcodeEntity(
     val rawValue: String,
+    val label: String,
+    val displayValue: String,
     val created: Long,
     val format: Int,
     val type: Int

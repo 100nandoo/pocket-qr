@@ -78,24 +78,15 @@ class BarcodeHistoryFragment : Fragment() {
 
         rv_barcode_history.run {
             adapter = fastAdapter
-            addDivider()
-
-            context.dividerBuilder()
-                .color(ContextCompat.getColor(requireContext(), R.color.material_color_grey_100))
-                .size(8.dpToPx)
-                .showFirstDivider()
-                .build()
-                .addTo(this)
-
         }
 
         fastAdapter.onClickListener = { _, _, item, _ ->
-            this.requireContext().actionView(item.barcode.rawValue)
+            this.requireContext().actionView(item.rawValue)
             false
         }
 
         fastAdapter.onLongClickListener = { _, _, item, _ ->
-            val clip = ClipData.newPlainText(getString(R.string.app_name), item.barcode.title)
+            val clip = ClipData.newPlainText(getString(R.string.app_name), item.subtitle)
             clipboardManager.setPrimaryClip(clip)
             this.requireContext().shortToast(R.string.copied)
             false

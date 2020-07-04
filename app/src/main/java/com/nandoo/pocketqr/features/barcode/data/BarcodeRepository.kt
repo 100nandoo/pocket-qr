@@ -9,5 +9,7 @@ class BarcodeRepository(private val barcodeDao: BarcodeDao) {
 
     fun getAllLiveData() = barcodeDao.getAllLiveData()
 
+    fun getLastId() = barcodeDao.getLastId()
+
     suspend fun insert(barcodeEntity: BarcodeEntity) = barcodeDao.insertData(barcodeEntity)
 }

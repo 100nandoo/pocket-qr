@@ -20,6 +20,9 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
     @Query("SELECT * from barcodeentity")
     fun getAllLiveData(): LiveData<List<BarcodeEntity>>
 
+    @Query("SELECT * FROM barcodeentity ORDER BY ID DESC LIMIT 1")
+    fun getLastId(): Int
+
     @Query("SELECT EXISTS(SELECT 1 FROM barcodeentity WHERE rawValue = :rawValue LIMIT 1)")
     suspend fun isExist(rawValue: String): Boolean
 
