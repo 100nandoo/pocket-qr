@@ -9,7 +9,7 @@
         android:id="@+id/barcodeScannerFragment"
         android:name="com.nandoo.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment"
         android:label="@string/qr_code"
-        tools:layout="@layout/barcode_scanner_fragment" >
+        tools:layout="@layout/barcode_scanner_fragment">
         <action
             android:id="@+id/action_to_barcodeHistoryFragment"
             app:destination="@id/barcodeHistoryFragment" />
@@ -26,8 +26,25 @@
         android:label="@string/history"
         tools:layout="@layout/barcode_history_fragment">
         <action
-            android:id="@+id/action_barcodeHistoryFragment_to_qrcodeScannerFragment"
+            android:id="@+id/action_to_barcodeScannerFragment"
             app:destination="@id/barcodeScannerFragment" />
+
+        <action
+            android:id="@+id/action_to_barcodeDetailFragment"
+            app:destination="@id/barcodeDetailFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/barcodeDetailFragment"
+        android:name="com.nandoo.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment"
+        android:label="@string/detail"
+        tools:layout="@layout/barcode_detail_fragment">
+
+        <argument
+            android:name="BARCODE_ID"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
 
     <fragment

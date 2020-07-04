@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.nandoo.pocketqr.common.BaseDao
 import com.nandoo.pocketqr.features.barcode.data.BarcodeEntity
 
@@ -20,6 +21,12 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
     @Query("SELECT * from barcodeentity")
     fun getAllLiveData(): LiveData<List<BarcodeEntity>>
 
+    @Query("SELECT * FROM barcodeentity WHERE ID=:id")
+    fun getById(id: Int): BarcodeEntity
+
+    @Query("SELECT * FROM barcodeentity WHERE ID=:id")
+    fun getByIdLiveData(id: Int): LiveData<BarcodeEntity>
+
     @Query("SELECT * FROM barcodeentity ORDER BY ID DESC LIMIT 1")
     fun getLastId(): Int
 
@@ -33,4 +40,11 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
             insert(barcodeEntity)
         }
     }
+
+    @Update
+    fun updateBarcodes(vararg barcodes: BarcodeEntity)
+
+    @Query("UPDATE barcodeentity SET label = :label WHERE id = :id")
+    fun updateLabel(label: String, id: Int)
+
 }

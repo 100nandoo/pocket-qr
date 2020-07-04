@@ -54,7 +54,7 @@ class BarcodeHistoryFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_barcode_scan -> {
-                findNavController().navigate(BarcodeHistoryFragmentDirections.actionBarcodeHistoryFragmentToQrcodeScannerFragment())
+                findNavController().navigate(BarcodeHistoryFragmentDirections.actionToBarcodeScannerFragment())
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -81,8 +81,7 @@ class BarcodeHistoryFragment : Fragment() {
         }
 
         fastAdapter.onLongClickListener = { _, _, item, _ ->
-            pocketQrUtil.copyToClipboard(item.subtitle)
-            this.requireContext().shortToast(R.string.copied)
+            actionNavigateToDetail(item.id.toInt())
             false
         }
     }
@@ -91,5 +90,14 @@ class BarcodeHistoryFragment : Fragment() {
         viewModel.barcodesLiveData.observe(viewLifecycleOwner, Observer {
             FastAdapterDiffUtil[itemAdapter] = it
         })
+    }
+
+    private fun copyToClipboard(text: String){
+        pocketQrUtil.copyToClipboard(text)
+        this.requireContext().shortToast(R.string.copied)
+    }
+
+    private fun actionNavigateToDetail(id: Int){
+        findNavController().navigate(BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id))
     }
 }

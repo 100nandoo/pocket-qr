@@ -19,12 +19,26 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         }
     }
 
+    fun getById(id: Int): Barcode {
+        return Barcode(barcodeRepository.getById(id))
+    }
+
+    fun getByIdLiveData(id: Int): LiveData<Barcode> {
+        return Transformations.map(barcodeRepository.getByIdLiveData(id)) { entity ->
+            Barcode(entity)
+        }
+    }
+
     fun getLastId(): Int {
         return barcodeRepository.getLastId()
     }
 
     suspend fun insert(barcode: Barcode) {
         barcodeRepository.insert(barcode.toEntity)
+    }
+
+    fun updateLabel(label: String, id: Int){
+        barcodeRepository.updateLabel(label, id)
     }
 }
 
