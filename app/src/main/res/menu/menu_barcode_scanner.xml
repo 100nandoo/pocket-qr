@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/item_history"
+        android:icon="@drawable/ic_barcode_history"
+        android:title="@string/history"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/item_settings"
         android:icon="@drawable/ic_settings"
-        android:title="@string/history"
+        android:title="@string/settings"
         app:showAsAction="ifRoom" />
 
 </menu>

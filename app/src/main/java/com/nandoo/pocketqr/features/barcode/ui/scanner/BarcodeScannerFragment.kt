@@ -1,7 +1,5 @@
 package com.nandoo.pocketqr.features.barcode.ui.scanner
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -12,11 +10,11 @@ import com.afollestad.assent.askForPermissions
 import com.afollestad.assent.showSystemAppDetailsPage
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.common.AppPreferences
+import com.nandoo.pocketqr.common.extension.actionView
 import com.nandoo.pocketqr.ui.settings.SettingsFragment
 import com.nandoo.pocketqr.util.MLKitVision
 import com.nandoo.pocketqr.util.PocketQrUtil
@@ -27,7 +25,6 @@ import com.otaliastudios.cameraview.gesture.GestureAction
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class BarcodeScannerFragment : Fragment() {
 
@@ -55,6 +52,10 @@ class BarcodeScannerFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.item_history -> {
+                findNavController().navigate(BarcodeScannerFragmentDirections.actionToBarcodeHistoryFragment())
+                true
+            }
             R.id.item_settings -> {
                 findNavController().navigate(BarcodeScannerFragmentDirections.actionToSettingsFragment())
                 true
@@ -71,12 +72,6 @@ class BarcodeScannerFragment : Fragment() {
     private fun initUi() {
         if (viewModel.openBarcodeHistoryFirst.not()) {
             setHasOptionsMenu(true)
-        }
-
-        extended_fab.apply {
-            setOnClickListener {
-                findNavController().navigate(BarcodeScannerFragmentDirections.actionToBarcodeHistoryFragment())
-            }
         }
     }
 
@@ -121,11 +116,7 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun frameProcessor(frame: Frame) {
-        val options = BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-                Barcode.FORMAT_QR_CODE,
-                Barcode.FORMAT_AZTEC
-            ).build()
+        val options = BarcodeScannerOptions.Builder().build()
 
         val scanner = BarcodeScanning.getClient(options)
 
@@ -138,16 +129,12 @@ class BarcodeScannerFragment : Fragment() {
                     val rawValue = barcode.rawValue.toString()
 
                     if (viewModel.tempRawValue != rawValue) {
+
                         viewModel.setBarcode(barcode)
 
                         Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
-                            .setAction(getString(R.string.open)) {
-                                try {
-                                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rawValue)))
-                                } catch (e: Exception) {
-                                    Timber.w(e)
-                                }
-                            }.show()
+                            .setAction(getString(R.string.open)) { this.requireContext().actionView(rawValue) }
+                            .show()
                     }
                 }
             }

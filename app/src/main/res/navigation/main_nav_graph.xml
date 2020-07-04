@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/qrcodeScannerFragment">
+    app:startDestination="@id/barcodeScannerFragment">
 
     <fragment
-        android:id="@+id/qrcodeScannerFragment"
+        android:id="@+id/barcodeScannerFragment"
         android:name="com.nandoo.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment"
         android:label="@string/qr_code"
         tools:layout="@layout/barcode_scanner_fragment" >
@@ -27,7 +27,7 @@
         tools:layout="@layout/barcode_history_fragment">
         <action
             android:id="@+id/action_barcodeHistoryFragment_to_qrcodeScannerFragment"
-            app:destination="@id/qrcodeScannerFragment" />
+            app:destination="@id/barcodeScannerFragment" />
     </fragment>
 
     <fragment
