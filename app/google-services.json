@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "674604234453",
+    "firebase_url": "https://pocket-knife-59d95.firebaseio.com",
+    "project_id": "pocket-knife-59d95",
+    "storage_bucket": "pocket-knife-59d95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674604234453:android:e8af6e556f5af883b0945c",
+        "android_client_info": {
+          "package_name": "com.nandoo.pocketknife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0rnUIYca3QPEnPDqAArMFILXARrNqhp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674604234453:android:07022e812c52710fb0945c",
+        "android_client_info": {
+          "package_name": "com.nandoo.pocketknife.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674604234453-d6m22kd2mb5kjh6jh1da64qeiv676le5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nandoo.pocketknife.debug",
+            "certificate_hash": "3b3d3555bef1c226e88c490cc7580723cb4cea5d"
+          }
+        },
+        {
+          "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0rnUIYca3QPEnPDqAArMFILXARrNqhp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674604234453:android:739aa8d9a0dc583bb0945c",
+        "android_client_info": {
+          "package_name": "com.nandoo.pocketknife.full.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674604234453-j8j5u0vf48hsb9gttho6i9a0bsgeojgi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nandoo.pocketknife.full.debug",
+            "certificate_hash": "3b3d3555bef1c226e88c490cc7580723cb4cea5d"
+          }
+        },
+        {
+          "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0rnUIYca3QPEnPDqAArMFILXARrNqhp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
