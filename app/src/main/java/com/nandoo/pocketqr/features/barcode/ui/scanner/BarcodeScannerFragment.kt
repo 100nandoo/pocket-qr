@@ -23,7 +23,6 @@ import com.nandoo.pocketqr.util.MLKitVision
 import com.nandoo.pocketqr.util.PocketQrUtil
 import com.otaliastudios.cameraview.frame.Frame
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -41,7 +40,7 @@ class BarcodeScannerFragment : Fragment() {
 
     private val preview: Preview by lazy {
         Preview.Builder().build().apply {
-            setSurfaceProvider { previewView.createSurfaceProvider() }
+            setSurfaceProvider(previewView.createSurfaceProvider())
         }
     }
 
@@ -122,26 +121,14 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun setupCameraAndQrCodeDetector() {
-//        camera_view_kit.apply {
-//            audio = Audio.OFF
-//            setLifecycleOwner(viewLifecycleOwner)
-//            mapGesture(Gesture.PINCH, GestureAction.ZOOM)
-//            mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
-//            addFrameProcessor { frame ->
-//                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-//                    frameProcessor(frame)
-//                }
-//            }
-//        }
-
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             val cameraSelector = CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
 
             ProcessCameraProvider.getInstance(requireContext()).await().apply {
                 this.unbindAll()
                 try {
                     camera = this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview)
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     Timber.e(e)
                 }
             }
