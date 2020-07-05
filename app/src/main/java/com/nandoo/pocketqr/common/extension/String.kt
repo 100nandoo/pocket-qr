@@ -22,4 +22,3 @@ fun String.rawValueToUrl(): URL? {
         null
     }
 }
-

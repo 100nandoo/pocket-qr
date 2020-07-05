@@ -60,6 +60,10 @@ android {
             versionNameSuffix ProductFlavors.fullSuffix
         }
     }
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
@@ -102,6 +106,7 @@ dependencies {
 
     // Camera
     api Libraries.cameraView
+    implementation Libraries.dialog
 
     // Fast adapter
     implementation Libraries.fastAdapter

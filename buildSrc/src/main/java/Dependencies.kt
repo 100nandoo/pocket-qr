@@ -33,11 +33,11 @@ object Versions {
         val core = "1.2.0"
         val lifecycle = "2.2.0"
         val material = "1.2.0-alpha06"
-        val navigation = "2.2.2"
+        val navigation = "2.3.0"
         val preference = "1.1.1"
         val room = "2.2.5"
     }
-    
+
     object Firebase {
         val core = "17.4.2"
         val mlVision = "24.0.3"
@@ -46,6 +46,7 @@ object Versions {
 
     val assent = "3.0.0-RC4"
     val cameraView = "2.6.2"
+    val dialog = "3.3.0"
     val fastAdapter = "5.1.0"
     val koin = "2.1.6"
     val materialValues = "1.1.1"
@@ -64,6 +65,7 @@ object Versions {
 object Libraries {
     val assent = "com.afollestad.assent:core:${Versions.assent}"
     val cameraView = "com.otaliastudios:cameraview:${Versions.cameraView}"
+    val dialog = "com.afollestad.material-dialogs:input:${Versions.dialog}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"

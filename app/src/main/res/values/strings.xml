@@ -20,9 +20,16 @@
     <string name="history">History</string>
     <string name="copied">Copied!</string>
 
+    <!-- Barcode Detail  -->
+    <string name="detail">Detail</string>
+    <string name="edit_label">Edit Label</string>
+    <string name="hint_edit_label">Add your own label here</string>
+    <string name="submit">Submit</string>
+
     <!--  Settings  -->
     <string name="open_qr_code_history_first">Open QR Code history first</string>
 
     <string name="about">About</string>
     <string name="build_version">Build version</string>
+
 </resources>

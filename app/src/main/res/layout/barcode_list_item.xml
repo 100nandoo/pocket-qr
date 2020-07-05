@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_white_rounded_effect"
-    android:layout_marginStart="@dimen/material_baseline_grid_1x"
-    android:layout_marginEnd="@dimen/material_baseline_grid_1x"
+    android:background="@drawable/background_white_effect"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="@dimen/material_baseline_grid_1x">
@@ -27,7 +25,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/TypefaceH6"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
@@ -37,7 +35,7 @@
 
         <TextView
             android:id="@+id/tv_subtitle"
-            style="@style/TypefaceSubtitle2"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"

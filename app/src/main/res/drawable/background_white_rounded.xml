@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/material_color_white" />
-    <corners android:radius="@dimen/material_baseline_grid_1x" />
-</shape>

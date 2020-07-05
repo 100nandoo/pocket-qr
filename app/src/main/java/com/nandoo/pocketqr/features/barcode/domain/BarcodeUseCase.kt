@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.nandoo.pocketqr.features.barcode.data.BarcodeEntity
 import com.nandoo.pocketqr.features.barcode.data.BarcodeRepository
-import java.util.*
-import com.google.mlkit.vision.barcode.Barcode as MLKitBarcode
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
@@ -21,19 +19,36 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         }
     }
 
-    suspend fun insert(mlKitBarcode: MLKitBarcode) {
-        mlKitBarcode.map()?.let { barcodeRepository.insert(it) }
+    fun getById(id: Int): Barcode {
+        return Barcode(barcodeRepository.getById(id))
+    }
+
+    fun getByIdLiveData(id: Int): LiveData<Barcode> {
+        return Transformations.map(barcodeRepository.getByIdLiveData(id)) { entity ->
+            Barcode(entity)
+        }
+    }
+
+    fun getLastId(): Int {
+        return barcodeRepository.getLastId()
+    }
+
+    suspend fun insert(barcode: Barcode) {
+        barcodeRepository.insert(barcode.toEntity)
+    }
+
+    suspend fun updateLabel(label: String, id: Int){
+        barcodeRepository.updateLabel(label, id)
     }
 }
 
-fun MLKitBarcode.map(): BarcodeEntity? {
-    this.rawValue?.let {
-        return BarcodeEntity(
-            rawValue = it,
-            created = Date().time,
+private val Barcode.toEntity: BarcodeEntity
+    get() =
+        BarcodeEntity(
+            rawValue = this.rawValue,
+            label = this.label,
+            displayValue = this.displayValue,
+            created = this.created,
             format = this.format,
-            type = this.valueType
+            type = this.type.value
         )
-    }
-    return null
-}
