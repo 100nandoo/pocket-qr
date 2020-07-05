@@ -38,11 +38,7 @@ class BarcodeScannerFragment : Fragment() {
 
     private val pocketQrUtil: PocketQrUtil by inject()
 
-    private val preview: Preview by lazy {
-        Preview.Builder().build().apply {
-            setSurfaceProvider(previewView.createSurfaceProvider())
-        }
-    }
+    private var preview: Preview? = null
 
     private var imageCapture: ImageCapture? = null
     private var imageAnalyzer: ImageAnalysis? = null
@@ -54,6 +50,11 @@ class BarcodeScannerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         checkPreferences()
         initUi()
@@ -121,13 +122,18 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun setupCameraAndQrCodeDetector() {
+        Timber.v("Setup Camera")
         lifecycleScope.launch {
             val cameraSelector = CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
 
             ProcessCameraProvider.getInstance(requireContext()).await().apply {
+                preview = Preview.Builder().build()
+
                 this.unbindAll()
                 try {
                     camera = this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview)
+
+                    preview?.setSurfaceProvider(previewView.createSurfaceProvider())
                 } catch (e: Exception) {
                     Timber.e(e)
                 }
