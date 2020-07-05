@@ -8,6 +8,7 @@ import com.nandoo.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.nandoo.pocketqr.features.barcode.ui.BarcodeItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class BarcodeDetailViewModel(val barcodeUseCase: BarcodeUseCase) : ViewModel() {
 
@@ -22,6 +23,7 @@ class BarcodeDetailViewModel(val barcodeUseCase: BarcodeUseCase) : ViewModel() {
             viewModelScope.launch(Dispatchers.IO) {
                 barcodeLiveData.value?.title = label
                 barcodeUseCase.updateLabel(label, id)
+                Timber.v("Finish!")
             }
         }
     }

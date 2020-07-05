@@ -37,7 +37,7 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         barcodeRepository.insert(barcode.toEntity)
     }
 
-    fun updateLabel(label: String, id: Int){
+    suspend fun updateLabel(label: String, id: Int){
         barcodeRepository.updateLabel(label, id)
     }
 }
