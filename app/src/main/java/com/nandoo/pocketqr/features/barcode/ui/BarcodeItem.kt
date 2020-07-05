@@ -40,8 +40,8 @@ open class BarcodeItem(
     class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view) {
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-            val color = if (layoutPosition % 2 == 0) R.color.material_color_grey_100 else R.color.material_color_white
-            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, color))
+            val background = if (layoutPosition % 2 == 0) R.drawable.background_light_grey_effect else R.drawable.background_white_effect
+            itemView.background = (ContextCompat.getDrawable(itemView.context, background))
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_title.text = item.title
             itemView.tv_subtitle.text = item.subtitle
