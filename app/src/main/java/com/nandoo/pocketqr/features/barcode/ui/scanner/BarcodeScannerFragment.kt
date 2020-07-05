@@ -2,8 +2,11 @@ package com.nandoo.pocketqr.features.barcode.ui.scanner
 
 import android.os.Bundle
 import android.view.*
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,22 +16,20 @@ import com.afollestad.assent.askForPermissions
 import com.afollestad.assent.showSystemAppDetailsPage
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.common.AppPreferences
 import com.nandoo.pocketqr.common.extension.actionView
 import com.nandoo.pocketqr.ui.settings.SettingsFragment
-import com.nandoo.pocketqr.util.MLKitVision
 import com.nandoo.pocketqr.util.PocketQrUtil
-import com.otaliastudios.cameraview.frame.Frame
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import org.koin.androidx.scope.lifecycleScope as koinScope
 
 class BarcodeScannerFragment : Fragment() {
 
@@ -38,11 +39,10 @@ class BarcodeScannerFragment : Fragment() {
 
     private val pocketQrUtil: PocketQrUtil by inject()
 
-    private var preview: Preview? = null
+    private val preview: Preview by koinScope.inject()
 
-    private var imageCapture: ImageCapture? = null
-    private var imageAnalyzer: ImageAnalysis? = null
-    private var camera: Camera? = null
+    private val scanner: BarcodeScanner by koinScope.inject()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_scanner_fragment, container, false)
@@ -50,11 +50,6 @@ class BarcodeScannerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         checkPreferences()
         initUi()
@@ -122,46 +117,37 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun setupCameraAndQrCodeDetector() {
-        Timber.v("Setup Camera")
         lifecycleScope.launch {
             val cameraSelector = CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
 
             ProcessCameraProvider.getInstance(requireContext()).await().apply {
-                preview = Preview.Builder().build()
-
                 this.unbindAll()
-                try {
-                    camera = this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview)
 
-                    preview?.setSurfaceProvider(previewView.createSurfaceProvider())
+                val imageAnalysis = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build()
+                    .also { it.setAnalyzer(ContextCompat.getMainExecutor(requireContext()), BarcodeAnalyzer(scanner) { handleBarcode(it) }) }
+
+                try {
+                    this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
+                    preview.setSurfaceProvider(previewView.createSurfaceProvider())
                 } catch (e: Exception) {
                     Timber.e(e)
                 }
             }
         }
-
     }
 
-    private suspend fun frameProcessor(frame: Frame) {
-        val options = BarcodeScannerOptions.Builder().build()
+    private fun handleBarcode(barcode: Barcode) {
+        val rawValue = barcode.rawValue.toString()
+        Timber.d("Barcode raw value : $rawValue")
 
-        val scanner = BarcodeScanning.getClient(options)
+        if (viewModel.tempRawValue != rawValue) {
+            viewModel.setBarcode(barcode)
 
-        val barcodes = scanner.process(MLKitVision.toInputImage(frame)).await()
-
-        if (barcodes.isNotEmpty()) {
-
-            val barcode = barcodes.first()
-            val rawValue = barcode.rawValue.toString()
-
-            if (viewModel.tempRawValue != rawValue) {
-
-                viewModel.setBarcode(barcode)
-
-                Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.open)) { this.requireContext().actionView(rawValue) }
-                    .show()
-            }
+            Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.open)) { this@BarcodeScannerFragment.requireContext().actionView(rawValue) }
+                .show()
         }
     }
 }
