@@ -17,8 +17,12 @@
 
     <!--  Barcode  -->
     <string name="qr_code">QR Code</string>
-    <string name="history">History</string>
     <string name="copied">Copied!</string>
+
+    <!--    History  -->
+    <string name="history">History</string>
+    <string name="sort">Sort</string>
+    <string name="search">Search</string>
 
     <!-- Barcode Detail  -->
     <string name="detail">Detail</string>

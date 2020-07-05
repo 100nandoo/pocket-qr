@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
-        <item name="android:windowBackground">@color/material_color_grey_100</item>
+        <item name="android:windowBackground">@color/material_color_grey_200</item>
     </style>
 
     <style name="TypefaceButton">

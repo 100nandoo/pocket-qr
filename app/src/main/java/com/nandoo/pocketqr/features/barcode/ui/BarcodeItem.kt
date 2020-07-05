@@ -2,6 +2,7 @@ package com.nandoo.pocketqr.features.barcode.ui
 
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.nandoo.pocketqr.R
@@ -39,6 +40,8 @@ open class BarcodeItem(
     class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view) {
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
+            val color = if (layoutPosition % 2 == 0) R.color.material_color_grey_100 else R.color.material_color_white
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, color))
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_title.text = item.title
             itemView.tv_subtitle.text = item.subtitle
