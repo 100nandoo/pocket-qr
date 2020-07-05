@@ -12,11 +12,6 @@ object ProductFlavors {
     val fullSuffix = "-full"
 }
 
-object Modules {
-    val app = ":app"
-    val common = ":common"
-}
-
 object Releases {
     val versionCode = 1
     val versionName = "0.2"
@@ -24,11 +19,15 @@ object Releases {
 
 object Versions {
     val kotlin = "1.3.72"
+    val coroutinePlayServices = "1.3.7"
+    val coroutineGuava = "1.3.7"
     val gradle = "4.0.0"
     val gms = "4.3.3"
 
     object Android {
         val appCompat = "1.1.0"
+        val cameraX = "1.0.0-beta06"
+        val cameraView = "1.0.0-alpha13"
         val constraintLayout = "1.1.3"
         val core = "1.2.0"
         val lifecycle = "2.2.0"
@@ -40,7 +39,6 @@ object Versions {
 
     object Firebase {
         val core = "17.4.2"
-        val mlVision = "24.0.3"
         val qrCode = "16.0.0"
     }
 
@@ -91,13 +89,20 @@ object DebugLibraries {
 
 object KotlinLibraries {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    val coroutinePlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinePlayServices}"
+    val coroutineGuava = "org.jetbrains.kotlinx:kotlinx-coroutines-guava:${Versions.coroutineGuava}"
 }
 
 object AndroidLibraries {
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
-    val core = "androidx.core:core-ktx:${Versions.Android.core}"
+
+    val camera2 = "androidx.camera:camera-camera2:${Versions.Android.cameraX}"
+    val cameraLifecycle = "androidx.camera:camera-lifecycle:${Versions.Android.cameraX}"
+    val cameraView = "androidx.camera:camera-view:${Versions.Android.cameraView}"
+
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayout}"
+    val core = "androidx.core:core-ktx:${Versions.Android.core}"
     val material = "com.google.android.material:material:${Versions.Android.material}"
 
     val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.Android.lifecycle}"

@@ -69,11 +69,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.coroutineGuava
+    implementation KotlinLibraries.coroutinePlayServices
 
     /**
      * ==================== Android ====================
      */
     implementation AndroidLibraries.appCompat
+
+    implementation AndroidLibraries.camera2
+    implementation AndroidLibraries.cameraLifecycle
+    implementation AndroidLibraries.cameraView
+
     implementation AndroidLibraries.core
     implementation AndroidLibraries.constraintLayout
     implementation AndroidLibraries.material
