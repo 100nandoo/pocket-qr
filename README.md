@@ -8,10 +8,16 @@ Pocket QR app
 
 ## Todo
 
-- [ ] CameraX
+- [ ] Diff Adapter
+- [ ] Add sort functionality
+- [ ] Add filter functionality
+- [ ] Add favorite functionality
+- [ ] Tutorials for history
+- [ ] Tutorials for scanner
+- [ ] Tutorials for detail
+- [ ]
 - [ ] View Binding
 - [ ] Multi module support
-- [ ] Add sort functionality for barcode history
 - [ ] Pick Image QR Code
 - [ ] Shortcut
 - [ ] Widget
@@ -25,6 +31,7 @@ Pocket QR app
 - [x] Settings Page
 - [x] Integrate leakCanary
 - [x] Migrate to fast adapter
+- [x] CameraX
 
 ## Wishlist
 

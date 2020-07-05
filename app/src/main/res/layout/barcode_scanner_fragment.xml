@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".features.barcode.ui.scanner.BarcodeScannerFragment">
 
-    <com.otaliastudios.cameraview.CameraView
-        android:id="@+id/camera_view_kit"
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
         android:layout_width="@dimen/material_increment_5x"
         android:layout_height="@dimen/material_increment_5x"
         android:layout_gravity="center"
         android:adjustViewBounds="true" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
