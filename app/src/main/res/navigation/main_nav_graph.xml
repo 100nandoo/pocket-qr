@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/barcodeScannerFragment"
         android:name="com.nandoo.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment"
-        android:label="@string/qr_code"
+        android:label="@string/scanner"
         tools:layout="@layout/barcode_scanner_fragment">
         <action
             android:id="@+id/action_to_barcodeHistoryFragment"

@@ -45,6 +45,7 @@ object Versions {
     val assent = "3.0.0-RC4"
     val cameraView = "2.6.2"
     val dialog = "3.3.0"
+    val fancyShowcaseView = "1.3.0"
     val fastAdapter = "5.1.0"
     val koin = "2.1.6"
     val materialValues = "1.1.1"
@@ -64,6 +65,7 @@ object Libraries {
     val assent = "com.afollestad.assent:core:${Versions.assent}"
     val cameraView = "com.otaliastudios:cameraview:${Versions.cameraView}"
     val dialog = "com.afollestad.material-dialogs:input:${Versions.dialog}"
+    val fancyShowcaseView = "me.toptas.fancyshowcase:fancyshowcaseview:${Versions.fancyShowcaseView}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"

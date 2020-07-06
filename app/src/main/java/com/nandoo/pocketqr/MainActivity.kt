@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
+import me.toptas.fancyshowcase.FancyShowCaseView
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,4 +24,11 @@ class MainActivity : AppCompatActivity() {
         main_toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
+    override fun onBackPressed() {
+        if (FancyShowCaseView.isVisible(this)) {
+            FancyShowCaseView.hideCurrent(this)
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

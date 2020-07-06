@@ -16,6 +16,7 @@
     <string name="camera">camera</string>
 
     <!--  Barcode  -->
+    <string name="scanner">Scanner</string>
     <string name="qr_code">QR Code</string>
     <string name="copied">Copied!</string>
 
@@ -35,5 +36,8 @@
 
     <string name="about">About</string>
     <string name="build_version">Build version</string>
+
+    <string name="tutorial">Tutorial</string>
+    <string name="show_tutorial_for">Show tutorial for %1$s %2$s</string>
 
 </resources>

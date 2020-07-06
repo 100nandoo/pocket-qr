@@ -2,6 +2,7 @@ package com.nandoo.pocketqr.features.barcode.ui.history
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -9,13 +10,13 @@ import androidx.navigation.fragment.findNavController
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.nandoo.pocketqr.R
-import com.nandoo.pocketqr.common.AppPreferences
 import com.nandoo.pocketqr.common.extension.actionView
 import com.nandoo.pocketqr.common.extension.shortToast
 import com.nandoo.pocketqr.features.barcode.ui.BarcodeItem
-import com.nandoo.pocketqr.ui.settings.SettingsFragment
 import com.nandoo.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
+import me.toptas.fancyshowcase.FancyShowCaseView
+import me.toptas.fancyshowcase.FocusShape
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -23,8 +24,6 @@ import java.util.*
 class BarcodeHistoryFragment : Fragment() {
 
     private val viewModel: BarcodeHistoryViewModel by viewModel()
-
-    private val appPreferences: AppPreferences by inject()
 
     private val pocketQrUtil: PocketQrUtil by inject()
 
@@ -61,7 +60,6 @@ class BarcodeHistoryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        checkPreferences()
         initUi()
         subscribeUi()
     }
@@ -78,11 +76,6 @@ class BarcodeHistoryFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.findItem(R.id.item_barcode_scan).isVisible = viewModel.openBarcodeHistoryFirst
-        super.onPrepareOptionsMenu(menu)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_barcode_scan -> {
@@ -93,11 +86,6 @@ class BarcodeHistoryFragment : Fragment() {
         }
     }
 
-    private fun checkPreferences() {
-        viewModel.openBarcodeHistoryFirst = appPreferences.settings
-            .getBoolean(SettingsFragment.BARCODE_OPEN_HISTORY_FIRST, false)
-    }
-
     private fun initUi() {
         setHasOptionsMenu(true)
 
@@ -105,8 +93,12 @@ class BarcodeHistoryFragment : Fragment() {
             adapter = fastAdapter
         }
 
-        fastAdapter.onClickListener = { _, _, item, _ ->
-            this.requireContext().actionView(item.rawValue)
+        fastAdapter.onClickListener = { view, _, item, _ ->
+            if (viewModel.showTutorial && view != null) {
+                initShowcase(view)
+            } else {
+                this.requireContext().actionView(item.rawValue)
+            }
             false
         }
 
@@ -129,5 +121,18 @@ class BarcodeHistoryFragment : Fragment() {
 
     private fun actionNavigateToDetail(id: Int) {
         findNavController().navigate(BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id))
+    }
+
+    private fun initShowcase(view: View) {
+        FancyShowCaseView.Builder(requireActivity())
+            .focusOn(view)
+            .title("Tap on the item to open the QR code link. \n\nTap on hold to go into the detail.")
+            .focusShape(FocusShape.CIRCLE)
+            .focusCircleRadiusFactor(0.5)
+            .enableAutoTextPosition()
+            .build()
+            .show()
+
+        viewModel.showTutorial = false
     }
 }

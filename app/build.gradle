@@ -115,6 +115,9 @@ dependencies {
     api Libraries.cameraView
     implementation Libraries.dialog
 
+    // Fancy showcase view
+    implementation Libraries.fancyShowcaseView
+
     // Fast adapter
     implementation Libraries.fastAdapter
     implementation Libraries.fastAdapterDiff

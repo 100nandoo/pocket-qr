@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.camera.core.Preview
 import androidx.preference.PreferenceManager
 import androidx.room.Room
-import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.nandoo.pocketqr.common.AppPreferences
@@ -22,7 +21,6 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 /**
@@ -43,8 +41,8 @@ val barcodeModule: Module = module {
     single { BarcodeRepository(barcodeDao = get()) }
     single { BarcodeUseCase(barcodeRepository = get()) }
     viewModel { BarcodeScannerViewModel(barcodeUseCase = get()) }
-    viewModel { BarcodeHistoryViewModel(barcodeUseCase = get()) }
-    viewModel { BarcodeDetailViewModel(barcodeUseCase = get()) }
+    viewModel { BarcodeHistoryViewModel(barcodeUseCase = get(), appPreferences = get()) }
+    viewModel { BarcodeDetailViewModel(barcodeUseCase = get(), appPreferences = get()) }
     scope<BarcodeScannerFragment> {
         scoped { Preview.Builder().build() }
         scoped { BarcodeScanning.getClient(BarcodeScannerOptions.Builder().build()) }

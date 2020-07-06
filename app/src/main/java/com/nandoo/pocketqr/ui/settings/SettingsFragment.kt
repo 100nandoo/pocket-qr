@@ -13,10 +13,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     companion object {
         const val CATEGORY_BARCODE = "barcode"
+        const val CATEGORY_TUTORIAL = "tutorial"
         const val CATEGORY_ABOUT = "about"
 
         const val BARCODE_OPEN_HISTORY_FIRST = "barcode_open_history_first"
 
+        const val BARCODE_SCANNER_SHOW_TUTORIAL = "barcode_scanner_show_tutorial"
+        const val BARCODE_HISTORY_SHOW_TUTORIAL = "barcode_history_show_tutorial"
+        const val BARCODE_DETAIL_SHOW_TUTORIAL = "barcode_detail_show_tutorial"
 
         const val ABOUT_VERSION = "version"
     }
@@ -42,6 +46,27 @@ class SettingsFragment : PreferenceFragmentCompat() {
 //                    }
 //                )
 //            }
+
+            PreferenceCategory(context).let { tutorialCategory ->
+                tutorialCategory.key = CATEGORY_TUTORIAL
+                tutorialCategory.title = getString(R.string.tutorial)
+                screen.addPreference(tutorialCategory)
+
+                tutorialCategory.addPreference(
+                    SwitchPreference(context).apply {
+                        key = BARCODE_HISTORY_SHOW_TUTORIAL
+                        title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.history).decapitalize())
+                    }
+                )
+
+                tutorialCategory.addPreference(
+                    SwitchPreference(context).apply {
+                        key = BARCODE_DETAIL_SHOW_TUTORIAL
+                        title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.detail).decapitalize())
+                    }
+                )
+            }
+
 
             PreferenceCategory(context).let { aboutCategory ->
                 aboutCategory.key = CATEGORY_ABOUT

@@ -1,15 +1,18 @@
 package com.nandoo.pocketqr.features.barcode.ui.detail
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
 import com.nandoo.pocketqr.R
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
+import me.toptas.fancyshowcase.FancyShowCaseView
+import me.toptas.fancyshowcase.FocusShape
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BarcodeDetailFragment : Fragment() {
@@ -37,36 +40,39 @@ class BarcodeDetailFragment : Fragment() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_barcode_detail, menu)
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.item_edit_label -> {
-                editLabelDialog()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun initArgs() {
         viewModel.id = args.BARCODEID
     }
 
-    private fun initUi(){
-        setHasOptionsMenu(true)
+    private fun initUi() {
+        fab_edit.setOnClickListener {
+            editLabelDialog()
+        }
+
+        if (viewModel.showTutorial) {
+            initShowcase(fab_edit)
+        }
     }
 
-    private fun editLabelDialog(){
+    private fun editLabelDialog() {
         MaterialDialog(requireContext()).show {
-            input(hintRes = R.string.hint_edit_label, prefill = viewModel.barcodeLiveData.value?.title) { dialog, label ->
+            input(hintRes = R.string.hint_edit_label, prefill = viewModel.barcodeLiveData.value?.title) { _, label ->
                 viewModel.submit(label.toString())
             }
             positiveButton(R.string.submit)
         }
     }
+
+    private fun initShowcase(view: View) {
+        FancyShowCaseView.Builder(requireActivity())
+            .focusOn(view)
+            .title("Tap on icon to edit the label. \n\nThis label help you to find this item later on.")
+            .focusShape(FocusShape.CIRCLE)
+            .enableAutoTextPosition()
+            .build()
+            .show()
+
+        viewModel.showTutorial = false
+    }
+
 }
