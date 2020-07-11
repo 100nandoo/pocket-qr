@@ -10,6 +10,7 @@ import com.mikepenz.fastadapter.items.AbstractItem
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.domain.Barcode
 import com.hapley.pocketqr.features.barcode.domain.BarcodeType
+import com.mikepenz.fastadapter.ui.utils.FastAdapterUIUtils
 import kotlinx.android.synthetic.main.barcode_list_item.view.*
 import java.util.*
 
@@ -43,7 +44,7 @@ open class BarcodeItem(
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
             val background = if (layoutPosition % 2 == 0) R.drawable.background_light_grey_effect else R.drawable.background_white_effect
-            itemView.background = (ContextCompat.getDrawable(itemView.context, background))
+            itemView.background = FastAdapterUIUtils.getSelectableBackground(itemView.context, ContextCompat.getColor(itemView.context, R.color.primaryLightColor), true)
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_title.text = item.title
             itemView.tv_created_at.text = DateUtils.formatDateTime(itemView.context, item.created.time, FORMAT_ABBREV_ALL)

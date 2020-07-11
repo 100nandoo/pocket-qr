@@ -144,7 +144,7 @@ class BarcodeScannerFragment : Fragment() {
             }
         }
 
-        slider.addOnChangeListener { slider, value, fromUser ->
+        slider.addOnChangeListener { _, value, _ ->
             cameraControl?.setLinearZoom(value)
         }
     }

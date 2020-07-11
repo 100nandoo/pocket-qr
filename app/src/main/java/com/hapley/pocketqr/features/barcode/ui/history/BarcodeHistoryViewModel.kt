@@ -23,4 +23,6 @@ class BarcodeHistoryViewModel(barcodeUseCase: BarcodeUseCase, private val appPre
         }
 
     val barcodesLiveData = Transformations.map(barcodeUseCase.getAllLiveData()) { barcodes -> barcodes.map { BarcodeItem(it) } }
+
+    var selectedItem: BarcodeItem? = null
 }

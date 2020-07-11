@@ -2,17 +2,21 @@ package com.hapley.pocketqr.features.barcode.ui.history
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.extension.actionView
 import com.hapley.pocketqr.common.extension.shortToast
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.util.PocketQrUtil
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.helpers.ActionModeHelper
+import com.mikepenz.fastadapter.select.getSelectExtension
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
@@ -51,6 +55,61 @@ class BarcodeHistoryFragment : Fragment() {
     }
 
     private val fastAdapter = FastAdapter.with(itemAdapter)
+
+    private val selectExtension by lazy {
+        fastAdapter.getSelectExtension().apply {
+            isSelectable = true
+            multiSelect = false
+            selectOnLongClick = true
+        }
+    }
+
+    private val actionModeCallback = object : ActionMode.Callback {
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            return true
+        }
+
+        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            val selectedItem = viewModel.selectedItem
+            if (selectedItem != null) {
+                return when (item.itemId) {
+                    R.id.item_detail -> {
+                        actionNavigateToDetail(selectedItem.id.toInt())
+                        mode.finish()
+                        true
+                    }
+                    R.id.item_share -> {
+                        true
+                    }
+                    R.id.item_favorite -> {
+                        true
+                    }
+                    R.id.item_copy -> {
+                        copyToClipboard(selectedItem.rawValue)
+                        mode.finish()
+                        true
+                    }
+                    else -> false
+                }
+            }
+            return false
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode?) {
+            actionMode = null
+        }
+    }
+
+    private val actionModeHelper by lazy {
+        ActionModeHelper(fastAdapter, R.menu.menu_barcode_history_action_mode, actionModeCallback)
+    }
+
+    private var actionMode: ActionMode? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_history_fragment, container, false)
@@ -91,19 +150,33 @@ class BarcodeHistoryFragment : Fragment() {
         rv_barcode_history.run {
             adapter = fastAdapter
         }
+        selectExtension
 
         fastAdapter.onClickListener = { view, _, item, _ ->
-            if (viewModel.showTutorial && view != null) {
-                initShowcase(view)
-            } else {
-                this.requireContext().actionView(item.rawValue)
+            when {
+                selectExtension.selections.isEmpty() -> {
+                    if (viewModel.showTutorial && view != null) {
+                        initShowcase(view)
+                    } else {
+                        this.requireContext().actionView(item.rawValue)
+                        actionMode?.finish()
+                    }
+                }
+
+                selectExtension.selections.isNotEmpty() -> {
+                    when {
+                        item == viewModel.selectedItem -> actionMode?.finish()
+                        item != viewModel.selectedItem -> viewModel.selectedItem = item
+                    }
+                }
             }
-            false
+            actionMode != null
         }
 
-        fastAdapter.onLongClickListener = { _, _, item, _ ->
-            actionNavigateToDetail(item.id.toInt())
-            false
+        fastAdapter.onPreLongClickListener = { view, _, item, position ->
+            viewModel.selectedItem = item
+            actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
+            actionMode != null
         }
     }
 

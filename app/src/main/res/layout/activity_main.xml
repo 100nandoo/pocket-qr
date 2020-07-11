@@ -7,22 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <fragment
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="?actionBarSize"
-        app:defaultNavHost="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:navGraph="@navigation/main_nav_graph" />
-
-    <com.google.android.material.bottomappbar.BottomAppBar
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bottom_appbar"
         style="@style/ToolbarTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         app:fabAlignmentMode="center">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -30,6 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ToolbarTheme" />
-    </com.google.android.material.bottomappbar.BottomAppBar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:navGraph="@navigation/main_nav_graph" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

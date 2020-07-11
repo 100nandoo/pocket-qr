@@ -118,6 +118,8 @@ dependencies {
     // Fast adapter
     implementation Libraries.fastAdapter
     implementation Libraries.fastAdapterDiff
+    implementation Libraries.fastAdapterUi
+    implementation Libraries.fastAdapterUtils
 
     // Koin
     implementation Libraries.koin

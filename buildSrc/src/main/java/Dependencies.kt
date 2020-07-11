@@ -46,7 +46,7 @@ object Versions {
     val assent = "3.0.0-RC4"
     val cameraView = "2.6.2"
     val fancyShowcaseView = "1.3.0"
-    val fastAdapter = "5.1.0"
+    val fastAdapter = "5.2.0"
     val koin = "2.1.6"
     val materialValues = "1.1.1"
     val rvDivider = "3.3.0"
@@ -68,6 +68,8 @@ object Libraries {
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
+    val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
+    val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
 
     val koin = "org.koin:koin-androidx-scope:${Versions.koin}"
     val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
