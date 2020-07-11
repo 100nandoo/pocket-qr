@@ -74,20 +74,12 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:674604234453:android:739aa8d9a0dc583bb0945c",
+        "mobilesdk_app_id": "1:674604234453:android:589b72575358774fb0945c",
         "android_client_info": {
-          "package_name": "com.nandoo.pocketknife.full.debug"
+          "package_name": "com.nandoo.pocketknife.pro"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "674604234453-j8j5u0vf48hsb9gttho6i9a0bsgeojgi.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.nandoo.pocketknife.full.debug",
-            "certificate_hash": "3b3d3555bef1c226e88c490cc7580723cb4cea5d"
-          }
-        },
         {
           "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
           "client_type": 3

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.ads.MobileAds
+import com.nandoo.pocketqr.util.BuildUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 
@@ -15,6 +17,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initToolbar()
+        
+        if(BuildUtil.isPro.not()){
+            initAds()
+        }
+    }
+
+    private fun initAds() {
+        MobileAds.initialize(this)
     }
 
     private fun initToolbar() {

@@ -51,13 +51,14 @@ android {
 
     flavorDimensions ProductFlavors.dimensions
     productFlavors {
-        dev {
-            resConfigs "en", "xxhdpi"
-            versionNameSuffix ProductFlavors.devSuffix
+        free {
+            dimension ProductFlavors.dimensions
+            versionNameSuffix ProductFlavors.freeSuffix
         }
-        full {
-            dimension "default"
-            versionNameSuffix ProductFlavors.fullSuffix
+        pro {
+            applicationIdSuffix ".pro"
+            dimension ProductFlavors.dimensions
+            versionNameSuffix ProductFlavors.proSuffix
         }
     }
 
@@ -76,6 +77,7 @@ dependencies {
      * ==================== Android ====================
      */
     implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.ads
 
     implementation AndroidLibraries.camera2
     implementation AndroidLibraries.cameraLifecycle

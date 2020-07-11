@@ -16,12 +16,10 @@
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        ads:adSize="BANNER"
-        ads:adUnitId=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:visibility="gone" />
-
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ads_ids"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

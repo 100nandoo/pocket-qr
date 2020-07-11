@@ -14,6 +14,8 @@ import com.afollestad.assent.GrantResult
 import com.afollestad.assent.Permission
 import com.afollestad.assent.askForPermissions
 import com.afollestad.assent.showSystemAppDetailsPage
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.Barcode
@@ -22,8 +24,10 @@ import com.nandoo.pocketqr.R
 import com.nandoo.pocketqr.common.AppPreferences
 import com.nandoo.pocketqr.common.extension.actionView
 import com.nandoo.pocketqr.ui.settings.SettingsFragment
+import com.nandoo.pocketqr.util.BuildUtil
 import com.nandoo.pocketqr.util.PocketQrUtil
-import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
+import kotlinx.android.synthetic.main.barcode_scanner_fragment.previewView
+import kotlinx.android.synthetic.main.barcode_scanner_fragment.qr_code_parent
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -54,6 +58,7 @@ class BarcodeScannerFragment : Fragment() {
         checkPreferences()
         initUi()
         requestPermission()
+        initAds()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -148,6 +153,14 @@ class BarcodeScannerFragment : Fragment() {
             Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
                 .setAction(getString(R.string.open)) { this@BarcodeScannerFragment.requireContext().actionView(rawValue) }
                 .show()
+        }
+    }
+
+    private fun initAds() {
+        if (BuildUtil.isPro.not()) {
+            val request = AdRequest.Builder().build()
+            val adView = view?.findViewById<AdView>(R.id.adView)
+            adView?.loadAd(request)
         }
     }
 }
