@@ -8,8 +8,8 @@ object Misc {
 
 object ProductFlavors {
     val dimensions = "default"
-    val devSuffix = "-dev"
-    val fullSuffix = "-full"
+    val freeSuffix = "-free"
+    val proSuffix = "-pro"
 }
 
 object Releases {
@@ -26,6 +26,7 @@ object Versions {
 
     object Android {
         val appCompat = "1.1.0"
+        val ads = "19.2.0"
         val cameraX = "1.0.0-beta06"
         val cameraView = "1.0.0-alpha13"
         val constraintLayout = "1.1.3"
@@ -98,6 +99,7 @@ object KotlinLibraries {
 object AndroidLibraries {
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
+    val ads = "com.google.android.gms:play-services-ads:${Versions.Android.ads}"
 
     val camera2 = "androidx.camera:camera-camera2:${Versions.Android.cameraX}"
     val cameraLifecycle = "androidx.camera:camera-lifecycle:${Versions.Android.cameraX}"
