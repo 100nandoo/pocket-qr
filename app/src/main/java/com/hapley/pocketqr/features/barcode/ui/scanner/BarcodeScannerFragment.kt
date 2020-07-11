@@ -47,6 +47,7 @@ class BarcodeScannerFragment : Fragment() {
 
     private val scanner: BarcodeScanner by koinScope.inject()
 
+    private var cameraControl: CameraControl? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_scanner_fragment, container, false)
@@ -120,8 +121,6 @@ class BarcodeScannerFragment : Fragment() {
             }
         }
     }
-
-    private var cameraControl: CameraControl? = null
 
     private fun setupCameraAndQrCodeDetector() {
         lifecycleScope.launch {

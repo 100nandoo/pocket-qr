@@ -31,11 +31,11 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewHeader"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/material_baseline_grid_2x"
         android:text="@string/zoom_slider"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
         ads:layout_constraintBottom_toTopOf="@id/slider"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toStartOf="parent"

@@ -39,16 +39,14 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/material_baseline_grid_2x"
-        android:text="@string/edit_label"
-        android:textAllCaps="false"
+        android:src="@drawable/ic_barcode_edit"
         android:textColor="@color/material_color_white"
-        app:icon="@drawable/ic_barcode_edit"
-        app:iconTint="@color/material_color_white" />
+        app:tint="@color/material_color_white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
