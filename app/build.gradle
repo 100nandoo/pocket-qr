@@ -61,10 +61,6 @@ android {
             versionNameSuffix ProductFlavors.proSuffix
         }
     }
-
-    packagingOptions {
-        exclude("META-INF/*.kotlin_module")
-    }
 }
 
 dependencies {
@@ -115,7 +111,6 @@ dependencies {
 
     // Camera
     api Libraries.cameraView
-    implementation Libraries.dialog
 
     // Fancy showcase view
     implementation Libraries.fancyShowcaseView

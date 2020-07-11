@@ -30,8 +30,10 @@
     <!-- Barcode Detail  -->
     <string name="detail">Detail</string>
     <string name="edit_label">Edit Label</string>
-    <string name="hint_edit_label">Add your own label here</string>
+    <string name="hint_edit_label">Add label here</string>
     <string name="submit">Submit</string>
+    <string name="tutorial_label">Tap on icon to edit the label.\n\nYou can search this label later on to help you find this item.</string>
+    <string name="label">Label</string>
 
     <!--  Settings  -->
     <string name="open_qr_code_history_first">Open QR Code history first</string>

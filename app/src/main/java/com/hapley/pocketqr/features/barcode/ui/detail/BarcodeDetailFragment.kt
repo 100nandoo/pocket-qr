@@ -9,7 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hapley.pocketqr.R
+import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
@@ -55,18 +57,24 @@ class BarcodeDetailFragment : Fragment() {
     }
 
     private fun editLabelDialog() {
-        MaterialDialog(requireContext()).show {
-            input(hintRes = R.string.hint_edit_label, prefill = viewModel.barcodeLiveData.value?.title) { _, label ->
-                viewModel.submit(label.toString())
+        val view = layoutInflater.inflate(R.layout.barcode_detail_dialog_label, null)
+        val editText = view.editText
+        editText.setText(viewModel.barcodeLiveData.value?.title)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.hint_edit_label)
+            .setView(view)
+            .setPositiveButton(R.string.submit) { _, _ ->
+                viewModel.submit(editText.text.toString())
             }
-            positiveButton(R.string.submit)
-        }
+            .show()
+
     }
 
     private fun initShowcase(view: View) {
         FancyShowCaseView.Builder(requireActivity())
             .focusOn(view)
-            .title("Tap on icon to edit the label. \n\nThis label help you to find this item later on.")
+            .title(getString(R.string.tutorial_label))
             .focusShape(FocusShape.CIRCLE)
             .enableAutoTextPosition()
             .build()
