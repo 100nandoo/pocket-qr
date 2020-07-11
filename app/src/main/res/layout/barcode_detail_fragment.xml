@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.nandoo.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment">
+    tools:context="com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

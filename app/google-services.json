@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "674604234453",
-    "firebase_url": "https://pocket-knife-59d95.firebaseio.com",
-    "project_id": "pocket-knife-59d95",
-    "storage_bucket": "pocket-knife-59d95.appspot.com"
+    "project_number": "510773635786",
+    "firebase_url": "https://pocket-qr-e66cb.firebaseio.com",
+    "project_id": "pocket-qr-e66cb",
+    "storage_bucket": "pocket-qr-e66cb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:674604234453:android:e8af6e556f5af883b0945c",
+        "mobilesdk_app_id": "1:510773635786:android:f7225d1c83d9129f22a233",
         "android_client_info": {
-          "package_name": "com.nandoo.pocketknife"
+          "package_name": "com.hapley.pocketqr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+          "client_id": "510773635786-9l76077riojteg4ltna6rvphjk51ucsv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA0rnUIYca3QPEnPDqAArMFILXARrNqhp8"
+          "current_key": "AIzaSyDlbLv1UImKKYfJUv2USLgVIGQRvMKWCoY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+              "client_id": "510773635786-9l76077riojteg4ltna6rvphjk51ucsv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -37,35 +37,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:674604234453:android:07022e812c52710fb0945c",
+        "mobilesdk_app_id": "1:510773635786:android:5bd85638d314e19922a233",
         "android_client_info": {
-          "package_name": "com.nandoo.pocketknife.debug"
+          "package_name": "com.hapley.pocketqr.debug"
         }
       },
       "oauth_client": [
         {
-          "client_id": "674604234453-d6m22kd2mb5kjh6jh1da64qeiv676le5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.nandoo.pocketknife.debug",
-            "certificate_hash": "3b3d3555bef1c226e88c490cc7580723cb4cea5d"
-          }
-        },
-        {
-          "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+          "client_id": "510773635786-9l76077riojteg4ltna6rvphjk51ucsv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA0rnUIYca3QPEnPDqAArMFILXARrNqhp8"
+          "current_key": "AIzaSyDlbLv1UImKKYfJUv2USLgVIGQRvMKWCoY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+              "client_id": "510773635786-9l76077riojteg4ltna6rvphjk51ucsv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -74,27 +66,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:674604234453:android:589b72575358774fb0945c",
+        "mobilesdk_app_id": "1:510773635786:android:74189b10d536d45922a233",
         "android_client_info": {
-          "package_name": "com.nandoo.pocketknife.pro"
+          "package_name": "com.hapley.pocketqr.pro"
         }
       },
       "oauth_client": [
         {
-          "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+          "client_id": "510773635786-9l76077riojteg4ltna6rvphjk51ucsv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA0rnUIYca3QPEnPDqAArMFILXARrNqhp8"
+          "current_key": "AIzaSyDlbLv1UImKKYfJUv2USLgVIGQRvMKWCoY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "674604234453-l45butfj4b3cnt12frnvkklmghn8jn4b.apps.googleusercontent.com",
+              "client_id": "510773635786-9l76077riojteg4ltna6rvphjk51ucsv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

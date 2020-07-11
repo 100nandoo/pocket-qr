@@ -1,5 +1,5 @@
 object Misc {
-    val appId = "com.nandoo.pocketknife"
+    val appId = "com.hapley.pocketqr"
     val compileSdk = 29
     val minSdk = 21
     val targetSdk = 29
