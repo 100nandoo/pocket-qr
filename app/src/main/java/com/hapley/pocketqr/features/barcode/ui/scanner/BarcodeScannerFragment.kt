@@ -163,8 +163,8 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun initAds() {
+        adView.isVisible = BuildUtil.isPro.not()
         if (BuildUtil.isPro.not()) {
-            adView.isVisible = BuildUtil.isPro.not()
             val request = AdRequest.Builder().build()
             adView.loadAd(request)
         }

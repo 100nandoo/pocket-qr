@@ -15,7 +15,6 @@ Pocket QR app
 - [ ] Tutorials for history
 - [ ] Tutorials for scanner
 - [ ] Tutorials for detail
-- [ ]
 - [ ] View Binding
 - [ ] Multi module support
 - [ ] Pick Image QR Code

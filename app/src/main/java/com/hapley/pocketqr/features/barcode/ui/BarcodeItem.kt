@@ -1,5 +1,7 @@
 package com.hapley.pocketqr.features.barcode.ui
 
+import android.text.format.DateUtils
+import android.text.format.DateUtils.FORMAT_ABBREV_ALL
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -44,6 +46,7 @@ open class BarcodeItem(
             itemView.background = (ContextCompat.getDrawable(itemView.context, background))
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_title.text = item.title
+            itemView.tv_created_at.text = DateUtils.formatDateTime(itemView.context, item.created.time, FORMAT_ABBREV_ALL)
             itemView.tv_subtitle.text = item.subtitle
         }
 
