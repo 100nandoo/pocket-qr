@@ -2,11 +2,13 @@ package com.hapley.pocketqr.features.barcode.ui.scanner
 
 import android.os.Bundle
 import android.view.*
+import androidx.camera.core.CameraControl
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -26,8 +28,7 @@ import com.hapley.pocketqr.common.extension.actionView
 import com.hapley.pocketqr.ui.settings.SettingsFragment
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
-import kotlinx.android.synthetic.main.barcode_scanner_fragment.previewView
-import kotlinx.android.synthetic.main.barcode_scanner_fragment.qr_code_parent
+import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -121,6 +122,8 @@ class BarcodeScannerFragment : Fragment() {
         }
     }
 
+    private var cameraControl: CameraControl? = null
+
     private fun setupCameraAndQrCodeDetector() {
         lifecycleScope.launch {
             val cameraSelector = CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
@@ -134,12 +137,17 @@ class BarcodeScannerFragment : Fragment() {
                     .also { it.setAnalyzer(ContextCompat.getMainExecutor(requireContext()), BarcodeAnalyzer(scanner) { handleBarcode(it) }) }
 
                 try {
-                    this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
+                    val camera = this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
+                    cameraControl = camera.cameraControl
                     preview.setSurfaceProvider(previewView.createSurfaceProvider())
                 } catch (e: Exception) {
                     Timber.e(e)
                 }
             }
+        }
+
+        slider.addOnChangeListener { slider, value, fromUser ->
+            cameraControl?.setLinearZoom(value)
         }
     }
 
@@ -158,9 +166,9 @@ class BarcodeScannerFragment : Fragment() {
 
     private fun initAds() {
         if (BuildUtil.isPro.not()) {
+            adView.isVisible = BuildUtil.isPro.not()
             val request = AdRequest.Builder().build()
-            val adView = view?.findViewById<AdView>(R.id.adView)
-            adView?.loadAd(request)
+            adView.loadAd(request)
         }
     }
 }

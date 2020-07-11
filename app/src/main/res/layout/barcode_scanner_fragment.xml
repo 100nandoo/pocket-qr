@@ -1,27 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/qr_code_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.barcode.ui.scanner.BarcodeScannerFragment">
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ads_ids"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="@dimen/material_increment_5x"
         android:layout_height="@dimen/material_increment_5x"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        ads:adSize="BANNER"
-        ads:adUnitId=""
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:visibility="gone" />
+        android:layout_marginTop="@dimen/material_baseline_grid_2x"
+        android:text="@string/zoom_slider"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        ads:layout_constraintBottom_toTopOf="@id/slider"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@id/previewView" />
 
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider"
+        android:layout_width="@dimen/material_increment_5x"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/material_baseline_grid_2x"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        app:labelBehavior="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewHeader" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
