@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initToolbar()
-        
-        if(BuildUtil.isPro.not()){
+
+        if (BuildUtil.isPro.not()) {
             initAds()
         }
     }
@@ -30,8 +30,15 @@ class MainActivity : AppCompatActivity() {
     private fun initToolbar() {
         setSupportActionBar(main_toolbar)
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.barcode_scanner_fragment,
+                R.id.barcode_history_fragment,
+                R.id.settings_fragment
+            )
+        )
         main_toolbar.setupWithNavController(navController, appBarConfiguration)
+        bottom_nav.setupWithNavController(navController)
     }
 
     override fun onBackPressed() {

@@ -12,8 +12,6 @@ import com.google.mlkit.vision.barcode.Barcode as MlKitBarcode
 
 class BarcodeScannerViewModel constructor(private val barcodeUseCase: BarcodeUseCase) : ViewModel() {
 
-    var openBarcodeHistoryFirst = false
-
     var tempRawValue: String? = null
 
     fun setBarcode(mlKitBarcode: MlKitBarcode) {

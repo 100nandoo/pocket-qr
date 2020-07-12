@@ -16,8 +16,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         const val CATEGORY_TUTORIAL = "tutorial"
         const val CATEGORY_ABOUT = "about"
 
-        const val BARCODE_OPEN_HISTORY_FIRST = "barcode_open_history_first"
-
         const val BARCODE_SCANNER_SHOW_TUTORIAL = "barcode_scanner_show_tutorial"
         const val BARCODE_HISTORY_SHOW_TUTORIAL = "barcode_history_show_tutorial"
         const val BARCODE_DETAIL_SHOW_TUTORIAL = "barcode_detail_show_tutorial"

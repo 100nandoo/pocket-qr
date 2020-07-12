@@ -56,42 +56,8 @@ class BarcodeScannerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        checkPreferences()
-        initUi()
         requestPermission()
         initAds()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_barcode_scanner, menu)
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.item_history -> {
-                findNavController().navigate(BarcodeScannerFragmentDirections.actionToBarcodeHistoryFragment())
-                true
-            }
-            R.id.item_settings -> {
-                findNavController().navigate(BarcodeScannerFragmentDirections.actionToSettingsFragment())
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun checkPreferences() {
-        viewModel.openBarcodeHistoryFirst = appPreferences.settings
-            .getBoolean(SettingsFragment.BARCODE_OPEN_HISTORY_FIRST, false)
-    }
-
-    private fun initUi() {
-        if (viewModel.openBarcodeHistoryFirst.not()) {
-            setHasOptionsMenu(true)
-        }
-
     }
 
     private fun requestPermission() {

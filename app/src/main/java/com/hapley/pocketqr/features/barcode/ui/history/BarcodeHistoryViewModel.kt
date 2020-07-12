@@ -10,12 +10,6 @@ import com.hapley.pocketqr.ui.settings.SettingsFragment
 
 class BarcodeHistoryViewModel(barcodeUseCase: BarcodeUseCase, private val appPreferences: AppPreferences) : ViewModel() {
 
-    var openBarcodeHistoryFirst : Boolean
-        get() = appPreferences.settings.getBoolean(SettingsFragment.BARCODE_OPEN_HISTORY_FIRST, false)
-        set(value) {
-            appPreferences.settings.edit { putBoolean(SettingsFragment.BARCODE_OPEN_HISTORY_FIRST, value) }
-        }
-
     var showTutorial: Boolean
         get() = appPreferences.settings.getBoolean(SettingsFragment.BARCODE_HISTORY_SHOW_TUTORIAL, true)
         set(value) {

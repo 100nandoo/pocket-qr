@@ -124,23 +124,11 @@ class BarcodeHistoryFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_barcode_history, menu)
 
-        menu.findItem(R.id.item_barcode_scan).isVisible = viewModel.openBarcodeHistoryFirst
-
         val searchView = menu.findItem(R.id.item_search).actionView as SearchView
 
         searchView.setOnQueryTextListener(queryTextListener)
 
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.item_barcode_scan -> {
-                findNavController().navigate(BarcodeHistoryFragmentDirections.actionToBarcodeScannerFragment())
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun initUi() {
@@ -156,7 +144,7 @@ class BarcodeHistoryFragment : Fragment() {
             selectOnLongClick = true
         }
 
-        fastAdapter.onPreClickListener = { _, _, item, position ->
+        fastAdapter.onPreClickListener = { _, _, item, _ ->
             val res = actionModeHelper.onClick(item)
             res ?: true
         }
@@ -173,7 +161,7 @@ class BarcodeHistoryFragment : Fragment() {
             false
         }
 
-        fastAdapter.onPreLongClickListener = { view, _, item, position ->
+        fastAdapter.onPreLongClickListener = { _, _, item, position ->
             viewModel.selectedItem = item
             actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
             actionMode != null

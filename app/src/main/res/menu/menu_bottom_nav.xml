@@ -3,13 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_history"
+        android:id="@+id/barcode_scanner_fragment"
+        android:icon="@drawable/ic_barcode_scan"
+        android:title="@string/scanner"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/barcode_history_fragment"
         android:icon="@drawable/ic_barcode_history"
         android:title="@string/history"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/item_settings"
+        android:id="@+id/settings_fragment"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
         app:showAsAction="ifRoom" />
