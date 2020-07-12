@@ -16,6 +16,7 @@ import com.hapley.pocketqr.util.PocketQrUtil
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.helpers.ActionModeHelper
+import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
@@ -56,14 +57,7 @@ class BarcodeHistoryFragment : Fragment() {
 
     private val fastAdapter = FastAdapter.with(itemAdapter)
 
-    private val selectExtension by lazy {
-        fastAdapter.getSelectExtension().apply {
-            isSelectable = true
-            multiSelect = false
-            selectOnLongClick = true
-        }
-    }
-
+    private lateinit var selectExtension: SelectExtension<BarcodeItem>
     private val actionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
             return true
@@ -96,7 +90,7 @@ class BarcodeHistoryFragment : Fragment() {
                     else -> false
                 }
             }
-            return false
+            return true
         }
 
         override fun onDestroyActionMode(mode: ActionMode?) {
@@ -106,6 +100,11 @@ class BarcodeHistoryFragment : Fragment() {
 
     private val actionModeHelper by lazy {
         ActionModeHelper(fastAdapter, R.menu.menu_barcode_history_action_mode, actionModeCallback)
+            .withTitleProvider(object : ActionModeHelper.ActionModeTitleProvider {
+                override fun getTitle(selected: Int): String {
+                    return selectExtension.selectedItems.firstOrNull()?.title ?: ""
+                }
+            })
     }
 
     private var actionMode: ActionMode? = null
@@ -150,27 +149,28 @@ class BarcodeHistoryFragment : Fragment() {
         rv_barcode_history.run {
             adapter = fastAdapter
         }
-        selectExtension
+        selectExtension = fastAdapter.getSelectExtension()
+        selectExtension.apply {
+            isSelectable = true
+            multiSelect = false
+            selectOnLongClick = true
+        }
+
+        fastAdapter.onPreClickListener = { _, _, item, position ->
+            val res = actionModeHelper.onClick(item)
+            res ?: true
+        }
 
         fastAdapter.onClickListener = { view, _, item, _ ->
-            when {
-                selectExtension.selections.isEmpty() -> {
-                    if (viewModel.showTutorial && view != null) {
-                        initShowcase(view)
-                    } else {
-                        this.requireContext().actionView(item.rawValue)
-                        actionMode?.finish()
-                    }
-                }
-
-                selectExtension.selections.isNotEmpty() -> {
-                    when {
-                        item == viewModel.selectedItem -> actionMode?.finish()
-                        item != viewModel.selectedItem -> viewModel.selectedItem = item
-                    }
+            if (view != null) {
+                if (viewModel.showTutorial) {
+                    initShowcase(view)
+                } else {
+                    this.requireContext().actionView(item.rawValue)
+                    actionMode?.finish()
                 }
             }
-            actionMode != null
+            false
         }
 
         fastAdapter.onPreLongClickListener = { view, _, item, position ->
