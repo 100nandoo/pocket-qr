@@ -21,7 +21,7 @@ object Versions {
     val kotlin = "1.3.72"
     val coroutinePlayServices = "1.3.7"
     val coroutineGuava = "1.3.7"
-    val gradle = "4.0.0"
+    val gradle = "4.0.1"
     val gms = "4.3.3"
 
     object Android {
@@ -30,7 +30,7 @@ object Versions {
         val cameraX = "1.0.0-beta06"
         val cameraView = "1.0.0-alpha13"
         val constraintLayout = "1.1.3"
-        val core = "1.2.0"
+        val core = "1.3.0"
         val lifecycle = "2.2.0"
         val material = "1.2.0-alpha06"
         val navigation = "2.3.0"
@@ -39,8 +39,8 @@ object Versions {
     }
 
     object Firebase {
-        val core = "17.4.2"
-        val qrCode = "16.0.0"
+        val core = "17.4.4"
+        val qrCode = "16.0.1"
     }
 
     val assent = "3.0.0-RC4"
