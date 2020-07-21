@@ -8,6 +8,8 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Add performance monitoring
+- [ ] Remove camera view dependencies
 - [ ] Diff Adapter
 - [ ] Add sort functionality
 - [ ] Add filter functionality
