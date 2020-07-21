@@ -146,7 +146,7 @@ class BarcodeHistoryFragment : Fragment() {
 
         fastAdapter.onPreClickListener = { _, _, item, _ ->
             val res = actionModeHelper.onClick(item)
-            res ?: true
+            res ?: false
         }
 
         fastAdapter.onClickListener = { view, _, item, _ ->
