@@ -9,7 +9,7 @@
     <string name="open">Open</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
-    <string name="ads_ids"> </string>
+    <string name="ads_ids">ca-app-pub-7608173079082716/6937421863</string>
 
     <!--  Permission  -->
     <string name="permission_required">Permission Required</string>

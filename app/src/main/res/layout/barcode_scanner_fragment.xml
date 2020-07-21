@@ -26,10 +26,10 @@
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
             ads:adSize="BANNER"
             ads:adUnitId="@string/ads_ids"
-            app:layout_constraintBottom_toBottomOf="@id/previewView"
+            ads:layout_constraintBottom_toTopOf="@id/textViewHeader"
+            ads:layout_constraintTop_toBottomOf="@id/previewView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -56,7 +56,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewHeader" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
