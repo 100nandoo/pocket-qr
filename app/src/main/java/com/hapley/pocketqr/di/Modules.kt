@@ -33,7 +33,7 @@ val appModule: Module = module {
     single { PreferenceManager.getDefaultSharedPreferences(androidApplication()) }
     single { AppPreferences(settings = get()) }
     single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
-    single { PocketQrUtil(context = androidContext(), crashReport = get(), clipboardManager = get()) }
+    single { PocketQrUtil(context = androidContext(), clipboardManager = get()) }
     single { CrashReport() }
     viewModel { SettingsViewModel() }
 }

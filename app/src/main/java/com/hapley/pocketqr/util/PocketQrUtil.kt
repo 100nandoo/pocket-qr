@@ -14,8 +14,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.CrashReport
+import org.koin.java.KoinJavaComponent.inject
 
-class PocketQrUtil(val context: Context, val crashReport: CrashReport, val clipboardManager: ClipboardManager) {
+class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager) {
+
+    private val crashReport by inject(CrashReport::class.java)
 
     fun permissionSnackbar(parent: View, requestMessage: String, action: () -> Unit) {
         Snackbar.make(parent, requestMessage, Snackbar.LENGTH_INDEFINITE)
@@ -69,4 +72,5 @@ class PocketQrUtil(val context: Context, val crashReport: CrashReport, val clipb
             }
         }
     }
+
 }

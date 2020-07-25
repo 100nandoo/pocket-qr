@@ -8,12 +8,14 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Add performance monitoring
-- [ ] Remove camera view dependencies
 - [ ] Diff Adapter
+- [ ] Find a way to generate userId for crash report
+- [ ] Monitor custom event (analytics)
+- [ ] Monitor specific code (performance)
 - [ ] Add sort functionality
 - [ ] Add filter functionality
 - [ ] Add favorite functionality
+- [ ] Explain about auto focus
 - [ ] Tutorials for history
 - [ ] Tutorials for scanner
 - [ ] Tutorials for detail
@@ -33,6 +35,8 @@ Pocket QR app
 - [x] Integrate leakCanary
 - [x] Migrate to fast adapter
 - [x] CameraX
+- [x] Remove camera view dependencies
+- [x] Add performance monitoring
 
 ## Wishlist
 

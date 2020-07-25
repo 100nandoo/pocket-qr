@@ -94,7 +94,11 @@ class BarcodeScannerFragment : Fragment() {
                 val imageAnalysis = ImageAnalysis.Builder()
                     .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                     .build()
-                    .also { it.setAnalyzer(ContextCompat.getMainExecutor(requireContext()), BarcodeAnalyzer(scanner, pocketQrUtil) { handleBarcode(it) }) }
+                    .also {
+                        it.setAnalyzer(
+                            ContextCompat.getMainExecutor(requireContext()),
+                            BarcodeAnalyzer(scanner, pocketQrUtil) { handleBarcode(it) })
+                    }
 
                 try {
                     val camera = this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
