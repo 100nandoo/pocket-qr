@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.common.extension.actionView
-import com.hapley.pocketqr.common.extension.shortToast
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.util.PocketQrUtil
 import com.mikepenz.fastadapter.FastAdapter
@@ -154,7 +152,7 @@ class BarcodeHistoryFragment : Fragment() {
                 if (viewModel.showTutorial) {
                     initShowcase(view)
                 } else {
-                    this.requireContext().actionView(item.rawValue)
+                    pocketQrUtil.actionView(requireContext(), item.rawValue)
                     actionMode?.finish()
                 }
             }
@@ -176,7 +174,7 @@ class BarcodeHistoryFragment : Fragment() {
 
     private fun copyToClipboard(text: String) {
         pocketQrUtil.copyToClipboard(text)
-        this.requireContext().shortToast(R.string.copied)
+        pocketQrUtil.shortToast(requireContext(), R.string.copied)
     }
 
     private fun actionNavigateToDetail(id: Int) {

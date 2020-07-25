@@ -8,6 +8,7 @@ import androidx.room.Room
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.hapley.pocketqr.common.AppPreferences
+import com.hapley.pocketqr.common.CrashReport
 import com.hapley.pocketqr.db.AppDatabase
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
@@ -32,7 +33,8 @@ val appModule: Module = module {
     single { PreferenceManager.getDefaultSharedPreferences(androidApplication()) }
     single { AppPreferences(settings = get()) }
     single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
-    single { PocketQrUtil(context = androidContext(), clipboardManager = get()) }
+    single { PocketQrUtil(context = androidContext(), crashReport = get(), clipboardManager = get()) }
+    single { CrashReport() }
     viewModel { SettingsViewModel() }
 }
 

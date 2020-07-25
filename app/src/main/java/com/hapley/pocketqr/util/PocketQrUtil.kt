@@ -4,13 +4,18 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.camera.core.ImageProxy
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.common.CrashReport
 
-class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager) {
+class PocketQrUtil(val context: Context, val crashReport: CrashReport, val clipboardManager: ClipboardManager) {
 
     fun permissionSnackbar(parent: View, requestMessage: String, action: () -> Unit) {
         Snackbar.make(parent, requestMessage, Snackbar.LENGTH_INDEFINITE)
@@ -28,6 +33,40 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
     fun toInputImage(imageProxy: ImageProxy?): InputImage? {
         return imageProxy?.image?.let { image ->
             InputImage.fromMediaImage(image, imageProxy.imageInfo.rotationDegrees)
+        }
+    }
+
+    private fun showToast(context: Context, text: CharSequence, duration: Int): Toast {
+        return Toast.makeText(context, text, duration)
+    }
+
+    fun shortToast(context: Context, text: CharSequence) {
+        this.showToast(context, text, Toast.LENGTH_SHORT).show()
+    }
+
+    fun shortToast(context: Context, @StringRes resId: Int) {
+        this.showToast(context, context.getText(resId), Toast.LENGTH_SHORT).show()
+    }
+
+    fun longToast(context: Context, text: CharSequence) {
+        this.showToast(context, text, Toast.LENGTH_LONG).show()
+    }
+
+    fun longToast(context: Context, @StringRes resId: Int) {
+        this.showToast(context, context.getText(resId), Toast.LENGTH_LONG).show()
+    }
+
+    fun actionView(context: Context, url: String) {
+        Intent(Intent.ACTION_VIEW).apply {
+            try {
+                data = Uri.parse(url)
+                if (resolveActivity(context.packageManager) != null) {
+                    context.startActivity(this)
+                }
+            } catch (e: NullPointerException) {
+                crashReport.recordException("Check whether Uri can be launch as intent.",e)
+                e.localizedMessage
+            }
         }
     }
 }

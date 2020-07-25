@@ -24,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.common.extension.actionView
+import com.hapley.pocketqr.common.CrashReport
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
@@ -38,11 +38,9 @@ import org.koin.androidx.scope.lifecycleScope as koinScope
 class BarcodeScannerFragment : Fragment() {
 
     private val viewModel: BarcodeScannerViewModel by viewModel()
-
+    private val crashReport: CrashReport by inject()
     private val pocketQrUtil: PocketQrUtil by inject()
-
     private val preview: Preview by koinScope.inject()
-
     private val scanner: BarcodeScanner by koinScope.inject()
 
     private var cameraControl: CameraControl? = null
@@ -103,6 +101,7 @@ class BarcodeScannerFragment : Fragment() {
                     cameraControl = camera.cameraControl
                     preview.setSurfaceProvider(previewView.createSurfaceProvider())
                 } catch (e: Exception) {
+                    crashReport.recordException("1. Bind camera\n2. Setup camera control\n3. Set surface provider.", e)
                     Timber.e(e)
                 }
             }
@@ -121,7 +120,7 @@ class BarcodeScannerFragment : Fragment() {
             viewModel.setBarcode(barcode)
 
             Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
-                .setAction(getString(R.string.open)) { this@BarcodeScannerFragment.requireContext().actionView(rawValue) }
+                .setAction(getString(R.string.open)) { pocketQrUtil.actionView(requireContext(), rawValue) }
                 .show()
         }
     }
