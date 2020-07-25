@@ -23,6 +23,7 @@ object Versions {
     val coroutineGuava = "1.3.7"
     val gradle = "4.0.1"
     val gms = "4.3.3"
+    val crashlyticsGradle = "2.2.0"
 
     object Android {
         val appCompat = "1.1.0"
@@ -40,6 +41,7 @@ object Versions {
     object Firebase {
         val ads = "19.3.0"
         val core = "17.4.4"
+        val crashlytics = "17.1.1"
         val qrCode = "16.0.1"
     }
 
@@ -121,8 +123,9 @@ object AndroidLibraries {
 
 object FirebaseLibraries {
     val ads = "com.google.android.gms:play-services-ads:${Versions.Firebase.ads}"
-    val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
     val analytics = "com.google.firebase:firebase-analytics-ktx:${Versions.Firebase.core}"
+    val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
+    val crashlytics = "com.google.firebase:firebase-crashlytics:${Versions.Firebase.crashlytics}"
 
     val qrCode = "com.google.mlkit:barcode-scanning:${Versions.Firebase.qrCode}"
 }
@@ -132,4 +135,5 @@ object ProjectLibraries {
     val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Android.navigation}"
     val gms = "com.google.gms:google-services:${Versions.gms}"
+    val crashlytics = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}"
 }

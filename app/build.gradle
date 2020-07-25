@@ -6,6 +6,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 apply from: '../android_commons.gradle'
 
@@ -98,8 +99,9 @@ dependencies {
      * ==================== Firebase ====================
      */
     implementation FirebaseLibraries.ads
-    implementation FirebaseLibraries.core
     implementation FirebaseLibraries.analytics
+    implementation FirebaseLibraries.core
+    implementation FirebaseLibraries.crashlytics
 
     implementation FirebaseLibraries.qrCode
 
