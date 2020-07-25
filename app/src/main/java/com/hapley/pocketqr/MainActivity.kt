@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity() {
 
         initToolbar()
 
-        if (BuildUtil.isPro.not()) {
-            initAds()
-        }
+        initAds()
     }
 
     private fun initAds() {
-        MobileAds.initialize(this)
+        if (BuildUtil.isPro.not()) {
+            MobileAds.initialize(this)
+        }
     }
 
     private fun initToolbar() {

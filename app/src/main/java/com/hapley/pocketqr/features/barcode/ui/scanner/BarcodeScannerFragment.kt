@@ -1,7 +1,9 @@
 package com.hapley.pocketqr.features.barcode.ui.scanner
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.camera.core.CameraControl
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -22,9 +24,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.common.AppPreferences
 import com.hapley.pocketqr.common.extension.actionView
-import com.hapley.pocketqr.ui.settings.SettingsFragment
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
@@ -38,8 +38,6 @@ import org.koin.androidx.scope.lifecycleScope as koinScope
 class BarcodeScannerFragment : Fragment() {
 
     private val viewModel: BarcodeScannerViewModel by viewModel()
-
-    private val appPreferences: AppPreferences by inject()
 
     private val pocketQrUtil: PocketQrUtil by inject()
 
@@ -98,7 +96,7 @@ class BarcodeScannerFragment : Fragment() {
                 val imageAnalysis = ImageAnalysis.Builder()
                     .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                     .build()
-                    .also { it.setAnalyzer(ContextCompat.getMainExecutor(requireContext()), BarcodeAnalyzer(scanner) { handleBarcode(it) }) }
+                    .also { it.setAnalyzer(ContextCompat.getMainExecutor(requireContext()), BarcodeAnalyzer(scanner, pocketQrUtil) { handleBarcode(it) }) }
 
                 try {
                     val camera = this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
@@ -129,8 +127,9 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun initAds() {
-//        adView.isVisible = BuildUtil.isPro.not()
-        if (BuildUtil.isPro.not()) {
+        val shouldShowAds = BuildUtil.isPro.not()
+        adView.isVisible = shouldShowAds
+        if (shouldShowAds) {
             val request = AdRequest.Builder().build()
             adView.loadAd(request)
         }
