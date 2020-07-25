@@ -26,27 +26,26 @@ object Versions {
 
     object Android {
         val appCompat = "1.1.0"
-        val ads = "19.2.0"
-        val cameraX = "1.0.0-beta06"
-        val cameraView = "1.0.0-alpha13"
+        val cameraX = "1.0.0-beta07"
+        val cameraView = "1.0.0-alpha14"
         val constraintLayout = "1.1.3"
-        val core = "1.3.0"
+        val core = "1.3.1"
         val lifecycle = "2.2.0"
-        val material = "1.2.0-alpha06"
+        val material = "1.3.0-alpha02"
         val navigation = "2.3.0"
         val preference = "1.1.1"
         val room = "2.2.5"
     }
 
     object Firebase {
+        val ads = "19.3.0"
         val core = "17.4.4"
         val qrCode = "16.0.1"
     }
 
     val assent = "3.0.0-RC4"
-    val cameraView = "2.6.2"
     val fancyShowcaseView = "1.3.0"
-    val fastAdapter = "5.2.0"
+    val fastAdapter = "5.2.2"
     val koin = "2.1.6"
     val materialValues = "1.1.1"
     val rvDivider = "3.3.0"
@@ -63,7 +62,6 @@ object Versions {
 
 object Libraries {
     val assent = "com.afollestad.assent:core:${Versions.assent}"
-    val cameraView = "com.otaliastudios:cameraview:${Versions.cameraView}"
     val fancyShowcaseView = "me.toptas.fancyshowcase:fancyshowcaseview:${Versions.fancyShowcaseView}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
@@ -99,7 +97,6 @@ object KotlinLibraries {
 object AndroidLibraries {
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
-    val ads = "com.google.android.gms:play-services-ads:${Versions.Android.ads}"
 
     val camera2 = "androidx.camera:camera-camera2:${Versions.Android.cameraX}"
     val cameraLifecycle = "androidx.camera:camera-lifecycle:${Versions.Android.cameraX}"
@@ -123,8 +120,9 @@ object AndroidLibraries {
 }
 
 object FirebaseLibraries {
+    val ads = "com.google.android.gms:play-services-ads:${Versions.Firebase.ads}"
     val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
-    val analytics = "com.google.firebase:firebase-analytics:${Versions.Firebase.core}"
+    val analytics = "com.google.firebase:firebase-analytics-ktx:${Versions.Firebase.core}"
 
     val qrCode = "com.google.mlkit:barcode-scanning:${Versions.Firebase.qrCode}"
 }

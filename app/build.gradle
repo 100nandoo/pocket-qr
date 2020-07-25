@@ -73,7 +73,6 @@ dependencies {
      * ==================== Android ====================
      */
     implementation AndroidLibraries.appCompat
-    implementation AndroidLibraries.ads
 
     implementation AndroidLibraries.camera2
     implementation AndroidLibraries.cameraLifecycle
@@ -98,6 +97,7 @@ dependencies {
     /**
      * ==================== Firebase ====================
      */
+    implementation FirebaseLibraries.ads
     implementation FirebaseLibraries.core
     implementation FirebaseLibraries.analytics
 
@@ -108,9 +108,6 @@ dependencies {
      */
     // Assent
     implementation Libraries.assent
-
-    // Camera
-    api Libraries.cameraView
 
     // Fancy showcase view
     implementation Libraries.fancyShowcaseView
