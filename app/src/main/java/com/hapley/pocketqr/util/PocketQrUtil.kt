@@ -73,4 +73,14 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
         }
     }
 
+    fun actionShare(context: Context, url: String){
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, url)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        context.startActivity(shareIntent)
+    }
 }

@@ -75,6 +75,8 @@ class BarcodeHistoryFragment : Fragment() {
                         true
                     }
                     R.id.item_share -> {
+                        share(selectedItem.rawValue)
+                        mode.finish()
                         true
                     }
                     R.id.item_favorite -> {
@@ -175,6 +177,10 @@ class BarcodeHistoryFragment : Fragment() {
     private fun copyToClipboard(text: String) {
         pocketQrUtil.copyToClipboard(text)
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
+    }
+
+    private fun share(text: String){
+        pocketQrUtil.actionShare(requireContext(), text)
     }
 
     private fun actionNavigateToDetail(id: Int) {
