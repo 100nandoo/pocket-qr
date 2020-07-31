@@ -5,11 +5,12 @@ import android.text.format.DateUtils.FORMAT_ABBREV_ALL
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.items.AbstractItem
+import androidx.core.view.isInvisible
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.domain.Barcode
 import com.hapley.pocketqr.features.barcode.domain.BarcodeType
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.ui.utils.FastAdapterUIUtils
 import kotlinx.android.synthetic.main.barcode_list_item.view.*
 import java.util.*
@@ -51,6 +52,7 @@ open class BarcodeItem(
             itemView.tv_title.text = item.title
             itemView.tv_created_at.text = DateUtils.formatDateTime(itemView.context, item.created.time, FORMAT_ABBREV_ALL)
             itemView.tv_subtitle.text = item.subtitle
+            itemView.iv_favorite.isInvisible = item.isFavorite.not()
         }
 
         override fun unbindView(item: BarcodeItem) = Unit
