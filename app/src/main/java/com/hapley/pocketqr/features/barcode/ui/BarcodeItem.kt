@@ -28,7 +28,8 @@ open class BarcodeItem(
     val subtitle: String,
     @DrawableRes val icon: Int,
     val created: Date,
-    val rawValue: String
+    val rawValue: String,
+    var isFavorite: Boolean
 ) : AbstractItem<BarcodeItem.ViewHolder>() {
 
     constructor(barcode: Barcode) : this(
@@ -37,7 +38,8 @@ open class BarcodeItem(
         barcode.displayValue,
         barcode.type.getIcon(),
         Date(barcode.created),
-        barcode.rawValue
+        barcode.rawValue,
+        barcode.isFavorite
     )
 
     class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view) {

@@ -2,9 +2,11 @@ package com.hapley.pocketqr.features.barcode.ui.history
 
 import android.os.Bundle
 import android.view.*
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,11 +18,13 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.helpers.ActionModeHelper
 import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
+import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.Serializable
 import java.util.*
 
 class BarcodeHistoryFragment : Fragment() {
@@ -48,47 +52,66 @@ class BarcodeHistoryFragment : Fragment() {
         title.contains(constraint) || subtitle.contains(constraint)
     }
 
+    private val favoriteComparator: FavoriteComparator by lazy {
+        FavoriteComparator()
+    }
+
+    private val itemListImpl: ComparableItemListImpl<BarcodeItem> by lazy {
+        ComparableItemListImpl(favoriteComparator)
+    }
+
     private val itemAdapter: ItemAdapter<BarcodeItem> by lazy {
-        ItemAdapter<BarcodeItem>()
+        ItemAdapter(itemListImpl)
             .also { it.itemFilter.filterPredicate = filterPredicate }
     }
 
     private val fastAdapter = FastAdapter.with(itemAdapter)
 
     private lateinit var selectExtension: SelectExtension<BarcodeItem>
+
     private val actionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
             return true
         }
 
         override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-            return false
+            val itemFavorite = menu.findItem(R.id.item_favorite)
+            val isFavorite = viewModel.selectedItemWithPosition.first.isFavorite
+
+            @DrawableRes
+            val icon = if (isFavorite) R.drawable.ic_barcode_favorite else R.drawable.ic_barcode_unfavorite
+
+            val iconDrawable = ContextCompat.getDrawable(requireContext(), icon)
+            itemFavorite?.icon = iconDrawable
+
+            return itemFavorite?.icon == iconDrawable
         }
 
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            val selectedItem = viewModel.selectedItem
-            if (selectedItem != null) {
-                return when (item.itemId) {
-                    R.id.item_detail -> {
-                        actionNavigateToDetail(selectedItem.id.toInt())
-                        mode.finish()
-                        true
-                    }
-                    R.id.item_share -> {
-                        share(selectedItem.rawValue)
-                        mode.finish()
-                        true
-                    }
-                    R.id.item_favorite -> {
-                        true
-                    }
-                    R.id.item_copy -> {
-                        copyToClipboard(selectedItem.rawValue)
-                        mode.finish()
-                        true
-                    }
-                    else -> false
+            val selectedItem = viewModel.selectedItemWithPosition
+            return when (item.itemId) {
+                R.id.item_detail -> {
+                    actionNavigateToDetail(selectedItem.first.id.toInt())
+                    mode.finish()
+                    true
                 }
+                R.id.item_share -> {
+                    actionShare(selectedItem.first.rawValue)
+                    mode.finish()
+                    true
+                }
+                R.id.item_favorite -> {
+                    actionFavorite()
+                    itemListImpl.withComparator(favoriteComparator)
+                    mode.finish()
+                    true
+                }
+                R.id.item_copy -> {
+                    actionCopyToClipboard(selectedItem.first.rawValue)
+                    mode.finish()
+                    true
+                }
+                else -> false
             }
             return true
         }
@@ -108,7 +131,6 @@ class BarcodeHistoryFragment : Fragment() {
     }
 
     private var actionMode: ActionMode? = null
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_history_fragment, container, false)
@@ -162,7 +184,7 @@ class BarcodeHistoryFragment : Fragment() {
         }
 
         fastAdapter.onPreLongClickListener = { _, _, item, position ->
-            viewModel.selectedItem = item
+            viewModel.selectedItemWithPosition = Pair(item, position)
             actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
             actionMode != null
         }
@@ -174,17 +196,22 @@ class BarcodeHistoryFragment : Fragment() {
         })
     }
 
-    private fun copyToClipboard(text: String) {
+    private fun actionCopyToClipboard(text: String) {
         pocketQrUtil.copyToClipboard(text)
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
     }
 
-    private fun share(text: String){
+    private fun actionNavigateToDetail(id: Int) {
+        findNavController().navigate(BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id))
+    }
+
+    private fun actionShare(text: String) {
         pocketQrUtil.actionShare(requireContext(), text)
     }
 
-    private fun actionNavigateToDetail(id: Int) {
-        findNavController().navigate(BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id))
+    private fun actionFavorite() {
+        viewModel.updateFavoriteFlag()
+        fastAdapter.notifyAdapterItemChanged(viewModel.selectedItemWithPosition.second)
     }
 
     private fun initShowcase(view: View) {
@@ -198,5 +225,11 @@ class BarcodeHistoryFragment : Fragment() {
             .show()
 
         viewModel.showTutorial = false
+    }
+
+    private inner class FavoriteComparator : Comparator<BarcodeItem>, Serializable {
+        override fun compare(o1: BarcodeItem?, o2: BarcodeItem?): Int {
+            return o2?.isFavorite?.compareTo(o1?.isFavorite ?: false) ?: 0
+        }
     }
 }

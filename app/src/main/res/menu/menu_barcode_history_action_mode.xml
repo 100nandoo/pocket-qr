@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/item_favorite"
-        android:icon="@drawable/ic_barcode_favorite"
+        android:icon="@drawable/ic_barcode_unfavorite"
         android:title="@string/favorite"
         app:showAsAction="always" />
 

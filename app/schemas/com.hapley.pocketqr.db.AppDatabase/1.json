@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8b60501824805283e921645196f4c951",
+    "identityHash": "a1bea594a3f25cfa24ec85e8c4944492",
     "entities": [
       {
         "tableName": "BarcodeEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rawValue` TEXT NOT NULL, `label` TEXT NOT NULL, `displayValue` TEXT NOT NULL, `created` INTEGER NOT NULL, `format` INTEGER NOT NULL, `type` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rawValue` TEXT NOT NULL, `label` TEXT NOT NULL, `displayValue` TEXT NOT NULL, `created` INTEGER NOT NULL, `format` INTEGER NOT NULL, `type` INTEGER NOT NULL, `isFavorite` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -49,6 +49,12 @@
             "columnName": "type",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "isFavorite",
+            "columnName": "isFavorite",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -64,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b60501824805283e921645196f4c951')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a1bea594a3f25cfa24ec85e8c4944492')"
     ]
   }
 }

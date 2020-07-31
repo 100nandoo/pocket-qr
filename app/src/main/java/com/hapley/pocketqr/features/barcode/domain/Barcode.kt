@@ -14,7 +14,8 @@ data class Barcode(
     val displayValue: String,
     val created: Long,
     val format: Int,
-    val type: BarcodeType
+    val type: BarcodeType,
+    val isFavorite: Boolean
 ) {
 
     constructor(barcodeEntity: BarcodeEntity) : this(
@@ -24,7 +25,8 @@ data class Barcode(
         displayValue = barcodeEntity.displayValue,
         created = barcodeEntity.created,
         format = barcodeEntity.format,
-        type = barcodeEntity.generateType()
+        type = barcodeEntity.generateType(),
+        isFavorite = barcodeEntity.isFavorite
     )
 }
 

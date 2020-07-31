@@ -14,7 +14,8 @@ data class BarcodeEntity(
     val displayValue: String,
     val created: Long,
     val format: Int,
-    val type: Int
+    val type: Int,
+    val isFavorite: Boolean
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
