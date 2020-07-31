@@ -8,7 +8,7 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Diff Adapter
+- [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
 - [ ] Monitor custom event (analytics)
 - [ ] Monitor specific code (performance)
@@ -37,6 +37,7 @@ Pocket QR app
 - [x] CameraX
 - [x] Remove camera view dependencies
 - [x] Add performance monitoring
+- [x] Diff Adapter
 
 ## Wishlist
 
