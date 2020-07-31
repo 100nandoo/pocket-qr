@@ -24,7 +24,6 @@ import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.Serializable
 import java.util.*
 
 class BarcodeHistoryFragment : Fragment() {
@@ -52,12 +51,25 @@ class BarcodeHistoryFragment : Fragment() {
         title.contains(constraint) || subtitle.contains(constraint)
     }
 
-    private val favoriteComparator: FavoriteComparator by lazy {
-        FavoriteComparator()
+    private val alphabetComparatorAscending: Comparator<BarcodeItem> by lazy {
+        Comparator<BarcodeItem> { lhs, rhs -> lhs.title.compareTo(rhs.title) }
+    }
+
+    private val favoriteComparator: Comparator<BarcodeItem> by lazy {
+        Comparator<BarcodeItem> { lhs, rhs -> rhs.isFavorite.compareTo(lhs.isFavorite) }
+    }
+
+    private val mergeComparator by lazy {
+        Comparator<BarcodeItem> { lhs, rhs ->
+            val favoriteCompare = favoriteComparator.compare(lhs, rhs)
+            if (favoriteCompare == 0) {
+                alphabetComparatorAscending.compare(lhs, rhs)
+            } else favoriteCompare
+        }
     }
 
     private val itemListImpl: ComparableItemListImpl<BarcodeItem> by lazy {
-        ComparableItemListImpl(favoriteComparator)
+        ComparableItemListImpl(mergeComparator)
     }
 
     private val itemAdapter: ItemAdapter<BarcodeItem> by lazy {
@@ -102,7 +114,6 @@ class BarcodeHistoryFragment : Fragment() {
                 }
                 R.id.item_favorite -> {
                     actionFavorite()
-                    itemListImpl.withComparator(favoriteComparator)
                     mode.finish()
                     true
                 }
@@ -113,7 +124,6 @@ class BarcodeHistoryFragment : Fragment() {
                 }
                 else -> false
             }
-            return true
         }
 
         override fun onDestroyActionMode(mode: ActionMode?) {
@@ -192,7 +202,7 @@ class BarcodeHistoryFragment : Fragment() {
 
     private fun subscribeUi() {
         viewModel.barcodesLiveData.observe(viewLifecycleOwner, Observer {
-            itemAdapter.set(it)
+            itemListImpl.setNewList(it, true)
         })
     }
 
@@ -212,6 +222,7 @@ class BarcodeHistoryFragment : Fragment() {
     private fun actionFavorite() {
         viewModel.updateFavoriteFlag()
         fastAdapter.notifyAdapterItemChanged(viewModel.selectedItemWithPosition.second)
+        itemListImpl.withComparator(mergeComparator)
     }
 
     private fun initShowcase(view: View) {
@@ -227,9 +238,4 @@ class BarcodeHistoryFragment : Fragment() {
         viewModel.showTutorial = false
     }
 
-    private inner class FavoriteComparator : Comparator<BarcodeItem>, Serializable {
-        override fun compare(o1: BarcodeItem?, o2: BarcodeItem?): Int {
-            return o2?.isFavorite?.compareTo(o1?.isFavorite ?: false) ?: 0
-        }
-    }
 }

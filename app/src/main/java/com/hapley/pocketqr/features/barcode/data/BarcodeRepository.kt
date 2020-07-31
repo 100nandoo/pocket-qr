@@ -18,4 +18,8 @@ class BarcodeRepository(private val barcodeDao: BarcodeDao) {
     suspend fun insert(barcodeEntity: BarcodeEntity) = barcodeDao.insertData(barcodeEntity)
 
     suspend fun updateLabel(label: String, id: Int) = barcodeDao.updateLabel(label, id)
+
+    suspend fun updateFavorite(id: Int, isFavorite: Boolean) = barcodeDao.updateFavorite(id, isFavorite)
+
+    suspend fun updateBarcodes(vararg barcodeEntity: BarcodeEntity) = barcodeDao.updateBarcodes(*barcodeEntity)
 }

@@ -42,9 +42,11 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
     }
 
     @Update
-    fun updateBarcodes(vararg barcodes: BarcodeEntity)
+    suspend fun updateBarcodes(vararg barcodes: BarcodeEntity)
 
     @Query("UPDATE barcodeentity SET label = :label WHERE id = :id")
     suspend fun updateLabel(label: String, id: Int)
 
+    @Query("UPDATE barcodeentity SET isFavorite = :isFavorite WHERE id = :id")
+    suspend fun updateFavorite(id: Int, isFavorite: Boolean)
 }

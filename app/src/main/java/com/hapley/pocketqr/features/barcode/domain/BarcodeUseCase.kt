@@ -37,8 +37,16 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         barcodeRepository.insert(barcode.toEntity)
     }
 
-    suspend fun updateLabel(label: String, id: Int){
+    suspend fun updateLabel(label: String, id: Int) {
         barcodeRepository.updateLabel(label, id)
+    }
+
+    suspend fun updateFavorite(id: Int, isFavorite: Boolean) {
+        barcodeRepository.updateFavorite(id, isFavorite)
+    }
+
+    suspend fun updateBarcodes(vararg barcode: Barcode){
+        barcodeRepository.updateBarcodes(*barcode.map { it.toEntity }.toTypedArray())
     }
 }
 
