@@ -11,6 +11,16 @@
     <string name="no">no</string>
     <string name="ads_ids">ca-app-pub-7608173079082716/6937421863</string>
 
+    <!--  App Intro  -->
+    <string name="welcome">Welcome 👋</string>
+    <string name="keep_history">Pocket QR will keep history\nall of your scanned item.</string>
+    <string name="label_with_emoji">Label 🏷️</string>
+    <string name="label_description">You can put a label for your history item,\nso it\'s easier to find it later.</string>
+    <string name="auto_focus">Auto Focus 📷</string>
+    <string name="auto_focus_description">The QR code scanner will automatically focus \nto the target you\'re pointing at.</string>
+    <string name="camera_permission">Camera Permission ⚠️</string>
+    <string name="camera_permission_desc">Before start using the app, \nplease give camera permission.</string>
+
     <!--  Permission  -->
     <string name="permission_required">Permission Required</string>
     <string name="please_allow_access">Please allow access permission for %s.</string>

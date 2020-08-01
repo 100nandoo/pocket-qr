@@ -95,6 +95,8 @@ dependencies {
 
     implementation AndroidLibraries.roomRuntime
     implementation AndroidLibraries.room
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     kapt AndroidLibraries.roomCompiler
 
     /**
@@ -110,8 +112,11 @@ dependencies {
     /**
      * ================= 3rd Party Libs ==================
      */
+    // App Intro
+    implementation Libraries.appIntro
+
     // Assent
-    implementation Libraries.assent
+//    implementation Libraries.assent
 
     // Fancy showcase view
     implementation Libraries.fancyShowcaseView
