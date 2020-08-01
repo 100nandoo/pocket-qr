@@ -8,6 +8,9 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Splash screen
+- [ ] App intro sharedpref
+- [ ] Google assistant action
 - [ ] Keep track how many times user tap on the link
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
