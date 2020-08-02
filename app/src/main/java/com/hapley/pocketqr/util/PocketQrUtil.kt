@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.view.View
 import android.widget.Toast
@@ -15,6 +16,7 @@ import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.CrashReport
 import org.koin.java.KoinJavaComponent.inject
+
 
 class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager) {
 
@@ -67,13 +69,13 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
                     context.startActivity(this)
                 }
             } catch (e: NullPointerException) {
-                crashReport.recordException("Check whether Uri can be launch as intent.",e)
+                crashReport.recordException("Check whether Uri can be launch as intent.", e)
                 e.localizedMessage
             }
         }
     }
 
-    fun actionShare(context: Context, url: String){
+    fun actionShare(context: Context, url: String) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, url)
@@ -82,5 +84,19 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         context.startActivity(shareIntent)
+    }
+
+    fun appInfo() {
+        val packageName = context.packageName
+        val installerPackageName = context.packageManager.getInstallerPackageName(packageName)
+        if (installerPackageName != null) {
+            val applicationLabel = try {
+                context.packageManager.getApplicationInfo(installerPackageName, 0).loadLabel(context.packageManager).toString()
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
+                installerPackageName
+            }
+            applicationLabel
+        }
     }
 }

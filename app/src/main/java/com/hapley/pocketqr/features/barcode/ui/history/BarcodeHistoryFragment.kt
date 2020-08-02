@@ -151,6 +151,7 @@ class BarcodeHistoryFragment : Fragment() {
 
         initUi()
         subscribeUi()
+        pocketQrUtil.appInfo()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
