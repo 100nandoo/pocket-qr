@@ -12,6 +12,7 @@
     <string name="ads_ids">ca-app-pub-7608173079082716/6937421863</string>
 
     <!--  App Intro  -->
+    <string name="show_app_intro">Show app introduction</string>
     <string name="welcome">Welcome 👋</string>
     <string name="keep_history">Pocket QR will keep history\nall of your scanned item.</string>
     <string name="label_with_emoji">Label 🏷️</string>

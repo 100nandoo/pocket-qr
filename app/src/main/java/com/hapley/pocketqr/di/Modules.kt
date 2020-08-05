@@ -16,6 +16,7 @@ import com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailViewModel
 import com.hapley.pocketqr.features.barcode.ui.history.BarcodeHistoryViewModel
 import com.hapley.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment
 import com.hapley.pocketqr.features.barcode.ui.scanner.BarcodeScannerViewModel
+import com.hapley.pocketqr.ui.launcher.LauncherViewModel
 import com.hapley.pocketqr.ui.settings.SettingsViewModel
 import com.hapley.pocketqr.util.PocketQrUtil
 import org.koin.android.ext.koin.androidApplication
@@ -36,6 +37,7 @@ val appModule: Module = module {
     single { PocketQrUtil(context = androidContext(), clipboardManager = get()) }
     single { CrashReport() }
     viewModel { SettingsViewModel() }
+    viewModel { LauncherViewModel(appPreferences = get()) }
 }
 
 val barcodeModule: Module = module {
