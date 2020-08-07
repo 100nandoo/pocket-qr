@@ -15,11 +15,11 @@ class LauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if(viewModel.showTutorial.not()){
-            finishAffinity()
             startActivity(Intent(this, MainActivity::class.java))
         } else {
             startActivity(Intent(this, AppIntroActivity::class.java))
             viewModel.showTutorial = false
         }
+        finishAffinity()
     }
 }
