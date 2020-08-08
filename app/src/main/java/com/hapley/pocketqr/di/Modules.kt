@@ -30,7 +30,7 @@ import org.koin.dsl.module
  */
 
 val appModule: Module = module {
-    single { Room.databaseBuilder(androidContext(), AppDatabase::class.java, Modules.DATABASE_NAME).build() }
+    single { Room.databaseBuilder(androidContext(), AppDatabase::class.java, Modules.DATABASE_NAME).fallbackToDestructiveMigration().build() }
     single { PreferenceManager.getDefaultSharedPreferences(androidApplication()) }
     single { AppPreferences(settings = get()) }
     single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
