@@ -8,7 +8,6 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Splash screen
 - [ ] Google assistant action
 - [ ] Keep track how many times user tap on the link
 - [ ] Integrate cyanea library
@@ -43,6 +42,7 @@ Pocket QR app
 - [x] Diff Adapter
 - [x] Integrate appIntro
 - [x] App intro sharedpref
+- [x] Splash screen
 
 ## Wishlist
 
