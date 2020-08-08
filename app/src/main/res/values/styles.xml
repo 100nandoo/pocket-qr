@@ -25,4 +25,8 @@
         <item name="backgroundTint">@color/primaryColor</item>
     </style>
 
+    <style name="PopupTheme" parent="@style/ThemeOverlay.MaterialComponents.Light">
+        <item name="android:textColor">@color/material_color_black</item>
+    </style>
+
 </resources>

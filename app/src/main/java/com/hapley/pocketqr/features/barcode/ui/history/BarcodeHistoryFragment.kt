@@ -20,6 +20,7 @@ import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
+import kotlinx.coroutines.flow.merge
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
 import org.koin.android.ext.android.inject
@@ -57,6 +58,14 @@ class BarcodeHistoryFragment : Fragment() {
 
     private val favoriteComparator: Comparator<BarcodeItem> by lazy {
         Comparator<BarcodeItem> { lhs, rhs -> rhs.isFavorite.compareTo(lhs.isFavorite) }
+    }
+
+    private val clickCountComparator: Comparator<BarcodeItem> by lazy {
+        Comparator<BarcodeItem> { lhs, rhs -> rhs.clickCount.compareTo(lhs.clickCount) }
+    }
+
+    private val scannedDateComparator: Comparator<BarcodeItem> by lazy {
+        Comparator<BarcodeItem> { lhs, rhs -> rhs.created.compareTo(lhs.created) }
     }
 
     private val mergeComparator by lazy {
@@ -163,6 +172,25 @@ class BarcodeHistoryFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_default -> {
+                itemListImpl.withComparator(mergeComparator)
+            }
+            R.id.item_click_count -> {
+                itemListImpl.withComparator(clickCountComparator)
+            }
+            R.id.item_scanned_date -> {
+                itemListImpl.withComparator(scannedDateComparator)
+            }
+            R.id.item_alphabetical -> {
+                itemListImpl.withComparator(alphabetComparatorAscending)
+            }
+        }
+        item.isChecked = !item.isChecked
+        return true
+    }
+
     private fun initUi() {
         setHasOptionsMenu(true)
 
@@ -186,8 +214,8 @@ class BarcodeHistoryFragment : Fragment() {
                 if (viewModel.showTutorial) {
                     initShowcase(view)
                 } else {
-                   val isSuccess = pocketQrUtil.actionView(requireContext(), item.rawValue)
-                    if(isSuccess){
+                    val isSuccess = pocketQrUtil.actionView(requireContext(), item.rawValue)
+                    if (isSuccess) {
                         viewModel.incrementClickCount(item.id.toInt())
                     }
                     actionMode?.finish()

@@ -41,6 +41,12 @@
     <string name="share">Share</string>
     <string name="copy_">Copy</string>
 
+    <!--  Sort  -->
+    <string name="default_">Default</string>
+    <string name="most_frequent">Most Frequent</string>
+    <string name="recent">Recent</string>
+    <string name="alphabetical">Alphabetical</string>
+
     <!-- Barcode Detail  -->
     <string name="detail">Detail</string>
     <string name="edit_label">Edit Label</string>
@@ -48,6 +54,8 @@
     <string name="submit">Submit</string>
     <string name="tutorial_label">Tap on icon to edit the label.\n\nYou can search this label later on to help you find this item.</string>
     <string name="label">Label</string>
+    <string name="scanned_date">Scanned date:</string>
+    <string name="click_counts_header">Click Counts:</string>
 
     <!--  Settings  -->
     <string name="open_qr_code_history_first">Open QR Code history first</string>
@@ -57,6 +65,5 @@
 
     <string name="tutorial">Tutorial</string>
     <string name="show_tutorial_for">Show tutorial for %1$s %2$s</string>
-
 
 </resources>
