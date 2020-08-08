@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -18,6 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/material_baseline_grid_2x"
+            app:layout_constraintBottom_toTopOf="@id/tv_detail_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Tiong Bahru QR" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -26,7 +30,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
             android:layout_marginEnd="@dimen/material_baseline_grid_2x"
-            android:text="Detail" />
+            android:text="Detail"
+            app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_subtitle"
@@ -35,9 +44,78 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
             android:layout_marginEnd="@dimen/material_baseline_grid_2x"
+            app:layout_constraintBottom_toTopOf="@id/tv_click_count_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_header"
             tools:text="1234" />
 
-    </LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_click_count_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_baseline_grid_2x"
+            android:layout_marginTop="@dimen/material_baseline_grid_1x"
+            android:layout_marginEnd="@dimen/material_baseline_grid_1x"
+            android:text="Click Counts:"
+            app:layout_constraintEnd_toStartOf="@id/tv_click_count"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tv_click_count_header, tv_scanned_date_header" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_click_count"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_baseline_grid_1x"
+            android:layout_marginEnd="@dimen/material_baseline_grid_2x"
+            app:layout_constraintBottom_toBottomOf="@id/tv_click_count_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/barrier_header"
+            app:layout_constraintTop_toTopOf="@id/tv_click_count_header"
+            tools:text="5" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_scanned_date_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_baseline_grid_2x"
+            android:layout_marginTop="@dimen/material_baseline_grid_1x"
+            android:layout_marginEnd="@dimen/material_baseline_grid_1x"
+            android:text="Scanned date:"
+            app:layout_constraintEnd_toStartOf="@id/tv_scanned_date"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_click_count" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_scanned_date"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_baseline_grid_1x"
+            android:layout_marginEnd="@dimen/material_baseline_grid_2x"
+            app:layout_constraintBottom_toBottomOf="@id/tv_scanned_date_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/barrier_header"
+            app:layout_constraintTop_toTopOf="@id/tv_scanned_date_header"
+            tools:text="7 July" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_edit"

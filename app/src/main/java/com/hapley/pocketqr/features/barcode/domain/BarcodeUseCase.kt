@@ -45,6 +45,10 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         barcodeRepository.updateFavorite(id, isFavorite)
     }
 
+    suspend fun incrementClickCount(id: Int) {
+        barcodeRepository.incrementClickCount(id)
+    }
+
     suspend fun updateBarcodes(vararg barcode: Barcode){
         barcodeRepository.updateBarcodes(*barcode.map { it.toEntity }.toTypedArray())
     }
@@ -59,5 +63,6 @@ private val Barcode.toEntity: BarcodeEntity
             created = this.created,
             format = this.format,
             type = this.type.value,
-            isFavorite = this.isFavorite
+            isFavorite = this.isFavorite,
+            clickCount = this.clickCount
         )

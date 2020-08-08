@@ -35,7 +35,8 @@ fun MlKitBarcode.toDomain(id: Int): Barcode? {
             created = Date().time,
             format = format,
             type = this.generateType(),
-            isFavorite = false
+            isFavorite = false,
+            clickCount = 0
         )
     }
 }

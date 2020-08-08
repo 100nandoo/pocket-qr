@@ -8,8 +8,8 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Dagger inject mock data
 - [ ] Google assistant action
-- [ ] Keep track how many times user tap on the link
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
 - [ ] Monitor custom event (analytics)
@@ -18,9 +18,6 @@ Pocket QR app
 - [ ] Add filter functionality
 - [ ] Add favorite functionality
 - [ ] Explain about auto focus
-- [ ] Tutorials for history
-- [ ] Tutorials for scanner
-- [ ] Tutorials for detail
 - [ ] View Binding
 - [ ] Multi module support
 - [ ] Pick Image QR Code
@@ -43,6 +40,10 @@ Pocket QR app
 - [x] Integrate appIntro
 - [x] App intro sharedpref
 - [x] Splash screen
+- [x] Tutorials for history
+- [x] Tutorials for scanner
+- [x] Tutorials for detail
+- [x] Keep track how many times user tap on the link
 
 ## Wishlist
 

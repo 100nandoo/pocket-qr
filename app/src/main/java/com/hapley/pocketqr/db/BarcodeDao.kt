@@ -49,4 +49,7 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
 
     @Query("UPDATE barcodeentity SET isFavorite = :isFavorite WHERE id = :id")
     suspend fun updateFavorite(id: Int, isFavorite: Boolean)
+
+    @Query("UPDATE barcodeentity SET clickCount = clickCount + 1 WHERE id = :id")
+    suspend fun incrementClickCount(id: Int)
 }

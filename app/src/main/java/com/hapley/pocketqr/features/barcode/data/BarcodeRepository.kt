@@ -21,5 +21,7 @@ class BarcodeRepository(private val barcodeDao: BarcodeDao) {
 
     suspend fun updateFavorite(id: Int, isFavorite: Boolean) = barcodeDao.updateFavorite(id, isFavorite)
 
+    suspend fun incrementClickCount(id: Int) = barcodeDao.incrementClickCount(id)
+
     suspend fun updateBarcodes(vararg barcodeEntity: BarcodeEntity) = barcodeDao.updateBarcodes(*barcodeEntity)
 }

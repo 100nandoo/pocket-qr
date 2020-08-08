@@ -1,6 +1,7 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BarcodeDetailFragment : Fragment() {
 
-    val args by navArgs<BarcodeDetailFragmentArgs>()
+    private val args by navArgs<BarcodeDetailFragmentArgs>()
 
     private val viewModel: BarcodeDetailViewModel by viewModel()
 
@@ -37,6 +38,8 @@ class BarcodeDetailFragment : Fragment() {
         viewModel.barcodeLiveData.observe(viewLifecycleOwner, Observer {
             tv_title.text = it.title
             tv_subtitle.text = it.subtitle
+            tv_click_count.text = it.clickCount.toString()
+            tv_scanned_date.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
         })
     }
 

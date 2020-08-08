@@ -186,7 +186,10 @@ class BarcodeHistoryFragment : Fragment() {
                 if (viewModel.showTutorial) {
                     initShowcase(view)
                 } else {
-                    pocketQrUtil.actionView(requireContext(), item.rawValue)
+                   val isSuccess = pocketQrUtil.actionView(requireContext(), item.rawValue)
+                    if(isSuccess){
+                        viewModel.incrementClickCount(item.id.toInt())
+                    }
                     actionMode?.finish()
                 }
             }

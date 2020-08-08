@@ -28,4 +28,10 @@ class BarcodeHistoryViewModel(private val barcodeUseCase: BarcodeUseCase, privat
             barcodeUseCase.updateFavorite(selectedItemWithPosition.first.id.toInt(), isFavorite)
         }
     }
+
+    fun incrementClickCount(barcodeId: Int){
+        viewModelScope.launch {
+            barcodeUseCase.incrementClickCount(barcodeId)
+        }
+    }
 }
