@@ -8,6 +8,8 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Google assistant action
+- [ ] Keep track how many times user tap on the link
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
 - [ ] Monitor custom event (analytics)
@@ -38,6 +40,9 @@ Pocket QR app
 - [x] Remove camera view dependencies
 - [x] Add performance monitoring
 - [x] Diff Adapter
+- [x] Integrate appIntro
+- [x] App intro sharedpref
+- [x] Splash screen
 
 ## Wishlist
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Green 500 -->
     <color name="primaryColor">#3096e2</color>
     <color name="primaryLightColor">#72c6ff</color>
     <color name="primaryDarkColor">#0069b0</color>
 
-    <!--  Orange A200  -->
     <color name="secondaryColor">#ffc05f</color>
     <color name="secondaryLightColor">#fff38f</color>
     <color name="secondaryDarkColor">#c89030</color>

@@ -10,6 +10,11 @@
         <item name="windowActionModeOverlay">true</item>
     </style>
 
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimaryDark">@color/material_color_white</item>
+        <item name="android:windowBackground">@drawable/splash_screen_background</item>
+    </style>
+
     <style name="TypefaceButton">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/work_sans_medium</item>

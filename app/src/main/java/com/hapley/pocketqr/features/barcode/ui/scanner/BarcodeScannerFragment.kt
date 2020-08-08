@@ -13,13 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.afollestad.assent.GrantResult
-import com.afollestad.assent.Permission
-import com.afollestad.assent.askForPermissions
-import com.afollestad.assent.showSystemAppDetailsPage
 import com.google.android.gms.ads.AdRequest
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
@@ -52,36 +46,8 @@ class BarcodeScannerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requestPermission()
+        setupCameraAndQrCodeDetector()
         initAds()
-    }
-
-    private fun requestPermission() {
-        askForPermissions(Permission.CAMERA) { result ->
-            when {
-                result[Permission.CAMERA] == GrantResult.GRANTED -> {
-                    setupCameraAndQrCodeDetector()
-                }
-                result[Permission.CAMERA] == GrantResult.PERMANENTLY_DENIED -> {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle(R.string.permission_required)
-                        .setMessage(getString(R.string.please_allow_access, getString(R.string.camera)))
-                        .setPositiveButton(R.string.yes) { _, _ ->
-                            findNavController().navigateUp()
-                            showSystemAppDetailsPage()
-                        }
-                        .setNegativeButton(R.string.no) { _, _ ->
-                            findNavController().navigateUp()
-                        }.show()
-                }
-                else -> {
-                    pocketQrUtil.permissionSnackbar(
-                        qr_code_parent,
-                        getString(R.string.please_allow_access, getString(R.string.camera))
-                    ) { requestPermission() }
-                }
-            }
-        }
     }
 
     private fun setupCameraAndQrCodeDetector() {
