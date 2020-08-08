@@ -10,6 +10,7 @@ Pocket QR app
 
 - [ ] Save sort state
 - [ ] Add swipe delete action
+- [ ] Migrate to adaptive banner
 - [ ] Dagger inject mock data
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
@@ -46,7 +47,3 @@ Pocket QR app
 - [x] Add favorite functionality
 - [x] Explain about auto focus
 - [x] Add sort functionality
-
-## Wishlist
-
-- [ ] Text Detection
