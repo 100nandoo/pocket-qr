@@ -7,9 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.ALPHABETICAL
@@ -92,7 +97,7 @@ class BarcodeHistoryFragment : Fragment() {
 
         override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
             val itemFavorite = menu.findItem(R.id.item_favorite)
-            val isFavorite = viewModel.selectedItemWithPosition.first.isFavorite
+            val isFavorite = viewModel.selectedItemWithPosition.second.isFavorite
 
             @DrawableRes
             val icon = if (isFavorite) R.drawable.ic_barcode_favorite else R.drawable.ic_barcode_unfavorite
@@ -107,12 +112,12 @@ class BarcodeHistoryFragment : Fragment() {
             val selectedItem = viewModel.selectedItemWithPosition
             return when (item.itemId) {
                 R.id.item_detail -> {
-                    actionNavigateToDetail(selectedItem.first.id.toInt())
+                    actionNavigateToDetail(selectedItem.second.id.toInt())
                     mode.finish()
                     true
                 }
                 R.id.item_share -> {
-                    actionShare(selectedItem.first.rawValue)
+                    actionShare(selectedItem.second.rawValue)
                     mode.finish()
                     true
                 }
@@ -122,7 +127,7 @@ class BarcodeHistoryFragment : Fragment() {
                     true
                 }
                 R.id.item_copy -> {
-                    actionCopyToClipboard(selectedItem.first.rawValue)
+                    actionCopyToClipboard(selectedItem.second.rawValue)
                     mode.finish()
                     true
                 }
@@ -145,6 +150,24 @@ class BarcodeHistoryFragment : Fragment() {
     }
 
     private var actionMode: ActionMode? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        enterTransition = MaterialFadeThrough().apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        exitTransition = MaterialFadeThrough().apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_history_fragment, container, false)
@@ -245,8 +268,9 @@ class BarcodeHistoryFragment : Fragment() {
             false
         }
 
-        fastAdapter.onPreLongClickListener = { _, _, item, position ->
-            viewModel.selectedItemWithPosition = Pair(item, position)
+        fastAdapter.onPreLongClickListener = { view, _, item, position ->
+            view.id
+            viewModel.selectedItemWithPosition = Triple(view, item, position)
             actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
             actionMode != null
         }
@@ -264,7 +288,16 @@ class BarcodeHistoryFragment : Fragment() {
     }
 
     private fun actionNavigateToDetail(id: Int) {
-        findNavController().navigate(BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id))
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        val endTransitionName = getString(R.string.barcode_detail_transition_name)
+        val extras = FragmentNavigatorExtras(viewModel.selectedItemWithPosition.first to endTransitionName)
+        val directions = BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id)
+        findNavController().navigate(directions, extras)
     }
 
     private fun actionShare(text: String) {
@@ -273,7 +306,7 @@ class BarcodeHistoryFragment : Fragment() {
 
     private fun actionFavorite() {
         viewModel.updateFavoriteFlag()
-        fastAdapter.notifyAdapterItemChanged(viewModel.selectedItemWithPosition.second)
+        fastAdapter.notifyAdapterItemChanged(viewModel.selectedItemWithPosition.third)
         itemListImpl.withComparator(mergeComparator(defaultComparator()))
     }
 

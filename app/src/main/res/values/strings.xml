@@ -40,6 +40,7 @@
     <string name="favorite">Favorite</string>
     <string name="share">Share</string>
     <string name="copy_">Copy</string>
+    <string name="barcode_history_transition_name">barcode_history_transition_%1$d</string>
 
     <!--  Sort  -->
     <string name="default_">Default</string>
@@ -56,6 +57,7 @@
     <string name="label">Label</string>
     <string name="scanned_date">Scanned date:</string>
     <string name="click_counts_header">Click Counts:</string>
+    <string name="barcode_detail_transition_name">barcode_detail_transition</string>
 
     <!--  Settings  -->
     <string name="sort_mode">Default sort mode</string>

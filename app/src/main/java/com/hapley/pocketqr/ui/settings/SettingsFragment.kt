@@ -2,6 +2,7 @@ package com.hapley.pocketqr.ui.settings
 
 import android.os.Bundle
 import androidx.preference.*
+import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.util.BuildUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +24,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private val viewModel: SettingsViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        enterTransition = MaterialFadeThrough().apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        exitTransition = MaterialFadeThrough().apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         initUi()

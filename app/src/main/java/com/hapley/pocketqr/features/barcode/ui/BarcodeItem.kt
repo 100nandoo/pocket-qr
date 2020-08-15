@@ -48,8 +48,9 @@ open class BarcodeItem(
     class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view) {
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-            val background = if (layoutPosition % 2 == 0) R.drawable.background_light_grey_effect else R.drawable.background_white_effect
             itemView.background = FastAdapterUIUtils.getSelectableBackground(itemView.context, ContextCompat.getColor(itemView.context, R.color.primaryLightColor), true)
+
+            itemView.cl_history_item.transitionName = itemView.context.getString(R.string.barcode_history_transition_name, item.id)
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_title.text = item.title
             itemView.tv_created_at.text = DateUtils.formatDateTime(itemView.context, item.created.time, FORMAT_ABBREV_ALL)

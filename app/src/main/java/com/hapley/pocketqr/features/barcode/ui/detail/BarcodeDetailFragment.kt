@@ -1,19 +1,24 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BarcodeDetailFragment : Fragment() {
@@ -21,6 +26,18 @@ class BarcodeDetailFragment : Fragment() {
     private val args by navArgs<BarcodeDetailFragmentArgs>()
 
     private val viewModel: BarcodeDetailViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(ContextCompat.getColor(requireContext(), R.color.material_color_grey_200))
+        }
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_detail_fragment, container, false)

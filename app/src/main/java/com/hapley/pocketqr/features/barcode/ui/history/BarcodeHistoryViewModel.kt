@@ -1,5 +1,6 @@
 package com.hapley.pocketqr.features.barcode.ui.history
 
+import android.view.View
 import androidx.core.content.edit
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -29,12 +30,12 @@ class BarcodeHistoryViewModel(private val barcodeUseCase: BarcodeUseCase, privat
 
     val barcodesLiveData = Transformations.map(barcodeUseCase.getAllLiveData()) { barcodes -> barcodes.map { BarcodeItem(it) } }
 
-    lateinit var selectedItemWithPosition: Pair<BarcodeItem, Int>
+    lateinit var selectedItemWithPosition: Triple<View, BarcodeItem, Int>
 
     fun updateFavoriteFlag() {
         viewModelScope.launch {
-            val isFavorite = selectedItemWithPosition.first.isFavorite.not()
-            barcodeUseCase.updateFavorite(selectedItemWithPosition.first.id.toInt(), isFavorite)
+            val isFavorite = selectedItemWithPosition.second.isFavorite.not()
+            barcodeUseCase.updateFavorite(selectedItemWithPosition.second.id.toInt(), isFavorite)
         }
     }
 
