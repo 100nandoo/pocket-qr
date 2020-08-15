@@ -162,13 +162,6 @@ class BarcodeHistoryFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_history_fragment, container, false)
     }
