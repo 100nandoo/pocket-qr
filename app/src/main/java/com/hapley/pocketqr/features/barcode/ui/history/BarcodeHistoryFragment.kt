@@ -12,6 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import com.hapley.pocketqr.ui.settings.ALPHABETICAL
+import com.hapley.pocketqr.ui.settings.MOST_FREQUENT
+import com.hapley.pocketqr.ui.settings.Mapper
+import com.hapley.pocketqr.ui.settings.RECENT
 import com.hapley.pocketqr.util.PocketQrUtil
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -20,12 +24,12 @@ import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
-import kotlinx.coroutines.flow.merge
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import kotlin.Comparator
 
 class BarcodeHistoryFragment : Fragment() {
 
@@ -68,17 +72,8 @@ class BarcodeHistoryFragment : Fragment() {
         Comparator<BarcodeItem> { lhs, rhs -> rhs.created.compareTo(lhs.created) }
     }
 
-    private val mergeComparator by lazy {
-        Comparator<BarcodeItem> { lhs, rhs ->
-            val favoriteCompare = favoriteComparator.compare(lhs, rhs)
-            if (favoriteCompare == 0) {
-                alphabetComparatorAscending.compare(lhs, rhs)
-            } else favoriteCompare
-        }
-    }
-
     private val itemListImpl: ComparableItemListImpl<BarcodeItem> by lazy {
-        ComparableItemListImpl(mergeComparator)
+        ComparableItemListImpl<BarcodeItem>(null)
     }
 
     private val itemAdapter: ItemAdapter<BarcodeItem> by lazy {
@@ -172,28 +167,54 @@ class BarcodeHistoryFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val itemId = Mapper.sortModeToMenuItemId(viewModel.sortMode)
+        menu.findItem(itemId).isChecked = true
+        super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_default -> {
-                itemListImpl.withComparator(mergeComparator)
+            R.id.item_recent -> {
+                itemListImpl.withComparator(mergeComparator(scannedDateComparator))
             }
-            R.id.item_click_count -> {
-                itemListImpl.withComparator(clickCountComparator)
-            }
-            R.id.item_scanned_date -> {
-                itemListImpl.withComparator(scannedDateComparator)
+            R.id.item_most_frequent -> {
+                itemListImpl.withComparator(mergeComparator(clickCountComparator))
             }
             R.id.item_alphabetical -> {
-                itemListImpl.withComparator(alphabetComparatorAscending)
+                itemListImpl.withComparator(mergeComparator(alphabetComparatorAscending))
             }
         }
+
+        val selectedSortMode = Mapper.menuItemIdToSortMode(item.itemId)
+        viewModel.sortMode = selectedSortMode
+
         item.isChecked = !item.isChecked
         return true
+    }
+
+    private fun defaultComparator():Comparator<BarcodeItem>{
+        return when (viewModel.sortMode) {
+            RECENT -> scannedDateComparator
+            MOST_FREQUENT -> clickCountComparator
+            ALPHABETICAL -> alphabetComparatorAscending
+            else -> scannedDateComparator
+        }
+    }
+
+    private fun mergeComparator(comparator: Comparator<BarcodeItem>): Comparator<BarcodeItem> {
+        return Comparator<BarcodeItem> { lhs, rhs ->
+            val favoriteCompare = favoriteComparator.compare(lhs, rhs)
+            if (favoriteCompare == 0) {
+                comparator.compare(lhs, rhs)
+            } else favoriteCompare
+        }
     }
 
     private fun initUi() {
         setHasOptionsMenu(true)
 
+        itemListImpl.withComparator(mergeComparator(defaultComparator()))
         rv_barcode_history.run {
             adapter = fastAdapter
         }
@@ -253,7 +274,7 @@ class BarcodeHistoryFragment : Fragment() {
     private fun actionFavorite() {
         viewModel.updateFavoriteFlag()
         fastAdapter.notifyAdapterItemChanged(viewModel.selectedItemWithPosition.second)
-        itemListImpl.withComparator(mergeComparator)
+        itemListImpl.withComparator(mergeComparator(defaultComparator()))
     }
 
     private fun initShowcase(view: View) {

@@ -58,6 +58,8 @@
     <string name="click_counts_header">Click Counts:</string>
 
     <!--  Settings  -->
+    <string name="sort_mode">Default sort mode</string>
+
     <string name="open_qr_code_history_first">Open QR Code history first</string>
 
     <string name="about">About</string>
@@ -65,5 +67,12 @@
 
     <string name="tutorial">Tutorial</string>
     <string name="show_tutorial_for">Show tutorial for %1$s %2$s</string>
+
+    <!--  Array  -->
+    <string-array name="sort_mode_entries">
+        <item>@string/recent</item>
+        <item>@string/most_frequent</item>
+        <item>@string/alphabetical</item>
+    </string-array>
 
 </resources>

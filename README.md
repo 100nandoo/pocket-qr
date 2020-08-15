@@ -8,8 +8,8 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Save sort state
 - [ ] Add swipe delete action
+- [ ] Implement new design
 - [ ] Migrate to adaptive banner
 - [ ] Dagger inject mock data
 - [ ] Google assistant action
@@ -47,3 +47,4 @@ Pocket QR app
 - [x] Add favorite functionality
 - [x] Explain about auto focus
 - [x] Add sort functionality
+- [x] Save sort state

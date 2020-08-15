@@ -17,18 +17,13 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/item_default"
-                    android:title="@string/default_"
-                    android:checked="true"
-                    app:showAsAction="withText" />
-                <item
-                    android:id="@+id/item_click_count"
-                    android:title="@string/most_frequent"
-                    app:showAsAction="always" />
-                <item
-                    android:id="@+id/item_scanned_date"
+                    android:id="@+id/item_recent"
                     android:title="@string/recent"
                     app:showAsAction="withText" />
+                <item
+                    android:id="@+id/item_most_frequent"
+                    android:title="@string/most_frequent"
+                    app:showAsAction="always" />
                 <item
                     android:id="@+id/item_alphabetical"
                     android:title="@string/alphabetical"
