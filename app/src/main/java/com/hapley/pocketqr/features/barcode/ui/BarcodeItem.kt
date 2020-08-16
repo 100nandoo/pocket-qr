@@ -11,8 +11,10 @@ import com.hapley.pocketqr.features.barcode.domain.Barcode
 import com.hapley.pocketqr.features.barcode.domain.BarcodeType
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
+import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
+import com.mikepenz.fastadapter.swipe.ISwipeable
 import com.mikepenz.fastadapter.ui.utils.FastAdapterUIUtils
-import kotlinx.android.synthetic.main.barcode_list_item.view.*
+import kotlinx.android.synthetic.main.barcode_history_item.view.*
 import java.util.*
 
 /**
@@ -32,7 +34,7 @@ open class BarcodeItem(
     val rawValue: String,
     val isFavorite: Boolean,
     val clickCount: Int
-) : AbstractItem<BarcodeItem.ViewHolder>() {
+) : AbstractItem<BarcodeItem.ViewHolder>(), ISwipeable {
 
     constructor(barcode: Barcode) : this(
         barcode.id.toLong(),
@@ -45,12 +47,10 @@ open class BarcodeItem(
         clickCount = barcode.clickCount
     )
 
-    class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view) {
+    class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view), IDrawerSwipeableViewHolder {
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-            itemView.background = FastAdapterUIUtils.getSelectableBackground(itemView.context, ContextCompat.getColor(itemView.context, R.color.primaryLightColor), true)
-
-            itemView.cl_history_item.transitionName = itemView.context.getString(R.string.barcode_history_transition_name, item.id)
+            itemView.fl_history_item.transitionName = itemView.context.getString(R.string.barcode_history_transition_name, item.id)
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_title.text = item.title
             itemView.tv_created_at.text = DateUtils.formatDateTime(itemView.context, item.created.time, FORMAT_ABBREV_ALL)
@@ -59,6 +59,9 @@ open class BarcodeItem(
         }
 
         override fun unbindView(item: BarcodeItem) = Unit
+
+        override val swipeableView: View
+            get() = itemView.cl_history_item
     }
 
     override var identifier: Long
@@ -66,7 +69,7 @@ open class BarcodeItem(
         set(_) {}
 
     override val layoutRes: Int
-        get() = R.layout.barcode_list_item
+        get() = R.layout.barcode_history_item
 
     override val type: Int
         get() = BarcodeItemView.BARCODE.id
@@ -74,6 +77,8 @@ open class BarcodeItem(
     override fun getViewHolder(v: View): ViewHolder {
         return ViewHolder(v)
     }
+
+    override val isSwipeable: Boolean = true
 }
 
 fun BarcodeType.getIcon(): Int {

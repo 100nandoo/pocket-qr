@@ -7,12 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.transition.Hold
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
@@ -27,6 +26,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.helpers.ActionModeHelper
 import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
+import com.mikepenz.fastadapter.swipe.SimpleSwipeDrawerCallback
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
@@ -173,6 +173,12 @@ class BarcodeHistoryFragment : Fragment() {
         subscribeUi()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        actionMode?.finish()
+        actionMode = null
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_barcode_history, menu)
 
@@ -209,7 +215,7 @@ class BarcodeHistoryFragment : Fragment() {
         return true
     }
 
-    private fun defaultComparator():Comparator<BarcodeItem>{
+    private fun defaultComparator(): Comparator<BarcodeItem> {
         return when (viewModel.sortMode) {
             RECENT -> scannedDateComparator
             MOST_FREQUENT -> clickCountComparator
@@ -231,9 +237,11 @@ class BarcodeHistoryFragment : Fragment() {
         setHasOptionsMenu(true)
 
         itemListImpl.withComparator(mergeComparator(defaultComparator()))
+
         rv_barcode_history.run {
             adapter = fastAdapter
         }
+
         selectExtension = fastAdapter.getSelectExtension()
         selectExtension.apply {
             isSelectable = true
@@ -267,6 +275,12 @@ class BarcodeHistoryFragment : Fragment() {
             actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
             actionMode != null
         }
+
+        val buttonSpacesSize = ((resources.getDimension(R.dimen.swipe_button_horizontal_margin) * 2) + resources.getDimension(R.dimen.swipe_button_size)) / resources.displayMetrics.density
+        val touchCallback = SimpleSwipeDrawerCallback().withSensitivity(1f).withSwipeLeft(buttonSpacesSize.toInt())
+
+        val touchHelper = ItemTouchHelper(touchCallback)
+        touchHelper.attachToRecyclerView(rv_barcode_history)
     }
 
     private fun subscribeUi() {

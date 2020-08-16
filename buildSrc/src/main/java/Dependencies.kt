@@ -72,6 +72,7 @@ object Libraries {
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
+    val fastAdapterSwipe = "com.mikepenz:fastadapter-extensions-swipe:${Versions.fastAdapter}"
     val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
     val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
 

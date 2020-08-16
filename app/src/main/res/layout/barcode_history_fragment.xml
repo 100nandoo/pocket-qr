@@ -12,6 +12,6 @@
         android:layout_height="match_parent"
         android:transitionGroup="true"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/barcode_list_item" />
+        tools:listitem="@layout/barcode_history_item" />
 
 </FrameLayout>
