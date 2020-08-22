@@ -18,7 +18,7 @@ object Releases {
 }
 
 object Versions {
-    val kotlin = "1.3.72"
+    val kotlin = "1.4.0"
     val coroutinePlayServices = "1.3.7"
     val coroutineGuava = "1.3.7"
     val gradle = "4.0.1"
@@ -27,9 +27,9 @@ object Versions {
     val perfPlugin = "1.3.1"
 
     object Android {
-        val appCompat = "1.1.0"
-        val cameraX = "1.0.0-beta07"
-        val cameraView = "1.0.0-alpha14"
+        val appCompat = "1.2.0"
+        val cameraX = "1.0.0-beta08"
+        val cameraView = "1.0.0-alpha15"
         val constraintLayout = "1.1.3"
         val core = "1.3.1"
         val lifecycle = "2.2.0"
@@ -41,10 +41,10 @@ object Versions {
 
     object Firebase {
         val ads = "19.3.0"
-        val core = "17.4.4"
-        val crashlytics = "17.1.1"
+        val core = "17.5.0"
+        val crashlytics = "17.2.1"
         val performance = "19.0.8"
-        val qrCode = "16.0.1"
+        val qrCode = "16.0.2"
     }
 
     val appIntro = "6.0.0"
