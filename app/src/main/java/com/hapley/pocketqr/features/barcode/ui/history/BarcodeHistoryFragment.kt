@@ -8,7 +8,6 @@ import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -284,7 +283,7 @@ class BarcodeHistoryFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-        viewModel.barcodesLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.barcodesLiveData.observe(viewLifecycleOwner, {
             itemListImpl.setNewList(it, true)
         })
     }
