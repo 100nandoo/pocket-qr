@@ -17,21 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
-            ads:layout_constraintDimensionRatio="1:1"
+            ads:layout_constraintHeight_percent="0.8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/ads_ids"
-            ads:layout_constraintBottom_toTopOf="@id/textViewHeader"
-            ads:layout_constraintTop_toBottomOf="@id/previewView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewHeader"
@@ -40,10 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_baseline_grid_2x"
             android:text="@string/zoom_slider"
+            android:textColor="@color/material_color_white"
             ads:layout_constraintBottom_toTopOf="@id/slider"
             ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@id/adView" />
+            ads:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/slider"
@@ -52,10 +41,21 @@
             android:layout_margin="@dimen/material_baseline_grid_2x"
             android:valueFrom="0.0"
             android:valueTo="1.0"
+            ads:layout_constraintBottom_toBottomOf="@id/previewView"
             app:labelBehavior="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewHeader" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/ads_ids"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintTop_toBottomOf="@id/previewView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

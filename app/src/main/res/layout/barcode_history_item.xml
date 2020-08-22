@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/secondaryColor"
-            tools:src="@drawable/ic_barcode_url" />
+            tools:src="@drawable/ic_barcode_type_url" />
 
         <TextView
             android:id="@+id/tv_title"

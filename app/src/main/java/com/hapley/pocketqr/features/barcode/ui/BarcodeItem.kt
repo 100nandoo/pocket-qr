@@ -81,10 +81,14 @@ open class BarcodeItem(
 
 fun BarcodeType.getIcon(): Int {
     return when (this) {
-        BarcodeType.EMAIL -> R.drawable.ic_barcode_mail
-        BarcodeType.ISBN -> R.drawable.ic_barcode_isbn
-        BarcodeType.PHONE -> R.drawable.ic_barcode_phone
-        BarcodeType.URL -> R.drawable.ic_barcode_url
-        else -> R.drawable.ic_barcode_other
+        BarcodeType.CONTACT -> R.drawable.ic_barcode_type_contact
+        BarcodeType.EMAIL -> R.drawable.ic_barcode_type_mail
+        BarcodeType.GEO -> R.drawable.ic_barcode_type_geo
+        BarcodeType.ISBN -> R.drawable.ic_barcode_type_isbn
+        BarcodeType.PHONE -> R.drawable.ic_barcode_type_phone
+        BarcodeType.SMS -> R.drawable.ic_barcode_type_sms
+        BarcodeType.URL -> R.drawable.ic_barcode_type_url
+        BarcodeType.WIFI -> R.drawable.ic_barcode_type_wifi
+        else -> R.drawable.ic_barcode_type_other
     }
 }

@@ -42,9 +42,13 @@ fun MlKitBarcode.toDomain(id: Int): Barcode? {
 }
 
 fun MlKitBarcode.generateType(): BarcodeType = when (valueType) {
+    MlKitBarcode.TYPE_CONTACT_INFO -> BarcodeType.CONTACT
     MlKitBarcode.TYPE_EMAIL -> BarcodeType.EMAIL
+    MlKitBarcode.TYPE_GEO -> BarcodeType.GEO
     MlKitBarcode.TYPE_ISBN -> BarcodeType.ISBN
     MlKitBarcode.TYPE_PHONE -> BarcodeType.PHONE
+    MlKitBarcode.TYPE_SMS -> BarcodeType.SMS
     MlKitBarcode.TYPE_URL -> BarcodeType.URL
+    MlKitBarcode.TYPE_WIFI -> BarcodeType.WIFI
     else -> BarcodeType.UNKNOWN
 }

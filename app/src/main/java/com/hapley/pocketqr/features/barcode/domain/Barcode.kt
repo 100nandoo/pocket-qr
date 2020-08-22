@@ -33,13 +33,25 @@ data class Barcode(
 }
 
 enum class BarcodeType(val value: Int) {
-    URL(MLKitBarcode.TYPE_URL), EMAIL(MLKitBarcode.TYPE_EMAIL), PHONE(MLKitBarcode.TYPE_PHONE), ISBN(MLKitBarcode.TYPE_ISBN), UNKNOWN(-1)
+    CONTACT(MLKitBarcode.TYPE_CONTACT_INFO),
+    EMAIL(MLKitBarcode.TYPE_EMAIL),
+    GEO(MLKitBarcode.TYPE_GEO),
+    ISBN(MLKitBarcode.TYPE_ISBN),
+    PHONE(MLKitBarcode.TYPE_PHONE),
+    SMS(MLKitBarcode.TYPE_SMS),
+    URL(MLKitBarcode.TYPE_URL),
+    WIFI(MLKitBarcode.TYPE_WIFI),
+    UNKNOWN(-1)
 }
 
 fun BarcodeEntity.generateType(): BarcodeType = when (type) {
+    MLKitBarcode.TYPE_CONTACT_INFO -> BarcodeType.CONTACT
     MLKitBarcode.TYPE_EMAIL -> BarcodeType.EMAIL
+    MLKitBarcode.TYPE_GEO -> BarcodeType.GEO
     MLKitBarcode.TYPE_ISBN -> BarcodeType.ISBN
     MLKitBarcode.TYPE_PHONE -> BarcodeType.PHONE
+    MLKitBarcode.TYPE_SMS -> BarcodeType.SMS
     MLKitBarcode.TYPE_URL -> BarcodeType.URL
+    MLKitBarcode.TYPE_WIFI -> BarcodeType.WIFI
     else -> BarcodeType.UNKNOWN
 }
