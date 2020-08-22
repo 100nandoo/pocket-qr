@@ -52,6 +52,10 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
     suspend fun updateBarcodes(vararg barcode: Barcode){
         barcodeRepository.updateBarcodes(*barcode.map { it.toEntity }.toTypedArray())
     }
+
+    suspend fun deleteBarcode(id: Int){
+        barcodeRepository.deleteBarcode(id)
+    }
 }
 
 private val Barcode.toEntity: BarcodeEntity

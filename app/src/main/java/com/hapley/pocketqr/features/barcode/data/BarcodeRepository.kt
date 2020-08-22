@@ -24,4 +24,6 @@ class BarcodeRepository(private val barcodeDao: BarcodeDao) {
     suspend fun incrementClickCount(id: Int) = barcodeDao.incrementClickCount(id)
 
     suspend fun updateBarcodes(vararg barcodeEntity: BarcodeEntity) = barcodeDao.updateBarcodes(*barcodeEntity)
+
+    suspend fun deleteBarcode(id: Int) = barcodeDao.delete(id)
 }

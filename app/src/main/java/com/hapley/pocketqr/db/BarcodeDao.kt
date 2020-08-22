@@ -52,4 +52,7 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
 
     @Query("UPDATE barcodeentity SET clickCount = clickCount + 1 WHERE id = :id")
     suspend fun incrementClickCount(id: Int)
+
+    @Query("DELETE FROM barcodeentity WHERE id = :id")
+    suspend fun delete(id: Int)
 }

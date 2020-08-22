@@ -9,22 +9,6 @@
     android:layout_marginVertical="2dp"
     android:gravity="center_vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="end|center_vertical"
-        android:visibility="visible"
-        tools:visibility="gone">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/b_delete"
-            android:layout_width="@dimen/swipe_button_size"
-            android:layout_height="@dimen/swipe_button_size"
-            android:layout_marginHorizontal="@dimen/swipe_button_horizontal_margin"
-            app:icon="@drawable/ic_barcode_delete" />
-
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_history_item"
         android:layout_width="match_parent"

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
@@ -25,7 +26,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.helpers.ActionModeHelper
 import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
-import com.mikepenz.fastadapter.swipe.SimpleSwipeDrawerCallback
+import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
@@ -35,7 +36,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.Comparator
 
-class BarcodeHistoryFragment : Fragment() {
+class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback {
 
     private val viewModel: BarcodeHistoryViewModel by viewModel()
 
@@ -275,8 +276,9 @@ class BarcodeHistoryFragment : Fragment() {
             actionMode != null
         }
 
-        val buttonSpacesSize = ((resources.getDimension(R.dimen.swipe_button_horizontal_margin) * 2) + resources.getDimension(R.dimen.swipe_button_size)) / resources.displayMetrics.density
-        val touchCallback = SimpleSwipeDrawerCallback().withSensitivity(1f).withSwipeLeft(buttonSpacesSize.toInt())
+        val touchCallback = SimpleSwipeCallback(this, ContextCompat.getDrawable(requireContext(), R.drawable.ic_barcode_delete))
+            .withSensitivity(6f)
+            .withSurfaceThreshold(0.5f)
 
         val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv_barcode_history)
@@ -316,6 +318,12 @@ class BarcodeHistoryFragment : Fragment() {
         itemListImpl.withComparator(mergeComparator(defaultComparator()))
     }
 
+    private fun actionDelete(position: Int, id: Int) {
+        if (position != RecyclerView.NO_POSITION) {
+            viewModel.deleteBarcode(id)
+        }
+    }
+
     private fun initShowcase(view: View) {
         FancyShowCaseView.Builder(requireActivity())
             .focusOn(view)
@@ -327,6 +335,15 @@ class BarcodeHistoryFragment : Fragment() {
             .show()
 
         viewModel.showTutorial = false
+    }
+
+    override fun itemSwiped(position: Int, direction: Int) {
+        val swipedItem = fastAdapter.getItem(position) ?: return
+        if (direction == ItemTouchHelper.LEFT) {
+            actionDelete(position, swipedItem.id.toInt())
+        } else {
+
+        }
     }
 
 }

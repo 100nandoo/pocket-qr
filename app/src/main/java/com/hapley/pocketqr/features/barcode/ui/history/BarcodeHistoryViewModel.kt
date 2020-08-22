@@ -44,4 +44,10 @@ class BarcodeHistoryViewModel(private val barcodeUseCase: BarcodeUseCase, privat
             barcodeUseCase.incrementClickCount(barcodeId)
         }
     }
+
+    fun deleteBarcode(barcodeId: Int){
+        viewModelScope.launch {
+            barcodeUseCase.deleteBarcode(barcodeId)
+        }
+    }
 }

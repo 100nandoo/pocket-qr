@@ -4,7 +4,6 @@ import android.text.format.DateUtils
 import android.text.format.DateUtils.FORMAT_ABBREV_ALL
 import android.view.View
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.domain.Barcode
@@ -13,7 +12,6 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
 import com.mikepenz.fastadapter.swipe.ISwipeable
-import com.mikepenz.fastadapter.ui.utils.FastAdapterUIUtils
 import kotlinx.android.synthetic.main.barcode_history_item.view.*
 import java.util.*
 
