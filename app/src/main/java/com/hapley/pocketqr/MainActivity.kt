@@ -6,11 +6,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.ads.MobileAds
+import com.hapley.pocketqr.di.MockDataGenerator
 import com.hapley.pocketqr.util.BuildUtil
+import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import me.toptas.fancyshowcase.FancyShowCaseView
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

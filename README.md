@@ -8,7 +8,6 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Inject mock data
 - [ ] Implement new design
 - [ ] Migrate to adaptive banner
 - [ ] Google assistant action
@@ -50,3 +49,4 @@ Pocket QR app
 - [x] Add sort functionality
 - [x] Save sort state
 - [x] Add swipe delete action
+- [x] Inject mock data

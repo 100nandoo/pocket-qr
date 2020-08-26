@@ -53,8 +53,8 @@ val barcodeModule: Module = module {
     }
 }
 
-val debugModule: Module = module {
-
+val fakeModule: Module = module {
+    single { MockDataGenerator(barcodeDao = get()) }
 }
 
 object Modules {
