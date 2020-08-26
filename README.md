@@ -8,9 +8,9 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Inject mock data
 - [ ] Implement new design
 - [ ] Migrate to adaptive banner
-- [ ] Dagger inject mock data
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
@@ -23,6 +23,8 @@ Pocket QR app
 - [ ] Shortcut
 - [ ] Widget
 - [ ] Donation
+- [ ] Night mode
+- [ ] Theme
 - [x] Support multi QR Code format (wifi, etc)
 - [x] Room Database for QR Code
 - [x] app signing

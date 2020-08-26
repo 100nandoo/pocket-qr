@@ -53,6 +53,10 @@ val barcodeModule: Module = module {
     }
 }
 
+val debugModule: Module = module {
+
+}
+
 object Modules {
     const val DATABASE_NAME = "pocket-database"
 }

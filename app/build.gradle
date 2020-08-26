@@ -95,8 +95,6 @@ dependencies {
 
     implementation AndroidLibraries.roomRuntime
     implementation AndroidLibraries.room
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     kapt AndroidLibraries.roomCompiler
 
     /**
@@ -139,6 +137,9 @@ dependencies {
 
     // Timber
     implementation Libraries.timber
+
+    debugImplementation 'com.facebook.flipper:flipper:0.52.1'
+    debugImplementation 'com.facebook.soloader:soloader:0.9.0'
 
     /**
      * ===================== Tests =======================
