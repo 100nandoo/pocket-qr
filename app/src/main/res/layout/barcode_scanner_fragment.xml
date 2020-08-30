@@ -24,7 +24,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewHeader"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
+            style="@style/TextAppearance.AppTheme.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_baseline_grid_2x"

@@ -30,12 +30,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/secondaryColor"
+            app:tint="?attr/colorSecondary"
             tools:src="@drawable/ic_barcode_type_url" />
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/TextAppearance.MaterialComponents.Body1"
+            style="@style/TextAppearance.AppTheme.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/tv_subtitle"
-            style="@style/TextAppearance.MaterialComponents.Caption"
+            style="@style/TextAppearance.AppTheme.Caption"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
@@ -62,7 +62,7 @@
 
         <TextView
             android:id="@+id/tv_created_at"
-            style="@style/TextAppearance.MaterialComponents.Overline"
+            style="@style/TextAppearance.AppTheme.Overline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_1x"
@@ -86,7 +86,7 @@
             app:layout_constraintStart_toEndOf="@id/tv_subtitle"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_goneMarginEnd="@dimen/material_baseline_grid_1x"
-            app:tint="@color/secondaryColor"
+            app:tint="?attr/colorSecondary"
             tools:visibility="visible" />
 
         <com.google.android.material.button.MaterialButton

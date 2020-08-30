@@ -28,8 +28,8 @@ class AppIntroActivity : AppIntro() {
                 title = getString(R.string.welcome),
                 description = getString(R.string.keep_history),
                 backgroundDrawable = R.drawable.background_gradient_purple,
-                titleTypefaceFontRes = R.font.work_sans_bold,
-                descriptionTypefaceFontRes = R.font.work_sans_medium
+                titleTypefaceFontRes = R.font.source_sans_pro,
+                descriptionTypefaceFontRes = R.font.source_sans_pro
             )
         )
 
@@ -38,8 +38,8 @@ class AppIntroActivity : AppIntro() {
                 title = getString(R.string.label_with_emoji),
                 description = getString(R.string.label_description),
                 backgroundDrawable = R.drawable.background_gradient_blue,
-                titleTypefaceFontRes = R.font.work_sans_bold,
-                descriptionTypefaceFontRes = R.font.work_sans_medium
+                titleTypefaceFontRes = R.font.source_sans_pro,
+                descriptionTypefaceFontRes = R.font.source_sans_pro
             )
         )
 
@@ -48,8 +48,8 @@ class AppIntroActivity : AppIntro() {
                 title = getString(R.string.auto_focus),
                 description = getString(R.string.auto_focus_description),
                 backgroundDrawable = R.drawable.background_gradient_green,
-                titleTypefaceFontRes = R.font.work_sans_bold,
-                descriptionTypefaceFontRes = R.font.work_sans_medium
+                titleTypefaceFontRes = R.font.source_sans_pro,
+                descriptionTypefaceFontRes = R.font.source_sans_pro
             )
         )
 
@@ -58,8 +58,8 @@ class AppIntroActivity : AppIntro() {
                 title = getString(R.string.camera_permission),
                 description = getString(R.string.camera_permission_desc),
                 backgroundDrawable = R.drawable.background_gradient_orange,
-                titleTypefaceFontRes = R.font.work_sans_bold,
-                descriptionTypefaceFontRes = R.font.work_sans_medium
+                titleTypefaceFontRes = R.font.source_sans_pro,
+                descriptionTypefaceFontRes = R.font.source_sans_pro
             )
         )
 

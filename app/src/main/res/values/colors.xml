@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#3096e2</color>
-    <color name="primaryLightColor">#72c6ff</color>
-    <color name="primaryDarkColor">#0069b0</color>
+    <color name="surfaceSelection">@color/blue_200</color>
 
-    <color name="secondaryColor">#ffc05f</color>
-    <color name="secondaryLightColor">#fff38f</color>
-    <color name="secondaryDarkColor">#c89030</color>
+    <color name="blue_200">#90caf9</color> <!--Color primary (dark)-->
+    <color name="blue_500">#2196f3</color> <!--Color primary (light)-->
+    <color name="blue_600">#1e88e5</color> <!--Color primary variant (dark)-->
+    <color name="blue_700">#1976d2</color> <!--Color primary variant (light)-->
 
     <color name="primaryTextColor">#FFFFFF</color>
     <color name="secondaryTextColor">#FFFFFF</color>
     <color name="colorOnSurface">#33312E</color>
+
+    <color name="orange_200">#ffcc80</color> <!--Color secondary-->
+    <color name="orange_500">#ff9800</color> <!--Color secondary variant-->
+
+    <color name="black_700">#303030</color>
+    <color name="black_800">#212121</color>
+    <color name="black_900">#000000</color>
+
+    <color name="red_200">#cf6679</color> <!--Color error (dark)-->
+    <color name="red_600">#b00020</color> <!--Color error (light)-->
 </resources>

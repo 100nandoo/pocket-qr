@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/primaryLightColor">
+    android:color="@color/surfaceSelection">
 
     <item>
         <selector>
             <item android:state_selected="true">
-                <color android:color="?attr/colorPrimaryVariant"/>
+                <color android:color="@color/surfaceSelection"/>
             </item>
 
             <item android:state_activated="true">
-                <color android:color="?attr/colorPrimaryVariant" />
+                <color android:color="@color/surfaceSelection" />
             </item>
 
             <item>

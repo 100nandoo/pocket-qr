@@ -40,7 +40,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_subtitle"
-            style="@style/TextAppearance.MaterialComponents.Body1"
+            style="@style/TextAppearance.AppTheme.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
@@ -75,7 +75,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_click_count"
-            style="@style/TextAppearance.MaterialComponents.Body1"
+            style="@style/TextAppearance.AppTheme.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_1x"
@@ -102,7 +102,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_scanned_date"
-            style="@style/TextAppearance.MaterialComponents.Body1"
+            style="@style/TextAppearance.AppTheme.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_1x"
