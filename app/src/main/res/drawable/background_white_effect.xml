@@ -5,15 +5,15 @@
     <item>
         <selector>
             <item android:state_selected="true">
-                <color android:color="@color/primaryLightColor"/>
+                <color android:color="?attr/colorPrimaryVariant"/>
             </item>
 
             <item android:state_activated="true">
-                <color android:color="@color/primaryLightColor" />
+                <color android:color="?attr/colorPrimaryVariant" />
             </item>
 
             <item>
-                <color android:color="@color/material_color_white" />
+                <color android:color="?attr/colorSurface" />
             </item>
         </selector>
     </item>

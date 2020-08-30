@@ -1,10 +1,10 @@
 package com.hapley.pocketqr.features.barcode.ui
 
-import android.text.format.DateUtils
-import android.text.format.DateUtils.FORMAT_ABBREV_ALL
+import android.text.format.DateUtils.*
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.domain.Barcode
 import com.hapley.pocketqr.features.barcode.domain.BarcodeType
@@ -48,12 +48,14 @@ open class BarcodeItem(
     class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view), IDrawerSwipeableViewHolder {
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-            itemView.fl_history_item.transitionName = itemView.context.getString(R.string.barcode_history_transition_name, item.id)
+            itemView.card_history_item.transitionName = itemView.context.getString(R.string.barcode_history_transition_name, item.id)
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_title.text = item.title
-            itemView.tv_created_at.text = DateUtils.formatDateTime(itemView.context, item.created.time, FORMAT_ABBREV_ALL)
+            itemView.tv_created_at.text = getRelativeTimeSpanString(item.created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)
             itemView.tv_subtitle.text = item.subtitle
             itemView.iv_favorite.isInvisible = item.isFavorite.not()
+//            itemView.b_info.transitionName = itemView.context.getString(R.string.barcode_history_transition_name, item.id)
+
         }
 
         override fun unbindView(item: BarcodeItem) = Unit

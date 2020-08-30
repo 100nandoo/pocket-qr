@@ -1,6 +1,7 @@
 package com.hapley.pocketqr.features.barcode.ui.history
 
 import android.os.Bundle
+import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.*
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
@@ -24,11 +26,13 @@ import com.hapley.pocketqr.util.PocketQrUtil
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.helpers.ActionModeHelper
+import com.mikepenz.fastadapter.listeners.ClickEventHook
 import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
 import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
+import kotlinx.android.synthetic.main.barcode_history_item.view.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
 import org.koin.android.ext.android.inject
@@ -112,7 +116,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             val selectedItem = viewModel.selectedItemWithPosition
             return when (item.itemId) {
                 R.id.item_detail -> {
-                    actionNavigateToDetail(selectedItem.second.id.toInt())
+                    actionNavigateToDetail()
                     mode.finish()
                     true
                 }
@@ -240,6 +244,11 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
         rv_barcode_history.run {
             adapter = fastAdapter
+            requireContext().dividerBuilder()
+                .size(8, COMPLEX_UNIT_DIP)
+                .showFirstDivider()
+                .showLastDivider()
+                .asSpace().build().addTo(this)
         }
 
         selectExtension = fastAdapter.getSelectExtension()
@@ -254,10 +263,23 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             res ?: false
         }
 
-        fastAdapter.onClickListener = { view, _, item, _ ->
-            if (view != null) {
+        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
+            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
+                viewModel.selectedItemWithPosition = Triple(v, item, position)
+                actionNavigateToDetail()
+            }
+
+            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
+                return if (viewHolder is BarcodeItem.ViewHolder) {
+                    viewHolder.itemView.b_info
+                } else null
+            }
+        })
+
+        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
+            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
                 if (viewModel.showTutorial) {
-                    initShowcase(view)
+                    initShowcase(v)
                 } else {
                     val isSuccess = pocketQrUtil.actionView(requireContext(), item.rawValue)
                     if (isSuccess) {
@@ -265,9 +287,15 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
                     }
                     actionMode?.finish()
                 }
+
             }
-            false
-        }
+
+            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
+                return if (viewHolder is BarcodeItem.ViewHolder) {
+                    viewHolder.itemView.card_history_item
+                } else null
+            }
+        })
 
         fastAdapter.onPreLongClickListener = { view, _, item, position ->
             view.id
@@ -295,7 +323,10 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
     }
 
-    private fun actionNavigateToDetail(id: Int) {
+    private fun actionNavigateToDetail() {
+        val id = viewModel.selectedItemWithPosition.second.id.toInt()
+        val selectedView = viewModel.selectedItemWithPosition.first
+
         exitTransition = MaterialElevationScale(false).apply {
             duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
         }
@@ -303,7 +334,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
         }
         val endTransitionName = getString(R.string.barcode_detail_transition_name)
-        val extras = FragmentNavigatorExtras(viewModel.selectedItemWithPosition.first to endTransitionName)
+        val extras = FragmentNavigatorExtras(selectedView to endTransitionName)
         val directions = BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id)
         findNavController().navigate(directions, extras)
     }

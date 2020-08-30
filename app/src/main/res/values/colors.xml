@@ -10,4 +10,5 @@
 
     <color name="primaryTextColor">#FFFFFF</color>
     <color name="secondaryTextColor">#FFFFFF</color>
+    <color name="colorOnSurface">#33312E</color>
 </resources>

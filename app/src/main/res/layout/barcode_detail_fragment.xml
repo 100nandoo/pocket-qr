@@ -95,7 +95,6 @@
             android:layout_marginTop="@dimen/material_baseline_grid_1x"
             android:layout_marginEnd="@dimen/material_baseline_grid_1x"
             android:text="@string/scanned_date"
-            app:layout_constraintEnd_toStartOf="@id/tv_scanned_date"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"

@@ -50,7 +50,7 @@ object Versions {
     val appIntro = "6.0.0"
 //    val assent = "3.0.0-RC4"
     val fancyShowcaseView = "1.3.0"
-    val fastAdapter = "5.2.2"
+    val fastAdapter = "5.2.3"
     val koin = "2.1.6"
     val materialValues = "1.1.1"
     val rvDivider = "3.3.0"
