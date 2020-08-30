@@ -14,6 +14,10 @@
         <item name="backgroundTint">?attr/colorPrimarySurface</item>
     </style>
 
+    <style name="PopupTheme">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
     <style name="TextAppearance.AppTheme.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/source_sans_pro</item>
         <item name="android:fontFamily">@font/source_sans_pro</item>
