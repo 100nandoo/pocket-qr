@@ -7,6 +7,8 @@
     <color name="blue_600">#1e88e5</color> <!--Color primary variant (dark)-->
     <color name="blue_700">#1976d2</color> <!--Color primary variant (light)-->
 
+    <color name="blue_500_dark">#0069c0</color>
+
     <color name="primaryTextColor">#FFFFFF</color>
     <color name="secondaryTextColor">#FFFFFF</color>
     <color name="colorOnSurface">#33312E</color>

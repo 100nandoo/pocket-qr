@@ -8,6 +8,8 @@
         <item name="colorPrimary">@color/blue_500</item>
         <item name="colorPrimaryVariant">@color/blue_700</item>
 
+        <item name="colorPrimaryDark">@color/blue_500_dark</item>
+
         <item name="colorSecondary">@color/orange_200</item>
         <item name="colorSecondaryVariant">@color/orange_500</item>
 
@@ -15,11 +17,11 @@
         <item name="colorSurface">@color/material_color_white</item>
         <item name="colorError">@color/red_600</item>
 
-        <item name="colorOnPrimary">@color/material_color_white</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
         <item name="colorOnSecondary">@color/black_900</item>
         <item name="colorOnBackground">@color/black_900</item>
         <item name="colorOnSurface">@color/black_900</item>
-        <item name="colorOnError">@color/material_color_white</item>
+        <item name="colorOnError">@color/primaryTextColor</item>
 
         <item name="actionModeBackground">?attr/colorSecondaryVariant</item>
         <item name="windowActionModeOverlay">true</item>
@@ -42,11 +44,7 @@
     </style>
 
     <style name="Base.Theme.Pocket" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">?attr/colorSurface</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
     </style>
 
 </resources>
