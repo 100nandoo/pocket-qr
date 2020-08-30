@@ -22,7 +22,6 @@ Pocket QR app
 - [ ] Shortcut
 - [ ] Widget
 - [ ] Donation
-- [ ] Night mode
 - [ ] Theme
 - [x] Support multi QR Code format (wifi, etc)
 - [x] Room Database for QR Code
@@ -50,3 +49,4 @@ Pocket QR app
 - [x] Save sort state
 - [x] Add swipe delete action
 - [x] Inject mock data
+- [x] Night mode
