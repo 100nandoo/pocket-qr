@@ -15,6 +15,7 @@ class MockDataGenerator(private val barcodeDao: BarcodeDao) {
 
     private fun generateData(): List<BarcodeEntity> {
         return mutableListOf<BarcodeEntity>().apply {
+            add(BarcodeEntity("https://www.safeentry-qr.gov.sg/tenant/PROD-200105648H-TIONGBAHRUPLAZA-TP", "TB Plaza", "TB Plaza", 1599124646000, 256, 8, true, 0))
             add(BarcodeEntity("9555540000085", "", "9555540000085", 1598265090208, 32, -1, false, 0))
             add(BarcodeEntity("SMSTO:+12345:Hello world", "", "+12345\nHello world", 1598450490804, 256, 6, false, 0))
             add(BarcodeEntity("WIFI:S:We know;T:WPA;P:galaxies;;", "", "9555540000085", 1598450497532, 256, 9, false, 0))
