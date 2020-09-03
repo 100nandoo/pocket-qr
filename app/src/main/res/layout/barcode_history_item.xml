@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_white_effect"
         android:orientation="horizontal"
-        android:padding="@dimen/material_baseline_grid_1x"
+        android:padding="@dimen/material_baseline_grid_2x"
         android:visibility="visible"
         tools:visibility="visible">
 
@@ -26,7 +26,7 @@
             android:layout_width="@dimen/material_baseline_grid_3x"
             android:layout_height="@dimen/material_baseline_grid_3x"
             android:layout_marginStart="@dimen/material_baseline_grid_1x"
-            android:contentDescription="icon"
+            android:contentDescription="@string/icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/TextAppearance.AppTheme.Subtitle1"
+            style="@style/TextAppearance.AppTheme.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/tv_subtitle"
-            style="@style/TextAppearance.AppTheme.Caption"
+            style="@style/TextAppearance.AppTheme.Body2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"

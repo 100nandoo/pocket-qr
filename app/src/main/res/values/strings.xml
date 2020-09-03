@@ -76,6 +76,9 @@
     <string name="tutorial">Tutorial</string>
     <string name="show_tutorial_for">Show tutorial for %1$s %2$s</string>
 
+    <!--  Misc  -->
+    <string name="icon">icon</string>
+
     <!--  Array  -->
     <string-array name="sort_mode_entries">
         <item>@string/recent</item>
