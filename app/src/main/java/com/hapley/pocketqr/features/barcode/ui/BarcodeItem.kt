@@ -6,7 +6,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.view.isInvisible
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.domain.Barcode
-import com.hapley.pocketqr.features.barcode.domain.BarcodeType
+import com.hapley.pocketqr.features.barcode.domain.*
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
@@ -80,16 +80,16 @@ open class BarcodeItem(
     override val isSwipeable: Boolean = true
 }
 
-fun BarcodeType.getIcon(): Int {
+fun Int.getIcon(): Int {
     return when (this) {
-        BarcodeType.CONTACT -> R.drawable.ic_barcode_type_contact
-        BarcodeType.EMAIL -> R.drawable.ic_barcode_type_mail
-        BarcodeType.GEO -> R.drawable.ic_barcode_type_geo
-        BarcodeType.ISBN -> R.drawable.ic_barcode_type_isbn
-        BarcodeType.PHONE -> R.drawable.ic_barcode_type_phone
-        BarcodeType.SMS -> R.drawable.ic_barcode_type_sms
-        BarcodeType.URL -> R.drawable.ic_barcode_type_url
-        BarcodeType.WIFI -> R.drawable.ic_barcode_type_wifi
+        CONTACT -> R.drawable.ic_barcode_type_contact
+        EMAIL -> R.drawable.ic_barcode_type_mail
+        GEO -> R.drawable.ic_barcode_type_geo
+        ISBN -> R.drawable.ic_barcode_type_isbn
+        PHONE -> R.drawable.ic_barcode_type_phone
+        SMS -> R.drawable.ic_barcode_type_sms
+        URL -> R.drawable.ic_barcode_type_url
+        WIFI -> R.drawable.ic_barcode_type_wifi
         else -> R.drawable.ic_barcode_type_other
     }
 }

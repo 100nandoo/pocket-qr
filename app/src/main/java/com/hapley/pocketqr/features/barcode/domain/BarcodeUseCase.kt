@@ -66,7 +66,7 @@ private val Barcode.toEntity: BarcodeEntity
             displayValue = this.displayValue,
             created = this.created,
             format = this.format,
-            type = this.type.value,
+            type = this.type,
             isFavorite = this.isFavorite,
             clickCount = this.clickCount
         )

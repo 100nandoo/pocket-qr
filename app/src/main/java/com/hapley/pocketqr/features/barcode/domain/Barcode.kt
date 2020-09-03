@@ -1,5 +1,6 @@
 package com.hapley.pocketqr.features.barcode.domain
 
+import androidx.annotation.IntDef
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.google.mlkit.vision.barcode.Barcode as MLKitBarcode
 
@@ -14,7 +15,9 @@ data class Barcode(
     val displayValue: String,
     val created: Long,
     val format: Int,
-    val type: BarcodeType,
+
+    @BarcodeType
+    val type: Int,
     val isFavorite: Boolean,
     val clickCount: Int
 ) {
@@ -26,32 +29,22 @@ data class Barcode(
         displayValue = barcodeEntity.displayValue,
         created = barcodeEntity.created,
         format = barcodeEntity.format,
-        type = barcodeEntity.generateType(),
+        type = barcodeEntity.type,
         isFavorite = barcodeEntity.isFavorite,
         clickCount = barcodeEntity.clickCount
     )
 }
 
-enum class BarcodeType(val value: Int) {
-    CONTACT(MLKitBarcode.TYPE_CONTACT_INFO),
-    EMAIL(MLKitBarcode.TYPE_EMAIL),
-    GEO(MLKitBarcode.TYPE_GEO),
-    ISBN(MLKitBarcode.TYPE_ISBN),
-    PHONE(MLKitBarcode.TYPE_PHONE),
-    SMS(MLKitBarcode.TYPE_SMS),
-    URL(MLKitBarcode.TYPE_URL),
-    WIFI(MLKitBarcode.TYPE_WIFI),
-    UNKNOWN(-1)
-}
+@Retention(AnnotationRetention.SOURCE)
+@IntDef(value = [CONTACT, EMAIL, GEO, ISBN, PHONE, SMS, URL, WIFI, UNKNOWN], open = false)
+annotation class BarcodeType
 
-fun BarcodeEntity.generateType(): BarcodeType = when (type) {
-    MLKitBarcode.TYPE_CONTACT_INFO -> BarcodeType.CONTACT
-    MLKitBarcode.TYPE_EMAIL -> BarcodeType.EMAIL
-    MLKitBarcode.TYPE_GEO -> BarcodeType.GEO
-    MLKitBarcode.TYPE_ISBN -> BarcodeType.ISBN
-    MLKitBarcode.TYPE_PHONE -> BarcodeType.PHONE
-    MLKitBarcode.TYPE_SMS -> BarcodeType.SMS
-    MLKitBarcode.TYPE_URL -> BarcodeType.URL
-    MLKitBarcode.TYPE_WIFI -> BarcodeType.WIFI
-    else -> BarcodeType.UNKNOWN
-}
+const val CONTACT = 1
+const val EMAIL = 2
+const val GEO = 10
+const val ISBN = 3
+const val PHONE = 4
+const val SMS = 6
+const val URL = 8
+const val WIFI = 9
+const val UNKNOWN = -1

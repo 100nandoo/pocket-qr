@@ -2,8 +2,7 @@ package com.hapley.pocketqr.features.barcode.ui.scanner
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hapley.pocketqr.features.barcode.domain.Barcode
-import com.hapley.pocketqr.features.barcode.domain.BarcodeType
+import com.hapley.pocketqr.features.barcode.domain.*
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,14 +40,15 @@ fun MlKitBarcode.toDomain(id: Int): Barcode? {
     }
 }
 
-fun MlKitBarcode.generateType(): BarcodeType = when (valueType) {
-    MlKitBarcode.TYPE_CONTACT_INFO -> BarcodeType.CONTACT
-    MlKitBarcode.TYPE_EMAIL -> BarcodeType.EMAIL
-    MlKitBarcode.TYPE_GEO -> BarcodeType.GEO
-    MlKitBarcode.TYPE_ISBN -> BarcodeType.ISBN
-    MlKitBarcode.TYPE_PHONE -> BarcodeType.PHONE
-    MlKitBarcode.TYPE_SMS -> BarcodeType.SMS
-    MlKitBarcode.TYPE_URL -> BarcodeType.URL
-    MlKitBarcode.TYPE_WIFI -> BarcodeType.WIFI
-    else -> BarcodeType.UNKNOWN
+@BarcodeType
+fun MlKitBarcode.generateType(): Int = when (valueType) {
+    MlKitBarcode.TYPE_CONTACT_INFO -> CONTACT
+    MlKitBarcode.TYPE_EMAIL -> EMAIL
+    MlKitBarcode.TYPE_GEO -> GEO
+    MlKitBarcode.TYPE_ISBN -> ISBN
+    MlKitBarcode.TYPE_PHONE -> PHONE
+    MlKitBarcode.TYPE_SMS -> SMS
+    MlKitBarcode.TYPE_URL -> URL
+    MlKitBarcode.TYPE_WIFI -> WIFI
+    else -> UNKNOWN
 }
