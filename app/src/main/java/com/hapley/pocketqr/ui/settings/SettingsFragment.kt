@@ -1,6 +1,7 @@
 package com.hapley.pocketqr.ui.settings
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.*
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
@@ -11,12 +12,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     companion object {
         const val CATEGORY_BARCODE = "barcode"
+        const val CATEGORY_DISPLAY = "display"
         const val CATEGORY_TUTORIAL = "tutorial"
         const val CATEGORY_ABOUT = "about"
 
         const val BARCODE_APP_INTRODUCTION = "barcode_app_introduction"
 
         const val BARCODE_HISTORY_SORT = "barcode_history_sort"
+        const val NIGHT_MODE = "night_mode"
         const val BARCODE_HISTORY_SHOW_TUTORIAL = "barcode_history_show_tutorial"
         const val BARCODE_DETAIL_SHOW_TUTORIAL = "barcode_detail_show_tutorial"
 
@@ -65,7 +68,34 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         setDefaultValue(RECENT)
                     }
                 )
+
             }
+
+            PreferenceCategory(context).let { displayCategory ->
+                displayCategory.key = CATEGORY_DISPLAY
+                displayCategory.title = getString(R.string.display)
+                screen.addPreference(displayCategory)
+
+                displayCategory.addPreference(
+                    ListPreference(context).apply {
+                        key = NIGHT_MODE
+                        title = getString(R.string.night_mode)
+                        summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
+                        entries = resources.getStringArray(R.array.night_mode_entries)
+                        entryValues = arrayOf(FOLLOW_SYSTEM, DARK, LIGHT)
+                        setDefaultValue(FOLLOW_SYSTEM)
+
+                        onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
+                            val nightMode = newValue as String
+                            val nightModeStatic = Mapper.nightModetoNightModeStatic(nightMode)
+                            AppCompatDelegate.setDefaultNightMode(nightModeStatic)
+                            true
+                        }
+                    }
+                )
+
+            }
+
 
             PreferenceCategory(context).let { tutorialCategory ->
                 tutorialCategory.key = CATEGORY_TUTORIAL
