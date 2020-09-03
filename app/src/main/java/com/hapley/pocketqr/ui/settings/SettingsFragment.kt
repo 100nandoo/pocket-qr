@@ -49,6 +49,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             PreferenceCategory(context).let { qrCodeCategory ->
                 qrCodeCategory.key = CATEGORY_BARCODE
                 qrCodeCategory.title = getString(R.string.qr_code)
+                qrCodeCategory.isIconSpaceReserved = false
                 screen.addPreference(qrCodeCategory)
 
 //                qrCodeCategory.addPreference(
@@ -62,6 +63,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     ListPreference(context).apply {
                         key = BARCODE_HISTORY_SORT
                         title = getString(R.string.sort_mode)
+                        isIconSpaceReserved = false
                         summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
                         entries = resources.getStringArray(R.array.sort_mode_entries)
                         entryValues = arrayOf(RECENT, MOST_FREQUENT, ALPHABETICAL)
@@ -74,12 +76,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             PreferenceCategory(context).let { displayCategory ->
                 displayCategory.key = CATEGORY_DISPLAY
                 displayCategory.title = getString(R.string.display)
+                displayCategory.isIconSpaceReserved = false
                 screen.addPreference(displayCategory)
 
                 displayCategory.addPreference(
                     ListPreference(context).apply {
                         key = NIGHT_MODE
                         title = getString(R.string.night_mode)
+                        isIconSpaceReserved = false
                         summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
                         entries = resources.getStringArray(R.array.night_mode_entries)
                         entryValues = arrayOf(FOLLOW_SYSTEM, DARK, LIGHT)
@@ -100,12 +104,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             PreferenceCategory(context).let { tutorialCategory ->
                 tutorialCategory.key = CATEGORY_TUTORIAL
                 tutorialCategory.title = getString(R.string.tutorial)
+                tutorialCategory.isIconSpaceReserved = false
                 screen.addPreference(tutorialCategory)
 
                 tutorialCategory.addPreference(
                     SwitchPreference(context).apply {
                         key = BARCODE_APP_INTRODUCTION
                         title = getString(R.string.show_app_intro)
+                        isIconSpaceReserved = false
                     }
                 )
 
@@ -113,6 +119,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     SwitchPreference(context).apply {
                         key = BARCODE_HISTORY_SHOW_TUTORIAL
                         title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.history).decapitalize())
+                        isIconSpaceReserved = false
                     }
                 )
 
@@ -120,6 +127,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     SwitchPreference(context).apply {
                         key = BARCODE_DETAIL_SHOW_TUTORIAL
                         title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.detail).decapitalize())
+                        isIconSpaceReserved = false
                     }
                 )
             }
@@ -128,6 +136,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             PreferenceCategory(context).let { aboutCategory ->
                 aboutCategory.key = CATEGORY_ABOUT
                 aboutCategory.title = getString(R.string.about)
+                aboutCategory.isIconSpaceReserved = false
                 screen.addPreference(aboutCategory)
 
                 aboutCategory.addPreference(
@@ -135,6 +144,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         key = ABOUT_VERSION
                         title = getString(R.string.build_version)
                         summary = BuildUtil.versionName
+                        isIconSpaceReserved = false
                     }
                 )
             }

@@ -19,6 +19,7 @@ import com.hapley.pocketqr.features.barcode.domain.SMS
 import com.hapley.pocketqr.features.barcode.domain.URL
 import com.hapley.pocketqr.features.barcode.domain.WIFI
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
@@ -28,6 +29,7 @@ import net.glxn.qrgen.core.scheme.EMail
 import net.glxn.qrgen.core.scheme.Schema
 import net.glxn.qrgen.core.scheme.Url
 import net.glxn.qrgen.core.scheme.Wifi
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BarcodeDetailFragment : Fragment() {
@@ -36,14 +38,14 @@ class BarcodeDetailFragment : Fragment() {
 
     private val viewModel: BarcodeDetailViewModel by viewModel()
 
+    private val pocketQrUtil: PocketQrUtil by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.nav_host_fragment
             duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-            scrimColor = Color.TRANSPARENT
-            setAllContainerColors(ContextCompat.getColor(requireContext(), R.color.material_color_grey_200))
         }
 
     }

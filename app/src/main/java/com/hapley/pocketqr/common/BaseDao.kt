@@ -2,6 +2,7 @@ package com.hapley.pocketqr.common
 
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.Transaction
 import androidx.room.Update
 
 /**

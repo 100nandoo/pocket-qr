@@ -32,10 +32,7 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
 
     @Insert
     suspend fun insertData(barcodeEntity: BarcodeEntity) {
-        val isExist = isExist(barcodeEntity.rawValue)
-        if (isExist.not()) {
-            insert(barcodeEntity)
-        }
+        insert(barcodeEntity)
     }
 
     @Update

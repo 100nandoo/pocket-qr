@@ -15,7 +15,12 @@ class BarcodeRepository(private val barcodeDao: BarcodeDao) {
 
     fun getLastId() = barcodeDao.getLastId()
 
-    suspend fun insert(barcodeEntity: BarcodeEntity) = barcodeDao.insertData(barcodeEntity)
+    suspend fun insert(barcodeEntity: BarcodeEntity) {
+        val isExist = barcodeDao.isExist(barcodeEntity.rawValue)
+        if (isExist.not()) {
+            barcodeDao.insertData(barcodeEntity)
+        }
+    }
 
     suspend fun updateLabel(label: String, id: Int) = barcodeDao.updateLabel(label, id)
 

@@ -56,7 +56,7 @@ val barcodeModule: Module = module {
 }
 
 val fakeModule: Module = module {
-    single { MockDataGenerator(barcodeDao = get()) }
+    single { MockDataGenerator(barcodeRepository = get()) }
 }
 
 object Modules {

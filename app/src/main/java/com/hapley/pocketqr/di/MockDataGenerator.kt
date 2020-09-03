@@ -1,17 +1,17 @@
 package com.hapley.pocketqr.di
 
-import com.hapley.pocketqr.db.BarcodeDao
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
+import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
 import com.hapley.pocketqr.features.barcode.domain.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-class MockDataGenerator(private val barcodeDao: BarcodeDao) {
+class MockDataGenerator(private val barcodeRepository: BarcodeRepository) {
 
     fun inject() {
         GlobalScope.launch {
-            generateData().forEach { barcodeDao.insertData(it) }
+            generateData().forEach { barcodeRepository.insert(it) }
         }
     }
 

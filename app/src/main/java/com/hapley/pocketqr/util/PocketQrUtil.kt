@@ -59,7 +59,7 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
         this.showToast(context, context.getText(resId), Toast.LENGTH_LONG).show()
     }
 
-    fun actionView(context: Context, url: String):Boolean {
+    fun actionView(context: Context, url: String): Boolean {
         Intent(Intent.ACTION_VIEW).apply {
             return try {
                 data = Uri.parse(url)
@@ -68,14 +68,14 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
                 }
                 true
             } catch (e: NullPointerException) {
-                crashReport.recordException("Check whether Uri can be launch as intent.",e)
+                crashReport.recordException("Check whether Uri can be launch as intent.", e)
                 e.localizedMessage
                 false
             }
         }
     }
 
-    fun actionShare(context: Context, url: String){
+    fun actionShare(context: Context, url: String) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, url)
