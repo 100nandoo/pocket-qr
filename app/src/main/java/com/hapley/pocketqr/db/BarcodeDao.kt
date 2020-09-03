@@ -1,10 +1,7 @@
 package com.hapley.pocketqr.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
-import androidx.room.Update
+import androidx.room.*
 import com.hapley.pocketqr.common.BaseDao
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 
@@ -33,7 +30,7 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
     @Query("SELECT EXISTS(SELECT 1 FROM barcodeentity WHERE rawValue = :rawValue LIMIT 1)")
     suspend fun isExist(rawValue: String): Boolean
 
-    @Transaction
+    @Insert
     suspend fun insertData(barcodeEntity: BarcodeEntity) {
         val isExist = isExist(barcodeEntity.rawValue)
         if (isExist.not()) {

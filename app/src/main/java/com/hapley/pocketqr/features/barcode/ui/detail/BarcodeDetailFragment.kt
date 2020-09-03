@@ -1,5 +1,6 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateUtils
@@ -9,13 +10,24 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.features.barcode.domain.EMAIL
+import com.hapley.pocketqr.features.barcode.domain.SMS
+import com.hapley.pocketqr.features.barcode.domain.URL
+import com.hapley.pocketqr.features.barcode.domain.WIFI
+import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
+import net.glxn.qrgen.android.QRCode
+import net.glxn.qrgen.core.scheme.EMail
+import net.glxn.qrgen.core.scheme.Schema
+import net.glxn.qrgen.core.scheme.Url
+import net.glxn.qrgen.core.scheme.Wifi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BarcodeDetailFragment : Fragment() {
@@ -48,16 +60,6 @@ class BarcodeDetailFragment : Fragment() {
         subscribeUi()
     }
 
-    private fun subscribeUi() {
-        viewModel.barcodeLiveData.observe(viewLifecycleOwner, {
-            tv_label.text = it.title
-            tv_label.isSelected = true
-            tv_subtitle.text = it.subtitle
-            tv_click_count.text = it.clickCount.toString()
-            tv_scanned_date.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
-        })
-    }
-
     private fun initArgs() {
         viewModel.id = args.BARCODEID
     }
@@ -70,6 +72,17 @@ class BarcodeDetailFragment : Fragment() {
         if (viewModel.showTutorial) {
             initShowcase(fab_edit)
         }
+    }
+
+    private fun subscribeUi() {
+        viewModel.barcodeLiveData.observe(viewLifecycleOwner, {
+            tv_label.text = it.title
+            tv_label.isSelected = true
+            tv_subtitle.text = it.subtitle
+            tv_click_count.text = it.clickCount.toString()
+            tv_scanned_date.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
+            iv_qrcode.load(generateQrCode(it))
+        })
     }
 
     private fun editLabelDialog() {
@@ -85,6 +98,19 @@ class BarcodeDetailFragment : Fragment() {
             }
             .show()
 
+    }
+
+    private fun generateQrCode(barcodeItem: BarcodeItem): Bitmap? {
+        // [CONTACT, EMAIL, GEO, ISBN, PHONE, SMS, URL, WIFI, UNKNOWN]
+        val schema: Schema? = when (barcodeItem.barcodeType) {
+            EMAIL -> EMail.parse(barcodeItem.rawValue)
+            URL -> Url.parse(barcodeItem.rawValue)
+            SMS -> net.glxn.qrgen.core.scheme.SMS.parse(barcodeItem.rawValue)
+            WIFI -> Wifi.parse(barcodeItem.rawValue)
+            else -> null
+        }
+
+        return schema?.let { QRCode.from(it).bitmap() }
     }
 
     private fun initShowcase(view: View) {

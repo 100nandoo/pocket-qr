@@ -116,6 +116,9 @@ dependencies {
     // Assent
 //    implementation Libraries.assent
 
+    // Coil Image Loader
+    implementation Libraries.coil
+
     // Fancy showcase view
     implementation Libraries.fancyShowcaseView
 

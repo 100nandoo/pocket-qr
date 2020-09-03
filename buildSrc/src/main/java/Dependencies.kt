@@ -49,6 +49,7 @@ object Versions {
 
     val appIntro = "6.0.0"
 //    val assent = "3.0.0-RC4"
+    val coil = "1.0.0-rc1"
     val fancyShowcaseView = "1.3.0"
     val fastAdapter = "5.2.3"
     val koin = "2.1.6"
@@ -70,11 +71,12 @@ object Versions {
 object Libraries {
     val appIntro = "com.github.AppIntro:AppIntro:${Versions.appIntro}"
 //    val assent = "com.afollestad.assent:core:${Versions.assent}"
+
+    val coil = "io.coil-kt:coil:${Versions.coil}"
     val fancyShowcaseView = "me.toptas.fancyshowcase:fancyshowcaseview:${Versions.fancyShowcaseView}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
-    val fastAdapterSwipe = "com.mikepenz:fastadapter-extensions-swipe:${Versions.fastAdapter}"
     val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
     val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
 

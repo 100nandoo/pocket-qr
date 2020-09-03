@@ -85,7 +85,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         entryValues = arrayOf(FOLLOW_SYSTEM, DARK, LIGHT)
                         setDefaultValue(FOLLOW_SYSTEM)
 
-                        onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
+                        onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                             val nightMode = newValue as String
                             val nightModeStatic = Mapper.nightModetoNightModeStatic(nightMode)
                             AppCompatDelegate.setDefaultNightMode(nightModeStatic)

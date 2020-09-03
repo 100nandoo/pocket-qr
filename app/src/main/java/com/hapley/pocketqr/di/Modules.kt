@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.camera.core.Preview
 import androidx.preference.PreferenceManager
 import androidx.room.Room
+import coil.ImageLoader
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.hapley.pocketqr.common.AppPreferences
@@ -36,6 +37,7 @@ val appModule: Module = module {
     single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
     single { PocketQrUtil(context = androidContext(), clipboardManager = get()) }
     single { CrashReport() }
+    single { ImageLoader.Builder(androidApplication()).allowHardware(true).crossfade(true).build() }
     viewModel { SettingsViewModel() }
     viewModel { LauncherViewModel(appPreferences = get()) }
 }
