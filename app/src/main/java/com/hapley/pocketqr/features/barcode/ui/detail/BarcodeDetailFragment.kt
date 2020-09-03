@@ -1,34 +1,23 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
-import android.graphics.Bitmap
-import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
+import com.github.sumimakito.awesomeqr.option.RenderOption
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.features.barcode.domain.EMAIL
-import com.hapley.pocketqr.features.barcode.domain.SMS
-import com.hapley.pocketqr.features.barcode.domain.URL
-import com.hapley.pocketqr.features.barcode.domain.WIFI
-import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
-import com.hapley.pocketqr.util.PocketQrUtil
+import com.hapley.pocketqr.common.CrashReport
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
-import net.glxn.qrgen.android.QRCode
-import net.glxn.qrgen.core.scheme.EMail
-import net.glxn.qrgen.core.scheme.Schema
-import net.glxn.qrgen.core.scheme.Url
-import net.glxn.qrgen.core.scheme.Wifi
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,7 +27,7 @@ class BarcodeDetailFragment : Fragment() {
 
     private val viewModel: BarcodeDetailViewModel by viewModel()
 
-    private val pocketQrUtil: PocketQrUtil by inject()
+    private val crashReport: CrashReport by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +72,18 @@ class BarcodeDetailFragment : Fragment() {
             tv_subtitle.text = it.subtitle
             tv_click_count.text = it.clickCount.toString()
             tv_scanned_date.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
-            iv_qrcode.load(generateQrCode(it))
+            try {
+                val renderOption = RenderOption().apply {
+                    content = it.rawValue
+                    borderWidth = 0
+                }
+                val result = AwesomeQrRenderer.render(renderOption)
+                iv_qrcode.load(result.bitmap)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                crashReport.recordException("Convert rawValue into QR Code Bitmap", e)
+            }
         })
     }
 
@@ -100,19 +100,6 @@ class BarcodeDetailFragment : Fragment() {
             }
             .show()
 
-    }
-
-    private fun generateQrCode(barcodeItem: BarcodeItem): Bitmap? {
-        // [CONTACT, EMAIL, GEO, ISBN, PHONE, SMS, URL, WIFI, UNKNOWN]
-        val schema: Schema? = when (barcodeItem.barcodeType) {
-            EMAIL -> EMail.parse(barcodeItem.rawValue)
-            URL -> Url.parse(barcodeItem.rawValue)
-            SMS -> net.glxn.qrgen.core.scheme.SMS.parse(barcodeItem.rawValue)
-            WIFI -> Wifi.parse(barcodeItem.rawValue)
-            else -> null
-        }
-
-        return schema?.let { QRCode.from(it).bitmap() }
     }
 
     private fun initShowcase(view: View) {

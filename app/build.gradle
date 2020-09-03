@@ -136,8 +136,8 @@ dependencies {
     implementation Libraries.materialValues
 
     // QR Generator
-    implementation Libraries.qrGen
-    
+    implementation Libraries.awesomeQr
+
     // RecyclerView Divider
     implementation Libraries.rvDivider
 
