@@ -53,6 +53,8 @@ object Versions {
     val fastAdapter = "5.2.3"
     val koin = "2.1.6"
     val materialValues = "1.1.1"
+
+    val qrGen = "2.6.0"
     val rvDivider = "3.3.0"
     val timber = "4.7.1"
 
@@ -81,6 +83,7 @@ object Libraries {
 
     val materialValues = "blue.aodev:material-values:${Versions.materialValues}"
 
+    val qrGen = "com.github.kenglxn.QRGen:android:${Versions.qrGen}"
     val rvDivider = "com.github.fondesa:recycler-view-divider:${Versions.rvDivider}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }

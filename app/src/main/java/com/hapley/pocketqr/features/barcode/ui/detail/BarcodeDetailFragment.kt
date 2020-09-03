@@ -8,17 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BarcodeDetailFragment : Fragment() {
@@ -52,8 +49,9 @@ class BarcodeDetailFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-        viewModel.barcodeLiveData.observe(viewLifecycleOwner, Observer {
-            tv_title.text = it.title
+        viewModel.barcodeLiveData.observe(viewLifecycleOwner, {
+            tv_label.text = it.title
+            tv_label.isSelected = true
             tv_subtitle.text = it.subtitle
             tv_click_count.text = it.clickCount.toString()
             tv_scanned_date.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)

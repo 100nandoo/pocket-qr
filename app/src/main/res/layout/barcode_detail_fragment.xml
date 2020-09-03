@@ -14,106 +14,154 @@
         android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_title"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_label_header"
+            style="@style/TextAppearance.AppTheme.Headline6"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/material_baseline_grid_2x"
-            app:layout_constraintBottom_toTopOf="@id/tv_detail_header"
+            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
+            android:layout_marginTop="@dimen/material_baseline_grid_2x"
+            android:text="@string/label"
+            app:layout_constraintBottom_toTopOf="@id/tv_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_label"
+            style="@style/TextAppearance.AppTheme.Headline4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Tiong Bahru QR" />
+            app:layout_constraintTop_toBottomOf="@id/tv_label_header"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Tiong Bahru QR Code Text" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/material_baseline_grid_2x"
+            app:layout_constraintBottom_toTopOf="@id/divider_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/material_baseline_grid_1x">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_scanned_date_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/scanned_date" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_scanned_date"
+                        style="@style/TextAppearance.AppTheme.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="7 July" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_marginVertical="@dimen/material_baseline_grid_1x"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/material_baseline_grid_1x">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_click_count_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/click_counts_header" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_click_count"
+                        style="@style/TextAppearance.AppTheme.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        tools:text="5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:id="@+id/divider_details"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
+            android:layout_marginVertical="@dimen/material_baseline_grid_2x"
+            android:background="@color/divider"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/card_view" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_detail_header"
+            style="@style/TextAppearance.AppTheme.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_2x"
+            android:layout_marginTop="@dimen/material_baseline_grid_2x"
             android:layout_marginEnd="@dimen/material_baseline_grid_2x"
             android:text="@string/detail"
             app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            app:layout_constraintTop_toBottomOf="@id/divider_details" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_subtitle"
-            style="@style/TextAppearance.AppTheme.Body1"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.AppTheme.Body2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/material_baseline_grid_2x"
-            android:layout_marginEnd="@dimen/material_baseline_grid_2x"
-            app:layout_constraintBottom_toTopOf="@id/tv_click_count_header"
+            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
+            android:background="?attr/selectableItemBackground"
+            android:focusable="true"
+            app:layout_constraintBottom_toTopOf="@id/iv_qrcode"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_header"
-            tools:text="1234" />
+            tools:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_click_count_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/material_baseline_grid_2x"
-            android:layout_marginTop="@dimen/material_baseline_grid_1x"
-            android:layout_marginEnd="@dimen/material_baseline_grid_1x"
-            android:text="@string/click_counts_header"
-            app:layout_constraintEnd_toStartOf="@id/tv_click_count"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="end"
-            app:constraint_referenced_ids="tv_click_count_header, tv_scanned_date_header" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_click_count"
-            style="@style/TextAppearance.AppTheme.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/material_baseline_grid_1x"
-            android:layout_marginEnd="@dimen/material_baseline_grid_2x"
-            app:layout_constraintBottom_toBottomOf="@id/tv_click_count_header"
+        <ImageView
+            android:id="@+id/iv_qrcode"
+            android:layout_width="@dimen/material_increment_2x"
+            android:layout_height="@dimen/material_increment_2x"
+            android:layout_marginVertical="@dimen/material_baseline_grid_2x"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/barrier_header"
-            app:layout_constraintTop_toTopOf="@id/tv_click_count_header"
-            tools:text="5" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_scanned_date_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/material_baseline_grid_2x"
-            android:layout_marginTop="@dimen/material_baseline_grid_1x"
-            android:layout_marginEnd="@dimen/material_baseline_grid_1x"
-            android:text="@string/scanned_date"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_click_count" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_scanned_date"
-            style="@style/TextAppearance.AppTheme.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/material_baseline_grid_1x"
-            android:layout_marginEnd="@dimen/material_baseline_grid_2x"
-            app:layout_constraintBottom_toBottomOf="@id/tv_scanned_date_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/barrier_header"
-            app:layout_constraintTop_toTopOf="@id/tv_scanned_date_header"
-            tools:text="7 July" />
-
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            tools:src="?attr/colorPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -36,6 +36,7 @@
     <style name="TextAppearance.AppTheme.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">@font/source_sans_pro</item>
         <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
     <style name="TextAppearance.AppTheme.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
