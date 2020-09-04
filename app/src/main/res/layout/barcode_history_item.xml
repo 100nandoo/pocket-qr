@@ -8,6 +8,7 @@
     android:layout_marginHorizontal="@dimen/material_baseline_grid_1x"
     android:checkable="true"
     android:clickable="true"
+    android:theme="@style/Widget.AppTheme.HistoryCardView"
     android:focusable="true"
     android:gravity="center_vertical">
 
@@ -97,9 +98,9 @@
             android:layout_marginStart="@dimen/material_baseline_grid_1x"
             android:layout_marginEnd="@dimen/material_baseline_grid_1x"
             android:contentDescription="@string/favorite"
+            android:visibility="gone"
             app:icon="@drawable/ic_barcode_info"
             app:iconGravity="textStart"
-            android:visibility="gone"
             app:iconPadding="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

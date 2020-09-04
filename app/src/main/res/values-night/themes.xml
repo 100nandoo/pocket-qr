@@ -29,4 +29,15 @@
     <style name="Base.Theme.Pocket" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
     </style>
+
+    <style name="ThemeOverlay.AppTheme.Card" parent="">
+        <item name="colorSurface">@color/black_900</item>
+        <item name="colorOnSurface">@color/material_color_white</item>
+    </style>
+
+    <style name="Widget.AppTheme.HistoryCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.AppTheme.Card</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.AppTheme.MediumComponent</item>
+    </style>
+
 </resources>
