@@ -52,6 +52,8 @@ object Versions {
     val coil = "1.0.0-rc1"
     val fancyShowcaseView = "1.3.0"
     val fastAdapter = "5.2.3"
+
+    val khronos = "0.9.0"
     val koin = "2.1.6"
     val materialValues = "1.1.1"
 
@@ -79,6 +81,8 @@ object Libraries {
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
     val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
     val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
+
+    val khronos = "com.github.hotchemi:khronos:${Versions.khronos}"
 
     val koin = "org.koin:koin-androidx-scope:${Versions.koin}"
     val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
