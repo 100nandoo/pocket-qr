@@ -41,6 +41,7 @@
     <string name="share">Share</string>
     <string name="copy_">Copy</string>
     <string name="barcode_history_transition_name">barcode_history_transition_%1$d</string>
+    <string name="your_action">Your Action</string>
 
     <!--  Sort  -->
     <string name="default_">Default</string>

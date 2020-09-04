@@ -8,10 +8,6 @@
                 <color android:color="@color/surfaceSelection"/>
             </item>
 
-            <item android:state_activated="true">
-                <color android:color="@color/surfaceSelection" />
-            </item>
-
             <item>
                 <color android:color="?attr/colorSurface" />
             </item>

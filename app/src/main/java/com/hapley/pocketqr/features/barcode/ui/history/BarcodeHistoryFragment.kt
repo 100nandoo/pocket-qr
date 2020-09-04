@@ -278,14 +278,16 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
         fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
             override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
-                if (viewModel.showTutorial) {
-                    initShowcase(v)
-                } else {
-                    val isSuccess = pocketQrUtil.actionView(requireContext(), item.rawValue)
-                    if (isSuccess) {
-                        viewModel.incrementClickCount(item.id.toInt())
+                when {
+                    viewModel.showTutorial -> {
+                        initShowcase(v)
                     }
-                    actionMode?.finish()
+                    actionMode == null -> {
+                        actionShowBottomSheet(item.id.toInt())
+                    }
+                    else -> {
+                        actionMode?.finish()
+                    }
                 }
 
             }
@@ -321,6 +323,10 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
     private fun actionCopyToClipboard(text: String) {
         pocketQrUtil.copyToClipboard(text)
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
+    }
+
+    private fun actionShowBottomSheet(id: Int) {
+        findNavController().navigate(BarcodeHistoryFragmentDirections.actionShowBottomSheetDialog(id))
     }
 
     private fun actionNavigateToDetail() {

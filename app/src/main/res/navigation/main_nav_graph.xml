@@ -31,9 +31,29 @@
 
         <action
             android:id="@+id/action_to_barcodeDetailFragment"
-            app:destination="@id/barcode_detail_fragment"/>
+            app:destination="@id/barcode_detail_fragment" />
+
+        <action
+            android:id="@+id/action_show_bottomSheetDialog"
+            app:destination="@id/action_bottomSheet_dialog" />
 
     </fragment>
+
+    <dialog
+        android:id="@+id/action_bottomSheet_dialog"
+        android:name="com.hapley.pocketqr.features.barcode.ui.history.bottomsheet.ActionBottomSheetDialog"
+        tools:layout="@layout/barcode_history_bottom_sheet">
+
+        <argument
+            android:name="BARCODE_ID"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_to_barcodeDetailFragment"
+            app:destination="@id/barcode_detail_fragment" />
+
+    </dialog>
 
     <fragment
         android:id="@+id/barcode_detail_fragment"
@@ -46,6 +66,7 @@
             android:defaultValue="-1"
             app:argType="integer" />
     </fragment>
+
 
     <fragment
         android:id="@+id/settings_fragment"
