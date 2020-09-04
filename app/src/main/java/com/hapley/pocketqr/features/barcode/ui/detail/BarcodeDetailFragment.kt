@@ -5,11 +5,15 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import coil.ImageLoader
 import coil.load
+import coil.request.ImageRequest
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
 import com.github.sumimakito.awesomeqr.option.RenderOption
+import com.github.sumimakito.awesomeqr.option.color.Color
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
@@ -75,9 +79,17 @@ class BarcodeDetailFragment : Fragment() {
             try {
                 val renderOption = RenderOption().apply {
                     content = it.rawValue
-                    borderWidth = 0
+                    borderWidth = 16
+                    patternScale = 1f
+                    color = Color(
+                        auto = false,
+                        background = ContextCompat.getColor(requireContext(), R.color.material_color_white),
+                        light = ContextCompat.getColor(requireContext(), R.color.material_color_white),
+                        dark = ContextCompat.getColor(requireContext(), R.color.black_900)
+                    )
                 }
                 val result = AwesomeQrRenderer.render(renderOption)
+
                 iv_qrcode.load(result.bitmap)
 
             } catch (e: Exception) {

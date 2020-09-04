@@ -10,8 +10,8 @@
 
         <item name="colorPrimaryDark">@color/blue_500_dark</item>
 
-        <item name="colorSecondary">@color/orange_200</item>
-        <item name="colorSecondaryVariant">@color/orange_500</item>
+        <item name="colorSecondary">@color/orange_500</item>
+        <item name="colorSecondaryVariant">@color/orange_200</item>
 
         <item name="android:colorBackground">@color/material_color_white</item>
         <item name="colorSurface">@color/material_color_grey_200</item>

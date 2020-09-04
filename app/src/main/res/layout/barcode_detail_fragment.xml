@@ -81,8 +81,8 @@
 
                 <View
                     android:layout_width="1dp"
-                    android:layout_marginVertical="@dimen/material_baseline_grid_1x"
                     android:layout_height="match_parent"
+                    android:layout_marginVertical="@dimen/material_baseline_grid_1x"
                     android:background="@color/divider" />
 
                 <LinearLayout
@@ -157,6 +157,7 @@
             android:layout_width="@dimen/material_increment_2x"
             android:layout_height="@dimen/material_increment_2x"
             android:layout_marginVertical="@dimen/material_baseline_grid_2x"
+            android:padding="@dimen/material_baseline_grid_1x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
