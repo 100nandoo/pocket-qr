@@ -28,6 +28,7 @@ object Versions {
 
     object Android {
         val appCompat = "1.2.0"
+        val browser = "1.2.0"
         val cameraX = "1.0.0-beta08"
         val cameraView = "1.0.0-alpha15"
         val constraintLayout = "1.1.3"
@@ -48,7 +49,8 @@ object Versions {
     }
 
     val appIntro = "6.0.0"
-//    val assent = "3.0.0-RC4"
+
+    //    val assent = "3.0.0-RC4"
     val coil = "1.0.0-rc1"
     val fancyShowcaseView = "1.3.0"
     val fastAdapter = "5.2.3"
@@ -113,6 +115,8 @@ object KotlinLibraries {
 object AndroidLibraries {
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
+
+    val browser = "androidx.browser:browser:${Versions.Android.browser}"
 
     val camera2 = "androidx.camera:camera-camera2:${Versions.Android.cameraX}"
     val cameraLifecycle = "androidx.camera:camera-lifecycle:${Versions.Android.cameraX}"

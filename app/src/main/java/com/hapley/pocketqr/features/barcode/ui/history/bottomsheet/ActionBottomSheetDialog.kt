@@ -1,19 +1,20 @@
 package com.hapley.pocketqr.features.barcode.ui.history.bottomsheet
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.transition.MaterialElevationScale
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.features.barcode.domain.URL
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
-import com.hapley.pocketqr.features.barcode.ui.history.BarcodeHistoryFragmentDirections
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.*
 import org.koin.android.ext.android.inject
@@ -76,17 +77,14 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         tv_open.setOnClickListener {
-            val isSuccess = pocketQrUtil.actionView(requireContext(), barcodeItem.rawValue)
-            if (isSuccess) {
-                viewModel.incrementClickCount(barcodeItem.id.toInt())
-            }
-            findNavController().popBackStack()
+            actionOpen(barcodeItem)
         }
+
         tv_favorite.setOnClickListener {
             actionFavorite()
-            // todo set fragment result
             findNavController().popBackStack()
         }
+
         tv_copy.setOnClickListener {
             actionCopyToClipboard(barcodeItem.rawValue)
             findNavController().popBackStack()
@@ -104,5 +102,26 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
     private fun actionCopyToClipboard(text: String) {
         pocketQrUtil.copyToClipboard(text)
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
+    }
+
+    private fun actionOpen(barcodeItem: BarcodeItem) {
+        when (barcodeItem.barcodeType) {
+            URL -> {
+                CustomTabsIntent.Builder()
+                    .setToolbarColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+                    .build()
+                    .launchUrl(requireContext(), Uri.parse(barcodeItem.rawValue))
+
+                viewModel.incrementClickCount(barcodeItem.id.toInt())
+                findNavController().popBackStack()
+            }
+            else -> {
+                val isSuccess = pocketQrUtil.actionView(requireContext(), barcodeItem.rawValue)
+                if (isSuccess) {
+                    viewModel.incrementClickCount(barcodeItem.id.toInt())
+                }
+                findNavController().popBackStack()
+            }
+        }
     }
 }

@@ -77,6 +77,8 @@ dependencies {
      */
     implementation AndroidLibraries.appCompat
 
+    implementation AndroidLibraries.browser
+
     implementation AndroidLibraries.camera2
     implementation AndroidLibraries.cameraLifecycle
     implementation AndroidLibraries.cameraView
