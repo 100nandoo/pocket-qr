@@ -181,6 +181,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         super.onDestroyView()
         actionMode?.finish()
         actionMode = null
+        rv_barcode_history.adapter = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

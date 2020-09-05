@@ -28,15 +28,14 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
-import org.koin.androidx.scope.lifecycleScope as koinScope
 
 class BarcodeScannerFragment : Fragment() {
 
     private val viewModel: BarcodeScannerViewModel by viewModel()
     private val crashReport: CrashReport by inject()
     private val pocketQrUtil: PocketQrUtil by inject()
-    private val preview: Preview by koinScope.inject()
-    private val scanner: BarcodeScanner by koinScope.inject()
+    private val preview: Preview by inject()
+    private val scanner: BarcodeScanner by inject()
 
     private var cameraControl: CameraControl? = null
 

@@ -16,7 +16,6 @@ import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailViewModel
 import com.hapley.pocketqr.features.barcode.ui.history.BarcodeHistoryViewModel
 import com.hapley.pocketqr.features.barcode.ui.history.bottomsheet.ActionBottomSheetViewModel
-import com.hapley.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment
 import com.hapley.pocketqr.features.barcode.ui.scanner.BarcodeScannerViewModel
 import com.hapley.pocketqr.ui.launcher.LauncherViewModel
 import com.hapley.pocketqr.ui.settings.SettingsViewModel
@@ -51,10 +50,9 @@ val barcodeModule: Module = module {
     viewModel { BarcodeHistoryViewModel(barcodeUseCase = get(), appPreferences = get()) }
     viewModel { ActionBottomSheetViewModel(barcodeUseCase = get()) }
     viewModel { BarcodeDetailViewModel(barcodeUseCase = get(), appPreferences = get()) }
-    scope<BarcodeScannerFragment> {
-        scoped { Preview.Builder().build() }
-        scoped { BarcodeScanning.getClient(BarcodeScannerOptions.Builder().build()) }
-    }
+
+    single { Preview.Builder().build() }
+    single { BarcodeScanning.getClient(BarcodeScannerOptions.Builder().build()) }
 }
 
 val fakeModule: Module = module {
