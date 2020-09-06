@@ -77,6 +77,8 @@ dependencies {
      */
     implementation AndroidLibraries.appCompat
 
+    implementation AndroidLibraries.browser
+
     implementation AndroidLibraries.camera2
     implementation AndroidLibraries.cameraLifecycle
     implementation AndroidLibraries.cameraView
@@ -134,6 +136,9 @@ dependencies {
     // Koin
     implementation Libraries.koin
     implementation Libraries.koinViewModel
+
+    // Koptional
+    implementation Libraries.koptional
 
     // Material Value
     implementation Libraries.materialValues

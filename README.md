@@ -8,7 +8,8 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Implement new design
+- [ ] Shortcut
+- [ ] Widget- [ ] Implement new design
 - [ ] Migrate to adaptive banner
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
@@ -19,8 +20,6 @@ Pocket QR app
 - [ ] View Binding
 - [ ] Multi module support
 - [ ] Pick Image QR Code
-- [ ] Shortcut
-- [ ] Widget
 - [ ] Donation
 - [ ] Theme
 - [x] Support multi QR Code format (wifi, etc)
