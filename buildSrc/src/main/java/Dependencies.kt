@@ -57,6 +57,9 @@ object Versions {
 
     val khronos = "0.9.0"
     val koin = "2.1.6"
+
+    val koptional = "1.7.0"
+
     val materialValues = "1.1.1"
 
     val awesomeQr = "1.2.0"
@@ -88,6 +91,8 @@ object Libraries {
 
     val koin = "org.koin:koin-androidx-scope:${Versions.koin}"
     val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+
+    val koptional = "com.gojuno.koptional:koptional:${Versions.koptional}"
 
     val materialValues = "blue.aodev:material-values:${Versions.materialValues}"
 

@@ -1,20 +1,26 @@
 package com.hapley.pocketqr.util
 
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.browser.customtabs.CustomTabsClient
+import androidx.browser.customtabs.CustomTabsServiceConnection
+import androidx.browser.customtabs.CustomTabsSession
 import androidx.camera.core.ImageProxy
+import com.gojuno.koptional.Optional
+import com.gojuno.koptional.toOptional
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.CrashReport
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.java.KoinJavaComponent.inject
+import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager) {
 
@@ -65,8 +71,11 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
                 data = Uri.parse(url)
                 if (resolveActivity(context.packageManager) != null) {
                     context.startActivity(this)
+                    true
+                } else {
+                    shortToast(context, "You don't have any app to handle this kind of data!")
+                    false
                 }
-                true
             } catch (e: NullPointerException) {
                 crashReport.recordException("Check whether Uri can be launch as intent.", e)
                 e.localizedMessage
@@ -84,5 +93,41 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         context.startActivity(shareIntent)
+    }
+
+    fun stringToOptionalUri(string: String?): Optional<Uri>{
+        return try {
+            Uri.parse(string)
+        } catch (e: Exception) {
+            crashReport.recordException("Parse Url to Uri", e)
+            null
+        }.toOptional()
+    }
+
+    suspend fun initCustomTabConnection(context: Context): Pair<CustomTabsServiceConnection?, CustomTabsSession> {
+        return suspendCancellableCoroutine { cont ->
+            val packageName = CustomTabsClient.getPackageName(context, null)
+
+            val connection = object : CustomTabsServiceConnection() {
+                override fun onServiceDisconnected(name: ComponentName?) {
+                    cont.resumeWithException(Throwable("Service Disconnected!"))
+                }
+
+                override fun onCustomTabsServiceConnected(name: ComponentName, client: CustomTabsClient) {
+                    try {
+                        val session = client.newSession(null)
+                        if (session != null) {
+                            cont.resume(this to session)
+                        } else {
+                            cont.resumeWithException(Throwable("Start CustomTabsSession failed!"))
+                        }
+                    } catch (e: Exception) {
+                        cont.resumeWithException(e)
+                    }
+                }
+            }
+
+            CustomTabsClient.bindCustomTabsService(context, packageName, connection)
+        }
     }
 }
