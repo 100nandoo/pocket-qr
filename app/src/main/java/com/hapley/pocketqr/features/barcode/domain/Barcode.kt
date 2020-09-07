@@ -2,7 +2,6 @@ package com.hapley.pocketqr.features.barcode.domain
 
 import androidx.annotation.IntDef
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
-import com.google.mlkit.vision.barcode.Barcode as MLKitBarcode
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
