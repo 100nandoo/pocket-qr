@@ -78,7 +78,11 @@ class BarcodeScannerFragment : Fragment() {
                     }
 
                 try {
-                    val camera = this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
+                    val camera =  if(BuildUtil.isDebug){
+                        this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview)
+                    } else {
+                        this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
+                    }
                     cameraControl = camera.cameraControl
                     preview.setSurfaceProvider(previewView.createSurfaceProvider())
                 } catch (e: Exception) {

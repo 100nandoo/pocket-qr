@@ -9,7 +9,8 @@ Pocket QR app
 ## Todo
 
 - [ ] Shortcut
-- [ ] Widget- [ ] Implement new design
+- [ ] Widget
+- [ ] Implement new design
 - [ ] Migrate to adaptive banner
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
