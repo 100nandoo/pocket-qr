@@ -1,17 +1,13 @@
 package com.hapley.pocketqr.main
 
-import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.browser.customtabs.CustomTabsSession
 import androidx.core.content.getSystemService
-import androidx.core.content.pm.ShortcutInfoCompat
-import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.navigation.findNavController
@@ -23,6 +19,8 @@ import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
 import com.google.android.gms.ads.MobileAds
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.features.barcode.domain.URL
+import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.features.barcode.ui.toShortcutInfo
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
@@ -89,9 +87,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun subscribeUi() {
-        viewModel.starredBarcodesLiveData.observe(this, {
-            updateDynamicShortcut(it.mapNotNull { barcodeItem ->  barcodeItem.toShortcutInfo(this@MainActivity) })
-        })
+        viewModel.starredBarcodesLiveData.observe(this) {
+            updateDynamicShortcut(it.mapNotNull { barcodeItem -> barcodeItem.toShortcutInfo(this@MainActivity) })
+        }
+
+        viewModel.barcodeItemLiveData().observe(this){
+            actionOpen(it)
+        }
     }
 
 
@@ -113,4 +115,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun actionOpen(barcodeItem: BarcodeItem) {
+        when (barcodeItem.barcodeType) {
+            URL -> {
+                val uri = pocketQrUtil.stringToOptionalUri(barcodeItem.rawValue)
+                val session = session
+
+                if (uri is Some && session is Some) {
+                    pocketQrUtil.launchCustomTab(this, session.value, uri.value)
+                    viewModel.incrementClickCount(barcodeItem.id.toInt())
+                } else {
+                    actionIntentViewWrapper(barcodeItem)
+                }
+
+            }
+            else -> {
+                actionIntentViewWrapper(barcodeItem)
+            }
+        }
+    }
+
+    private fun actionIntentViewWrapper(barcodeItem: BarcodeItem) {
+        val isSuccess = pocketQrUtil.actionView(this, barcodeItem.rawValue)
+        if (isSuccess) {
+            viewModel.incrementClickCount(barcodeItem.id.toInt())
+        }
+    }
 }

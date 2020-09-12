@@ -18,12 +18,6 @@ class ActionBottomSheetViewModel(private val barcodeUseCase: BarcodeUseCase) : V
         Transformations.map(barcodeUseCase.getByIdLiveData(id)) { barcode -> BarcodeItem(barcode) }
     }
 
-    fun incrementClickCount(barcodeId: Int){
-        viewModelScope.launch {
-            barcodeUseCase.incrementClickCount(barcodeId)
-        }
-    }
-
     fun updateFavoriteFlag() {
         viewModelScope.launch {
             val id = barcodeLiveData.value?.id ?: return@launch

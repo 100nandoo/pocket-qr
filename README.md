@@ -9,8 +9,8 @@ Pocket QR app
 ## Todo
 
 - [ ] Widget
+- [ ] Full screen QR Code + Download
 - [ ] Implement new design
-- [ ] Migrate to adaptive banner
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
@@ -51,3 +51,4 @@ Pocket QR app
 - [x] Night mode
 - [x] Static Shortcut
 - [x] Dynamic Shortcut
+- [x] Migrate to adaptive banner

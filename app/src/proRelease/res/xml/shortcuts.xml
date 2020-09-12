@@ -3,7 +3,7 @@
     <shortcut
         android:shortcutId="shortcut_id_history"
         android:enabled="true"
-        android:icon="@drawable/ic_barcode_history_shortcut"
+        android:icon="@mipmap/ic_shortcut_history"
         android:shortcutShortLabel="@string/history">
         <intent
             android:action="android.intent.action.VIEW"

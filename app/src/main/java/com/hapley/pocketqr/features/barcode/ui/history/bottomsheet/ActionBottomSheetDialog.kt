@@ -1,34 +1,32 @@
 package com.hapley.pocketqr.features.barcode.ui.history.bottomsheet
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.gojuno.koptional.Some
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.transition.MaterialElevationScale
-import com.hapley.pocketqr.main.MainActivity
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.features.barcode.domain.*
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.*
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ActionBottomSheetDialog : BottomSheetDialogFragment() {
 
-      private val args by navArgs<ActionBottomSheetDialogArgs>()
+    private val args by navArgs<ActionBottomSheetDialogArgs>()
 
     private val pocketQrUtil: PocketQrUtil by inject()
 
     private val viewModel: ActionBottomSheetViewModel by viewModel()
+
+    private val mainViewModel: MainViewModel by sharedViewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_history_bottom_sheet, container, false)
@@ -79,7 +77,8 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         tv_open.setOnClickListener {
-            actionOpen(barcodeItem)
+            mainViewModel.actionOpenUrl(barcodeItem)
+            mainViewModel.incrementClickCount(barcodeItem.id.toInt())
         }
 
         tv_favorite.setOnClickListener {
@@ -104,47 +103,5 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
     private fun actionCopyToClipboard(text: String) {
         pocketQrUtil.copyToClipboard(text)
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
-    }
-
-    private fun actionOpen(barcodeItem: BarcodeItem) {
-        when (barcodeItem.barcodeType) {
-            URL -> {
-                val uri = pocketQrUtil.stringToOptionalUri(barcodeItem.rawValue)
-                if(requireActivity() is MainActivity){
-                    val mainActivity = requireActivity() as MainActivity
-                    val session = mainActivity.session
-
-                    if (uri is Some && session is Some) {
-                        session.value.mayLaunchUrl(uri.value, null, null)
-
-                        CustomTabsIntent.Builder()
-                            .setToolbarColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
-                            .setSession(session.value)
-                            .setStartAnimations(requireContext(), R.anim.slide_in_right, R.anim.slide_out_left)
-                            .setExitAnimations(requireContext(), R.anim.slide_in_left, R.anim.slide_out_right)
-                            .build()
-                            .launchUrl(requireContext(), Uri.parse(barcodeItem.rawValue))
-                        viewModel.incrementClickCount(barcodeItem.id.toInt())
-
-                        findNavController().popBackStack()
-                    } else {
-                        actionIntentViewWrapper(barcodeItem)
-                    }
-                } else {
-                    actionIntentViewWrapper(barcodeItem)
-                }
-            }
-            else -> {
-                actionIntentViewWrapper(barcodeItem)
-            }
-        }
-    }
-
-    private fun actionIntentViewWrapper(barcodeItem: BarcodeItem) {
-        val isSuccess = pocketQrUtil.actionView(requireContext(), barcodeItem.rawValue)
-        if (isSuccess) {
-            viewModel.incrementClickCount(barcodeItem.id.toInt())
-        }
-        findNavController().popBackStack()
     }
 }

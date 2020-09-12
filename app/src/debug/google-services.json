@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "185186570545",
+    "firebase_url": "https://pocket-qr-debug.firebaseio.com",
+    "project_id": "pocket-qr-debug",
+    "storage_bucket": "pocket-qr-debug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185186570545:android:17938abcc2931a4daa6010",
+        "android_client_info": {
+          "package_name": "com.hapley.pocketqr.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185186570545-13gs7jpi59kd1n52rmdn21je63etjabq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUB90-hvQD04xYGv0lxzLDFKj2gxd5b1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185186570545-13gs7jpi59kd1n52rmdn21je63etjabq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185186570545:android:f8e274030a9e7ee3aa6010",
+        "android_client_info": {
+          "package_name": "com.hapley.pocketqr.pro.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185186570545-13gs7jpi59kd1n52rmdn21je63etjabq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUB90-hvQD04xYGv0lxzLDFKj2gxd5b1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185186570545-13gs7jpi59kd1n52rmdn21je63etjabq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

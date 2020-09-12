@@ -3,13 +3,16 @@ package com.hapley.pocketqr.util
 import android.annotation.SuppressLint
 import android.content.*
 import android.net.Uri
+import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.browser.customtabs.CustomTabsClient
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.browser.customtabs.CustomTabsSession
 import androidx.camera.core.ImageProxy
+import androidx.core.content.ContextCompat
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
 import com.google.android.material.snackbar.Snackbar
@@ -18,11 +21,10 @@ import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.CrashReport
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.java.KoinJavaComponent.inject
-import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager) {
+class PocketQrUtil(private val context: Context, private val clipboardManager: ClipboardManager) {
 
     private val crashReport by inject(CrashReport::class.java)
 
@@ -95,7 +97,19 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
         context.startActivity(shareIntent)
     }
 
-    fun stringToOptionalUri(string: String?): Optional<Uri>{
+    fun launchCustomTab(context: Context, session: CustomTabsSession, uri: Uri) {
+        session.mayLaunchUrl(uri, null, null)
+
+        CustomTabsIntent.Builder()
+            .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            .setSession(session)
+            .setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
+            .setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right)
+            .build()
+            .launchUrl(context, uri)
+    }
+
+    fun stringToOptionalUri(string: String?): Optional<Uri> {
         return try {
             Uri.parse(string)
         } catch (e: Exception) {
@@ -130,4 +144,15 @@ class PocketQrUtil(val context: Context, val clipboardManager: ClipboardManager)
             CustomTabsClient.bindCustomTabsService(context, packageName, connection)
         }
     }
+
+    fun isProbablyAnEmulator() = Build.FINGERPRINT.startsWith("generic")
+            || Build.FINGERPRINT.startsWith("unknown")
+            || Build.MODEL.contains("google_sdk")
+            || Build.MODEL.contains("Emulator")
+            || Build.MODEL.contains("Android SDK built for x86")
+            || Build.BOARD == "QC_Reference_Phone"
+            || Build.MANUFACTURER.contains("Genymotion")
+            || Build.HOST.startsWith("Build")
+            || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
+            || "google_sdk" == Build.PRODUCT
 }

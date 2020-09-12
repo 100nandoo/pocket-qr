@@ -23,18 +23,23 @@ import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.CrashReport
+import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class BarcodeScannerFragment : Fragment() {
 
     private val viewModel: BarcodeScannerViewModel by viewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
+
     private val crashReport: CrashReport by inject()
     private val pocketQrUtil: PocketQrUtil by inject()
     private val preview: Preview by inject()
@@ -81,7 +86,7 @@ class BarcodeScannerFragment : Fragment() {
                     }
 
                 try {
-                    val camera =  if(BuildUtil.isDebug){
+                    val camera =  if(pocketQrUtil.isProbablyAnEmulator()){
                         this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview)
                     } else {
                         this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
@@ -107,8 +112,10 @@ class BarcodeScannerFragment : Fragment() {
         if (viewModel.tempRawValue != rawValue) {
             viewModel.setBarcode(barcode)
 
+            val barcodeItem = barcode.toDomain(0)?.let { BarcodeItem(it) }
+
             Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
-                .setAction(getString(R.string.open)) { pocketQrUtil.actionView(requireContext(), rawValue) }
+                .setAction(getString(R.string.open)) { mainViewModel.actionOpenUrl(barcodeItem) }
                 .show()
         }
     }
