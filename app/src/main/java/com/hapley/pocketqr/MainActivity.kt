@@ -14,14 +14,11 @@ import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
 import com.google.android.gms.ads.MobileAds
-import com.hapley.pocketqr.di.MockDataGenerator
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
-import me.toptas.fancyshowcase.FancyShowCaseView
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -84,13 +81,5 @@ class MainActivity : AppCompatActivity() {
 //            connection = None
 //            session = None
 //        }
-    }
-
-    override fun onBackPressed() {
-        if (FancyShowCaseView.isVisible(this)) {
-            FancyShowCaseView.hideCurrent(this)
-        } else {
-            super.onBackPressed()
-        }
     }
 }

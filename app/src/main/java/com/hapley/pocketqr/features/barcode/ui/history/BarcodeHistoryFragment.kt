@@ -33,8 +33,6 @@ import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import kotlinx.android.synthetic.main.barcode_history_item.view.*
-import me.toptas.fancyshowcase.FancyShowCaseView
-import me.toptas.fancyshowcase.FocusShape
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -280,9 +278,9 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
             override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
                 when {
-                    viewModel.showTutorial -> {
-                        initShowcase(v)
-                    }
+//                    viewModel.showTutorial -> {
+//                        initShowcase(v)
+//                    }
                     actionMode == null -> {
                         actionShowBottomSheet(item.id.toInt())
                     }
@@ -363,15 +361,6 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
     }
 
     private fun initShowcase(view: View) {
-        FancyShowCaseView.Builder(requireActivity())
-            .focusOn(view)
-            .title("Tap on the item to open the QR code link. \n\nTap on hold to go into the detail.")
-            .focusShape(FocusShape.CIRCLE)
-            .focusCircleRadiusFactor(0.5)
-            .enableAutoTextPosition()
-            .build()
-            .show()
-
         viewModel.showTutorial = false
     }
 

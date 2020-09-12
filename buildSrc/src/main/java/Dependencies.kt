@@ -52,7 +52,6 @@ object Versions {
 
     //    val assent = "3.0.0-RC4"
     val coil = "1.0.0-rc1"
-    val fancyShowcaseView = "1.3.0"
     val fastAdapter = "5.2.3"
 
     val khronos = "0.9.0"
@@ -80,7 +79,6 @@ object Libraries {
 //    val assent = "com.afollestad.assent:core:${Versions.assent}"
 
     val coil = "io.coil-kt:coil:${Versions.coil}"
-    val fancyShowcaseView = "me.toptas.fancyshowcase:fancyshowcaseview:${Versions.fancyShowcaseView}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"

@@ -115,21 +115,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     }
                 )
 
-                tutorialCategory.addPreference(
-                    SwitchPreference(context).apply {
-                        key = BARCODE_HISTORY_SHOW_TUTORIAL
-                        title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.history).decapitalize())
-                        isIconSpaceReserved = false
-                    }
-                )
-
-                tutorialCategory.addPreference(
-                    SwitchPreference(context).apply {
-                        key = BARCODE_DETAIL_SHOW_TUTORIAL
-                        title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.detail).decapitalize())
-                        isIconSpaceReserved = false
-                    }
-                )
+//                tutorialCategory.addPreference(
+//                    SwitchPreference(context).apply {
+//                        key = BARCODE_HISTORY_SHOW_TUTORIAL
+//                        title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.history).decapitalize())
+//                        isIconSpaceReserved = false
+//                    }
+//                )
+//
+//                tutorialCategory.addPreference(
+//                    SwitchPreference(context).apply {
+//                        key = BARCODE_DETAIL_SHOW_TUTORIAL
+//                        title = getString(R.string.show_tutorial_for, getString(R.string.qr_code), getString(R.string.detail).decapitalize())
+//                        isIconSpaceReserved = false
+//                    }
+//                )
             }
 
 

@@ -121,9 +121,6 @@ dependencies {
     // Coil Image Loader
     implementation Libraries.coil
 
-    // Fancy showcase view
-    implementation Libraries.fancyShowcaseView
-
     // Fast adapter
     implementation Libraries.fastAdapter
     implementation Libraries.fastAdapterDiff
