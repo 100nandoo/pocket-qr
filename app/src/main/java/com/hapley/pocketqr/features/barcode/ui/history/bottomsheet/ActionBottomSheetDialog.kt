@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.gojuno.koptional.Some
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.transition.MaterialElevationScale
-import com.hapley.pocketqr.MainActivity
+import com.hapley.pocketqr.main.MainActivity
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.domain.*
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem

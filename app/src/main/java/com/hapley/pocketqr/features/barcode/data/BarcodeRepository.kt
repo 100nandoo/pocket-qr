@@ -9,6 +9,8 @@ class BarcodeRepository(private val barcodeDao: BarcodeDao) {
 
     fun getAllLiveData() = barcodeDao.getAllLiveData()
 
+    fun getStarredLiveData() = barcodeDao.getStarredLiveData()
+
     fun getById(id: Int) = barcodeDao.getById(id)
 
     fun getByIdLiveData(id: Int) = barcodeDao.getByIdLiveData(id)

@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_baseline_grid_1x"
             android:contentDescription="@string/favorite"
-            android:src="@drawable/ic_barcode_favorite"
+            app:srcCompat="@drawable/ic_barcode_favorite"
             android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@id/b_info"
             app:layout_constraintStart_toEndOf="@id/tv_subtitle"

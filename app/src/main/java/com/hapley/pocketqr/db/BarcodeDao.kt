@@ -18,6 +18,9 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
     @Query("SELECT * from barcodeentity")
     fun getAllLiveData(): LiveData<List<BarcodeEntity>>
 
+    @Query("SELECT * from barcodeentity WHERE isFavorite = 1")
+    fun getStarredLiveData(): LiveData<List<BarcodeEntity>>
+
     @Query("SELECT * FROM barcodeentity WHERE ID=:id")
     fun getById(id: Int): BarcodeEntity
 

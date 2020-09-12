@@ -9,6 +9,6 @@
             android:action="android.intent.action.VIEW"
             android:targetPackage="com.hapley.pocketqr.pro"
             android:data="hapley://history"
-            android:targetClass="com.hapley.pocketqr.MainActivity" />
+            android:targetClass="com.hapley.pocketqr.main.MainActivity" />
     </shortcut>
 </shortcuts>

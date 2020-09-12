@@ -19,6 +19,14 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         }
     }
 
+    fun getStarredLiveData(): LiveData<List<Barcode>> {
+        return Transformations.map(barcodeRepository.getStarredLiveData()) { barcodeEntities ->
+            barcodeEntities.map { barcodeEntity ->
+                Barcode(barcodeEntity)
+            }
+        }
+    }
+
     fun getById(id: Int): Barcode {
         return Barcode(barcodeRepository.getById(id))
     }

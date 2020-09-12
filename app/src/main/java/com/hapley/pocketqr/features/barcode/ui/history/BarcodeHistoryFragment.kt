@@ -5,6 +5,7 @@ import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.*
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -104,7 +105,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             @DrawableRes
             val icon = if (isFavorite) R.drawable.ic_barcode_favorite else R.drawable.ic_barcode_unfavorite
 
-            val iconDrawable = ContextCompat.getDrawable(requireContext(), icon)
+            val iconDrawable = AppCompatResources.getDrawable(requireContext(), icon)
             itemFavorite?.icon = iconDrawable
 
             return itemFavorite?.icon == iconDrawable
@@ -305,7 +306,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             actionMode != null
         }
 
-        val touchCallback = SimpleSwipeCallback(this, ContextCompat.getDrawable(requireContext(), R.drawable.ic_barcode_delete))
+        val touchCallback = SimpleSwipeCallback(this, AppCompatResources.getDrawable(requireContext(), R.drawable.ic_barcode_delete))
             .withSensitivity(6f)
             .withSurfaceThreshold(0.5f)
 

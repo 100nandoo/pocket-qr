@@ -62,6 +62,7 @@
         android:name="com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment"
         android:label="@string/detail"
         tools:layout="@layout/barcode_detail_fragment">
+        <deepLink app:uri="hapley://detail/{BARCODE_ID}" />
 
         <argument
             android:name="BARCODE_ID"

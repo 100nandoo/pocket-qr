@@ -1,12 +1,18 @@
 package com.hapley.pocketqr.features.barcode.ui
 
+import android.content.Context
+import android.content.Intent
+import android.content.pm.ShortcutInfo
+import android.graphics.drawable.Icon
+import android.net.Uri
+import android.os.Build
 import android.text.format.DateUtils.*
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.view.isInvisible
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.features.barcode.domain.Barcode
 import com.hapley.pocketqr.features.barcode.domain.*
+import com.hapley.pocketqr.main.MainActivity
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
@@ -92,4 +98,18 @@ fun Int.getIcon(): Int {
         WIFI -> R.drawable.ic_barcode_type_wifi
         else -> R.drawable.ic_barcode_type_other
     }
+}
+
+fun BarcodeItem.toShortcutInfo(context: Context): ShortcutInfo? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+        ShortcutInfo.Builder(context, this.id.toString())
+            .setShortLabel(this.title)
+            .setIcon(Icon.createWithResource(context, this.icon))
+            .setIntent(
+                Intent(context, MainActivity::class.java)
+                    .setAction(Intent.ACTION_VIEW)
+                    .setData(Uri.parse("hapley://detail/${this.id.toInt()}"))
+            )
+            .build()
+    } else null
 }

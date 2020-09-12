@@ -17,6 +17,7 @@ import com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailViewModel
 import com.hapley.pocketqr.features.barcode.ui.history.BarcodeHistoryViewModel
 import com.hapley.pocketqr.features.barcode.ui.history.bottomsheet.ActionBottomSheetViewModel
 import com.hapley.pocketqr.features.barcode.ui.scanner.BarcodeScannerViewModel
+import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.ui.launcher.LauncherViewModel
 import com.hapley.pocketqr.ui.settings.SettingsViewModel
 import com.hapley.pocketqr.util.PocketQrUtil
@@ -38,6 +39,7 @@ val appModule: Module = module {
     single { PocketQrUtil(context = androidContext(), clipboardManager = get()) }
     single { CrashReport() }
     single { ImageLoader.Builder(androidApplication()).allowHardware(true).crossfade(true).build() }
+    viewModel { MainViewModel(barcodeUseCase = get()) }
     viewModel { SettingsViewModel() }
     viewModel { LauncherViewModel(appPreferences = get()) }
 }

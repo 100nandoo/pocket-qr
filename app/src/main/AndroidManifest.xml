@@ -27,7 +27,7 @@
         <activity android:name=".ui.appintro.AppIntroActivity" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustPan" />
 
         <meta-data

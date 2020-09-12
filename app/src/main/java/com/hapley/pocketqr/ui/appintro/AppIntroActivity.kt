@@ -10,7 +10,7 @@ import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
 import com.github.appintro.AppIntroPageTransformerType
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.hapley.pocketqr.MainActivity
+import com.hapley.pocketqr.main.MainActivity
 import com.hapley.pocketqr.R
 
 class AppIntroActivity : AppIntro() {

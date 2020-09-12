@@ -1,9 +1,17 @@
-package com.hapley.pocketqr
+package com.hapley.pocketqr.main
 
+import android.content.Intent
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.browser.customtabs.CustomTabsSession
+import androidx.core.content.getSystemService
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.navigation.findNavController
@@ -14,11 +22,14 @@ import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
 import com.google.android.gms.ads.MobileAds
+import com.hapley.pocketqr.R
+import com.hapley.pocketqr.features.barcode.ui.toShortcutInfo
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +50,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val viewModel: MainViewModel by viewModel()
+
     private val pocketQrUtil: PocketQrUtil by inject()
 
     private var connection: Optional<CustomTabsServiceConnection> = None
@@ -51,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
 
         initAds()
+
+        subscribeUi()
     }
 
     private fun initAds() {
@@ -73,6 +88,13 @@ class MainActivity : AppCompatActivity() {
         bottom_nav.setupWithNavController(navController)
     }
 
+    private fun subscribeUi() {
+        viewModel.starredBarcodesLiveData.observe(this, {
+            updateDynamicShortcut(it.mapNotNull { barcodeItem ->  barcodeItem.toShortcutInfo(this@MainActivity) })
+        })
+    }
+
+
     override fun onStop() {
         super.onStop()
 //        val connectionTemp = connection
@@ -82,4 +104,13 @@ class MainActivity : AppCompatActivity() {
 //            session = None
 //        }
     }
+
+    private fun updateDynamicShortcut(list: List<ShortcutInfo>) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            val shortcutManager = getSystemService<ShortcutManager>()
+            shortcutManager?.dynamicShortcuts = list
+        }
+
+    }
+
 }
