@@ -8,7 +8,7 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Shortcut
+- [ ] Dynamic Shortcut
 - [ ] Widget
 - [ ] Implement new design
 - [ ] Migrate to adaptive banner
@@ -50,3 +50,4 @@ Pocket QR app
 - [x] Add swipe delete action
 - [x] Inject mock data
 - [x] Night mode
+- [x] Static Shortcut

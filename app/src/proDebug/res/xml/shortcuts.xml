@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="shortcut_id_history"
+        android:enabled="true"
+        android:icon="@drawable/ic_barcode_history_shortcut"
+        android:shortcutShortLabel="@string/history">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.hapley.pocketqr.pro.debug"
+            android:data="hapley://history"
+            android:targetClass="com.hapley.pocketqr.MainActivity" />
+    </shortcut>
+</shortcuts>

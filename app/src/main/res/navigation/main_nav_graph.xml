@@ -25,6 +25,8 @@
         android:name="com.hapley.pocketqr.features.barcode.ui.history.BarcodeHistoryFragment"
         android:label="@string/history"
         tools:layout="@layout/barcode_history_fragment">
+        <deepLink app:uri="hapley://history" />
+
         <action
             android:id="@+id/action_to_barcodeScannerFragment"
             app:destination="@id/barcode_scanner_fragment" />
