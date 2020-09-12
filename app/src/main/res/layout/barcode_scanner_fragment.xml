@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
-            ads:layout_constraintHeight_percent="0.8"
+            ads:layout_constraintHeight_percent="0.85"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,13 +46,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
+        <FrameLayout
+            android:id="@+id/adCointainerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/ads_ids"
             ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintHeight_min="50dp"
             ads:layout_constraintTop_toBottomOf="@id/previewView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -1,6 +1,7 @@
 package com.hapley.pocketqr.features.barcode.ui.scanner
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.mlkit.vision.barcode.Barcode
@@ -110,10 +113,33 @@ class BarcodeScannerFragment : Fragment() {
         }
     }
 
+    private val adSize: AdSize
+        get() {
+            val display = requireActivity().windowManager.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display.getMetrics(outMetrics)
+
+            val density = outMetrics.density
+
+            var adWidthPixels = adCointainerView.width.toFloat()
+            if (adWidthPixels == 0f) {
+                adWidthPixels = outMetrics.widthPixels.toFloat()
+            }
+
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(requireContext(), adWidth)
+        }
+
     private fun initAds() {
         val shouldShowAds = BuildUtil.isPro.not()
-        adView.isVisible = shouldShowAds
+        adCointainerView.isVisible = shouldShowAds
         if (shouldShowAds) {
+            val adView = AdView(requireContext()).apply {
+                adUnitId = getString(R.string.ads_ids)
+                adSize = this@BarcodeScannerFragment.adSize
+            }
+            adCointainerView.addView(adView)
+
             val request = AdRequest.Builder().build()
             adView.loadAd(request)
         }
