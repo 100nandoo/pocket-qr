@@ -28,6 +28,8 @@ android {
     defaultConfig {
         applicationId Misc.appId
 
+        resConfigs "en"
+
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [

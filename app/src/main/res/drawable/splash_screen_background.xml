@@ -3,6 +3,6 @@
     android:opacity="opaque">
     <item android:drawable="?attr/colorSurface" />
     <item
-        android:drawable="@drawable/ic_hapley_new"
+        android:drawable="@drawable/ic_hapley"
         android:gravity="center" />
 </layer-list>
