@@ -2,13 +2,8 @@ package com.hapley.pocketqr.features.barcode.ui.scanner
 
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.camera.core.CameraControl
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.Preview
+import android.view.*
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -34,6 +29,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import kotlin.math.max
+import kotlin.math.min
 
 class BarcodeScannerFragment : Fragment() {
 
@@ -86,13 +83,16 @@ class BarcodeScannerFragment : Fragment() {
                     }
 
                 try {
-                    val camera =  if(pocketQrUtil.isProbablyAnEmulator()){
+                    val camera = if (pocketQrUtil.isProbablyAnEmulator()) {
                         this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview)
                     } else {
                         this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
                     }
                     cameraControl = camera.cameraControl
                     preview.setSurfaceProvider(previewView.createSurfaceProvider())
+
+                    setUpPinchToZoom(camera)
+
                 } catch (e: Exception) {
                     crashReport.recordException("1. Bind camera\n2. Setup camera control\n3. Set surface provider.", e)
                     Timber.e(e)
@@ -102,6 +102,31 @@ class BarcodeScannerFragment : Fragment() {
 
         slider.addOnChangeListener { _, value, _ ->
             cameraControl?.setLinearZoom(value)
+        }
+
+    }
+
+    private fun setUpPinchToZoom(camera: Camera) {
+        val listener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                val zoomState = camera.cameraInfo.zoomState.value
+
+                val currentZoomRatio: Float = zoomState?.zoomRatio ?: 0F
+                val result = currentZoomRatio * detector.scaleFactor
+                cameraControl?.setZoomRatio(result)
+
+                val linearZoom: Float = zoomState?.linearZoom ?: 0F
+                slider.value = linearZoom
+                return true
+            }
+        }
+
+        val scaleGestureDetector = ScaleGestureDetector(context, listener)
+
+        previewView.setOnTouchListener { v, event ->
+            scaleGestureDetector.onTouchEvent(event)
+            v.performClick()
+            return@setOnTouchListener true
         }
     }
 
