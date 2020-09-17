@@ -124,19 +124,25 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
 
             val connection = object : CustomTabsServiceConnection() {
                 override fun onServiceDisconnected(name: ComponentName?) {
-                    cont.resumeWithException(Throwable("Service Disconnected!"))
                 }
 
                 override fun onCustomTabsServiceConnected(name: ComponentName, client: CustomTabsClient) {
                     try {
                         val session = client.newSession(null)
                         if (session != null) {
-                            cont.resume(this to session)
+                            if(cont.isActive.not()){
+                                cont.resume(this to session)
+                            }
                         } else {
-                            cont.resumeWithException(Throwable("Start CustomTabsSession failed!"))
+                            if(cont.isActive.not()){
+                                cont.resumeWithException(Throwable("Start CustomTabsSession failed!"))
+                            }
                         }
                     } catch (e: Exception) {
-                        cont.resumeWithException(e)
+                        if(cont.isActive.not()){
+                            cont.resumeWithException(e)
+                        }
+                        crashReport.recordException("onCustomTabsServiceConnected when try to connect to custom Tabs", e)
                     }
                 }
             }
