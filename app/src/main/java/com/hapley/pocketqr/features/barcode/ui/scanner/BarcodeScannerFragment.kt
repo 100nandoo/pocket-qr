@@ -29,8 +29,6 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
-import kotlin.math.max
-import kotlin.math.min
 
 class BarcodeScannerFragment : Fragment() {
 
@@ -135,9 +133,9 @@ class BarcodeScannerFragment : Fragment() {
         Timber.d("Barcode raw value : $rawValue")
 
         if (viewModel.tempRawValue != rawValue) {
-            viewModel.setBarcode(barcode)
+            viewModel.insertBarcode(barcode)
 
-            val barcodeItem = barcode.toDomain(0)?.let { BarcodeItem(it) }
+            val barcodeItem = viewModel.convertToDomain(barcode, 0)?.let { BarcodeItem(it) }
 
             Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
                 .setAction(getString(R.string.open)) { mainViewModel.actionOpenUrl(barcodeItem) }

@@ -4,39 +4,41 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hapley.pocketqr.features.barcode.domain.*
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
+import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import com.google.mlkit.vision.barcode.Barcode as MlKitBarcode
 
-class BarcodeScannerViewModel constructor(private val barcodeUseCase: BarcodeUseCase) : ViewModel() {
+class BarcodeScannerViewModel constructor(private val barcodeUseCase: BarcodeUseCase, private val pocketQrUtil: PocketQrUtil) : ViewModel() {
 
     var tempRawValue: String? = null
 
-    fun setBarcode(mlKitBarcode: MlKitBarcode) {
+    fun insertBarcode(mlKitBarcode: MlKitBarcode) {
         viewModelScope.launch(Dispatchers.IO) {
             tempRawValue = mlKitBarcode.rawValue.toString()
 
             val availableId = barcodeUseCase.getLastId() + 1
 
-            mlKitBarcode.toDomain(availableId)?.let { barcodeUseCase.insert(it) }
+
+            convertToDomain(mlKitBarcode, availableId)?.let { barcodeUseCase.insert(it) }
         }
     }
-}
 
-fun MlKitBarcode.toDomain(id: Int): Barcode? {
-    return rawValue?.let {
-        Barcode(
-            id = id,
-            rawValue = it,
-            label = "",
-            displayValue = displayValue ?: "",
-            created = Date().time,
-            format = format,
-            type = this.generateType(),
-            isFavorite = false,
-            clickCount = 0
-        )
+    fun convertToDomain(mlKitBarcode: MlKitBarcode, id: Int): Barcode?{
+       return mlKitBarcode.rawValue?.let {
+           Barcode(
+               id = id,
+               rawValue = it,
+               label = pocketQrUtil.extractSafeEntryLabel(it),
+               displayValue = mlKitBarcode.displayValue ?: "",
+               created = Date().time,
+               format = mlKitBarcode.format,
+               type = mlKitBarcode.generateType(),
+               isFavorite = false,
+               clickCount = 0
+           )
+       }
     }
 }
 

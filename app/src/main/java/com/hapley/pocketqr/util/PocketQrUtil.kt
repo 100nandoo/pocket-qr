@@ -28,6 +28,10 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
 
     private val crashReport by inject(CrashReport::class.java)
 
+    companion object {
+        const val SAFE_ENTRY_REGEX = "-([A-Z]){2}\\w+"
+    }
+
     fun permissionSnackbar(parent: View, requestMessage: String, action: () -> Unit) {
         Snackbar.make(parent, requestMessage, Snackbar.LENGTH_INDEFINITE)
             .setAction(R.string.allow) {
@@ -130,16 +134,16 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
                     try {
                         val session = client.newSession(null)
                         if (session != null) {
-                            if(cont.isActive.not()){
+                            if (cont.isActive.not()) {
                                 cont.resume(this to session)
                             }
                         } else {
-                            if(cont.isActive.not()){
+                            if (cont.isActive.not()) {
                                 cont.resumeWithException(Throwable("Start CustomTabsSession failed!"))
                             }
                         }
                     } catch (e: Exception) {
-                        if(cont.isActive.not()){
+                        if (cont.isActive.not()) {
                             cont.resumeWithException(e)
                         }
                         crashReport.recordException("onCustomTabsServiceConnected when try to connect to custom Tabs", e)
@@ -161,4 +165,12 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
             || Build.HOST.startsWith("Build")
             || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
             || "google_sdk" == Build.PRODUCT
+
+    fun extractSafeEntryLabel(url: String): String {
+        return if (url.contains("temperaturepass.ndi-api.gov.sg", true)) {
+            val regex = SAFE_ENTRY_REGEX.toRegex()
+            val result = regex.find(url)
+            result?.value?.replace("-", " ")?.trim() ?: ""
+        } else ""
+    }
 }
