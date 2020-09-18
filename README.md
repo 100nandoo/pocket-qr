@@ -8,6 +8,9 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Fix issue with tutorial screen, button done gone
+- [ ] Add empty history lottie animation
+- [ ] Android 11 support
 - [ ] Widget
 - [ ] Full screen QR Code + Download
 - [ ] Implement new design
