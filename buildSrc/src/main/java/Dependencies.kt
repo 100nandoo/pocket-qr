@@ -1,9 +1,9 @@
 object Misc {
     val appId = "com.hapley.pocketqr"
-    val compileSdk = 29
+    val compileSdk = 30
     val minSdk = 21
-    val targetSdk = 29
-    val buildTools = "29.0.3"
+    val targetSdk = 30
+    val buildTools = "30.0.1"
 }
 
 object ProductFlavors {
