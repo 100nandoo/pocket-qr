@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -316,7 +315,10 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
     private fun subscribeUi() {
         viewModel.barcodesLiveData.observe(viewLifecycleOwner, {
-            itemListImpl.setNewList(it, true)
+            if(it.isNotEmpty()){
+                view_switcher.showNext()
+                itemListImpl.setNewList(it, true)
+            }
         })
     }
 

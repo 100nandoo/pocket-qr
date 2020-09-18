@@ -139,6 +139,9 @@ dependencies {
     // Koptional
     implementation Libraries.koptional
 
+    // Lottie
+    implementation Libraries.lottie
+
     // Material Value
     implementation Libraries.materialValues
 

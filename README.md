@@ -8,9 +8,8 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Add empty history lottie animation
-- [ ] Widget
 - [ ] Full screen QR Code + Download
+- [ ] Widget
 - [ ] Implement new design
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
@@ -56,3 +55,4 @@ Pocket QR app
 - [x] Fix issue with tutorial screen, button done gone
 - [x] Fix splash screen icon
 - [x] Android 11 support
+- [x] Add empty history lottie animation

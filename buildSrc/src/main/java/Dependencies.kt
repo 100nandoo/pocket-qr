@@ -59,6 +59,8 @@ object Versions {
 
     val koptional = "1.7.0"
 
+    val lottie = "3.4.2"
+
     val materialValues = "1.1.1"
 
     val awesomeQr = "1.2.0"
@@ -91,6 +93,8 @@ object Libraries {
     val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
     val koptional = "com.gojuno.koptional:koptional:${Versions.koptional}"
+
+    val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
 
     val materialValues = "blue.aodev:material-values:${Versions.materialValues}"
 

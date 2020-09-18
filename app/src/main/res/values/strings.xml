@@ -42,6 +42,7 @@
     <string name="copy_">Copy</string>
     <string name="barcode_history_transition_name">barcode_history_transition_%1$d</string>
     <string name="your_action">Your Action</string>
+    <string name="you_have_no_scanned_item">You have no scanned item</string>
 
     <!--  Sort  -->
     <string name="most_frequent">Most Frequent</string>
