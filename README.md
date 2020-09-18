@@ -8,9 +8,8 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Fix splash screen icon
-- [ ] Add empty history lottie animation
 - [ ] Android 11 support
+- [ ] Add empty history lottie animation
 - [ ] Widget
 - [ ] Full screen QR Code + Download
 - [ ] Implement new design
@@ -56,3 +55,4 @@ Pocket QR app
 - [x] Dynamic Shortcut
 - [x] Migrate to adaptive banner
 - [x] Fix issue with tutorial screen, button done gone
+- [x] Fix splash screen icon
