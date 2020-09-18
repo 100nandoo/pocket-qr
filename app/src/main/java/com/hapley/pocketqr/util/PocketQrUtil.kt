@@ -167,7 +167,7 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
             || "google_sdk" == Build.PRODUCT
 
     fun extractSafeEntryLabel(url: String): String {
-        return if (url.contains("temperaturepass.ndi-api.gov.sg", true)) {
+        return if (url.contains("temperaturepass.ndi-api.gov.sg", true) || url.contains("www.safeentry-qr.gov.sg", true)) {
             val regex = SAFE_ENTRY_REGEX.toRegex()
             val result = regex.find(url)
             result?.value?.replace("-", " ")?.trim() ?: ""

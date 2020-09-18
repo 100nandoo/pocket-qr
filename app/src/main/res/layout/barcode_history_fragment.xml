@@ -8,6 +8,14 @@
     android:background="?attr/colorSurface"
     tools:context=".features.barcode.ui.history.BarcodeHistoryFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_barcode_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionGroup="true"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/barcode_history_item" />
+
     <LinearLayout
         android:id="@+id/ll_empty"
         android:layout_width="match_parent"
@@ -30,13 +38,5 @@
             android:text="@string/you_have_no_scanned_item"
             android:textAlignment="center" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_barcode_history"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionGroup="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/barcode_history_item" />
 
 </ViewSwitcher>

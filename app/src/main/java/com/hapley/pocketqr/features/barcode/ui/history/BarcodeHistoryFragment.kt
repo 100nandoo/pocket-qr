@@ -315,8 +315,9 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
     private fun subscribeUi() {
         viewModel.barcodesLiveData.observe(viewLifecycleOwner, {
-            if(it.isNotEmpty()){
+            if (it.isEmpty()) {
                 view_switcher.showNext()
+            } else {
                 itemListImpl.setNewList(it, true)
             }
         })
