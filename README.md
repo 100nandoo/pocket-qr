@@ -8,9 +8,11 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Add share app url button
 - [ ] Full screen QR Code + Download
 - [ ] Widget
 - [ ] Implement new design
+- [ ] In app review
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
