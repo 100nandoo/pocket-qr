@@ -17,7 +17,6 @@ class AppIntroActivity : AppIntro() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setImmersiveMode()
         setTransformer(AppIntroPageTransformerType.Fade)
         isWizardMode = true
 
@@ -63,12 +62,12 @@ class AppIntroActivity : AppIntro() {
             )
         )
 
-
         askForPermissions(
             permissions = arrayOf(Manifest.permission.CAMERA),
             slideNumber = 4,
             required = true
         )
+
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {

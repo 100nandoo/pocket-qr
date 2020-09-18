@@ -32,4 +32,7 @@
 
     <color name="ic_launcher_background">#FFFFFF</color>
 
+    <color name="logo_purple">#FF5558FF</color>
+    <color name="logo_blue">#FF00C0FF</color>
+
 </resources>

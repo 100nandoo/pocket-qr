@@ -2,7 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
     <item android:drawable="?attr/colorSurface" />
-    <item
-        android:drawable="@drawable/ic_hapley"
-        android:gravity="center" />
+    <item>
+        <bitmap android:src="@mipmap/ic_hapley"
+            android:gravity="center"/>
+    </item>
 </layer-list>
