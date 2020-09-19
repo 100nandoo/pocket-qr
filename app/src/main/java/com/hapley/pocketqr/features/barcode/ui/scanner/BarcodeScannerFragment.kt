@@ -87,7 +87,7 @@ class BarcodeScannerFragment : Fragment() {
                         this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
                     }
                     cameraControl = camera.cameraControl
-                    preview.setSurfaceProvider(previewView.createSurfaceProvider())
+                    preview.setSurfaceProvider(previewView.surfaceProvider)
 
                     setUpPinchToZoom(camera)
 

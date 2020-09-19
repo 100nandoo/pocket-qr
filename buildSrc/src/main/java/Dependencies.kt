@@ -18,20 +18,20 @@ object Releases {
 }
 
 object Versions {
-    val kotlin = "1.4.0"
-    val coroutinePlayServices = "1.3.7"
-    val coroutineGuava = "1.3.7"
+    val kotlin = "1.4.10"
+    val coroutinePlayServices = "1.3.9"
+    val coroutineGuava = "1.3.9"
     val gradle = "4.0.1"
     val gms = "4.3.3"
-    val crashlyticsGradle = "2.2.0"
+    val crashlyticsGradle = "2.3.0"
     val perfPlugin = "1.3.1"
 
     object Android {
         val appCompat = "1.2.0"
         val browser = "1.2.0"
-        val cameraX = "1.0.0-beta08"
-        val cameraView = "1.0.0-alpha15"
-        val constraintLayout = "1.1.3"
+        val cameraX = "1.0.0-beta09"
+        val cameraView = "1.0.0-alpha16"
+        val constraintLayout = "2.0.0"
         val core = "1.3.1"
         val lifecycle = "2.2.0"
         val material = "1.2.0"
@@ -41,11 +41,11 @@ object Versions {
     }
 
     object Firebase {
-        val ads = "19.3.0"
+        val ads = "19.4.0"
         val core = "17.5.0"
         val crashlytics = "17.2.1"
         val performance = "19.0.8"
-        val qrCode = "16.0.2"
+        val qrCode = "16.0.3"
     }
 
     val appIntro = "6.0.0"
