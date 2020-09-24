@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
             updateDynamicShortcut(it.mapNotNull { barcodeItem -> barcodeItem.toShortcutInfo(this@MainActivity) })
         }
 
-        viewModel.barcodeItemLiveData().observe(this){
+        viewModel.barcodeItemLiveData().observe(this) {
             actionOpen(it)
         }
     }

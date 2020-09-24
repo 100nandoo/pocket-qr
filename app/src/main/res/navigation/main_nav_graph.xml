@@ -43,6 +43,7 @@
 
     <dialog
         android:id="@+id/action_bottomSheet_dialog"
+        android:label="@string/action_bottom_sheet"
         android:name="com.hapley.pocketqr.features.barcode.ui.history.bottomsheet.ActionBottomSheetDialog"
         tools:layout="@layout/barcode_history_bottom_sheet">
 

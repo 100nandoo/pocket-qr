@@ -18,7 +18,7 @@ import com.gojuno.koptional.toOptional
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.common.CrashReport
+import com.hapley.pocketqr.common.Tracker
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.java.KoinJavaComponent.inject
 import kotlin.coroutines.resume
@@ -26,7 +26,7 @@ import kotlin.coroutines.resumeWithException
 
 class PocketQrUtil(private val context: Context, private val clipboardManager: ClipboardManager) {
 
-    private val crashReport by inject(CrashReport::class.java)
+    private val crashReport by inject(Tracker::class.java)
 
     companion object {
         const val SAFE_ENTRY_REGEX = "-([A-Z]){2}\\w+"

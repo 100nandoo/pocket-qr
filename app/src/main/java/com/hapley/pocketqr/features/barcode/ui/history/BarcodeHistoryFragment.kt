@@ -9,6 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,6 +18,8 @@ import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.common.SCREEN_HISTORY
+import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.ALPHABETICAL
 import com.hapley.pocketqr.ui.settings.MOST_FREQUENT
@@ -33,6 +36,8 @@ import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import kotlinx.android.synthetic.main.barcode_history_item.view.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -43,6 +48,8 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
     private val viewModel: BarcodeHistoryViewModel by viewModel()
 
     private val pocketQrUtil: PocketQrUtil by inject()
+
+    private val tracker: Tracker by inject()
 
     private val queryTextListener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(s: String): Boolean {
@@ -153,6 +160,9 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
     private var actionMode: ActionMode? = null
 
+    private val screenName: String = SCREEN_HISTORY
+    private val className: String = this.javaClass.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -166,6 +176,14 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_history_fragment, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            delay(2_000L)
+            tracker.trackScreen(className, screenName)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

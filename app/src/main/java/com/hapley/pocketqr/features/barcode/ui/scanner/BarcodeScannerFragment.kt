@@ -17,12 +17,14 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.common.CrashReport
+import com.hapley.pocketqr.common.SCREEN_SCANNER
+import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -35,12 +37,15 @@ class BarcodeScannerFragment : Fragment() {
     private val viewModel: BarcodeScannerViewModel by viewModel()
     private val mainViewModel: MainViewModel by sharedViewModel()
 
-    private val crashReport: CrashReport by inject()
+    private val tracker: Tracker by inject()
     private val pocketQrUtil: PocketQrUtil by inject()
     private val preview: Preview by inject()
     private val scanner: BarcodeScanner by inject()
 
     private var cameraControl: CameraControl? = null
+
+    private val screenName: String = SCREEN_SCANNER
+    private val className: String = this.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +60,14 @@ class BarcodeScannerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_scanner_fragment, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            delay(2_000L)
+            tracker.trackScreen(className, screenName)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -92,7 +105,7 @@ class BarcodeScannerFragment : Fragment() {
                     setUpPinchToZoom(camera)
 
                 } catch (e: Exception) {
-                    crashReport.recordException("1. Bind camera\n2. Setup camera control\n3. Set surface provider.", e)
+                    tracker.recordException("1. Bind camera\n2. Setup camera control\n3. Set surface provider.", e)
                     Timber.e(e)
                 }
             }

@@ -58,6 +58,9 @@
     <string name="click_counts_header">Click Counts:</string>
     <string name="barcode_detail_transition_name">barcode_detail_transition</string>
 
+    <!--  Action Bottom Sheet -->
+    <string name="action_bottom_sheet">Action Bottom Sheet</string>
+
     <!--  Settings  -->
     <string name="sort_mode">Default sort mode</string>
     <string name="night_mode">Night mode</string>

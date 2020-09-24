@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
@@ -15,9 +16,12 @@ import com.github.sumimakito.awesomeqr.option.color.Color
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.common.CrashReport
+import com.hapley.pocketqr.common.SCREEN_DETAIL
+import com.hapley.pocketqr.common.Tracker
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,7 +31,10 @@ class BarcodeDetailFragment : Fragment() {
 
     private val viewModel: BarcodeDetailViewModel by viewModel()
 
-    private val crashReport: CrashReport by inject()
+    private val tracker: Tracker by inject()
+
+    private val screenName: String = SCREEN_DETAIL
+    private val className: String = this.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +48,14 @@ class BarcodeDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.barcode_detail_fragment, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            delay(2_000L)
+            tracker.trackScreen(className, screenName)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -90,7 +105,7 @@ class BarcodeDetailFragment : Fragment() {
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                crashReport.recordException("Convert rawValue into QR Code Bitmap", e)
+                tracker.recordException("Convert rawValue into QR Code Bitmap", e)
             }
         })
     }

@@ -2,10 +2,16 @@ package com.hapley.pocketqr.ui.settings
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.*
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.common.SCREEN_SETTINGS
+import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.util.BuildUtil
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -28,6 +34,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private val viewModel: SettingsViewModel by viewModel()
 
+    private val tracker: Tracker by inject()
+
+    private val screenName: String = SCREEN_SETTINGS
+    private val className: String = this.javaClass.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,6 +52,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         initUi()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            delay(2_000L)
+            tracker.trackScreen(className, screenName)
+        }
     }
 
     private fun initUi() {

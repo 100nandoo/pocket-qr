@@ -9,7 +9,7 @@ import coil.ImageLoader
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.hapley.pocketqr.common.AppPreferences
-import com.hapley.pocketqr.common.CrashReport
+import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.db.AppDatabase
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
@@ -37,7 +37,7 @@ val appModule: Module = module {
     single { AppPreferences(settings = get()) }
     single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
     single { PocketQrUtil(context = androidContext(), clipboardManager = get()) }
-    single { CrashReport() }
+    single { Tracker() }
     single { ImageLoader.Builder(androidApplication()).allowHardware(true).crossfade(true).build() }
     viewModel { MainViewModel(barcodeUseCase = get()) }
     viewModel { SettingsViewModel() }
