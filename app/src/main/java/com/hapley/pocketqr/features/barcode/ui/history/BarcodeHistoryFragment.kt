@@ -59,6 +59,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
         override fun onQueryTextChange(s: String): Boolean {
             itemAdapter.filter(s)
+            tracker.search(s)
             return true
         }
     }
@@ -126,7 +127,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
                     true
                 }
                 R.id.item_share -> {
-                    actionShare(selectedItem.second.rawValue)
+                    actionShare(selectedItem.second)
                     mode.finish()
                     true
                 }
@@ -284,6 +285,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
                 viewModel.selectedItemWithPosition = Triple(v, item, position)
                 actionNavigateToDetail()
+                tracker.selectContent(item)
             }
 
             override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
@@ -366,8 +368,8 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         findNavController().navigate(directions, extras)
     }
 
-    private fun actionShare(text: String) {
-        pocketQrUtil.actionShare(requireContext(), text)
+    private fun actionShare(barcodeItem: BarcodeItem) {
+        pocketQrUtil.actionShare(requireContext(), barcodeItem)
     }
 
     private fun actionFavorite() {

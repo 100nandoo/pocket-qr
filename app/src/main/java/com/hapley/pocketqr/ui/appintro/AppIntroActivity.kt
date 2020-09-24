@@ -6,14 +6,26 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
 import com.github.appintro.AppIntroPageTransformerType
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hapley.pocketqr.main.MainActivity
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.common.SCREEN_APP_INTRO
+import com.hapley.pocketqr.common.Tracker
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class AppIntroActivity : AppIntro() {
+
+    private val tracker: Tracker by inject()
+
+    private val screenName: String = SCREEN_APP_INTRO
+    private val className: String = this.javaClass.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,6 +33,8 @@ class AppIntroActivity : AppIntro() {
         isWizardMode = true
 
         isIndicatorEnabled = true
+
+        tracker.tutorialBegin()
 
         addSlide(
             AppIntroFragment.newInstance(
@@ -70,6 +84,14 @@ class AppIntroActivity : AppIntro() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            delay(2_000L)
+            tracker.trackScreen(className, screenName)
+        }
+    }
+
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
         navigateToMainActivity()
@@ -88,6 +110,7 @@ class AppIntroActivity : AppIntro() {
     private fun navigateToMainActivity() {
         finishAffinity()
         startActivity(Intent(this, MainActivity::class.java))
+        tracker.tutorialComplete()
     }
 
     private fun showSystemAppDetailsPage() {

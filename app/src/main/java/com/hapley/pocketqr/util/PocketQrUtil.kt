@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.java.KoinJavaComponent.inject
 import kotlin.coroutines.resume
@@ -26,7 +27,7 @@ import kotlin.coroutines.resumeWithException
 
 class PocketQrUtil(private val context: Context, private val clipboardManager: ClipboardManager) {
 
-    private val crashReport by inject(Tracker::class.java)
+    private val tracker by inject(Tracker::class.java)
 
     companion object {
         const val SAFE_ENTRY_REGEX = "-([A-Z]){2}\\w+"
@@ -83,22 +84,23 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
                     false
                 }
             } catch (e: NullPointerException) {
-                crashReport.recordException("Check whether Uri can be launch as intent.", e)
+                tracker.recordException("Check whether Uri can be launch as intent.", e)
                 e.localizedMessage
                 false
             }
         }
     }
 
-    fun actionShare(context: Context, url: String) {
+    fun actionShare(context: Context, barcodeItem: BarcodeItem) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, url)
+            putExtra(Intent.EXTRA_TEXT, barcodeItem.rawValue)
             type = "text/plain"
         }
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         context.startActivity(shareIntent)
+        tracker.share(barcodeItem)
     }
 
     fun launchCustomTab(context: Context, session: CustomTabsSession, uri: Uri) {
@@ -117,7 +119,7 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
         return try {
             Uri.parse(string)
         } catch (e: Exception) {
-            crashReport.recordException("Parse Url to Uri", e)
+            tracker.recordException("Parse Url to Uri", e)
             null
         }.toOptional()
     }
@@ -146,7 +148,7 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
                         if (cont.isActive.not()) {
                             cont.resumeWithException(e)
                         }
-                        crashReport.recordException("onCustomTabsServiceConnected when try to connect to custom Tabs", e)
+                        tracker.recordException("onCustomTabsServiceConnected when try to connect to custom Tabs", e)
                     }
                 }
             }

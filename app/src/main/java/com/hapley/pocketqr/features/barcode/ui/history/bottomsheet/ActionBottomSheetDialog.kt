@@ -90,7 +90,7 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
             findNavController().navigate(directions, extras)
         }
         tv_share.setOnClickListener {
-            actionShare(barcodeItem.rawValue)
+            actionShare(barcodeItem)
             findNavController().popBackStack()
         }
 
@@ -110,8 +110,8 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
-    private fun actionShare(text: String) {
-        pocketQrUtil.actionShare(requireContext(), text)
+    private fun actionShare(barcodeItem: BarcodeItem) {
+        pocketQrUtil.actionShare(requireContext(), barcodeItem)
     }
 
     private fun actionFavorite() {

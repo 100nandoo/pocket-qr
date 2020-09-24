@@ -47,3 +47,17 @@ const val SMS = 6
 const val URL = 8
 const val WIFI = 9
 const val UNKNOWN = -1
+
+fun Int.getBarcodeTypeName(): String {
+    return when (this) {
+        CONTACT -> ::CONTACT.name
+        EMAIL -> ::EMAIL.name
+        GEO -> ::GEO.name
+        ISBN -> ::ISBN.name
+        PHONE -> ::PHONE.name
+        SMS -> ::SMS.name
+        URL -> ::URL.name
+        WIFI -> ::WIFI.name
+        else -> ::UNKNOWN.name
+    }
+}
