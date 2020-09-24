@@ -44,6 +44,7 @@ object Versions {
         val ads = "19.4.0"
         val core = "17.5.0"
         val crashlytics = "17.2.1"
+        val indexing = "19.1.0"
         val performance = "19.0.8"
         val qrCode = "16.0.3"
     }
@@ -151,6 +152,7 @@ object FirebaseLibraries {
     val analytics = "com.google.firebase:firebase-analytics-ktx:${Versions.Firebase.core}"
     val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
     val crashlytics = "com.google.firebase:firebase-crashlytics:${Versions.Firebase.crashlytics}"
+    val indexing = "com.google.firebase:firebase-appindexing:${Versions.Firebase.indexing}"
     val performance = "com.google.firebase:firebase-perf:${Versions.Firebase.performance}"
     val qrCode = "com.google.mlkit:barcode-scanning:${Versions.Firebase.qrCode}"
 }
