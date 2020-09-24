@@ -13,8 +13,8 @@ object ProductFlavors {
 }
 
 object Releases {
-    val versionCode = 5
-    val versionName = "0.8.1"
+    val versionCode = 7
+    val versionName = "0.8.2"
 }
 
 object Versions {
