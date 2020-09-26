@@ -111,7 +111,7 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun actionShare(barcodeItem: BarcodeItem) {
-        pocketQrUtil.actionShare(requireContext(), barcodeItem)
+        pocketQrUtil.actionShareBarcodeItem(requireContext(), barcodeItem)
     }
 
     private fun actionFavorite() {

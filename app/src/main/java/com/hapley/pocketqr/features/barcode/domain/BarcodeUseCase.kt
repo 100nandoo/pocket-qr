@@ -53,11 +53,7 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
 
     suspend fun updateFavorite(barcodeItem: BarcodeItem, isFavorite: Boolean) {
         barcodeRepository.updateFavorite(barcodeItem.id.toInt(), isFavorite)
-        if(isFavorite){
-            tracker.favorite(barcodeItem)
-        } else {
-            tracker.unfavorite(barcodeItem)
-        }
+        tracker.favorite(barcodeItem, isFavorite)
     }
 
     suspend fun incrementClickCount(id: Int) {

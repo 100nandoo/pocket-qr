@@ -8,7 +8,6 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Add share app url button
 - [ ] Full screen QR Code + Download
 - [ ] Widget
 - [ ] Implement new design
@@ -16,14 +15,12 @@ Pocket QR app
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
-- [ ] Monitor custom event (analytics)
 - [ ] Monitor specific code (performance)
 - [ ] Add filter functionality
 - [ ] View Binding
 - [ ] Multi module support
 - [ ] Pick Image QR Code
 - [ ] Donation
-- [ ] Theme
 - [x] Support multi QR Code format (wifi, etc)
 - [x] Room Database for QR Code
 - [x] app signing
@@ -58,3 +55,6 @@ Pocket QR app
 - [x] Fix splash screen icon
 - [x] Android 11 support
 - [x] Add empty history lottie animation
+- [x] Monitor custom event (analytics)
+- [x] Add share app url button
+- [x] Theme

@@ -369,7 +369,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
     }
 
     private fun actionShare(barcodeItem: BarcodeItem) {
-        pocketQrUtil.actionShare(requireContext(), barcodeItem)
+        pocketQrUtil.actionShareBarcodeItem(requireContext(), barcodeItem)
     }
 
     private fun actionFavorite() {

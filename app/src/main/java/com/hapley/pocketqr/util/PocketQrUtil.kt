@@ -92,15 +92,19 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
         }
     }
 
-    fun actionShare(context: Context, barcodeItem: BarcodeItem) {
+    fun actionShare(context: Context, text: String){
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, barcodeItem.rawValue)
+            putExtra(Intent.EXTRA_TEXT, text)
             type = "text/plain"
         }
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         context.startActivity(shareIntent)
+    }
+
+    fun actionShareBarcodeItem(context: Context, barcodeItem: BarcodeItem) {
+        actionShare(context, barcodeItem.rawValue)
         tracker.share(barcodeItem)
     }
 

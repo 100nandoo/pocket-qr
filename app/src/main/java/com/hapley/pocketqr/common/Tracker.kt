@@ -17,7 +17,6 @@ class Tracker {
         const val EVENT_COPY = "copy_to_clipboard"
         const val EVENT_DELETE = "delete"
         const val EVENT_FAVORITE = "favorite"
-        const val EVENT_UNFAVORITE = "unfavorite"
         const val EVENT_SCAN = "scan"
         const val EVENT_SORT = "sort"
         const val EVENT_ZOOM = "zoom"
@@ -25,8 +24,8 @@ class Tracker {
         const val ZOOM_IN = "zoom_in"
         const val ZOOM_OUT = "zoom_out"
 
-        const val FAVORITE = "favorite"
-        const val UNFAVORITE = "unfavorite"
+        const val ADD_FAVORITE = "add_favorite"
+        const val REMOVE_UNFAVORITE = "remove_favorite"
     }
 
     fun recordException(message: String, exception: Exception) {
@@ -51,17 +50,12 @@ class Tracker {
 
     fun favorite(barcodeItem: BarcodeItem, isFavorite: Boolean) {
         val bundle = basicBundle(barcodeItem)
-        val paramValue = if(isFavorite) FAVORITE else UNFAVORITE
+        val paramValue = if(isFavorite) ADD_FAVORITE else REMOVE_UNFAVORITE
 
         bundle.apply {
             putString(VALUE, paramValue)
         }
         Firebase.analytics.logEvent(EVENT_FAVORITE, bundle)
-    }
-
-    fun unfavorite(barcodeItem: BarcodeItem) {
-        val bundle = basicBundle(barcodeItem)
-        Firebase.analytics.logEvent(EVENT_UNFAVORITE, bundle)
     }
 
     fun scan(barcodeItem: BarcodeItem) {

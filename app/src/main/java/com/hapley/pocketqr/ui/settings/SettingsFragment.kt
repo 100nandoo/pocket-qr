@@ -9,6 +9,7 @@ import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_SETTINGS
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.util.BuildUtil
+import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -31,9 +32,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         const val BARCODE_DETAIL_SHOW_TUTORIAL = "barcode_detail_show_tutorial"
 
         const val ABOUT_VERSION = "version"
+
+        const val APP_LINK = "app_link"
+        const val APP_LINK_PLAY_STORE = "https://play.google.com/store/apps/details?id=com.hapley.pocketqr"
     }
 
     private val viewModel: SettingsViewModel by viewModel()
+
+    private val pocketQrUtil: PocketQrUtil by inject()
 
     private val tracker: Tracker by inject()
 
@@ -165,6 +171,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 aboutCategory.title = getString(R.string.about)
                 aboutCategory.isIconSpaceReserved = false
                 screen.addPreference(aboutCategory)
+
+                aboutCategory.addPreference(
+                    Preference(context).apply {
+                        key = APP_LINK
+                        title = getString(R.string.share_app)
+                        isIconSpaceReserved = false
+                        setOnPreferenceClickListener {
+                            pocketQrUtil.actionShare(requireContext(), APP_LINK_PLAY_STORE)
+                            true
+                        }
+                    }
+                )
 
                 aboutCategory.addPreference(
                     Preference(context).apply {
