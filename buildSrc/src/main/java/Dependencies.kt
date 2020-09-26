@@ -52,7 +52,7 @@ object Versions {
     val appIntro = "6.0.0"
 
     //    val assent = "3.0.0-RC4"
-    val coil = "1.0.0-rc1"
+    val coil = "1.0.0-rc3"
     val fastAdapter = "5.2.3"
 
     val khronos = "0.9.0"
