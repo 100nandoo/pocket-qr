@@ -13,6 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -87,6 +88,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         entries = resources.getStringArray(R.array.sort_mode_entries)
                         entryValues = arrayOf(RECENT, MOST_FREQUENT, ALPHABETICAL)
                         setDefaultValue(RECENT)
+                        setOnPreferenceChangeListener { _, newValue ->
+                            Timber.d("setOnPreferenceChangeListener")
+                            if (value != newValue && newValue is String) {
+                                tracker.sort(newValue)
+                            }
+                            true
+                        }
                     }
                 )
 

@@ -20,7 +20,6 @@ class BarcodeScannerViewModel constructor(private val barcodeUseCase: BarcodeUse
 
             val availableId = barcodeUseCase.getLastId() + 1
 
-
             convertToDomain(mlKitBarcode, availableId)?.let { barcodeUseCase.insert(it) }
         }
     }

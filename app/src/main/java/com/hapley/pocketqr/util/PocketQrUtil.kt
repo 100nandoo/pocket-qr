@@ -40,9 +40,10 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
             }.show()
     }
 
-    fun copyToClipboard(text: String) {
-        val clip = ClipData.newPlainText(context.getString(R.string.app_name), text)
+    fun copyToClipboard(barcodeItem: BarcodeItem) {
+        val clip = ClipData.newPlainText(context.getString(R.string.app_name), barcodeItem.rawValue)
         clipboardManager.setPrimaryClip(clip)
+        tracker.copy(barcodeItem)
     }
 
     @SuppressLint("UnsafeExperimentalUsageError")

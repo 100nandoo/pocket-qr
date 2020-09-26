@@ -105,7 +105,7 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         tv_copy.setOnClickListener {
-            actionCopyToClipboard(barcodeItem.rawValue)
+            actionCopyToClipboard(barcodeItem)
             findNavController().popBackStack()
         }
     }
@@ -118,8 +118,8 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
         viewModel.updateFavoriteFlag()
     }
 
-    private fun actionCopyToClipboard(text: String) {
-        pocketQrUtil.copyToClipboard(text)
+    private fun actionCopyToClipboard(barcodeItem: BarcodeItem) {
+        pocketQrUtil.copyToClipboard(barcodeItem)
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
     }
 }

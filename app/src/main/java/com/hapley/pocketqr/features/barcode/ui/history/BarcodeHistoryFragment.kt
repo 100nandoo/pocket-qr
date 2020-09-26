@@ -137,7 +137,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
                     true
                 }
                 R.id.item_copy -> {
-                    actionCopyToClipboard(selectedItem.second.rawValue)
+                    actionCopyToClipboard(selectedItem.second)
                     mode.finish()
                     true
                 }
@@ -231,7 +231,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         }
 
         val selectedSortMode = Mapper.menuItemIdToSortMode(item.itemId)
-        viewModel.sortMode = selectedSortMode
+        viewModel.updateSortMode(selectedSortMode)
 
         item.isChecked = !item.isChecked
         return true
@@ -343,8 +343,8 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         })
     }
 
-    private fun actionCopyToClipboard(text: String) {
-        pocketQrUtil.copyToClipboard(text)
+    private fun actionCopyToClipboard(barcodeItem: BarcodeItem) {
+        pocketQrUtil.copyToClipboard(barcodeItem)
         pocketQrUtil.shortToast(requireContext(), R.string.copied)
     }
 
@@ -378,9 +378,9 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         itemListImpl.withComparator(mergeComparator(defaultComparator()))
     }
 
-    private fun actionDelete(position: Int, id: Int) {
+    private fun actionDelete(position: Int, barcodeItem: BarcodeItem) {
         if (position != RecyclerView.NO_POSITION) {
-            viewModel.deleteBarcode(id)
+            viewModel.deleteBarcode(barcodeItem)
         }
     }
 
@@ -391,9 +391,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
     override fun itemSwiped(position: Int, direction: Int) {
         val swipedItem = fastAdapter.getItem(position) ?: return
         if (direction == ItemTouchHelper.LEFT) {
-            actionDelete(position, swipedItem.id.toInt())
-        } else {
-
+            actionDelete(position, swipedItem)
         }
     }
 

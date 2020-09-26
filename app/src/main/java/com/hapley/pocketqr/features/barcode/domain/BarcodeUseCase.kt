@@ -2,14 +2,16 @@ package com.hapley.pocketqr.features.barcode.domain
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
+import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
  */
 
-class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepository) {
+class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepository, private val tracker: Tracker) {
 
     fun getAllLiveData(): LiveData<List<Barcode>> {
         return Transformations.map(barcodeRepository.getAllLiveData()) { barcodeEntities ->
@@ -49,8 +51,13 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         barcodeRepository.updateLabel(label, id)
     }
 
-    suspend fun updateFavorite(id: Int, isFavorite: Boolean) {
-        barcodeRepository.updateFavorite(id, isFavorite)
+    suspend fun updateFavorite(barcodeItem: BarcodeItem, isFavorite: Boolean) {
+        barcodeRepository.updateFavorite(barcodeItem.id.toInt(), isFavorite)
+        if(isFavorite){
+            tracker.favorite(barcodeItem)
+        } else {
+            tracker.unfavorite(barcodeItem)
+        }
     }
 
     suspend fun incrementClickCount(id: Int) {
@@ -61,8 +68,9 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         barcodeRepository.updateBarcodes(*barcode.map { it.toEntity }.toTypedArray())
     }
 
-    suspend fun deleteBarcode(id: Int){
-        barcodeRepository.deleteBarcode(id)
+    suspend fun deleteBarcode(barcodeItem: BarcodeItem){
+        barcodeRepository.deleteBarcode(barcodeItem.id.toInt())
+        tracker.delete(barcodeItem)
     }
 }
 

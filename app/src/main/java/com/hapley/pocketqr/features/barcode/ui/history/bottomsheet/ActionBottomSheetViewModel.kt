@@ -20,9 +20,9 @@ class ActionBottomSheetViewModel(private val barcodeUseCase: BarcodeUseCase) : V
 
     fun updateFavoriteFlag() {
         viewModelScope.launch {
-            val id = barcodeLiveData.value?.id ?: return@launch
+            val barcodeItem = barcodeLiveData.value ?: return@launch
             val isFavorite = barcodeLiveData.value?.isFavorite?.not() ?: return@launch
-            barcodeUseCase.updateFavorite(id.toInt(), isFavorite)
+            barcodeUseCase.updateFavorite(barcodeItem, isFavorite)
         }
     }
 

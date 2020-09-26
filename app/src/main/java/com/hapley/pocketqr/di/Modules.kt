@@ -47,9 +47,9 @@ val appModule: Module = module {
 val barcodeModule: Module = module {
     single { get<AppDatabase>().barcodeDao() }
     single { BarcodeRepository(barcodeDao = get()) }
-    single { BarcodeUseCase(barcodeRepository = get()) }
+    single { BarcodeUseCase(barcodeRepository = get(), tracker = get()) }
     viewModel { BarcodeScannerViewModel(barcodeUseCase = get(), pocketQrUtil = get()) }
-    viewModel { BarcodeHistoryViewModel(barcodeUseCase = get(), appPreferences = get()) }
+    viewModel { BarcodeHistoryViewModel(barcodeUseCase = get(), appPreferences = get(), tracker = get()) }
     viewModel { ActionBottomSheetViewModel(barcodeUseCase = get()) }
     viewModel { BarcodeDetailViewModel(barcodeUseCase = get(), appPreferences = get()) }
 

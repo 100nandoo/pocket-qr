@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.mlkit.vision.barcode.Barcode
@@ -115,6 +116,14 @@ class BarcodeScannerFragment : Fragment() {
             cameraControl?.setLinearZoom(value)
         }
 
+        slider.addOnSliderTouchListener(object: Slider.OnSliderTouchListener {
+            override fun onStartTrackingTouch(slider: Slider) = Unit
+
+            override fun onStopTrackingTouch(slider: Slider) {
+                tracker.zoom(slider.value)
+            }
+        })
+
     }
 
     private fun setUpPinchToZoom(camera: Camera) {
@@ -129,6 +138,12 @@ class BarcodeScannerFragment : Fragment() {
                 val linearZoom: Float = zoomState?.linearZoom ?: 0F
                 slider.value = linearZoom
                 return true
+            }
+
+            override fun onScaleEnd(detector: ScaleGestureDetector?) {
+                val zoomState = camera.cameraInfo.zoomState.value
+                val linearZoom: Float = zoomState?.linearZoom ?: 0F
+                tracker.zoom(linearZoom)
             }
         }
 
@@ -149,6 +164,10 @@ class BarcodeScannerFragment : Fragment() {
             viewModel.insertBarcode(barcode)
 
             val barcodeItem = viewModel.convertToDomain(barcode, 0)?.let { BarcodeItem(it) }
+
+            barcodeItem?.let {
+                tracker.scan(barcodeItem)
+            }
 
             Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
                 .setAction(getString(R.string.open)) { mainViewModel.actionOpenUrl(barcodeItem) }

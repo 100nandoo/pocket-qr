@@ -1,6 +1,7 @@
 package com.hapley.pocketqr.common
 
 import android.os.Bundle
+import androidx.annotation.FloatRange
 import androidx.annotation.StringDef
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics.Param.*
@@ -9,35 +10,83 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
 import com.hapley.pocketqr.features.barcode.domain.getBarcodeTypeName
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import com.hapley.pocketqr.ui.settings.SortMode
 
 class Tracker {
+    companion object {
+        const val EVENT_COPY = "copy_to_clipboard"
+        const val EVENT_DELETE = "delete"
+        const val EVENT_FAVORITE = "favorite"
+        const val EVENT_UNFAVORITE = "unfavorite"
+        const val EVENT_SCAN = "scan"
+        const val EVENT_SORT = "sort"
+        const val EVENT_ZOOM = "zoom"
+
+        const val ZOOM_IN = "zoom_in"
+        const val ZOOM_OUT = "zoom_out"
+
+        const val FAVORITE = "favorite"
+        const val UNFAVORITE = "unfavorite"
+    }
+
     fun recordException(message: String, exception: Exception) {
         FirebaseCrashlytics.getInstance().log(message)
         FirebaseCrashlytics.getInstance().recordException(exception)
     }
 
-    fun trackScreen(className: String, @ScreenName screenName: String) {
-        val bundle = Bundle().apply {
-            putString(SCREEN_CLASS, className)
-            putString(SCREEN_NAME, screenName)
+    private fun basicBundle(barcodeItem: BarcodeItem): Bundle = Bundle().apply {
+        putString(ITEM_NAME, barcodeItem.title)
+        putString(CONTENT_TYPE, barcodeItem.barcodeType.getBarcodeTypeName())
+    }
+
+    fun copy(barcodeItem: BarcodeItem) {
+        val bundle = basicBundle(barcodeItem)
+        Firebase.analytics.logEvent(EVENT_COPY, bundle)
+    }
+
+    fun delete(barcodeItem: BarcodeItem) {
+        val bundle = basicBundle(barcodeItem)
+        Firebase.analytics.logEvent(EVENT_DELETE, bundle)
+    }
+
+    fun favorite(barcodeItem: BarcodeItem, isFavorite: Boolean) {
+        val bundle = basicBundle(barcodeItem)
+        val paramValue = if(isFavorite) FAVORITE else UNFAVORITE
+
+        bundle.apply {
+            putString(VALUE, paramValue)
         }
-        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+        Firebase.analytics.logEvent(EVENT_FAVORITE, bundle)
     }
 
-    fun share(barcodeItem: BarcodeItem) {
+    fun unfavorite(barcodeItem: BarcodeItem) {
+        val bundle = basicBundle(barcodeItem)
+        Firebase.analytics.logEvent(EVENT_UNFAVORITE, bundle)
+    }
+
+    fun scan(barcodeItem: BarcodeItem) {
+        val bundle = basicBundle(barcodeItem)
+        Firebase.analytics.logEvent(EVENT_SCAN, bundle)
+    }
+
+    fun sort(@SortMode sortMode: String) {
         val bundle = Bundle().apply {
-            putString(ITEM_NAME, barcodeItem.title)
-            putString(CONTENT_TYPE, barcodeItem.barcodeType.getBarcodeTypeName())
+            putString(VALUE, sortMode)
         }
-        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
+
+        Firebase.analytics.logEvent(EVENT_SORT, bundle)
     }
 
-    fun tutorialBegin() {
-        Firebase.analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, null)
-    }
+    private var zoomValue = 0f
+    fun zoom(@FloatRange(from = 0.0, to = 1.0) linearZoom: Float) {
+        val zoomType = if (linearZoom > zoomValue) ZOOM_IN else ZOOM_OUT
+        zoomValue = linearZoom
 
-    fun tutorialComplete() {
-        Firebase.analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
+        val bundle = Bundle().apply {
+            putString(VALUE, zoomType)
+        }
+
+        Firebase.analytics.logEvent(EVENT_ZOOM, bundle)
     }
 
     fun search(term: String) {
@@ -49,14 +98,35 @@ class Tracker {
         }
     }
 
-    fun selectContent(barcodeItem: BarcodeItem){
+    fun selectContent(barcodeItem: BarcodeItem) {
         val bundle = Bundle().apply {
             putString(ITEM_NAME, barcodeItem.title)
             putString(CONTENT_TYPE, barcodeItem.barcodeType.getBarcodeTypeName())
         }
         Firebase.analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
-
     }
+
+    fun share(barcodeItem: BarcodeItem) {
+        val bundle = basicBundle(barcodeItem)
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
+    }
+
+    fun trackScreen(className: String, @ScreenName screenName: String) {
+        val bundle = Bundle().apply {
+            putString(SCREEN_CLASS, className)
+            putString(SCREEN_NAME, screenName)
+        }
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+    }
+
+    fun tutorialBegin() {
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, null)
+    }
+
+    fun tutorialComplete() {
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
+    }
+
 }
 
 const val SCREEN_APP_INTRO = "AppIntro"
