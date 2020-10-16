@@ -46,4 +46,11 @@
             android:value="false" />
     </application>
 
+    <queries>
+        <intent>
+            <action android:name=
+                "android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
+
 </manifest>
