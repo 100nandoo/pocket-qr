@@ -21,7 +21,7 @@ object Versions {
     val kotlin = "1.4.10"
     val coroutinePlayServices = "1.3.9"
     val coroutineGuava = "1.3.9"
-    val gradle = "4.0.1"
+    val gradle = "4.1.0"
     val gms = "4.3.3"
     val crashlyticsGradle = "2.3.0"
     val perfPlugin = "1.3.1"
@@ -42,10 +42,6 @@ object Versions {
 
     object Firebase {
         val ads = "19.4.0"
-        val core = "17.5.0"
-        val crashlytics = "17.2.1"
-        val indexing = "19.1.0"
-        val performance = "19.0.8"
         val qrCode = "16.0.3"
     }
 
@@ -53,7 +49,7 @@ object Versions {
 
     //    val assent = "3.0.0-RC4"
     val coil = "1.0.0-rc3"
-    val fastAdapter = "5.2.3"
+    val fastAdapter = "5.2.4"
 
     val khronos = "0.9.0"
     val koin = "2.1.6"
@@ -74,7 +70,7 @@ object Versions {
     val junitExt = "1.1.1"
 
     // Debug
-    val leakCanary = "2.4"
+    val leakCanary = "2.5"
 }
 
 object Libraries {
@@ -148,12 +144,12 @@ object AndroidLibraries {
 }
 
 object FirebaseLibraries {
+    val bom = "com.google.firebase:firebase-bom:25.12.0"
     val ads = "com.google.android.gms:play-services-ads:${Versions.Firebase.ads}"
-    val analytics = "com.google.firebase:firebase-analytics-ktx:${Versions.Firebase.core}"
-    val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
-    val crashlytics = "com.google.firebase:firebase-crashlytics:${Versions.Firebase.crashlytics}"
-    val indexing = "com.google.firebase:firebase-appindexing:${Versions.Firebase.indexing}"
-    val performance = "com.google.firebase:firebase-perf:${Versions.Firebase.performance}"
+    val analytics = "com.google.firebase:firebase-analytics-ktx"
+    val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    val indexing = "com.google.firebase:firebase-appindexing"
+    val performance = "com.google.firebase:firebase-perf-ktx"
     val qrCode = "com.google.mlkit:barcode-scanning:${Versions.Firebase.qrCode}"
 }
 

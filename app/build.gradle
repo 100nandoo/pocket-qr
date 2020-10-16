@@ -104,9 +104,9 @@ dependencies {
     /**
      * ==================== Firebase ====================
      */
+    implementation platform(FirebaseLibraries.bom)
     implementation FirebaseLibraries.ads
     implementation FirebaseLibraries.analytics
-    implementation FirebaseLibraries.core
     implementation FirebaseLibraries.crashlytics
     implementation FirebaseLibraries.indexing
     implementation FirebaseLibraries.performance
