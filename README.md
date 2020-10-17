@@ -9,6 +9,8 @@ Pocket QR app
 ## Todo
 
 - [ ] Full screen QR Code + Download
+- [ ] Integrate [refreshVersion](https://github.com/jmfayard/refreshVersions)
+- [ ] Create core module
 - [ ] Widget
 - [ ] Implement new design
 - [ ] In app review
