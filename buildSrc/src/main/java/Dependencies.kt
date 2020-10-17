@@ -29,8 +29,8 @@ object Versions {
     object Android {
         val appCompat = "1.2.0"
         val browser = "1.2.0"
-        val cameraX = "1.0.0-beta09"
-        val cameraView = "1.0.0-alpha16"
+        val cameraX = "1.0.0-beta11"
+        val cameraView = "1.0.0-alpha18"
         val constraintLayout = "2.0.0"
         val core = "1.3.1"
         val lifecycle = "2.2.0"
