@@ -6,6 +6,7 @@ import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import com.hapley.preview.ui.PreviewItem
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
@@ -37,6 +38,11 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         return Transformations.map(barcodeRepository.getByIdLiveData(id)) { entity ->
             Barcode(entity)
         }
+    }
+
+    fun getPreviewById(id: Int): PreviewItem {
+        val barcodeEntity = barcodeRepository.getById(id)
+        return PreviewItem(barcodeEntity.label, barcodeEntity.rawValue)
     }
 
     fun getLastId(): Int {

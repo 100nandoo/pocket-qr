@@ -19,7 +19,6 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
-import com.hapley.preview.ui.PreviewFragmentArgs
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import kotlinx.coroutines.delay

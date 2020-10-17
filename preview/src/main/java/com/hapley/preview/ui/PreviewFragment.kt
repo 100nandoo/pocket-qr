@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PreviewFragment : Fragment() {
 
-//    private val args by navArgs<PreviewFragmentArgs>()
+    private val args by navArgs<PreviewFragmentArgs>()
 
     private val viewModel: PreviewViewModel by viewModel()
 
@@ -26,7 +26,7 @@ class PreviewFragment : Fragment() {
     }
 
     private fun initArgs() {
-//        viewModel.id = args.BARCODEID
+        viewModel.id = args.BARCODEID
     }
 
 }
