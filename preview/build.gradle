@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.library'
+
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+apply from: '../android_commons.gradle'
+
+android {}
+
+dependencies {
+
+    implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.coroutineGuava
+    implementation KotlinLibraries.coroutinePlayServices
+
+    /**
+     * ==================== Android ====================
+     */
+    implementation AndroidLibraries.appCompat
+
+    implementation AndroidLibraries.core
+    implementation AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.material
+
+    implementation AndroidLibraries.lifecycleExt
+    implementation AndroidLibraries.viewModel
+
+    implementation AndroidLibraries.navigationFrag
+    implementation AndroidLibraries.navigation
+
+    /**
+     * ================= 3rd Party Libs ==================
+     */
+
+    // Coil Image Loader
+    implementation Libraries.coil
+
+    // Koin
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+
+    /**
+     * ===================== Tests =======================
+     */
+    androidTestImplementation TestLibraries.espresso
+    testImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.junitExt
+}

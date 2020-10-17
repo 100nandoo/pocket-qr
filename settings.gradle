@@ -1,2 +1,2 @@
+include ':preview'
 include ':app'
-rootProject.name = "Pocket-QR"

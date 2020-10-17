@@ -15,16 +15,8 @@ apply from: '../android_commons.gradle'
 def keystorePropertiesFile = file("../../signing/keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-android {
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-        }
-    }
 
+android {
     defaultConfig {
         applicationId Misc.appId
 
@@ -37,6 +29,15 @@ android {
                         "room.incremental"     : "true",
                         "room.expandProjection": "true"]
             }
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
 
@@ -69,6 +70,8 @@ android {
 }
 
 dependencies {
+    implementation project(Modules.preview)
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation KotlinLibraries.kotlin
     implementation KotlinLibraries.coroutineGuava

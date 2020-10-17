@@ -2,6 +2,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion Misc.compileSdk
     buildToolsVersion Misc.buildTools
@@ -25,5 +26,13 @@ android {
     }
 
     androidExtensions { experimental = true }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+
+        release {}
+    }
 
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
@@ -18,6 +19,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.preview.ui.PreviewFragmentArgs
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import kotlinx.coroutines.delay
@@ -107,6 +109,10 @@ class BarcodeDetailFragment : Fragment() {
                 e.printStackTrace()
                 tracker.recordException("Convert rawValue into QR Code Bitmap", e)
             }
+
+            iv_qrcode.setOnClickListener {
+                navigateToPreview(viewModel.id)
+            }
         })
     }
 
@@ -129,4 +135,7 @@ class BarcodeDetailFragment : Fragment() {
         viewModel.showTutorial = false
     }
 
+    private fun navigateToPreview(id: Int){
+        findNavController().navigate(BarcodeDetailFragmentDirections.actionToPreviewFragment(id))
+    }
 }

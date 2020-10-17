@@ -12,6 +12,11 @@ object ProductFlavors {
     val proSuffix = "-pro"
 }
 
+object Modules {
+    val app = ":app"
+    val preview = ":preview"
+}
+
 object Releases {
     val versionCode = 9
     val versionName = "0.8.4"

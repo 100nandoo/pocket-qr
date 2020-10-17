@@ -13,6 +13,7 @@ import com.hapley.pocketqr.ui.settings.Mapper
 import com.hapley.pocketqr.ui.settings.SettingsFragment
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.debugger.Flipper
+import com.hapley.preview.di.previewModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -26,10 +27,11 @@ class PocketQrApp : Application() {
         startKoin {
             androidContext(this@PocketQrApp)
 
+            val mainModules = listOf(appModule, barcodeModule, previewModule)
             if (BuildUtil.isRelease) {
-                modules(listOf(appModule, barcodeModule))
+                modules(mainModules)
             } else {
-                modules(listOf(appModule, barcodeModule, fakeModule))
+                modules(mainModules + fakeModule)
                 val mockDataGenerator: MockDataGenerator by inject()
                 mockDataGenerator.inject()
             }
