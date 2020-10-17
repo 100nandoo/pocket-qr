@@ -13,9 +13,8 @@
         <deepLink app:uri="hapley://preview/{BARCODE_ID}" />
 
         <argument
-            android:name="BARCODE_ID"
-            android:defaultValue="-1"
-            app:argType="integer" />
+            android:name="PREVIEW_ITEM"
+            app:argType="com.hapley.preview.ui.PreviewItem" />
 
     </fragment>
 

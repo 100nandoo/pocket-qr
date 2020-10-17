@@ -45,6 +45,12 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         return PreviewItem(barcodeEntity.label, barcodeEntity.rawValue)
     }
 
+    fun getPreviewLiveDataById(id: Int): LiveData<PreviewItem> {
+        return Transformations.map(barcodeRepository.getByIdLiveData(id)) { entity ->
+            PreviewItem(entity.label, entity.rawValue)
+        }
+    }
+
     fun getLastId(): Int {
         return barcodeRepository.getLastId()
     }
@@ -66,11 +72,11 @@ class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepositor
         barcodeRepository.incrementClickCount(id)
     }
 
-    suspend fun updateBarcodes(vararg barcode: Barcode){
+    suspend fun updateBarcodes(vararg barcode: Barcode) {
         barcodeRepository.updateBarcodes(*barcode.map { it.toEntity }.toTypedArray())
     }
 
-    suspend fun deleteBarcode(barcodeItem: BarcodeItem){
+    suspend fun deleteBarcode(barcodeItem: BarcodeItem) {
         barcodeRepository.deleteBarcode(barcodeItem.id.toInt())
         tracker.delete(barcodeItem)
     }

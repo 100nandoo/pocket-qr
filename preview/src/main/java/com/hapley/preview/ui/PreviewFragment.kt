@@ -5,8 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
+import coil.load
+import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
+import com.github.sumimakito.awesomeqr.option.RenderOption
+import com.github.sumimakito.awesomeqr.option.color.Color
 import com.hapley.preview.R
+import kotlinx.android.synthetic.main.preview_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PreviewFragment : Fragment() {
@@ -23,10 +29,33 @@ class PreviewFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         initArgs()
+        initUi()
     }
 
     private fun initArgs() {
-        viewModel.id = args.BARCODEID
+        viewModel.previewItem = args.PREVIEWITEM
     }
 
+    private fun initUi() {
+        try {
+            val renderOption = RenderOption().apply {
+                content = viewModel.previewItem.rawValue
+                borderWidth = 16
+                patternScale = 1f
+                color = Color(
+                    auto = false,
+                    background = ContextCompat.getColor(requireContext(), R.color.material_color_white),
+                    light = ContextCompat.getColor(requireContext(), R.color.material_color_white),
+                    dark = ContextCompat.getColor(requireContext(), R.color.black_900)
+                )
+            }
+            val result = AwesomeQrRenderer.render(renderOption)
+
+            imageView.load(result.bitmap)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+//            tracker.recordException("Convert rawValue into QR Code Bitmap", e)
+        }
+    }
 }

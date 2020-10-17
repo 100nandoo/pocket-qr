@@ -19,6 +19,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.preview.ui.PreviewItem
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import kotlinx.coroutines.delay
@@ -109,10 +110,14 @@ class BarcodeDetailFragment : Fragment() {
                 tracker.recordException("Convert rawValue into QR Code Bitmap", e)
             }
 
-            iv_qrcode.setOnClickListener {
-                navigateToPreview(viewModel.id)
-            }
+
         })
+
+        viewModel.previewLiveData.observe(viewLifecycleOwner) { previewItem ->
+            iv_qrcode.setOnClickListener {
+                navigateToPreview(previewItem)
+            }
+        }
     }
 
     private fun editLabelDialog() {
@@ -134,7 +139,7 @@ class BarcodeDetailFragment : Fragment() {
         viewModel.showTutorial = false
     }
 
-    private fun navigateToPreview(id: Int){
-        findNavController().navigate(BarcodeDetailFragmentDirections.actionToPreviewFragment(id))
+    private fun navigateToPreview(previewItem: PreviewItem) {
+        findNavController().navigate(BarcodeDetailFragmentDirections.actionToPreviewFragment(previewItem))
     }
 }

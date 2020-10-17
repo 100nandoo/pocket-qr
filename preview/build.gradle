@@ -44,6 +44,13 @@ dependencies {
     implementation Libraries.koin
     implementation Libraries.koinViewModel
 
+    // Material Value
+    implementation Libraries.materialValues
+
+    // QR Generator
+    implementation Libraries.awesomeQr
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     /**
      * ===================== Tests =======================
      */

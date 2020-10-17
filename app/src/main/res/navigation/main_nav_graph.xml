@@ -58,6 +58,8 @@
 
     </dialog>
 
+    <include app:graph="@navigation/preview_nav_graph" />
+
     <fragment
         android:id="@+id/barcode_detail_fragment"
         android:name="com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment"
@@ -72,16 +74,16 @@
 
         <action
             android:id="@+id/action_to_previewFragment"
-            app:destination="@id/preview_fragment">
+            app:destination="@id/preview_nav_graph">
 
             <argument
-                android:name="BARCODE_ID"
-                android:defaultValue="-1"
-                app:argType="integer" />
+                android:name="PREVIEW_ITEM"
+                app:argType="com.hapley.preview.ui.PreviewItem" />
 
         </action>
 
     </fragment>
+
 
     <fragment
         android:id="@+id/settings_fragment"

@@ -1,14 +1,12 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
 import androidx.core.content.edit
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hapley.pocketqr.common.AppPreferences
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.SettingsFragment
+import com.hapley.preview.ui.PreviewItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -27,8 +25,12 @@ class BarcodeDetailViewModel(val barcodeUseCase: BarcodeUseCase, private val app
         Transformations.map(barcodeUseCase.getByIdLiveData(id)) { barcode -> BarcodeItem(barcode) }
     }
 
+    val previewLiveData: LiveData<PreviewItem> by lazy {
+        barcodeUseCase.getPreviewLiveDataById(id)
+    }
+
     fun submit(label: String) {
-        if(id > -1){
+        if (id > -1) {
             viewModelScope.launch(Dispatchers.IO) {
                 barcodeLiveData.value?.title = label
                 barcodeUseCase.updateLabel(label, id)
