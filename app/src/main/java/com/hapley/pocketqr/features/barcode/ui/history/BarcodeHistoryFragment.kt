@@ -273,7 +273,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         selectExtension.apply {
             isSelectable = true
             multiSelect = false
-            selectOnLongClick = true
+            selectOnLongClick = false
         }
 
         fastAdapter.onPreClickListener = { _, _, item, _ ->
@@ -318,12 +318,12 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             }
         })
 
-        fastAdapter.onPreLongClickListener = { view, _, item, position ->
-            view.id
-            viewModel.selectedItemWithPosition = Triple(view, item, position)
-            actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
-            actionMode != null
-        }
+//        fastAdapter.onPreLongClickListener = { view, _, item, position ->
+//            view.id
+//            viewModel.selectedItemWithPosition = Triple(view, item, position)
+//            actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
+//            actionMode != null
+//        }
 
         val touchCallback = SimpleSwipeCallback(this, AppCompatResources.getDrawable(requireContext(), R.drawable.ic_barcode_delete))
             .withSensitivity(6f)

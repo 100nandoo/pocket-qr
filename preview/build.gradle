@@ -49,7 +49,6 @@ dependencies {
 
     // QR Generator
     implementation Libraries.awesomeQr
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     /**
      * ===================== Tests =======================
