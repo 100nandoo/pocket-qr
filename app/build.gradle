@@ -54,13 +54,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-    flavorDimensions ProductFlavors.dimensions
-    productFlavors {
-        free {
-            dimension ProductFlavors.dimensions
-        }
-    }
 }
 
 dependencies {

@@ -7,6 +7,4 @@ object BuildUtil {
     const val isRelease: Boolean = BuildConfig.BUILD_TYPE == "release"
     const val versionName = BuildConfig.VERSION_NAME
 
-    const val isPro = BuildConfig.FLAVOR == "pro"
-
 }

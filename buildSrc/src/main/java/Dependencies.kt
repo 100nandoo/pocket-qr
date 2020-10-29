@@ -6,10 +6,6 @@ object Misc {
     val buildTools = "30.0.1"
 }
 
-object ProductFlavors {
-    val dimensions = "default"
-}
-
 object Modules {
     val app = ":app"
     val preview = ":preview"
