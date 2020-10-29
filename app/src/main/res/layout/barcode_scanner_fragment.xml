@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/qr_code_parent"
@@ -17,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
-            ads:layout_constraintHeight_percent="0.85"
+            app:layout_constraintHeight_percent="0.85"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,9 +29,9 @@
             android:layout_marginTop="@dimen/material_baseline_grid_2x"
             android:text="@string/zoom_slider"
             android:textColor="@color/material_color_white"
-            ads:layout_constraintBottom_toTopOf="@id/slider"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/slider"
@@ -41,18 +40,8 @@
             android:layout_margin="@dimen/material_baseline_grid_2x"
             android:valueFrom="0.0"
             android:valueTo="1.0"
-            ads:layout_constraintBottom_toBottomOf="@id/previewView"
+            app:layout_constraintBottom_toBottomOf="@id/previewView"
             app:labelBehavior="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <FrameLayout
-            android:id="@+id/adCointainerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintHeight_min="50dp"
-            ads:layout_constraintTop_toBottomOf="@id/previewView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

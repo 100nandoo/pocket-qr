@@ -55,7 +55,6 @@ open class BarcodeItem(
     class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view), IDrawerSwipeableViewHolder {
 
         override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-//            itemView.card_history_item.transitionName = itemView.context.getString(R.string.barcode_history_transition_name, item.id)
             itemView.iv_icon.setImageResource(item.icon)
             itemView.tv_label.text = item.title
             itemView.tv_created_at.text = getRelativeTimeSpanString(item.created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)

@@ -8,8 +8,6 @@ object Misc {
 
 object ProductFlavors {
     val dimensions = "default"
-    val freeSuffix = "-free"
-    val proSuffix = "-pro"
 }
 
 object Modules {
@@ -46,7 +44,7 @@ object Versions {
     }
 
     object Firebase {
-        val ads = "19.4.0"
+        val bom = "26.0.0"
         val qrCode = "16.0.3"
     }
 
@@ -149,8 +147,7 @@ object AndroidLibraries {
 }
 
 object FirebaseLibraries {
-    val bom = "com.google.firebase:firebase-bom:25.12.0"
-    val ads = "com.google.android.gms:play-services-ads:${Versions.Firebase.ads}"
+    val bom = "com.google.firebase:firebase-bom:${Versions.Firebase.bom}"
     val analytics = "com.google.firebase:firebase-analytics-ktx"
     val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
     val indexing = "com.google.firebase:firebase-appindexing"

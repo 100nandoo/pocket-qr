@@ -1,17 +1,15 @@
 package com.hapley.pocketqr.features.barcode.ui.scanner
 
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.*
+import android.view.LayoutInflater
+import android.view.ScaleGestureDetector
+import android.view.View
+import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
 import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
@@ -22,7 +20,6 @@ import com.hapley.pocketqr.common.SCREEN_SCANNER
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.main.MainViewModel
-import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
 import kotlinx.coroutines.delay
@@ -75,7 +72,6 @@ class BarcodeScannerFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setupCameraAndQrCodeDetector()
-        initAds()
     }
 
     private fun setupCameraAndQrCodeDetector() {
@@ -116,7 +112,7 @@ class BarcodeScannerFragment : Fragment() {
             cameraControl?.setLinearZoom(value)
         }
 
-        slider.addOnSliderTouchListener(object: Slider.OnSliderTouchListener {
+        slider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) = Unit
 
             override fun onStopTrackingTouch(slider: Slider) {
@@ -175,35 +171,4 @@ class BarcodeScannerFragment : Fragment() {
         }
     }
 
-    private val adSize: AdSize
-        get() {
-            val display = requireActivity().windowManager.defaultDisplay
-            val outMetrics = DisplayMetrics()
-            display.getMetrics(outMetrics)
-
-            val density = outMetrics.density
-
-            var adWidthPixels = adCointainerView.width.toFloat()
-            if (adWidthPixels == 0f) {
-                adWidthPixels = outMetrics.widthPixels.toFloat()
-            }
-
-            val adWidth = (adWidthPixels / density).toInt()
-            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(requireContext(), adWidth)
-        }
-
-    private fun initAds() {
-        val shouldShowAds = BuildUtil.isPro.not()
-        adCointainerView.isVisible = shouldShowAds
-        if (shouldShowAds) {
-            val adView = AdView(requireContext()).apply {
-                adUnitId = getString(R.string.ads_ids)
-                adSize = this@BarcodeScannerFragment.adSize
-            }
-            adCointainerView.addView(adView)
-
-            val request = AdRequest.Builder().build()
-            adView.loadAd(request)
-        }
-    }
 }

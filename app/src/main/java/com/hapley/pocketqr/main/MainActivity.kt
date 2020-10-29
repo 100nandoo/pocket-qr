@@ -17,12 +17,10 @@ import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
-import com.google.android.gms.ads.MobileAds
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.features.barcode.domain.URL
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.features.barcode.ui.toShortcutInfo
-import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
@@ -61,15 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         initToolbar()
 
-        initAds()
-
         subscribeUi()
-    }
-
-    private fun initAds() {
-        if (BuildUtil.isPro.not()) {
-            MobileAds.initialize(this)
-        }
     }
 
     private fun initToolbar() {
