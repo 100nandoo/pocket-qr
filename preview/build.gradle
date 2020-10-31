@@ -4,13 +4,17 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    
-    id 'androidx.navigation.safeargs.kotlin'
 }
 
 apply from: '../android_commons.gradle'
 
-android {}
+android {
+    buildTypes {
+        debug {}
+
+        release {}
+    }
+}
 
 dependencies {
 

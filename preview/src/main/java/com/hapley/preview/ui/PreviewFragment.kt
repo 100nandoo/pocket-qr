@@ -1,12 +1,12 @@
 package com.hapley.preview.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.navArgs
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
 import com.github.sumimakito.awesomeqr.option.RenderOption
@@ -17,7 +17,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PreviewFragment : Fragment() {
 
-    private val args by navArgs<PreviewFragmentArgs>()
+    companion object {
+        const val PREVIEW_ITEM = "previewItem"
+    }
 
     private val viewModel: PreviewViewModel by viewModel()
 
@@ -33,7 +35,12 @@ class PreviewFragment : Fragment() {
     }
 
     private fun initArgs() {
-        viewModel.previewItem = args.PREVIEWITEM
+        val previewItem = arguments?.getParcelable<PreviewItem>(PREVIEW_ITEM)
+        if(previewItem != null){
+            viewModel.previewItem = previewItem
+        } else {
+            findNavController().popBackStack()
+        }
     }
 
     private fun initUi() {

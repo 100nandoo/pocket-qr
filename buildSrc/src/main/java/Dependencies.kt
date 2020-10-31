@@ -34,7 +34,7 @@ object Versions {
         val core = "1.3.1"
         val lifecycle = "2.2.0"
         val material = "1.2.0"
-        val navigation = "2.3.0"
+        val navigation = "2.3.1"
         val preference = "1.1.1"
         val room = "2.2.5"
     }

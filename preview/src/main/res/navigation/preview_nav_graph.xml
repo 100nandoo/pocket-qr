@@ -10,11 +10,8 @@
         android:name="com.hapley.preview.ui.PreviewFragment"
         android:label="@string/preview"
         tools:layout="@layout/preview_fragment">
-        <deepLink app:uri="hapley://preview/{BARCODE_ID}" />
 
-        <argument
-            android:name="PREVIEW_ITEM"
-            app:argType="com.hapley.preview.ui.PreviewItem" />
+        <deepLink app:uri="hapley://preview/{BARCODE_ID}" />
 
     </fragment>
 

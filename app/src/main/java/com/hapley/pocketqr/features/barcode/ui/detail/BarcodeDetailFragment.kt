@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.preview.ui.PreviewFragment
 import com.hapley.preview.ui.PreviewItem
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
@@ -140,6 +142,6 @@ class BarcodeDetailFragment : Fragment() {
     }
 
     private fun navigateToPreview(previewItem: PreviewItem) {
-        findNavController().navigate(BarcodeDetailFragmentDirections.actionToPreviewFragment(previewItem))
+        findNavController().navigate(R.id.preview_nav_graph, bundleOf(PreviewFragment.PREVIEW_ITEM to previewItem))
     }
 }

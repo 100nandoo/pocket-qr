@@ -57,9 +57,10 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation project(Modules.preview)
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation KotlinLibraries.kotlin
     implementation KotlinLibraries.coroutineGuava
     implementation KotlinLibraries.coroutinePlayServices

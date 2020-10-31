@@ -74,16 +74,9 @@
 
         <action
             android:id="@+id/action_to_previewFragment"
-            app:destination="@id/preview_nav_graph">
-
-            <argument
-                android:name="PREVIEW_ITEM"
-                app:argType="com.hapley.preview.ui.PreviewItem" />
-
-        </action>
+            app:destination="@id/preview_nav_graph" />
 
     </fragment>
-
 
     <fragment
         android:id="@+id/settings_fragment"
