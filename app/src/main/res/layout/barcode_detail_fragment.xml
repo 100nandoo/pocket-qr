@@ -154,9 +154,10 @@
 
         <ImageView
             android:id="@+id/iv_qrcode"
-            android:layout_width="@dimen/material_increment_2x"
-            android:layout_height="@dimen/material_increment_2x"
-            android:layout_marginVertical="@dimen/material_baseline_grid_2x"
+            android:layout_width="@dimen/material_increment_4x"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/material_baseline_grid_5x"
+            app:layout_constraintDimensionRatio="1:1"
             android:padding="@dimen/material_baseline_grid_1x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,7 @@
         android:shortcutShortLabel="@string/history">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.hapley.pocketqr.pro"
+            android:targetPackage="com.hapley.pocketqr"
             android:data="hapley://history"
             android:targetClass="com.hapley.pocketqr.main.MainActivity" />
     </shortcut>

@@ -14,6 +14,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
 import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
@@ -205,7 +206,6 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         inflater.inflate(R.menu.menu_barcode_history, menu)
 
         val searchView = menu.findItem(R.id.item_search).actionView as SearchView
-
         searchView.setOnQueryTextListener(queryTextListener)
 
         super.onCreateOptionsMenu(menu, inflater)

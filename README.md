@@ -8,7 +8,6 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Full screen QR Code + Download
 - [ ] Integrate [refreshVersion](https://github.com/jmfayard/refreshVersions)
 - [ ] Create core module
 - [ ] Widget
@@ -18,10 +17,7 @@ Pocket QR app
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
 - [ ] Monitor specific code (performance)
-- [ ] Add filter functionality
 - [ ] View Binding
-- [ ] Multi module support
-- [ ] Pick Image QR Code
 - [ ] Donation
 - [x] Support multi QR Code format (wifi, etc)
 - [x] Room Database for QR Code
@@ -60,3 +56,6 @@ Pocket QR app
 - [x] Monitor custom event (analytics)
 - [x] Add share app url button
 - [x] Theme
+- [x] Multi module support
+- [x] Add filter functionality
+- [x] Full screen QR Code

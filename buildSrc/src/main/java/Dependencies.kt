@@ -12,8 +12,8 @@ object Modules {
 }
 
 object Releases {
-    val versionCode = 11
-    val versionName = "0.8.6"
+    val versionCode = 12
+    val versionName = "0.8.7"
 }
 
 object Versions {
@@ -30,8 +30,8 @@ object Versions {
         val browser = "1.2.0"
         val cameraX = "1.0.0-beta11"
         val cameraView = "1.0.0-alpha18"
-        val constraintLayout = "2.0.0"
-        val core = "1.3.1"
+        val constraintLayout = "2.0.4"
+        val core = "1.3.2"
         val lifecycle = "2.2.0"
         val material = "1.2.0"
         val navigation = "2.3.1"
