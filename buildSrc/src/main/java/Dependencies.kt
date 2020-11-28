@@ -28,10 +28,10 @@ object Versions {
     object Android {
         val appCompat = "1.2.0"
         val browser = "1.2.0"
-        val cameraX = "1.0.0-beta12"
-        val cameraView = "1.0.0-alpha19"
-        val constraintLayout = "2.0.4"
-        val core = "1.3.2"
+        val cameraX = "1.0.0-beta11"
+        val cameraView = "1.0.0-alpha18"
+        val constraintLayout = "2.0.0"
+        val core = "1.3.1"
         val lifecycle = "2.2.0"
         val material = "1.2.0"
         val navigation = "2.3.1"
@@ -40,22 +40,22 @@ object Versions {
     }
 
     object Firebase {
-        val bom = "26.1.0"
+        val bom = "26.0.0"
         val qrCode = "16.0.3"
     }
 
     val appIntro = "6.0.0"
 
     //    val assent = "3.0.0-RC4"
-    val coil = "1.1.0"
-    val fastAdapter = "5.3.1"
+    val coil = "1.0.0-rc3"
+    val fastAdapter = "5.2.4"
 
     val khronos = "0.9.0"
-    val koin = "2.2.1"
+    val koin = "2.1.6"
 
     val koptional = "1.7.0"
 
-    val lottie = "3.5.0"
+    val lottie = "3.4.2"
 
     val materialValues = "1.1.1"
 
