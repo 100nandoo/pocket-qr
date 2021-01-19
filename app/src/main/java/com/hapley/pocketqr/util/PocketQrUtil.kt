@@ -7,10 +7,7 @@ import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.browser.customtabs.CustomTabsClient
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.browser.customtabs.CustomTabsServiceConnection
-import androidx.browser.customtabs.CustomTabsSession
+import androidx.browser.customtabs.*
 import androidx.camera.core.ImageProxy
 import androidx.core.content.ContextCompat
 import com.gojuno.koptional.Optional
@@ -92,7 +89,7 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
         }
     }
 
-    fun actionShare(context: Context, text: String){
+    fun actionShare(context: Context, text: String) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, text)
@@ -111,8 +108,13 @@ class PocketQrUtil(private val context: Context, private val clipboardManager: C
     fun launchCustomTab(context: Context, session: CustomTabsSession, uri: Uri) {
         session.mayLaunchUrl(uri, null, null)
 
-        CustomTabsIntent.Builder()
+        val customTabColorSchemeParams = CustomTabColorSchemeParams
+            .Builder()
             .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            .build()
+
+        CustomTabsIntent.Builder()
+            .setDefaultColorSchemeParams(customTabColorSchemeParams)
             .setSession(session)
             .setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
             .setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right)

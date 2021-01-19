@@ -384,10 +384,6 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         }
     }
 
-    private fun initShowcase(view: View) {
-        viewModel.showTutorial = false
-    }
-
     override fun itemSwiped(position: Int, direction: Int) {
         val swipedItem = fastAdapter.getItem(position) ?: return
         if (direction == ItemTouchHelper.LEFT) {

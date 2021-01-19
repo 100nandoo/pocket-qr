@@ -134,11 +134,6 @@ class BarcodeDetailFragment : Fragment() {
                 viewModel.submit(editText.text.toString())
             }
             .show()
-
-    }
-
-    private fun initShowcase(view: View) {
-        viewModel.showTutorial = false
     }
 
     private fun navigateToPreview(previewItem: PreviewItem) {

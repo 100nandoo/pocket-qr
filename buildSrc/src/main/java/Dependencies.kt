@@ -17,45 +17,45 @@ object Releases {
 }
 
 object Versions {
-    val kotlin = "1.4.10"
-    val coroutinePlayServices = "1.3.9"
-    val coroutineGuava = "1.3.9"
-    val gradle = "4.1.0"
+    val kotlin = "1.4.21"
+    val coroutinePlayServices = "1.4.2"
+    val coroutineGuava = "1.4.2"
+    val gradle = "4.1.1"
     val gms = "4.3.3"
     val crashlyticsGradle = "2.3.0"
     val perfPlugin = "1.3.1"
 
     object Android {
         val appCompat = "1.2.0"
-        val browser = "1.2.0"
-        val cameraX = "1.0.0-beta11"
+        val browser = "1.3.0"
+        val cameraX = "1.0.0-beta12"
         val cameraView = "1.0.0-alpha18"
         val constraintLayout = "2.0.4"
         val core = "1.3.2"
         val lifecycle = "2.2.0"
         val material = "1.2.0"
-        val navigation = "2.3.1"
+        val navigation = "2.3.2"
         val preference = "1.1.1"
-        val room = "2.2.5"
+        val room = "2.2.6"
     }
 
     object Firebase {
-        val bom = "26.0.0"
+        val bom = "26.3.0"
         val qrCode = "16.0.3"
     }
 
     val appIntro = "6.0.0"
 
     //    val assent = "3.0.0-RC4"
-    val coil = "1.0.0-rc3"
-    val fastAdapter = "5.2.4"
+    val coil = "1.1.1"
+    val fastAdapter = "5.3.2"
 
     val khronos = "0.9.0"
     val koin = "2.1.6"
 
     val koptional = "1.7.0"
 
-    val lottie = "3.4.2"
+    val lottie = "3.5.0"
 
     val materialValues = "1.1.1"
 
