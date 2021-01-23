@@ -8,6 +8,7 @@ buildscript {
 
     dependencies {
         classpath ProjectLibraries.gradle
+        classpath ProjectLibraries.hilt
         classpath ProjectLibraries.kotlinGradle
         classpath ProjectLibraries.navigationSafeArgs
         classpath ProjectLibraries.gms

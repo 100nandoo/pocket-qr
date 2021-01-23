@@ -9,6 +9,8 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id 'com.google.firebase.firebase-perf'
+
+    id 'dagger.hilt.android.plugin'
 }
 apply from: '../android_commons.gradle'
 
@@ -30,6 +32,10 @@ android {
                         "room.expandProjection": "true"]
             }
         }
+    }
+
+    kapt {
+        correctErrorTypes true
     }
 
     signingConfigs {
@@ -78,6 +84,10 @@ dependencies {
 
     implementation AndroidLibraries.core
     implementation AndroidLibraries.constraintLayout
+
+    implementation AndroidLibraries.hiltAndroid
+    implementation AndroidLibraries.hiltKapt
+
     implementation AndroidLibraries.material
 
     implementation AndroidLibraries.lifecycleExt

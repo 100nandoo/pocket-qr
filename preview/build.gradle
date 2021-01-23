@@ -4,16 +4,23 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: '../android_commons.gradle'
 
 android {
+    kapt {
+        correctErrorTypes true
+    }
+
     buildTypes {
         debug {}
 
         release {}
     }
+
 }
 
 dependencies {
@@ -29,6 +36,10 @@ dependencies {
 
     implementation AndroidLibraries.core
     implementation AndroidLibraries.constraintLayout
+
+    implementation AndroidLibraries.hiltAndroid
+    implementation AndroidLibraries.hiltKapt
+
     implementation AndroidLibraries.material
 
     implementation AndroidLibraries.lifecycleExt

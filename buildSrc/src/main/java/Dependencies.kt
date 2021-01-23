@@ -20,7 +20,7 @@ object Versions {
     val kotlin = "1.4.21"
     val coroutinePlayServices = "1.4.2"
     val coroutineGuava = "1.4.2"
-    val gradle = "4.1.1"
+    val gradle = "4.1.2"
     val gms = "4.3.3"
     val crashlyticsGradle = "2.3.0"
     val perfPlugin = "1.3.1"
@@ -32,6 +32,7 @@ object Versions {
         val cameraView = "1.0.0-alpha18"
         val constraintLayout = "2.0.4"
         val core = "1.3.2"
+        val hilt = "2.31.2-alpha"
         val lifecycle = "2.2.0"
         val material = "1.2.0"
         val navigation = "2.3.2"
@@ -127,6 +128,10 @@ object AndroidLibraries {
 
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayout}"
     val core = "androidx.core:core-ktx:${Versions.Android.core}"
+
+    val hiltAndroid = "com.google.dagger:hilt-android:${Versions.Android.hilt}"
+    val hiltKapt = "com.google.dagger:hilt-compiler:${Versions.Android.hilt}"
+
     val material = "com.google.android.material:material:${Versions.Android.material}"
 
     val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.Android.lifecycle}"
@@ -153,6 +158,7 @@ object FirebaseLibraries {
 
 object ProjectLibraries {
     val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
+    val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.Android.hilt}"
     val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Android.navigation}"
     val gms = "com.google.gms:google-services:${Versions.gms}"
