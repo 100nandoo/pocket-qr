@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.*
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.TransitionManager
 import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
@@ -35,22 +34,25 @@ import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
 import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.barcode_history_fragment.*
 import kotlinx.android.synthetic.main.barcode_history_item.view.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import javax.inject.Inject
 import kotlin.Comparator
 
+@AndroidEntryPoint
 class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback {
 
-    private val viewModel: BarcodeHistoryViewModel by viewModel()
+    private val viewModel: BarcodeHistoryViewModel by viewModels()
 
-    private val pocketQrUtil: PocketQrUtil by inject()
+    @Inject
+    lateinit var pocketQrUtil: PocketQrUtil
 
-    private val tracker: Tracker by inject()
+    @Inject
+    lateinit var tracker: Tracker
 
     private val queryTextListener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(s: String): Boolean {

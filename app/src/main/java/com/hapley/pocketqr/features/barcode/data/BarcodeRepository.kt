@@ -1,11 +1,12 @@
 package com.hapley.pocketqr.features.barcode.data
 
 import com.hapley.pocketqr.db.BarcodeDao
+import javax.inject.Inject
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
  */
-class BarcodeRepository(private val barcodeDao: BarcodeDao) {
+class BarcodeRepository @Inject constructor(private val barcodeDao: BarcodeDao) {
 
     fun getAllLiveData() = barcodeDao.getAllLiveData()
 

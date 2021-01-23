@@ -3,9 +3,12 @@ package com.hapley.pocketqr.main
 import androidx.lifecycle.*
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val barcodeUseCase: BarcodeUseCase): ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val barcodeUseCase: BarcodeUseCase): ViewModel() {
 
     val starredBarcodesLiveData = Transformations.map(barcodeUseCase.getStarredLiveData()) { barcodes -> barcodes.map { BarcodeItem(it) } }
 

@@ -2,8 +2,9 @@ package com.hapley.pocketqr.common
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import javax.inject.Inject
 
-class AppPreferences(val settings: SharedPreferences) {
+class AppPreferences @Inject constructor(val settings: SharedPreferences) {
 
     companion object {
         object KEY {

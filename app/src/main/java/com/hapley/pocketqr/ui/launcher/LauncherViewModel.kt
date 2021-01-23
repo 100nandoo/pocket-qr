@@ -4,8 +4,11 @@ import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import com.hapley.pocketqr.common.AppPreferences
 import com.hapley.pocketqr.ui.settings.SettingsFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LauncherViewModel(private val appPreferences: AppPreferences): ViewModel() {
+@HiltViewModel
+class LauncherViewModel @Inject constructor(private val appPreferences: AppPreferences): ViewModel() {
 
     var showTutorial: Boolean
         get() = appPreferences.settings.getBoolean(SettingsFragment.BARCODE_APP_INTRODUCTION, true)

@@ -4,6 +4,7 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.browser.customtabs.CustomTabsSession
@@ -22,11 +23,12 @@ import com.hapley.pocketqr.features.barcode.domain.URL
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.features.barcode.ui.toShortcutInfo
 import com.hapley.pocketqr.util.PocketQrUtil
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     init {
@@ -46,9 +48,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModels()
 
-    private val pocketQrUtil: PocketQrUtil by inject()
+    @Inject
+    lateinit var pocketQrUtil: PocketQrUtil
 
     private var connection: Optional<CustomTabsServiceConnection> = None
     var session: Optional<CustomTabsSession> = None

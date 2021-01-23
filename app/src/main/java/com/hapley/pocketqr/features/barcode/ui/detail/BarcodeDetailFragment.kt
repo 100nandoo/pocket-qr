@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -22,20 +23,22 @@ import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.preview.ui.PreviewFragment
 import com.hapley.preview.ui.PreviewItem
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
 import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class BarcodeDetailFragment : Fragment() {
 
     private val args by navArgs<BarcodeDetailFragmentArgs>()
 
-    private val viewModel: BarcodeDetailViewModel by viewModel()
+    private val viewModel: BarcodeDetailViewModel by viewModels()
 
-    private val tracker: Tracker by inject()
+    @Inject
+    lateinit var tracker: Tracker
 
     private val screenName: String = SCREEN_DETAIL
     private val className: String = this.javaClass.simpleName

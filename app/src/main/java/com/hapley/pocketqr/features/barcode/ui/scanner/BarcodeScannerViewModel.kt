@@ -5,12 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.hapley.pocketqr.features.barcode.domain.*
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.util.PocketQrUtil
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 import com.google.mlkit.vision.barcode.Barcode as MlKitBarcode
 
-class BarcodeScannerViewModel constructor(private val barcodeUseCase: BarcodeUseCase, private val pocketQrUtil: PocketQrUtil) : ViewModel() {
+@HiltViewModel
+class BarcodeScannerViewModel @Inject constructor(private val barcodeUseCase: BarcodeUseCase, private val pocketQrUtil: PocketQrUtil) : ViewModel() {
 
     var tempRawValue: String? = null
 

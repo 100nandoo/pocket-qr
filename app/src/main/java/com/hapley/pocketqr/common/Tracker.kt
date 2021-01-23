@@ -11,8 +11,9 @@ import com.google.firebase.ktx.Firebase
 import com.hapley.pocketqr.features.barcode.domain.getBarcodeTypeName
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.SortMode
+import javax.inject.Inject
 
-class Tracker {
+class Tracker @Inject constructor() {
     companion object {
         const val EVENT_COPY = "copy_to_clipboard"
         const val EVENT_DELETE = "delete"

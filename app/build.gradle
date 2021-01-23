@@ -9,8 +9,6 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id 'com.google.firebase.firebase-perf'
-
-    id 'dagger.hilt.android.plugin'
 }
 apply from: '../android_commons.gradle'
 
@@ -19,6 +17,7 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
+
     defaultConfig {
         applicationId Misc.appId
 
@@ -26,7 +25,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [
+                arguments += [
                         "room.schemaLocation"  : "$projectDir/schemas".toString(),
                         "room.incremental"     : "true",
                         "room.expandProjection": "true"]
@@ -34,9 +33,7 @@ android {
         }
     }
 
-    kapt {
-        correctErrorTypes true
-    }
+
 
     signingConfigs {
         release {
@@ -86,7 +83,7 @@ dependencies {
     implementation AndroidLibraries.constraintLayout
 
     implementation AndroidLibraries.hiltAndroid
-    implementation AndroidLibraries.hiltKapt
+    kapt AndroidLibraries.hiltKapt
 
     implementation AndroidLibraries.material
 
@@ -118,8 +115,6 @@ dependencies {
     // App Intro
     implementation Libraries.appIntro
 
-    // Assent
-//    implementation Libraries.assent
 
     // Coil Image Loader
     implementation Libraries.coil
@@ -132,10 +127,6 @@ dependencies {
 
     // Khronos
     implementation Libraries.khronos
-
-    // Koin
-    implementation Libraries.koin
-    implementation Libraries.koinViewModel
 
     // Koptional
     implementation Libraries.koptional

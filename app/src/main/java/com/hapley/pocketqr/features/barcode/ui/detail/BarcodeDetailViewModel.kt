@@ -7,11 +7,14 @@ import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.SettingsFragment
 import com.hapley.preview.ui.PreviewItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class BarcodeDetailViewModel(val barcodeUseCase: BarcodeUseCase, private val appPreferences: AppPreferences) : ViewModel() {
+@HiltViewModel
+class BarcodeDetailViewModel @Inject constructor(val barcodeUseCase: BarcodeUseCase, private val appPreferences: AppPreferences) : ViewModel() {
 
     var id = -1
 

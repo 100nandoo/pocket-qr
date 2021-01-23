@@ -17,14 +17,13 @@ import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.suspendCancellableCoroutine
-import org.koin.java.KoinJavaComponent.inject
+import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class PocketQrUtil(private val context: Context, private val clipboardManager: ClipboardManager) {
-
-    private val tracker by inject(Tracker::class.java)
+class PocketQrUtil @Inject constructor(@ApplicationContext private val context: Context, private val clipboardManager: ClipboardManager, private val tracker: Tracker) {
 
     companion object {
         const val SAFE_ENTRY_REGEX = "-([A-Z]){2}\\w+"

@@ -6,22 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
 import com.github.sumimakito.awesomeqr.option.RenderOption
 import com.github.sumimakito.awesomeqr.option.color.Color
 import com.hapley.preview.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.preview_fragment.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class PreviewFragment : Fragment() {
 
     companion object {
         const val PREVIEW_ITEM = "previewItem"
     }
 
-    private val viewModel: PreviewViewModel by viewModel()
+    private val viewModel: PreviewViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.preview_fragment, container, false)

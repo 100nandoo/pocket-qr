@@ -9,6 +9,8 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
@@ -21,24 +23,31 @@ import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.util.PocketQrUtil
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class BarcodeScannerFragment : Fragment() {
 
-    private val viewModel: BarcodeScannerViewModel by viewModel()
-    private val mainViewModel: MainViewModel by sharedViewModel()
+    private val viewModel: BarcodeScannerViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
-    private val tracker: Tracker by inject()
-    private val pocketQrUtil: PocketQrUtil by inject()
-    private val preview: Preview by inject()
-    private val scanner: BarcodeScanner by inject()
+    @Inject
+    lateinit var tracker: Tracker
+
+    @Inject
+    lateinit var pocketQrUtil: PocketQrUtil
+
+    @Inject
+    lateinit var preview: Preview
+
+    @Inject
+    lateinit var scanner: BarcodeScanner
 
     private var cameraControl: CameraControl? = null
 

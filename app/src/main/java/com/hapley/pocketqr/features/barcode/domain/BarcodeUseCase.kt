@@ -7,12 +7,13 @@ import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.preview.ui.PreviewItem
+import javax.inject.Inject
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
  */
 
-class BarcodeUseCase constructor(private val barcodeRepository: BarcodeRepository, private val tracker: Tracker) {
+class BarcodeUseCase @Inject constructor(private val barcodeRepository: BarcodeRepository, private val tracker: Tracker) {
 
     fun getAllLiveData(): LiveData<List<Barcode>> {
         return Transformations.map(barcodeRepository.getAllLiveData()) { barcodeEntities ->

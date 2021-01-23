@@ -5,7 +5,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 
-    id 'dagger.hilt.android.plugin'
 }
 
 apply from: '../android_commons.gradle'
@@ -38,7 +37,7 @@ dependencies {
     implementation AndroidLibraries.constraintLayout
 
     implementation AndroidLibraries.hiltAndroid
-    implementation AndroidLibraries.hiltKapt
+    kapt AndroidLibraries.hiltKapt
 
     implementation AndroidLibraries.material
 
@@ -54,10 +53,6 @@ dependencies {
 
     // Coil Image Loader
     implementation Libraries.coil
-
-    // Koin
-    implementation Libraries.koin
-    implementation Libraries.koinViewModel
 
     // Material Value
     implementation Libraries.materialValues

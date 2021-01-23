@@ -1,6 +1,7 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
@@ -23,6 +24,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = ["-Xjvm-default=all"]
+    }
+
+    kapt {
+        correctErrorTypes true
     }
 
     androidExtensions { experimental = true }

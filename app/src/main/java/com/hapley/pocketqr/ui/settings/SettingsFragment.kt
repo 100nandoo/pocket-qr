@@ -2,6 +2,7 @@ package com.hapley.pocketqr.ui.settings
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.*
 import com.google.android.material.transition.MaterialFadeThrough
@@ -10,12 +11,13 @@ import com.hapley.pocketqr.common.SCREEN_SETTINGS
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.util.BuildUtil
 import com.hapley.pocketqr.util.PocketQrUtil
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
     companion object {
@@ -37,11 +39,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         const val APP_LINK_PLAY_STORE = "https://play.google.com/store/apps/details?id=com.hapley.pocketqr"
     }
 
-    private val viewModel: SettingsViewModel by viewModel()
+    private val viewModel: SettingsViewModel by viewModels()
 
-    private val pocketQrUtil: PocketQrUtil by inject()
+    @Inject
+    lateinit var pocketQrUtil: PocketQrUtil
 
-    private val tracker: Tracker by inject()
+    @Inject
+    lateinit var tracker: Tracker
 
     private val screenName: String = SCREEN_SETTINGS
     private val className: String = this.javaClass.simpleName

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -16,24 +18,26 @@ import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.util.PocketQrUtil
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ActionBottomSheetDialog : BottomSheetDialogFragment() {
 
     private val args by navArgs<ActionBottomSheetDialogArgs>()
 
-    private val pocketQrUtil: PocketQrUtil by inject()
+    @Inject
+    lateinit var pocketQrUtil: PocketQrUtil
 
-    private val viewModel: ActionBottomSheetViewModel by viewModel()
+    private val viewModel: ActionBottomSheetViewModel by viewModels()
 
-    private val mainViewModel: MainViewModel by sharedViewModel()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
-    private val tracker: Tracker by inject()
+    @Inject
+    lateinit var tracker: Tracker
 
     private val screenName: String = SCREEN_BOTTOM_SHEET
     private val className: String = this.javaClass.simpleName

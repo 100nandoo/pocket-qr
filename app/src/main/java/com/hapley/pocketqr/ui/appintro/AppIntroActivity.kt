@@ -15,13 +15,16 @@ import com.hapley.pocketqr.main.MainActivity
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_APP_INTRO
 import com.hapley.pocketqr.common.Tracker
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AppIntroActivity : AppIntro() {
 
-    private val tracker: Tracker by inject()
+    @Inject
+    lateinit var tracker: Tracker
 
     private val screenName: String = SCREEN_APP_INTRO
     private val className: String = this.javaClass.simpleName

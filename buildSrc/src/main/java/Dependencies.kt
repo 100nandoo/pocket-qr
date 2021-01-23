@@ -52,7 +52,6 @@ object Versions {
     val fastAdapter = "5.3.2"
 
     val khronos = "0.9.0"
-    val koin = "2.1.6"
 
     val koptional = "1.7.0"
 
@@ -70,7 +69,7 @@ object Versions {
     val junitExt = "1.1.1"
 
     // Debug
-    val leakCanary = "2.5"
+    val leakCanary = "2.6"
 }
 
 object Libraries {
@@ -85,9 +84,6 @@ object Libraries {
     val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
 
     val khronos = "com.github.hotchemi:khronos:${Versions.khronos}"
-
-    val koin = "org.koin:koin-androidx-scope:${Versions.koin}"
-    val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
     val koptional = "com.gojuno.koptional:koptional:${Versions.koptional}"
 

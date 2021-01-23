@@ -7,8 +7,9 @@ import khronos.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class MockDataGenerator(private val barcodeRepository: BarcodeRepository) {
+class MockDataGenerator @Inject constructor(private val barcodeRepository: BarcodeRepository) {
 
     fun inject() {
         GlobalScope.launch {

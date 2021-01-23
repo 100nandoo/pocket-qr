@@ -3,13 +3,15 @@ package com.hapley.pocketqr.ui.launcher
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.hapley.pocketqr.main.MainActivity
 import com.hapley.pocketqr.ui.appintro.AppIntroActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LauncherActivity : AppCompatActivity() {
 
-    private val viewModel: LauncherViewModel by viewModel()
+    private val viewModel: LauncherViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

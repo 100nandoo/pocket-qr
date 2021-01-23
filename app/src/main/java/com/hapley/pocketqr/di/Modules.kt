@@ -2,65 +2,71 @@ package com.hapley.pocketqr.di
 
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.camera.core.Preview
 import androidx.preference.PreferenceManager
 import androidx.room.Room
 import coil.ImageLoader
+import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.hapley.pocketqr.common.AppPreferences
-import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.db.AppDatabase
-import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
-import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
-import com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailViewModel
-import com.hapley.pocketqr.features.barcode.ui.history.BarcodeHistoryViewModel
-import com.hapley.pocketqr.features.barcode.ui.history.bottomsheet.ActionBottomSheetViewModel
-import com.hapley.pocketqr.features.barcode.ui.scanner.BarcodeScannerViewModel
-import com.hapley.pocketqr.main.MainViewModel
-import com.hapley.pocketqr.ui.launcher.LauncherViewModel
-import com.hapley.pocketqr.ui.settings.SettingsViewModel
-import com.hapley.pocketqr.util.PocketQrUtil
-import org.koin.android.ext.koin.androidApplication
-import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import com.hapley.pocketqr.db.BarcodeDao
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
  */
 
-val appModule: Module = module {
-    single { Room.databaseBuilder(androidContext(), AppDatabase::class.java, Modules.DATABASE_NAME).fallbackToDestructiveMigration().build() }
-    single { PreferenceManager.getDefaultSharedPreferences(androidApplication()) }
-    single { AppPreferences(settings = get()) }
-    single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
-    single { PocketQrUtil(context = androidContext(), clipboardManager = get()) }
-    single { Tracker() }
-    single { ImageLoader.Builder(androidApplication()).allowHardware(true).crossfade(true).build() }
-    viewModel { MainViewModel(barcodeUseCase = get()) }
-    viewModel { SettingsViewModel() }
-    viewModel { LauncherViewModel(appPreferences = get()) }
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    private const val DATABASE_NAME = "pocket-database"
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase =
+        Room.databaseBuilder(appContext, AppDatabase::class.java, DATABASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideSharedPref(@ApplicationContext appContext: Context): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(appContext)
+
+    @Provides
+    @Singleton
+    fun provideClipboardManager(@ApplicationContext appContext: Context): ClipboardManager =
+        appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+    @Provides
+    @Singleton
+    fun provideImageLoader(@ApplicationContext appContext: Context): ImageLoader =
+        ImageLoader.Builder(appContext)
+            .allowHardware(true)
+            .crossfade(true)
+            .build()
 }
 
-val barcodeModule: Module = module {
-    single { get<AppDatabase>().barcodeDao() }
-    single { BarcodeRepository(barcodeDao = get()) }
-    single { BarcodeUseCase(barcodeRepository = get(), tracker = get()) }
-    viewModel { BarcodeScannerViewModel(barcodeUseCase = get(), pocketQrUtil = get()) }
-    viewModel { BarcodeHistoryViewModel(barcodeUseCase = get(), appPreferences = get(), tracker = get()) }
-    viewModel { ActionBottomSheetViewModel(barcodeUseCase = get()) }
-    viewModel { BarcodeDetailViewModel(barcodeUseCase = get(), appPreferences = get()) }
+@Module
+@InstallIn(SingletonComponent::class)
+object BarcodeModule {
 
-    single { Preview.Builder().build() }
-    single { BarcodeScanning.getClient(BarcodeScannerOptions.Builder().build()) }
-}
+    @Provides
+    @Singleton
+    fun provideBarcodeDao(appDatabase: AppDatabase): BarcodeDao = appDatabase.barcodeDao()
 
-val fakeModule: Module = module {
-    single { MockDataGenerator(barcodeRepository = get()) }
-}
+    @Provides
+    @Singleton
+    fun providePreview(): Preview = Preview.Builder().build()
 
-object Modules {
-    const val DATABASE_NAME = "pocket-database"
+    @Provides
+    @Singleton
+    fun provideBarcodeScannerOptions(): BarcodeScanner = BarcodeScanning.getClient(BarcodeScannerOptions.Builder().build())
 }

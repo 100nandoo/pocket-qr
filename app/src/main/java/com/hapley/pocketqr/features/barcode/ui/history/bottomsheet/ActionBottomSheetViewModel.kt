@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class ActionBottomSheetViewModel(private val barcodeUseCase: BarcodeUseCase) : ViewModel() {
+@HiltViewModel
+class ActionBottomSheetViewModel @Inject constructor(private val barcodeUseCase: BarcodeUseCase) : ViewModel() {
 
     var id = -1
 
