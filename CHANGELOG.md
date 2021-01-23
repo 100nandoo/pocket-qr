@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 0.8.9 *(23 Jan 2021)*
+----------------------------
+ * New: Migrate from Koin to Hilt
+
 Version 0.8.8 *(19 Jan 2021)*
 ----------------------------
  * New: Update dependancies
