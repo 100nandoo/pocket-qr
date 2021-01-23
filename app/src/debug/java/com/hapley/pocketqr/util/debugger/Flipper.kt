@@ -6,6 +6,8 @@ import com.facebook.flipper.android.utils.FlipperUtils
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
+import com.facebook.flipper.plugins.leakcanary.LeakCanaryFlipperPlugin
+import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
 import com.facebook.soloader.SoLoader
 
 class Flipper(app: Application) {
@@ -15,6 +17,8 @@ class Flipper(app: Application) {
             AndroidFlipperClient.getInstance(app).apply {
                 addPlugin(InspectorFlipperPlugin(app, DescriptorMapping.withDefaults()))
                 addPlugin(DatabasesFlipperPlugin(app))
+                addPlugin(SharedPreferencesFlipperPlugin(app))
+                addPlugin(LeakCanaryFlipperPlugin())
                 start()
             }
         }
