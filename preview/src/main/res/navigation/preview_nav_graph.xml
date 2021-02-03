@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/preview_nav_graph"
+    app:startDestination="@id/preview_fragment">
+
+    <fragment
+        android:id="@+id/preview_fragment"
+        android:name="com.hapley.preview.ui.PreviewFragment"
+        android:label="@string/preview"
+        tools:layout="@layout/preview_fragment">
+
+        <deepLink app:uri="hapley://preview/{BARCODE_ID}" />
+
+    </fragment>
+
+</navigation>

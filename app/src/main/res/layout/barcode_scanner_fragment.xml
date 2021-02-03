@@ -7,11 +7,43 @@
     android:layout_height="match_parent"
     tools:context=".features.barcode.ui.scanner.BarcodeScannerFragment">
 
-    <com.otaliastudios.cameraview.CameraView
-        android:id="@+id/camera_view_kit"
-        android:layout_width="@dimen/material_increment_5x"
-        android:layout_height="@dimen/material_increment_5x"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewHeader"
+            style="@style/TextAppearance.AppTheme.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_baseline_grid_2x"
+            android:text="@string/zoom_slider"
+            android:textColor="@color/material_color_white"
+            app:layout_constraintBottom_toTopOf="@id/slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider"
+            android:layout_width="@dimen/material_increment_5x"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/material_baseline_grid_2x"
+            android:valueFrom="0.0"
+            android:valueTo="1.0"
+            app:layout_constraintBottom_toBottomOf="@id/previewView"
+            app:labelBehavior="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

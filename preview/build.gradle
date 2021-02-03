@@ -1,0 +1,69 @@
+plugins {
+    id 'com.android.library'
+
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+
+}
+
+apply from: '../android_commons.gradle'
+
+android {
+    kapt {
+        correctErrorTypes true
+    }
+
+    buildTypes {
+        debug {}
+
+        release {}
+    }
+
+}
+
+dependencies {
+
+    implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.coroutineGuava
+    implementation KotlinLibraries.coroutinePlayServices
+
+    /**
+     * ==================== Android ====================
+     */
+    implementation AndroidLibraries.appCompat
+
+    implementation AndroidLibraries.core
+    implementation AndroidLibraries.constraintLayout
+
+    implementation AndroidLibraries.hiltAndroid
+    kapt AndroidLibraries.hiltKapt
+
+    implementation AndroidLibraries.material
+
+    implementation AndroidLibraries.lifecycleExt
+    implementation AndroidLibraries.viewModel
+
+    implementation AndroidLibraries.navigationFrag
+    implementation AndroidLibraries.navigation
+
+    /**
+     * ================= 3rd Party Libs ==================
+     */
+
+    // Coil Image Loader
+    implementation Libraries.coil
+
+    // Material Value
+    implementation Libraries.materialValues
+
+    // QR Generator
+    implementation Libraries.awesomeQr
+
+    /**
+     * ===================== Tests =======================
+     */
+    androidTestImplementation TestLibraries.espresso
+    testImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.junitExt
+}

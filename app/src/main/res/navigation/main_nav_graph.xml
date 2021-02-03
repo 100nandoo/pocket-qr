@@ -3,52 +3,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/barcodeScannerFragment">
+    app:startDestination="@id/barcode_scanner_fragment">
 
     <fragment
-        android:id="@+id/barcodeScannerFragment"
-        android:name="com.nandoo.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment"
-        android:label="@string/qr_code"
+        android:id="@+id/barcode_scanner_fragment"
+        android:name="com.hapley.pocketqr.features.barcode.ui.scanner.BarcodeScannerFragment"
+        android:label="@string/scanner"
         tools:layout="@layout/barcode_scanner_fragment">
         <action
             android:id="@+id/action_to_barcodeHistoryFragment"
-            app:destination="@id/barcodeHistoryFragment" />
+            app:destination="@id/barcode_history_fragment" />
 
         <action
             android:id="@+id/action_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settings_fragment" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/barcodeHistoryFragment"
-        android:name="com.nandoo.pocketqr.features.barcode.ui.history.BarcodeHistoryFragment"
+        android:id="@+id/barcode_history_fragment"
+        android:name="com.hapley.pocketqr.features.barcode.ui.history.BarcodeHistoryFragment"
         android:label="@string/history"
         tools:layout="@layout/barcode_history_fragment">
+        <deepLink app:uri="hapley://history" />
+
         <action
             android:id="@+id/action_to_barcodeScannerFragment"
-            app:destination="@id/barcodeScannerFragment" />
+            app:destination="@id/barcode_scanner_fragment" />
 
         <action
             android:id="@+id/action_to_barcodeDetailFragment"
-            app:destination="@id/barcodeDetailFragment"/>
+            app:destination="@id/barcode_detail_fragment" />
+
+        <action
+            android:id="@+id/action_show_bottomSheetDialog"
+            app:destination="@id/action_bottomSheet_dialog" />
 
     </fragment>
 
-    <fragment
-        android:id="@+id/barcodeDetailFragment"
-        android:name="com.nandoo.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment"
-        android:label="@string/detail"
-        tools:layout="@layout/barcode_detail_fragment">
+    <dialog
+        android:id="@+id/action_bottomSheet_dialog"
+        android:name="com.hapley.pocketqr.features.barcode.ui.history.bottomsheet.ActionBottomSheetDialog"
+        android:label="@string/action_bottom_sheet"
+        tools:layout="@layout/barcode_history_bottom_sheet">
 
         <argument
             android:name="BARCODE_ID"
             android:defaultValue="-1"
             app:argType="integer" />
+
+        <action
+            android:id="@+id/action_to_barcodeDetailFragment"
+            app:destination="@id/barcode_detail_fragment" />
+
+    </dialog>
+
+    <include app:graph="@navigation/preview_nav_graph" />
+
+    <fragment
+        android:id="@+id/barcode_detail_fragment"
+        android:name="com.hapley.pocketqr.features.barcode.ui.detail.BarcodeDetailFragment"
+        android:label="@string/detail"
+        tools:layout="@layout/barcode_detail_fragment">
+        <deepLink app:uri="hapley://detail/{BARCODE_ID}" />
+
+        <argument
+            android:name="BARCODE_ID"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_to_previewFragment"
+            app:destination="@id/preview_nav_graph" />
+
     </fragment>
 
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.nandoo.pocketqr.ui.settings.SettingsFragment"
+        android:id="@+id/settings_fragment"
+        android:name="com.hapley.pocketqr.ui.settings.SettingsFragment"
         android:label="@string/settings" />
+
 </navigation>

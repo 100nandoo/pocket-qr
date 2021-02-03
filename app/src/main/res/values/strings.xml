@@ -10,26 +10,85 @@
     <string name="yes">yes</string>
     <string name="no">no</string>
 
+    <!--  App Intro  -->
+    <string name="show_app_intro">Show app introduction</string>
+    <string name="welcome">Welcome 👋</string>
+    <string name="keep_history">Pocket QR will keep history\nall of your scanned item.</string>
+    <string name="label_with_emoji">Label 🏷️</string>
+    <string name="label_description">You can put a label for your history item,\nso it\'s easier to find it later.</string>
+    <string name="auto_focus">Auto Focus 📷</string>
+    <string name="auto_focus_description">The QR code scanner will automatically focus \nto the target you\'re pointing at.</string>
+    <string name="camera_permission">Camera Permission ⚠️</string>
+    <string name="camera_permission_desc">Before start using the app, \nplease give camera permission.</string>
+
     <!--  Permission  -->
     <string name="permission_required">Permission Required</string>
     <string name="please_allow_access">Please allow access permission for %s.</string>
     <string name="camera">camera</string>
 
     <!--  Barcode  -->
+    <string name="scanner">Scanner</string>
     <string name="qr_code">QR Code</string>
-    <string name="history">History</string>
     <string name="copied">Copied!</string>
+    <string name="zoom_slider">Zoom Slider</string>
+
+    <!--    History  -->
+    <string name="history">History</string>
+    <string name="sort">Sort</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="share">Share</string>
+    <string name="copy_">Copy</string>
+    <string name="barcode_history_transition_name">barcode_history_transition_%1$d</string>
+    <string name="your_action">Your Action</string>
+    <string name="you_have_no_scanned_item">You have no scanned item</string>
+
+    <!--  Sort  -->
+    <string name="most_frequent">Most Frequent</string>
+    <string name="recent">Recent</string>
+    <string name="alphabetical">Alphabetical</string>
 
     <!-- Barcode Detail  -->
     <string name="detail">Detail</string>
-    <string name="edit_label">Edit Label</string>
-    <string name="hint_edit_label">Add your own label here</string>
+    <string name="hint_edit_label">Add label here</string>
     <string name="submit">Submit</string>
+    <string name="label">Label</string>
+    <string name="scanned_date">Scanned date:</string>
+    <string name="click_counts_header">Click Counts:</string>
+    <string name="barcode_detail_transition_name">barcode_detail_transition</string>
+
+    <!--  Action Bottom Sheet -->
+    <string name="action_bottom_sheet">Action Bottom Sheet</string>
 
     <!--  Settings  -->
-    <string name="open_qr_code_history_first">Open QR Code history first</string>
+    <string name="sort_mode">Default sort mode</string>
+    <string name="night_mode">Night mode</string>
+
+    <string name="display">Display</string>
+    <string name="system_default">System Default</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
 
     <string name="about">About</string>
     <string name="build_version">Build version</string>
+    <string name="share_app">Share App Link</string>
+
+    <string name="tutorial">Tutorial</string>
+
+    <!--  Misc  -->
+    <string name="icon">icon</string>
+
+    <!--  Array  -->
+    <string-array name="sort_mode_entries">
+        <item>@string/recent</item>
+        <item>@string/most_frequent</item>
+        <item>@string/alphabetical</item>
+    </string-array>
+
+    <string-array name="night_mode_entries">
+        <item>@string/system_default</item>
+        <item>@string/dark</item>
+        <item>@string/light</item>
+    </string-array>
 
 </resources>

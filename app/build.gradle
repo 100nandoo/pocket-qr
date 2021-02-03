@@ -1,37 +1,44 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
 
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 
-apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'com.google.gms.google-services'
-
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.firebase.firebase-perf'
+}
 apply from: '../android_commons.gradle'
 
 def keystorePropertiesFile = file("../../signing/keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
+
+    defaultConfig {
+        applicationId Misc.appId
+
+        resConfigs "en"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
+    }
+
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
-        }
-    }
-
-    defaultConfig {
-        applicationId Misc.appId
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [
-                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
-                        "room.incremental"     : "true",
-                        "room.expandProjection": "true"]
-            }
         }
     }
 
@@ -48,34 +55,34 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-    flavorDimensions ProductFlavors.dimensions
-    productFlavors {
-        dev {
-            resConfigs "en", "xxhdpi"
-            versionNameSuffix ProductFlavors.devSuffix
-        }
-        full {
-            dimension "default"
-            versionNameSuffix ProductFlavors.fullSuffix
-        }
-    }
-
-    packagingOptions {
-        exclude("META-INF/*.kotlin_module")
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(Modules.preview)
+
     implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.coroutineGuava
+    implementation KotlinLibraries.coroutinePlayServices
 
     /**
      * ==================== Android ====================
      */
     implementation AndroidLibraries.appCompat
+
+    implementation AndroidLibraries.browser
+
+    implementation AndroidLibraries.camera2
+    implementation AndroidLibraries.cameraLifecycle
+    implementation AndroidLibraries.cameraView
+
     implementation AndroidLibraries.core
     implementation AndroidLibraries.constraintLayout
+
+    implementation AndroidLibraries.hiltAndroid
+    kapt AndroidLibraries.hiltKapt
+
     implementation AndroidLibraries.material
 
     implementation AndroidLibraries.lifecycleExt
@@ -93,37 +100,53 @@ dependencies {
     /**
      * ==================== Firebase ====================
      */
-    implementation FirebaseLibraries.core
+    implementation platform(FirebaseLibraries.bom)
     implementation FirebaseLibraries.analytics
-
+    implementation FirebaseLibraries.crashlytics
+    implementation FirebaseLibraries.indexing
+    implementation FirebaseLibraries.performance
     implementation FirebaseLibraries.qrCode
 
     /**
      * ================= 3rd Party Libs ==================
      */
-    // Assent
-    implementation Libraries.assent
+    // App Intro
+    implementation Libraries.appIntro
 
-    // Camera
-    api Libraries.cameraView
-    implementation Libraries.dialog
+
+    // Coil Image Loader
+    implementation Libraries.coil
 
     // Fast adapter
     implementation Libraries.fastAdapter
     implementation Libraries.fastAdapterDiff
+    implementation Libraries.fastAdapterUi
+    implementation Libraries.fastAdapterUtils
 
-    // Koin
-    implementation Libraries.koin
-    implementation Libraries.koinViewModel
+    // Khronos
+    implementation Libraries.khronos
+
+    // Koptional
+    implementation Libraries.koptional
+
+    // Lottie
+    implementation Libraries.lottie
 
     // Material Value
     implementation Libraries.materialValues
+
+    // QR Generator
+    implementation Libraries.awesomeQr
 
     // RecyclerView Divider
     implementation Libraries.rvDivider
 
     // Timber
     implementation Libraries.timber
+
+    debugImplementation 'com.facebook.flipper:flipper:0.52.1'
+    debugImplementation 'com.facebook.soloader:soloader:0.9.0'
+    debugImplementation 'com.facebook.flipper:flipper-leakcanary-plugin:0.72.0'
 
     /**
      * ===================== Tests =======================

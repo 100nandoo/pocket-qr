@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_action_header"
+        style="@style/TextAppearance.AppTheme.Headline6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/material_baseline_grid_2x"
+        android:text="@string/your_action"
+        app:layout_constraintEnd_toStartOf="@id/iv_down"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/material_baseline_grid_2x"
+        app:srcCompat="@drawable/ic_barcode_arrow_down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_action_header"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorOnSurface" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_share"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        app:drawableTopCompat="@drawable/ic_barcode_share_large"
+        android:paddingVertical="@dimen/material_baseline_grid_2x"
+        android:text="@string/share"
+        android:textAlignment="center"
+        app:drawableTint="?attr/colorOnSurface"
+        app:layout_constraintEnd_toStartOf="@id/tv_open"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_action_header" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_open"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        app:drawableTopCompat="@drawable/ic_barcode_type_url_large"
+        android:paddingVertical="@dimen/material_baseline_grid_2x"
+        android:text="@string/open"
+        android:textAlignment="center"
+        app:drawableTint="?attr/colorOnSurface"
+        app:layout_constraintEnd_toStartOf="@id/tv_detail"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/tv_share"
+        app:layout_constraintTop_toBottomOf="@id/tv_action_header" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        app:drawableTopCompat="@drawable/ic_barcode_info_large"
+        android:paddingVertical="@dimen/material_baseline_grid_2x"
+        android:text="@string/detail"
+        android:textAlignment="center"
+        app:drawableTint="?attr/colorOnSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/tv_open"
+        app:layout_constraintTop_toBottomOf="@id/tv_action_header" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_favorite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        app:drawableTopCompat="@drawable/ic_barcode_favorite_large"
+        android:paddingVertical="@dimen/material_baseline_grid_2x"
+        android:text="@string/favorite"
+        android:textAlignment="center"
+        app:drawableTint="?attr/colorOnSurface"
+        app:layout_constraintEnd_toStartOf="@id/tv_copy"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_share" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_copy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        app:drawableTopCompat="@drawable/ic_barcode_copy_large"
+        android:paddingVertical="@dimen/material_baseline_grid_2x"
+        android:text="@string/copy_"
+        android:textAlignment="center"
+        app:drawableTint="?attr/colorOnSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/tv_favorite"
+        app:layout_constraintTop_toBottomOf="@id/tv_share" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

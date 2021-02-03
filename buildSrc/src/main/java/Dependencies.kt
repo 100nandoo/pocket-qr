@@ -1,55 +1,65 @@
 object Misc {
-    val appId = "com.nandoo.pocketknife"
-    val compileSdk = 29
+    val appId = "com.hapley.pocketqr"
+    val compileSdk = 30
     val minSdk = 21
-    val targetSdk = 29
-    val buildTools = "29.0.3"
-}
-
-object ProductFlavors {
-    val dimensions = "default"
-    val devSuffix = "-dev"
-    val fullSuffix = "-full"
+    val targetSdk = 30
+    val buildTools = "30.0.1"
 }
 
 object Modules {
     val app = ":app"
-    val common = ":common"
+    val preview = ":preview"
 }
 
 object Releases {
-    val versionCode = 1
-    val versionName = "0.2"
+    val versionCode = 14
+    val versionName = "0.8.9"
 }
 
 object Versions {
-    val kotlin = "1.3.72"
-    val gradle = "4.0.0"
+    val kotlin = "1.4.21"
+    val coroutinePlayServices = "1.4.2"
+    val coroutineGuava = "1.4.2"
+    val gradle = "4.1.2"
     val gms = "4.3.3"
+    val crashlyticsGradle = "2.3.0"
+    val perfPlugin = "1.3.1"
 
     object Android {
-        val appCompat = "1.1.0"
-        val constraintLayout = "1.1.3"
-        val core = "1.2.0"
+        val appCompat = "1.2.0"
+        val browser = "1.3.0"
+        val cameraX = "1.0.0-beta12"
+        val cameraView = "1.0.0-alpha18"
+        val constraintLayout = "2.0.4"
+        val core = "1.3.2"
+        val hilt = "2.31.2-alpha"
         val lifecycle = "2.2.0"
-        val material = "1.2.0-alpha06"
-        val navigation = "2.3.0"
+        val material = "1.2.0"
+        val navigation = "2.3.2"
         val preference = "1.1.1"
-        val room = "2.2.5"
+        val room = "2.2.6"
     }
 
     object Firebase {
-        val core = "17.4.2"
-        val mlVision = "24.0.3"
-        val qrCode = "16.0.0"
+        val bom = "26.3.0"
+        val qrCode = "16.0.3"
     }
 
-    val assent = "3.0.0-RC4"
-    val cameraView = "2.6.2"
-    val dialog = "3.3.0"
-    val fastAdapter = "5.1.0"
-    val koin = "2.1.6"
+    val appIntro = "6.0.0"
+
+    //    val assent = "3.0.0-RC4"
+    val coil = "1.1.1"
+    val fastAdapter = "5.3.2"
+
+    val khronos = "0.9.0"
+
+    val koptional = "1.7.0"
+
+    val lottie = "3.5.0"
+
     val materialValues = "1.1.1"
+
+    val awesomeQr = "1.2.0"
     val rvDivider = "3.3.0"
     val timber = "4.7.1"
 
@@ -59,22 +69,29 @@ object Versions {
     val junitExt = "1.1.1"
 
     // Debug
-    val leakCanary = "2.4"
+    val leakCanary = "2.6"
 }
 
 object Libraries {
-    val assent = "com.afollestad.assent:core:${Versions.assent}"
-    val cameraView = "com.otaliastudios:cameraview:${Versions.cameraView}"
-    val dialog = "com.afollestad.material-dialogs:input:${Versions.dialog}"
+    val appIntro = "com.github.AppIntro:AppIntro:${Versions.appIntro}"
+//    val assent = "com.afollestad.assent:core:${Versions.assent}"
+
+    val coil = "io.coil-kt:coil:${Versions.coil}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
+    val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
+    val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
 
-    val koin = "org.koin:koin-androidx-scope:${Versions.koin}"
-    val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    val khronos = "com.github.hotchemi:khronos:${Versions.khronos}"
+
+    val koptional = "com.gojuno.koptional:koptional:${Versions.koptional}"
+
+    val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
 
     val materialValues = "blue.aodev:material-values:${Versions.materialValues}"
 
+    val awesomeQr = "com.github.SumiMakito:AwesomeQRCode:${Versions.awesomeQr}"
     val rvDivider = "com.github.fondesa:recycler-view-divider:${Versions.rvDivider}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }
@@ -91,13 +108,26 @@ object DebugLibraries {
 
 object KotlinLibraries {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    val coroutinePlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinePlayServices}"
+    val coroutineGuava = "org.jetbrains.kotlinx:kotlinx-coroutines-guava:${Versions.coroutineGuava}"
 }
 
 object AndroidLibraries {
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
-    val core = "androidx.core:core-ktx:${Versions.Android.core}"
+
+    val browser = "androidx.browser:browser:${Versions.Android.browser}"
+
+    val camera2 = "androidx.camera:camera-camera2:${Versions.Android.cameraX}"
+    val cameraLifecycle = "androidx.camera:camera-lifecycle:${Versions.Android.cameraX}"
+    val cameraView = "androidx.camera:camera-view:${Versions.Android.cameraView}"
+
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayout}"
+    val core = "androidx.core:core-ktx:${Versions.Android.core}"
+
+    val hiltAndroid = "com.google.dagger:hilt-android:${Versions.Android.hilt}"
+    val hiltKapt = "com.google.dagger:hilt-compiler:${Versions.Android.hilt}"
+
     val material = "com.google.android.material:material:${Versions.Android.material}"
 
     val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.Android.lifecycle}"
@@ -114,15 +144,20 @@ object AndroidLibraries {
 }
 
 object FirebaseLibraries {
-    val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
-    val analytics = "com.google.firebase:firebase-analytics:${Versions.Firebase.core}"
-
+    val bom = "com.google.firebase:firebase-bom:${Versions.Firebase.bom}"
+    val analytics = "com.google.firebase:firebase-analytics-ktx"
+    val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    val indexing = "com.google.firebase:firebase-appindexing"
+    val performance = "com.google.firebase:firebase-perf-ktx"
     val qrCode = "com.google.mlkit:barcode-scanning:${Versions.Firebase.qrCode}"
 }
 
 object ProjectLibraries {
     val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
+    val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.Android.hilt}"
     val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Android.navigation}"
     val gms = "com.google.gms:google-services:${Versions.gms}"
+    val crashlytics = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}"
+    val perfPlugin = "com.google.firebase:perf-plugin:${Versions.perfPlugin}"
 }

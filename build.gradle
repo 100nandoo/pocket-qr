@@ -8,10 +8,12 @@ buildscript {
 
     dependencies {
         classpath ProjectLibraries.gradle
+        classpath ProjectLibraries.hilt
         classpath ProjectLibraries.kotlinGradle
         classpath ProjectLibraries.navigationSafeArgs
         classpath ProjectLibraries.gms
-
+        classpath ProjectLibraries.crashlytics
+        classpath ProjectLibraries.perfPlugin
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -21,6 +23,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 

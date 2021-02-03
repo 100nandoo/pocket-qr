@@ -1,6 +1,8 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
 
 android {
     compileSdkVersion Misc.compileSdk
@@ -19,8 +21,25 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions { jvmTarget = "1.8" }
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs = ["-Xjvm-default=all"]
+    }
+
+    kapt {
+        correctErrorTypes true
+    }
 
     androidExtensions { experimental = true }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
 
 }

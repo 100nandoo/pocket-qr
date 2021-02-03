@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#90caf9</color>
+    <color name="colorSecondary">#ffcc80</color>
+
+    <color name="surfaceSelection">@color/black_700</color>
+
+</resources>

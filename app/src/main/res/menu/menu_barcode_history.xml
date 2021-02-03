@@ -3,9 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_barcode_scan"
-        android:icon="@drawable/ic_barcode_scan"
-        android:title="@string/qr_code"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/item_search"
+        android:icon="@drawable/ic_barcode_search"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom" />
+
+    <item
+        android:id="@+id/item_sort"
+        android:icon="@drawable/ic_barcode_sort"
+        android:title="@string/sort"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/item_recent"
+                    android:title="@string/recent"
+                    app:showAsAction="withText" />
+                <item
+                    android:id="@+id/item_most_frequent"
+                    android:title="@string/most_frequent"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/item_alphabetical"
+                    android:title="@string/alphabetical"
+                    app:showAsAction="withText" />
+            </group>
+        </menu>
+    </item>
 
 </menu>
