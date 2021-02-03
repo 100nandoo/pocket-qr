@@ -37,6 +37,7 @@ A blazing fast QR code scanner powered by [Firebase MLKit].
     * Navigation
     * Room
     * ViewModel
+    * Ktx
 
 
 ## MAD Score
