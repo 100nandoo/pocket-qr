@@ -1,18 +1,22 @@
 Change Log
 ==========
 
+Version 0.8.10 *(18 Feb 2021)*
+----------------------------
+ * New: Update dependencies
+
 Version 0.8.9 *(23 Jan 2021)*
 ----------------------------
  * New: Migrate from Koin to Hilt
 
 Version 0.8.8 *(19 Jan 2021)*
 ----------------------------
- * New: Update dependancies
+ * New: Update dependencies
 
 Version 0.8.6 *(31 Oct 2020)*
 ----------------------------
  * New: Remove unused build flavor
- * Fix: Navigation argment causing crash 
+ * Fix: Navigation argument causing crash
 
 Version 0.8.5 *(29 Oct 2020)*
 ----------------------------
