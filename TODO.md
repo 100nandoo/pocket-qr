@@ -8,6 +8,7 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Update room usage to use flow
 - [ ] Create core module
 - [ ] Widget
 - [ ] Screen App Flow
@@ -20,6 +21,7 @@ Pocket QR app
 - [ ] Find a way to generate userId for crash report
 - [ ] Monitor specific code (performance)
 - [ ] View Binding
+- [ ] Write test
 - [ ] Donation
 - [x] Support multi QR Code format (wifi, etc)
 - [x] Room Database for QR Code
