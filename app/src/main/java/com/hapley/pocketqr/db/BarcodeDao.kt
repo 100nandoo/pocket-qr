@@ -1,9 +1,9 @@
 package com.hapley.pocketqr.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hapley.pocketqr.common.BaseDao
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.
@@ -16,16 +16,16 @@ interface BarcodeDao : BaseDao<BarcodeEntity> {
     fun getAll(): List<BarcodeEntity>
 
     @Query("SELECT * from barcodeentity")
-    fun getAllLiveData(): LiveData<List<BarcodeEntity>>
+    fun getAllFlow(): Flow<List<BarcodeEntity>>
 
     @Query("SELECT * from barcodeentity WHERE isFavorite = 1")
-    fun getStarredLiveData(): LiveData<List<BarcodeEntity>>
+    fun getStarredFlow(): Flow<List<BarcodeEntity>>
 
     @Query("SELECT * FROM barcodeentity WHERE ID=:id")
     fun getById(id: Int): BarcodeEntity
 
     @Query("SELECT * FROM barcodeentity WHERE ID=:id")
-    fun getByIdLiveData(id: Int): LiveData<BarcodeEntity>
+    fun getByIdFlow(id: Int): Flow<BarcodeEntity>
 
     @Query("SELECT * FROM barcodeentity ORDER BY ID DESC LIMIT 1")
     fun getLastId(): Int

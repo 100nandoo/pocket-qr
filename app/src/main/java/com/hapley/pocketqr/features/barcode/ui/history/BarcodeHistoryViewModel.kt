@@ -4,6 +4,7 @@ import android.view.View
 import androidx.core.content.edit
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hapley.pocketqr.common.AppPreferences
 import com.hapley.pocketqr.common.Tracker
@@ -13,6 +14,7 @@ import com.hapley.pocketqr.ui.settings.RECENT
 import com.hapley.pocketqr.ui.settings.SettingsFragment
 import com.hapley.pocketqr.ui.settings.SortMode
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,7 +41,7 @@ class BarcodeHistoryViewModel @Inject constructor(private val barcodeUseCase: Ba
         }
     }
 
-    val barcodesLiveData = Transformations.map(barcodeUseCase.getAllLiveData()) { barcodes -> barcodes.map { BarcodeItem(it) } }
+    val barcodeListLiveData = barcodeUseCase.getAllFlow().map { barcodeList -> barcodeList.map { BarcodeItem(it) } }.asLiveData()
 
     lateinit var selectedItemWithPosition: Triple<View, BarcodeItem, Int>
 
