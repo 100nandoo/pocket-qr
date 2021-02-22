@@ -9,6 +9,8 @@ Pocket QR app
 ## Todo
 
 - [ ] Create core module
+- [ ] Migrate rv adapter to epoxy
+- [ ] Setup documentation using [docusaurus](https://v2.docusaurus.io/docs/)
 - [ ] Widget
 - [ ] Screen App Flow
 - [ ] Github action for release build
