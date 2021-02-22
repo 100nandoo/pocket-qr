@@ -8,7 +8,6 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Update room usage to use flow
 - [ ] Create core module
 - [ ] Widget
 - [ ] Screen App Flow
@@ -20,7 +19,6 @@ Pocket QR app
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
 - [ ] Monitor specific code (performance)
-- [ ] View Binding
 - [ ] Write test
 - [ ] Donation
 - [x] Support multi QR Code format (wifi, etc)
@@ -63,3 +61,5 @@ Pocket QR app
 - [x] Multi module support
 - [x] Add filter functionality
 - [x] Full screen QR Code
+- [x] Update room usage to use flow
+- [x] View Binding
