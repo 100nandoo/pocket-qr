@@ -1,13 +1,11 @@
 package com.hapley.pocketqr.features.barcode.ui.history.bottomsheet
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,7 +16,7 @@ class ActionBottomSheetViewModel @Inject constructor(private val barcodeUseCase:
     var id = -1
 
     val barcodeLiveData: LiveData<BarcodeItem> by lazy {
-        Transformations.map(barcodeUseCase.getByIdLiveData(id)) { barcode -> BarcodeItem(barcode) }
+        barcodeUseCase.getByIdFlow(id).map { barcode -> BarcodeItem(barcode) }.asLiveData()
     }
 
     fun updateFavoriteFlag() {

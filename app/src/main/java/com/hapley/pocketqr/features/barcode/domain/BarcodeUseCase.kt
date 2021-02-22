@@ -1,12 +1,14 @@
 package com.hapley.pocketqr.features.barcode.domain
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.asLiveData
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.preview.ui.PreviewItem
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
@@ -15,17 +17,15 @@ import javax.inject.Inject
 
 class BarcodeUseCase @Inject constructor(private val barcodeRepository: BarcodeRepository, private val tracker: Tracker) {
 
-    fun getAllLiveData(): LiveData<List<Barcode>> {
-        return Transformations.map(barcodeRepository.getAllLiveData()) { barcodeEntities ->
-            barcodeEntities.map { barcodeEntity ->
-                Barcode(barcodeEntity)
-            }
+    fun getAllFlow(): Flow<List<Barcode>> {
+        return barcodeRepository.getAllFlow().map { barcodeEntityList ->
+            barcodeEntityList.map { Barcode(it) }
         }
     }
 
-    fun getStarredLiveData(): LiveData<List<Barcode>> {
-        return Transformations.map(barcodeRepository.getStarredLiveData()) { barcodeEntities ->
-            barcodeEntities.map { barcodeEntity ->
+    fun getStarredFlow(): Flow<List<Barcode>> {
+        return barcodeRepository.getStarredFlow().map { barcodeEntityList ->
+            barcodeEntityList.map { barcodeEntity ->
                 Barcode(barcodeEntity)
             }
         }
@@ -35,21 +35,15 @@ class BarcodeUseCase @Inject constructor(private val barcodeRepository: BarcodeR
         return Barcode(barcodeRepository.getById(id))
     }
 
-    fun getByIdLiveData(id: Int): LiveData<Barcode> {
-        return Transformations.map(barcodeRepository.getByIdLiveData(id)) { entity ->
-            Barcode(entity)
-        }
-    }
+    fun getByIdFlow(id: Int): Flow<Barcode> = barcodeRepository.getByIdFlow(id).map { Barcode(it) }
 
     fun getPreviewById(id: Int): PreviewItem {
         val barcodeEntity = barcodeRepository.getById(id)
         return PreviewItem(barcodeEntity.label, barcodeEntity.rawValue)
     }
 
-    fun getPreviewLiveDataById(id: Int): LiveData<PreviewItem> {
-        return Transformations.map(barcodeRepository.getByIdLiveData(id)) { entity ->
-            PreviewItem(entity.label, entity.rawValue)
-        }
+    fun getPreviewByIdFlow(id: Int): Flow<PreviewItem> {
+        return barcodeRepository.getByIdFlow(id).map { entity -> PreviewItem(entity.label, entity.rawValue) }
     }
 
     fun getLastId(): Int {

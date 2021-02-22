@@ -8,13 +8,13 @@ import javax.inject.Inject
  */
 class BarcodeRepository @Inject constructor(private val barcodeDao: BarcodeDao) {
 
-    fun getAllLiveData() = barcodeDao.getAllLiveData()
+    fun getAllFlow() = barcodeDao.getAllFlow()
 
-    fun getStarredLiveData() = barcodeDao.getStarredLiveData()
+    fun getStarredFlow() = barcodeDao.getStarredFlow()
 
     fun getById(id: Int) = barcodeDao.getById(id)
 
-    fun getByIdLiveData(id: Int) = barcodeDao.getByIdLiveData(id)
+    fun getByIdFlow(id: Int) = barcodeDao.getByIdFlow(id)
 
     fun getLastId() = barcodeDao.getLastId()
 

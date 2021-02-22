@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun subscribeUi() {
-        viewModel.starredBarcodesLiveData.observe(this) {
+        viewModel.starredBarcodeListLiveData.observe(this) {
             updateDynamicShortcut(it.mapNotNull { barcodeItem -> barcodeItem.toShortcutInfo(this@MainActivity) })
         }
 

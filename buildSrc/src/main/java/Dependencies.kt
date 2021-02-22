@@ -131,6 +131,7 @@ object AndroidLibraries {
     val material = "com.google.android.material:material:${Versions.Android.material}"
 
     val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.Android.lifecycle}"
+    val lifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Android.lifecycle}"
     val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
 
     val navigationFrag = "androidx.navigation:navigation-fragment-ktx:${Versions.Android.navigation}"
