@@ -6,24 +6,24 @@
         android:id="@+id/item_detail"
         android:icon="@drawable/ic_barcode_detail"
         android:title="@string/detail"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/item_share"
         android:icon="@drawable/ic_barcode_share"
         android:title="@string/share"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/item_favorite"
         android:icon="@drawable/ic_barcode_unfavorite"
         android:title="@string/favorite"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/item_copy"
         android:icon="@drawable/ic_barcode_copy"
         android:title="@string/copy_"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
 </menu>

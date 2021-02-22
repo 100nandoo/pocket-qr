@@ -62,6 +62,7 @@ object Versions {
     val awesomeQr = "1.2.0"
     val rvDivider = "3.4.0"
     val timber = "4.7.1"
+    val viewBindingDelegate = "1.0.0"
 
     // Tests
     val espresso = "3.2.0"
@@ -79,6 +80,7 @@ object Libraries {
     val coil = "io.coil-kt:coil:${Versions.coil}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
+    val fastAdapterBinding = "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"
     val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
     val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
     val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
@@ -94,6 +96,7 @@ object Libraries {
     val awesomeQr = "com.github.SumiMakito:AwesomeQRCode:${Versions.awesomeQr}"
     val rvDivider = "com.github.fondesa:recycler-view-divider:${Versions.rvDivider}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    val viewBindingDelegate = "com.github.Zhuinden:fragmentviewbindingdelegate-kt:${Versions.viewBindingDelegate}"
 }
 
 object TestLibraries {

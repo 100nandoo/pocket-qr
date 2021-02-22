@@ -20,6 +20,7 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_HISTORY
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.pocketqr.databinding.BarcodeHistoryFragmentBinding
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.ALPHABETICAL
 import com.hapley.pocketqr.ui.settings.MOST_FREQUENT
@@ -34,9 +35,8 @@ import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
 import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.barcode_history_fragment.*
-import kotlinx.android.synthetic.main.barcode_history_item.view.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
@@ -44,7 +44,9 @@ import javax.inject.Inject
 import kotlin.Comparator
 
 @AndroidEntryPoint
-class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback {
+class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment), SimpleSwipeCallback.ItemSwipeCallback {
+
+    private val binding by viewBinding(BarcodeHistoryFragmentBinding::bind)
 
     private val viewModel: BarcodeHistoryViewModel by viewModels()
 
@@ -178,10 +180,6 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.barcode_history_fragment, container, false)
-    }
-
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch {
@@ -190,8 +188,8 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initUi()
         subscribeUi()
@@ -201,7 +199,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
         super.onDestroyView()
         actionMode?.finish()
         actionMode = null
-        rv_barcode_history.adapter = null
+//        binding.rvBarcodeHistory.adapter = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -262,7 +260,7 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
 
         itemListImpl.withComparator(mergeComparator(defaultComparator()))
 
-        rv_barcode_history.run {
+        binding.rvBarcodeHistory.run {
             adapter = fastAdapter
             requireContext().dividerBuilder()
                 .size(8, COMPLEX_UNIT_DIP)
@@ -283,42 +281,43 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             res ?: false
         }
 
-        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
-            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
-                viewModel.selectedItemWithPosition = Triple(v, item, position)
-                actionNavigateToDetail()
-                tracker.selectContent(item)
-            }
+        // TODO Handle click listener
+//        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
+//            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
+//                viewModel.selectedItemWithPosition = Triple(v, item, position)
+//                actionNavigateToDetail()
+//                tracker.selectContent(item)
+//            }
+//
+//            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
+//                return if (viewHolder is BarcodeItem.ViewHolder) {
+//                    viewHolder.itemView.b_info
+//                } else null
+//            }
+//        })
 
-            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-                return if (viewHolder is BarcodeItem.ViewHolder) {
-                    viewHolder.itemView.b_info
-                } else null
-            }
-        })
-
-        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
-            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
-                when {
-//                    viewModel.showTutorial -> {
-//                        initShowcase(v)
+//        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
+//            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
+//                when {
+////                    viewModel.showTutorial -> {
+////                        initShowcase(v)
+////                    }
+//                    actionMode == null -> {
+//                        actionShowBottomSheet(item.id.toInt())
 //                    }
-                    actionMode == null -> {
-                        actionShowBottomSheet(item.id.toInt())
-                    }
-                    else -> {
-                        actionMode?.finish()
-                    }
-                }
-
-            }
-
-            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-                return if (viewHolder is BarcodeItem.ViewHolder) {
-                    viewHolder.itemView.card_history_item
-                } else null
-            }
-        })
+//                    else -> {
+//                        actionMode?.finish()
+//                    }
+//                }
+//
+//            }
+//
+//            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
+//                return if (viewHolder is BarcodeItem.ViewHolder) {
+//                    viewHolder.itemView.card_history_item
+//                } else null
+//            }
+//        })
 
 //        fastAdapter.onPreLongClickListener = { view, _, item, position ->
 //            view.id
@@ -332,13 +331,13 @@ class BarcodeHistoryFragment : Fragment(), SimpleSwipeCallback.ItemSwipeCallback
             .withSurfaceThreshold(0.5f)
 
         val touchHelper = ItemTouchHelper(touchCallback)
-        touchHelper.attachToRecyclerView(rv_barcode_history)
+        touchHelper.attachToRecyclerView(binding.rvBarcodeHistory)
     }
 
     private fun subscribeUi() {
         viewModel.barcodeListLiveData.observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
-                view_switcher.showNext()
+                binding.viewSwitcher.showNext()
             } else {
                 itemListImpl.setNewList(it, true)
             }

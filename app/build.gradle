@@ -120,6 +120,7 @@ dependencies {
 
     // Fast adapter
     implementation Libraries.fastAdapter
+    implementation Libraries.fastAdapterBinding
     implementation Libraries.fastAdapterDiff
     implementation Libraries.fastAdapterUi
     implementation Libraries.fastAdapterUtils
@@ -145,9 +146,12 @@ dependencies {
     // Timber
     implementation Libraries.timber
 
-    debugImplementation 'com.facebook.flipper:flipper:0.52.1'
-    debugImplementation 'com.facebook.soloader:soloader:0.9.0'
-    debugImplementation 'com.facebook.flipper:flipper-leakcanary-plugin:0.72.0'
+    // View Binding Delegate
+    implementation Libraries.viewBindingDelegate
+
+    debugImplementation 'com.facebook.flipper:flipper:0.76.0'
+    debugImplementation 'com.facebook.soloader:soloader:0.10.1'
+    debugImplementation 'com.facebook.flipper:flipper-leakcanary-plugin:0.76.0'
 
     /**
      * ===================== Tests =======================
