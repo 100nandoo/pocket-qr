@@ -7,13 +7,17 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.text.format.DateUtils.*
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.view.isInvisible
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.databinding.BarcodeHistoryItemBinding
 import com.hapley.pocketqr.features.barcode.domain.*
 import com.hapley.pocketqr.main.MainActivity
 import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
 import com.mikepenz.fastadapter.swipe.ISwipeable
@@ -38,7 +42,7 @@ open class BarcodeItem(
     val rawValue: String,
     val isFavorite: Boolean,
     val clickCount: Int
-) : AbstractItem<BarcodeItem.ViewHolder>(), ISwipeable {
+) : AbstractBindingItem<BarcodeHistoryItemBinding>(), ISwipeable {
 
     constructor(barcode: Barcode) : this(
         barcode.id.toLong(),
@@ -52,37 +56,26 @@ open class BarcodeItem(
         clickCount = barcode.clickCount
     )
 
-    class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view), IDrawerSwipeableViewHolder {
-
-        override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-            itemView.iv_icon.setImageResource(item.icon)
-            itemView.tv_label.text = item.title
-            itemView.tv_created_at.text = getRelativeTimeSpanString(item.created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)
-            itemView.tv_subtitle.text = item.subtitle
-            itemView.iv_favorite.isInvisible = item.isFavorite.not()
-        }
-
-        override fun unbindView(item: BarcodeItem) = Unit
-
-        override val swipeableView: View
-            get() = itemView.cl_history_item
+    override fun bindView(binding: BarcodeHistoryItemBinding, payloads: List<Any>) {
+        binding.ivIcon.setImageResource(icon)
+        binding.tvLabel.text = title
+        binding.tvCreatedAt.text = getRelativeTimeSpanString(created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)
+        binding.tvSubtitle.text = subtitle
+        binding.ivFavorite.isInvisible = isFavorite.not()
     }
 
     override var identifier: Long
         get() = id
         set(_) {}
 
-    override val layoutRes: Int
-        get() = R.layout.barcode_history_item
-
     override val type: Int
         get() = BarcodeItemView.BARCODE.id
 
-    override fun getViewHolder(v: View): ViewHolder {
-        return ViewHolder(v)
-    }
-
     override val isSwipeable: Boolean = true
+
+    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): BarcodeHistoryItemBinding {
+        return BarcodeHistoryItemBinding.inflate(inflater, parent, false)
+    }
 }
 
 fun Int.getIcon(): Int {

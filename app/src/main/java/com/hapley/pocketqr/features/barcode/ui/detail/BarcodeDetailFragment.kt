@@ -3,8 +3,6 @@ package com.hapley.pocketqr.features.barcode.ui.detail
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -21,17 +19,20 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.pocketqr.databinding.BarcodeDetailDialogLabelBinding
+import com.hapley.pocketqr.databinding.BarcodeDetailFragmentBinding
 import com.hapley.preview.ui.PreviewFragment
 import com.hapley.preview.ui.PreviewItem
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.barcode_detail_dialog_label.view.*
-import kotlinx.android.synthetic.main.barcode_detail_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class BarcodeDetailFragment : Fragment() {
+class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
+
+    private val binding by viewBinding(BarcodeDetailFragmentBinding::bind)
 
     private val args by navArgs<BarcodeDetailFragmentArgs>()
 
@@ -51,10 +52,6 @@ class BarcodeDetailFragment : Fragment() {
             duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
         }
 
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.barcode_detail_fragment, container, false)
     }
 
     override fun onResume() {
@@ -78,7 +75,7 @@ class BarcodeDetailFragment : Fragment() {
     }
 
     private fun initUi() {
-        fab_edit.setOnClickListener {
+        binding.fabEdit.setOnClickListener {
             editLabelDialog()
         }
 
@@ -89,11 +86,11 @@ class BarcodeDetailFragment : Fragment() {
 
     private fun subscribeUi() {
         viewModel.barcodeLiveData.observe(viewLifecycleOwner, {
-            tv_label.text = it.title
-            tv_label.isSelected = true
-            tv_subtitle.text = it.subtitle
-            tv_click_count.text = it.clickCount.toString()
-            tv_scanned_date.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
+           binding.tvLabel.text = it.title
+            binding.tvLabel.isSelected = true
+            binding.tvSubtitle.text = it.subtitle
+            binding.tvClickCount.text = it.clickCount.toString()
+            binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
             try {
                 val renderOption = RenderOption().apply {
                     content = it.rawValue
@@ -108,7 +105,7 @@ class BarcodeDetailFragment : Fragment() {
                 }
                 val result = AwesomeQrRenderer.render(renderOption)
 
-                iv_qrcode.load(result.bitmap)
+                binding.ivQrcode.load(result.bitmap)
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -119,15 +116,16 @@ class BarcodeDetailFragment : Fragment() {
         })
 
         viewModel.previewLiveData.observe(viewLifecycleOwner) { previewItem ->
-            iv_qrcode.setOnClickListener {
+            binding.ivQrcode.setOnClickListener {
                 navigateToPreview(previewItem)
             }
         }
     }
 
     private fun editLabelDialog() {
-        val view = layoutInflater.inflate(R.layout.barcode_detail_dialog_label, null)
-        val editText = view.editText
+        val dialogLabelBinding = BarcodeDetailDialogLabelBinding.inflate(LayoutInflater.from(requireContext()))
+        val view = dialogLabelBinding.llParent
+        val editText = dialogLabelBinding.editText
         editText.setText(viewModel.barcodeLiveData.value?.title)
 
         MaterialAlertDialogBuilder(requireContext())

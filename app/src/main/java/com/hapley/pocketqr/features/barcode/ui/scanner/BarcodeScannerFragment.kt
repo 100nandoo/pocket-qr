@@ -20,11 +20,12 @@ import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_SCANNER
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.pocketqr.databinding.BarcodeScannerFragmentBinding
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.util.PocketQrUtil
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.barcode_scanner_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
@@ -32,10 +33,12 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class BarcodeScannerFragment : Fragment() {
+class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
 
     private val viewModel: BarcodeScannerViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
+
+    private val binding by viewBinding(BarcodeScannerFragmentBinding::bind)
 
     @Inject
     lateinit var tracker: Tracker
@@ -106,7 +109,7 @@ class BarcodeScannerFragment : Fragment() {
                         this.bindToLifecycle(this@BarcodeScannerFragment, cameraSelector, preview, imageAnalysis)
                     }
                     cameraControl = camera.cameraControl
-                    preview.setSurfaceProvider(previewView.surfaceProvider)
+                    preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
                     setUpPinchToZoom(camera)
 
@@ -117,11 +120,11 @@ class BarcodeScannerFragment : Fragment() {
             }
         }
 
-        slider.addOnChangeListener { _, value, _ ->
+        binding.slider.addOnChangeListener { _, value, _ ->
             cameraControl?.setLinearZoom(value)
         }
 
-        slider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+        binding.slider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) = Unit
 
             override fun onStopTrackingTouch(slider: Slider) {
@@ -141,7 +144,7 @@ class BarcodeScannerFragment : Fragment() {
                 cameraControl?.setZoomRatio(result)
 
                 val linearZoom: Float = zoomState?.linearZoom ?: 0F
-                slider.value = linearZoom
+                binding.slider.value = linearZoom
                 return true
             }
 
@@ -154,7 +157,7 @@ class BarcodeScannerFragment : Fragment() {
 
         val scaleGestureDetector = ScaleGestureDetector(context, listener)
 
-        previewView.setOnTouchListener { v, event ->
+        binding.previewView.setOnTouchListener { v, event ->
             scaleGestureDetector.onTouchEvent(event)
             v.performClick()
             return@setOnTouchListener true
@@ -174,7 +177,7 @@ class BarcodeScannerFragment : Fragment() {
                 tracker.scan(barcodeItem)
             }
 
-            Snackbar.make(qr_code_parent, rawValue, Snackbar.LENGTH_LONG)
+            Snackbar.make(binding.qrCodeParent, rawValue, Snackbar.LENGTH_LONG)
                 .setAction(getString(R.string.open)) { mainViewModel.actionOpenUrl(barcodeItem) }
                 .show()
         }

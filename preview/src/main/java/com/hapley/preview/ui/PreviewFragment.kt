@@ -13,8 +13,9 @@ import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
 import com.github.sumimakito.awesomeqr.option.RenderOption
 import com.github.sumimakito.awesomeqr.option.color.Color
 import com.hapley.preview.R
+import com.hapley.preview.databinding.PreviewFragmentBinding
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.preview_fragment.*
 
 @AndroidEntryPoint
 class PreviewFragment : Fragment() {
@@ -22,6 +23,8 @@ class PreviewFragment : Fragment() {
     companion object {
         const val PREVIEW_ITEM = "previewItem"
     }
+
+    private val binding by viewBinding(PreviewFragmentBinding::bind)
 
     private val viewModel: PreviewViewModel by viewModels()
 
@@ -60,7 +63,7 @@ class PreviewFragment : Fragment() {
             }
             val result = AwesomeQrRenderer.render(renderOption)
 
-            imageView.load(result.bitmap)
+            binding.imageView.load(result.bitmap)
 
         } catch (e: Exception) {
             e.printStackTrace()

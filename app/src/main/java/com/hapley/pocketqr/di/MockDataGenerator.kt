@@ -28,7 +28,7 @@ class MockDataGenerator @Inject constructor(private val barcodeRepository: Barco
             add(
                 BarcodeEntity(
                     "https://maps.google.com/local?q=1.2864726270678333,103.82698018585205", "Location", "https://maps.google.com/local?q=1.2864726270678333,103.82698018585205",
-                    30.days.ago.time, 256, 8, false, 0
+                    30.days.ago.time, 256, URL, false, 0
                 )
             )
             add(

@@ -42,6 +42,7 @@
     <string name="barcode_history_transition_name">barcode_history_transition_%1$d</string>
     <string name="your_action">Your Action</string>
     <string name="you_have_no_scanned_item">You have no scanned item</string>
+    <string name="arrow_down">Arrow Down</string>
 
     <!--  Sort  -->
     <string name="most_frequent">Most Frequent</string>
@@ -50,6 +51,7 @@
 
     <!-- Barcode Detail  -->
     <string name="detail">Detail</string>
+    <string name="edit">Edit</string>
     <string name="hint_edit_label">Add label here</string>
     <string name="submit">Submit</string>
     <string name="label">Label</string>
