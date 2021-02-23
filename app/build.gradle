@@ -119,6 +119,10 @@ dependencies {
     // Coil Image Loader
     implementation Libraries.coil
 
+    // Epoxy
+    implementation Libraries.epoxy
+    kapt Libraries.epoxyKapt
+
     // Fast adapter
     implementation Libraries.fastAdapter
     implementation Libraries.fastAdapterBinding

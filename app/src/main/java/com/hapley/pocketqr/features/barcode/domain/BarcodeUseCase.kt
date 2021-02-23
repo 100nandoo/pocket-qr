@@ -1,7 +1,5 @@
 package com.hapley.pocketqr.features.barcode.domain
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository

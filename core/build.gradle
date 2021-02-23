@@ -42,4 +42,12 @@ dependencies {
 
     implementation AndroidLibraries.navigationFrag
     implementation AndroidLibraries.navigation
+
+    /**
+     * ================= 3rd Party Libs ==================
+     */
+
+    // Epoxy
+    implementation Libraries.epoxy
+    kapt Libraries.epoxyKapt
 }

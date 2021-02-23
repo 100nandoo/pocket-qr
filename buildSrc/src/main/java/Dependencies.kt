@@ -50,6 +50,7 @@ object Versions {
 
     //    val assent = "3.0.0-RC4"
     val coil = "1.1.1"
+    val epoxy = "4.4.0"
     val fastAdapter = "5.3.2"
 
     val khronos = "0.9.0"
@@ -79,6 +80,9 @@ object Libraries {
 //    val assent = "com.afollestad.assent:core:${Versions.assent}"
 
     val coil = "io.coil-kt:coil:${Versions.coil}"
+
+    val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
+    val epoxyKapt = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
 
     val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
     val fastAdapterBinding = "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"

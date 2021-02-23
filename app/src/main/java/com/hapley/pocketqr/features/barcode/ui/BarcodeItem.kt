@@ -7,21 +7,13 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.text.format.DateUtils.*
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.view.isInvisible
+import com.hapley.core.ui.helper.ViewBindingKotlinModel
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.databinding.BarcodeHistoryItemBinding
 import com.hapley.pocketqr.features.barcode.domain.*
 import com.hapley.pocketqr.main.MainActivity
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import com.mikepenz.fastadapter.items.AbstractItem
-import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
-import com.mikepenz.fastadapter.swipe.ISwipeable
-import kotlinx.android.synthetic.main.barcode_history_item.view.*
 import java.util.*
 
 /**
@@ -32,7 +24,11 @@ enum class BarcodeItemView(val id: Int) {
     UNKNOWN(0)
 }
 
-open class BarcodeItem(
+interface BarcodeItemListener {
+    fun clickListener(id: Int)
+}
+
+data class BarcodeItem(
     val id: Long,
     var title: String,
     val subtitle: String,
@@ -42,7 +38,9 @@ open class BarcodeItem(
     val rawValue: String,
     val isFavorite: Boolean,
     val clickCount: Int
-) : AbstractBindingItem<BarcodeHistoryItemBinding>(), ISwipeable {
+) : ViewBindingKotlinModel<BarcodeHistoryItemBinding>(R.layout.barcode_history_item) {
+
+    lateinit var listener: BarcodeItemListener
 
     constructor(barcode: Barcode) : this(
         barcode.id.toLong(),
@@ -56,25 +54,14 @@ open class BarcodeItem(
         clickCount = barcode.clickCount
     )
 
-    override fun bindView(binding: BarcodeHistoryItemBinding, payloads: List<Any>) {
-        binding.ivIcon.setImageResource(icon)
-        binding.tvLabel.text = title
-        binding.tvCreatedAt.text = getRelativeTimeSpanString(created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)
-        binding.tvSubtitle.text = subtitle
-        binding.ivFavorite.isInvisible = isFavorite.not()
-    }
+    override fun BarcodeHistoryItemBinding.bind() {
+        ivIcon.setImageResource(icon)
+        tvLabel.text = title
+        tvCreatedAt.text = getRelativeTimeSpanString(created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)
+        tvSubtitle.text = subtitle
+        ivFavorite.isInvisible = isFavorite.not()
 
-    override var identifier: Long
-        get() = id
-        set(_) {}
-
-    override val type: Int
-        get() = BarcodeItemView.BARCODE.id
-
-    override val isSwipeable: Boolean = true
-
-    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): BarcodeHistoryItemBinding {
-        return BarcodeHistoryItemBinding.inflate(inflater, parent, false)
+        cardHistoryItem.setOnClickListener { listener.clickListener(id.toInt()) }
     }
 }
 

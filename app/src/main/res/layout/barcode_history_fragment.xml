@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/view_switcher"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_switcher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.barcode.ui.history.BarcodeHistoryFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_barcode_history"
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/epoxy_rv_barcode_history"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionGroup="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/barcode_history_item" />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:id="@+id/ll_empty"

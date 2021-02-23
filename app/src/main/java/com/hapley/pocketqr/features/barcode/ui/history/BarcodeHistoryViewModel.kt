@@ -2,7 +2,6 @@ package com.hapley.pocketqr.features.barcode.ui.history
 
 import android.view.View
 import androidx.core.content.edit
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -57,4 +56,11 @@ class BarcodeHistoryViewModel @Inject constructor(private val barcodeUseCase: Ba
             barcodeUseCase.deleteBarcode(barcodeItem)
         }
     }
+
+    fun deleteBarcodeViewBinding(barcodeItem: BarcodeItem){
+        viewModelScope.launch {
+            barcodeUseCase.deleteBarcode(barcodeItem)
+        }
+    }
+
 }
