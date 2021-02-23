@@ -8,6 +8,7 @@ object Misc {
 
 object Modules {
     val app = ":app"
+    var core = ":core"
     val preview = ":preview"
 }
 

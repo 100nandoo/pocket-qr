@@ -6,7 +6,6 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.browser.customtabs.CustomTabsSession
 import androidx.core.content.getSystemService
@@ -26,7 +25,7 @@ import com.hapley.pocketqr.databinding.ActivityMainBinding
 import com.hapley.pocketqr.features.barcode.domain.URL
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.features.barcode.ui.toShortcutInfo
-import com.hapley.pocketqr.ui.helper.viewBinding
+import com.hapley.core.ui.helper.viewBinding
 import com.hapley.pocketqr.util.PocketQrUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

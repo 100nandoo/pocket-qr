@@ -61,6 +61,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(Modules.preview)
+    implementation project(Modules.core)
 
     implementation KotlinLibraries.kotlin
     implementation KotlinLibraries.coroutineGuava

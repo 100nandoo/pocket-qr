@@ -1,13 +1,10 @@
 plugins {
     id 'com.android.library'
-
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-
 }
 
 apply from: '../android_commons.gradle'
+
 
 android {
     kapt {
@@ -19,13 +16,9 @@ android {
 
         release {}
     }
-
 }
 
 dependencies {
-
-    implementation project(Modules.core)
-
     implementation KotlinLibraries.kotlin
     implementation KotlinLibraries.coroutineGuava
     implementation KotlinLibraries.coroutinePlayServices
@@ -49,27 +42,4 @@ dependencies {
 
     implementation AndroidLibraries.navigationFrag
     implementation AndroidLibraries.navigation
-
-    /**
-     * ================= 3rd Party Libs ==================
-     */
-
-    // Coil Image Loader
-    implementation Libraries.coil
-
-    // Material Value
-    implementation Libraries.materialValues
-
-    // QR Generator
-    implementation Libraries.awesomeQr
-
-    // View Binding Delegate
-    implementation Libraries.viewBindingDelegate
-
-    /**
-     * ===================== Tests =======================
-     */
-    androidTestImplementation TestLibraries.espresso
-    testImplementation TestLibraries.junit
-    androidTestImplementation TestLibraries.junitExt
 }

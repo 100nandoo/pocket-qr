@@ -8,7 +8,6 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Create core module
 - [ ] Migrate rv adapter to epoxy
 - [ ] Setup documentation using [docusaurus](https://v2.docusaurus.io/docs/)
 - [ ] Widget
@@ -65,3 +64,4 @@ Pocket QR app
 - [x] Full screen QR Code
 - [x] Update room usage to use flow
 - [x] View Binding
+- [x] Create core module

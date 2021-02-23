@@ -1,4 +1,4 @@
-package com.hapley.pocketqr.ui.helper
+package com.hapley.core.ui.helper
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
