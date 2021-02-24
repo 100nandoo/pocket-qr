@@ -44,54 +44,23 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
     @Inject
     lateinit var tracker: Tracker
 
-//    private val queryTextListener = object : SearchView.OnQueryTextListener {
-//        override fun onQueryTextSubmit(s: String): Boolean {
-//            itemAdapter.filter(s)
-//            return true
-//        }
-//
-//        override fun onQueryTextChange(s: String): Boolean {
-//            itemAdapter.filter(s)
-//            tracker.search(s)
-//            return true
-//        }
-//    }
+    private val queryTextListener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(s: String): Boolean {
+            viewModel.calculate(s)
+            tracker.search(s)
+            return true
+        }
 
-//    private val filterPredicate = { item: BarcodeItem, c: CharSequence? ->
-//        val title = item.subtitle.toLowerCase(Locale.getDefault())
-//        val subtitle = item.title.toLowerCase(Locale.getDefault())
-//        val constraint = c.toString().toLowerCase(Locale.getDefault())
-//        title.contains(constraint) || subtitle.contains(constraint)
-//    }
-
-    private val alphabetComparatorAscending: Comparator<BarcodeItem> by lazy {
-        Comparator<BarcodeItem> { lhs, rhs -> lhs.title.compareTo(rhs.title) }
+        override fun onQueryTextChange(s: String): Boolean {viewModel.calculate(s)
+            tracker.search(s)
+            return true
+        }
     }
 
-    private val favoriteComparator: Comparator<BarcodeItem> by lazy {
-        Comparator<BarcodeItem> { lhs, rhs -> rhs.isFavorite.compareTo(lhs.isFavorite) }
+    private val queryCloseListener = SearchView.OnCloseListener {
+        viewModel.calculate()
+        false
     }
-
-    private val clickCountComparator: Comparator<BarcodeItem> by lazy {
-        Comparator<BarcodeItem> { lhs, rhs -> rhs.clickCount.compareTo(lhs.clickCount) }
-    }
-
-    private val scannedDateComparator: Comparator<BarcodeItem> by lazy {
-        Comparator<BarcodeItem> { lhs, rhs -> rhs.created.compareTo(lhs.created) }
-    }
-//
-//    private val itemListImpl: ComparableItemListImpl<BarcodeItem> by lazy {
-//        ComparableItemListImpl<BarcodeItem>(null)
-//    }
-//
-//    private val itemAdapter: ItemAdapter<BarcodeItem> by lazy {
-//        ItemAdapter(itemListImpl)
-//            .also { it.itemFilter.filterPredicate = filterPredicate }
-//    }
-
-//    private val fastAdapter = FastAdapter.with(itemAdapter)
-//
-//    private lateinit var selectExtension: SelectExtension<BarcodeItem>
 
     private val actionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
@@ -194,7 +163,13 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
         inflater.inflate(R.menu.menu_barcode_history, menu)
 
         val searchView = menu.findItem(R.id.item_search).actionView as SearchView
-//        searchView.setOnQueryTextListener(queryTextListener)
+        searchView.apply {
+            setOnQueryTextListener(queryTextListener)
+            setOnCloseListener {
+                viewModel.calculate()
+                false
+            }
+        }
 
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -206,117 +181,18 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.item_recent -> {
-//                itemListImpl.withComparator(mergeComparator(scannedDateComparator))
-            }
-            R.id.item_most_frequent -> {
-//                itemListImpl.withComparator(mergeComparator(clickCountComparator))
-            }
-            R.id.item_alphabetical -> {
-//                itemListImpl.withComparator(mergeComparator(alphabetComparatorAscending))
-            }
+        Mapper.menuItemIdToSortMode(item.itemId)?.let {
+            viewModel.updateSortMode(it)
         }
-
-        val selectedSortMode = Mapper.menuItemIdToSortMode(item.itemId)
-        viewModel.updateSortMode(selectedSortMode)
 
         item.isChecked = !item.isChecked
         return true
     }
 
-//    private fun defaultComparator(): Comparator<BarcodeItem> {
-//        return when (viewModel.sortMode) {
-//            RECENT -> scannedDateComparator
-//            MOST_FREQUENT -> clickCountComparator
-//            ALPHABETICAL -> alphabetComparatorAscending
-//            else -> scannedDateComparator
-//        }
-//    }
-
-    private fun mergeComparator(comparator: Comparator<BarcodeItem>): Comparator<BarcodeItem> {
-        return Comparator<BarcodeItem> { lhs, rhs ->
-            val favoriteCompare = favoriteComparator.compare(lhs, rhs)
-            if (favoriteCompare == 0) {
-                comparator.compare(lhs, rhs)
-            } else favoriteCompare
-        }
-    }
-
     private fun initUi() {
         setHasOptionsMenu(true)
-
-//        itemListImpl.withComparator(mergeComparator(defaultComparator()))
-//
-//        binding.rvBarcodeHistory.run {
-//            adapter = fastAdapter
-//            requireContext().dividerBuilder()
-//                .size(8, COMPLEX_UNIT_DIP)
-//                .showFirstDivider()
-//                .showLastDivider()
-//                .asSpace().build().addTo(this)
-//        }
-
-//        selectExtension = fastAdapter.getSelectExtension()
-//        selectExtension.apply {
-//            isSelectable = true
-//            multiSelect = false
-//            selectOnLongClick = false
-//        }
-//
-//        fastAdapter.onPreClickListener = { _, _, item, _ ->
-//            val res = actionModeHelper.onClick(item)
-//            res ?: false
-//        }
-
-//        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
-//            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
-//                viewModel.selectedItemWithPosition = Triple(v, item, position)
-//                actionNavigateToDetail()
-//                tracker.selectContent(item)
-//            }
-//
-//            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-//                return if (viewHolder is BarcodeItem.ViewHolder) {
-//                    viewHolder.itemView.b_info
-//                } else null
-//            }
-//        })
-
-//        fastAdapter.addEventHook(object : ClickEventHook<BarcodeItem>() {
-//            override fun onClick(v: View, position: Int, fastAdapter: FastAdapter<BarcodeItem>, item: BarcodeItem) {
-//                when {
-////                    viewModel.showTutorial -> {
-////                        initShowcase(v)
-////                    }
-//                    actionMode == null -> {
-//                        actionShowBottomSheet(item.id.toInt())
-//                    }
-//                    else -> {
-//                        actionMode?.finish()
-//                    }
-//                }
-//
-//            }
-//
-//            override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-//                return if (viewHolder is BarcodeItem.ViewHolder) {
-//                    viewHolder.itemView.card_history_item
-//                } else null
-//            }
-//        })
-
-//        fastAdapter.onPreLongClickListener = { view, _, item, position ->
-//            view.id
-//            viewModel.selectedItemWithPosition = Triple(view, item, position)
-//            actionMode = actionModeHelper.onLongClick(requireActivity() as AppCompatActivity, position)
-//            actionMode != null
-//        }
-
-        /***
-         * TODO epoxy need to implement: swipe, diffing, comparator, search filter
-         * click listener
-         */
+        binding.epoxyRvBarcodeHistory.setItemSpacingDp(8)
+        viewModel.calculate()
     }
 
     private val barcodeItemListener = object : BarcodeItemListener {
@@ -375,14 +251,12 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
 
     private fun actionFavorite() {
         viewModel.updateFavoriteFlag()
-//        fastAdapter.notifyAdapterItemChanged(viewModel.selectedItemWithPosition.third)
-//        itemListImpl.withComparator(mergeComparator(defaultComparator()))
     }
 
     private val actionDelete: IBarcodeHistoryAdapterHelper = object : IBarcodeHistoryAdapterHelper {
         override fun actionDelete(position: Int, barcodeItem: BarcodeItem?) {
             if (position != RecyclerView.NO_POSITION && barcodeItem != null) {
-                viewModel.deleteBarcodeViewBinding(barcodeItem)
+                viewModel.deleteBarcode(barcodeItem)
             }
         }
     }

@@ -8,7 +8,6 @@
     android:layout_marginHorizontal="@dimen/material_baseline_grid_1x"
     android:checkable="true"
     android:clickable="true"
-    android:theme="@style/Widget.AppTheme.HistoryCardView"
     android:focusable="true"
     android:gravity="center_vertical">
 

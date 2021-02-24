@@ -10,7 +10,8 @@
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/epoxy_rv_barcode_history"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingVertical="@dimen/material_baseline_grid_1x" />
 
     <LinearLayout
         android:id="@+id/ll_empty"
