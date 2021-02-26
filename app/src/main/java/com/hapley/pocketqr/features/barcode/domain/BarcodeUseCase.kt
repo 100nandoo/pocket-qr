@@ -1,11 +1,10 @@
 package com.hapley.pocketqr.features.barcode.domain
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
+import com.hapley.pocketqr.ui.settings.SortMode
 import com.hapley.preview.ui.PreviewItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -20,6 +19,12 @@ class BarcodeUseCase @Inject constructor(private val barcodeRepository: BarcodeR
     fun getAllFlow(): Flow<List<Barcode>> {
         return barcodeRepository.getAllFlow().map { barcodeEntityList ->
             barcodeEntityList.map { Barcode(it) }
+        }
+    }
+
+    fun getAllFlowSorted(comparator: Comparator<Barcode>): Flow<List<Barcode>> {
+        return barcodeRepository.getAllFlow().map { barcodeEntityList ->
+            barcodeEntityList.map { Barcode(it) }.sortedWith(comparator)
         }
     }
 

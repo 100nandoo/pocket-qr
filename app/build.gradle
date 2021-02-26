@@ -119,12 +119,9 @@ dependencies {
     // Coil Image Loader
     implementation Libraries.coil
 
-    // Fast adapter
-    implementation Libraries.fastAdapter
-    implementation Libraries.fastAdapterBinding
-    implementation Libraries.fastAdapterDiff
-    implementation Libraries.fastAdapterUi
-    implementation Libraries.fastAdapterUtils
+    // Epoxy
+    implementation Libraries.epoxy
+    kapt Libraries.epoxyKapt
 
     // Khronos
     implementation Libraries.khronos
