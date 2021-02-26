@@ -84,12 +84,6 @@ object Libraries {
     val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
     val epoxyKapt = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
 
-    val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
-    val fastAdapterBinding = "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"
-    val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
-    val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
-    val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
-
     val khronos = "com.github.hotchemi:khronos:${Versions.khronos}"
 
     val koptional = "com.gojuno.koptional:koptional:${Versions.koptional}"

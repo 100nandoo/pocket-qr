@@ -123,13 +123,6 @@ dependencies {
     implementation Libraries.epoxy
     kapt Libraries.epoxyKapt
 
-    // Fast adapter
-    implementation Libraries.fastAdapter
-    implementation Libraries.fastAdapterBinding
-    implementation Libraries.fastAdapterDiff
-    implementation Libraries.fastAdapterUi
-    implementation Libraries.fastAdapterUtils
-
     // Khronos
     implementation Libraries.khronos
 

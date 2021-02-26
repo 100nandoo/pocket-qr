@@ -80,7 +80,7 @@ limitations under the License.
 
 <!-- Other -->
 [AppIntro]: https://github.com/AppIntro/AppIntro
-[Fast Adapter]: https://github.com/mikepenz/FastAdapter
+[Epoxy Adapter]: https://github.com/airbnb/epoxy
 [Khronos]: http://hotchemi.github.io/khronos/
 [Koptional]: https://github.com/gojuno/koptional
 [Leak Canary]: https://square.github.io/leakcanary/

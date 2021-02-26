@@ -57,72 +57,6 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
         }
     }
 
-    private val queryCloseListener = SearchView.OnCloseListener {
-        viewModel.calculate()
-        false
-    }
-
-    private val actionModeCallback = object : ActionMode.Callback {
-        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-            return true
-        }
-
-        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-            val itemFavorite = menu.findItem(R.id.item_favorite)
-            val isFavorite = viewModel.selectedItemWithPosition.second.isFavorite
-
-            @DrawableRes
-            val icon = if (isFavorite) R.drawable.ic_barcode_favorite else R.drawable.ic_barcode_unfavorite
-
-            val iconDrawable = AppCompatResources.getDrawable(requireContext(), icon)
-            itemFavorite?.icon = iconDrawable
-
-            return itemFavorite?.icon == iconDrawable
-        }
-
-        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            val selectedItem = viewModel.selectedItemWithPosition
-            return when (item.itemId) {
-                R.id.item_detail -> {
-                    actionNavigateToDetail()
-                    mode.finish()
-                    true
-                }
-                R.id.item_share -> {
-                    actionShare(selectedItem.second)
-                    mode.finish()
-                    true
-                }
-                R.id.item_favorite -> {
-                    actionFavorite()
-                    mode.finish()
-                    true
-                }
-                R.id.item_copy -> {
-                    actionCopyToClipboard(selectedItem.second)
-                    mode.finish()
-                    true
-                }
-                else -> false
-            }
-        }
-
-        override fun onDestroyActionMode(mode: ActionMode?) {
-            actionMode = null
-        }
-    }
-
-//    private val actionModeHelper by lazy {
-//        ActionModeHelper(fastAdapter, R.menu.menu_barcode_history_action_mode, actionModeCallback)
-//            .withTitleProvider(object : ActionModeHelper.ActionModeTitleProvider {
-//                override fun getTitle(selected: Int): String {
-//                    return selectExtension.selectedItems.firstOrNull()?.title ?: ""
-//                }
-//            })
-//    }
-
-    private var actionMode: ActionMode? = null
-
     private val screenName: String = SCREEN_HISTORY
     private val className: String = this.javaClass.simpleName
 
@@ -151,12 +85,6 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
         initUi()
         subscribeUi()
         initSwipe()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        actionMode?.finish()
-        actionMode = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -219,38 +147,8 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
         })
     }
 
-
-    private fun actionCopyToClipboard(barcodeItem: BarcodeItem) {
-        pocketQrUtil.copyToClipboard(barcodeItem)
-        pocketQrUtil.shortToast(requireContext(), R.string.copied)
-    }
-
     private fun actionShowBottomSheet(id: Int) {
         findNavController().navigate(BarcodeHistoryFragmentDirections.actionShowBottomSheetDialog(id))
-    }
-
-    private fun actionNavigateToDetail() {
-        val id = viewModel.selectedItemWithPosition.second.id.toInt()
-        val selectedView = viewModel.selectedItemWithPosition.first
-
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-        }
-        val endTransitionName = getString(R.string.barcode_detail_transition_name)
-        val extras = FragmentNavigatorExtras(selectedView to endTransitionName)
-        val directions = BarcodeHistoryFragmentDirections.actionToBarcodeDetailFragment(id)
-        findNavController().navigate(directions, extras)
-    }
-
-    private fun actionShare(barcodeItem: BarcodeItem) {
-        pocketQrUtil.actionShareBarcodeItem(requireContext(), barcodeItem)
-    }
-
-    private fun actionFavorite() {
-        viewModel.updateFavoriteFlag()
     }
 
     private val actionDelete: IBarcodeHistoryAdapterHelper = object : IBarcodeHistoryAdapterHelper {
