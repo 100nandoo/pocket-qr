@@ -18,7 +18,7 @@ object Releases {
 }
 
 object Versions {
-    val kotlin = "1.4.30"
+    val kotlin = "1.4.31"
     val coroutinePlayServices = "1.4.2"
     val coroutineGuava = "1.4.2"
     val gradle = "4.1.2"
@@ -33,7 +33,7 @@ object Versions {
         val cameraView = "1.0.0-alpha21"
         val constraintLayout = "2.0.4"
         val core = "1.3.2"
-        val hilt = "2.32-alpha"
+        val hilt = "2.33-beta"
         val lifecycle = "2.2.0"
         val material = "1.2.0"
         val navigation = "2.3.3"
@@ -50,8 +50,7 @@ object Versions {
 
     //    val assent = "3.0.0-RC4"
     val coil = "1.1.1"
-    val epoxy = "4.4.0"
-    val fastAdapter = "5.3.2"
+    val epoxy = "4.4.1"
 
     val khronos = "0.9.0"
 
