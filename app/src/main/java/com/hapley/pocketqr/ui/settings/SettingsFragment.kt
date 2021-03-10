@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.*
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_SETTINGS
@@ -107,7 +111,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         }
                     }
                 )
-
             }
 
             PreferenceCategory(context).let { displayCategory ->
@@ -134,9 +137,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         }
                     }
                 )
-
             }
-
 
             PreferenceCategory(context).let { tutorialCategory ->
                 tutorialCategory.key = CATEGORY_TUTORIAL
@@ -168,7 +169,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 //                    }
 //                )
             }
-
 
             PreferenceCategory(context).let { aboutCategory ->
                 aboutCategory.key = CATEGORY_ABOUT

@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.annotation.FloatRange
 import androidx.annotation.StringDef
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.FirebaseAnalytics.Param.*
+import com.google.firebase.analytics.FirebaseAnalytics.Param.CONTENT_TYPE
+import com.google.firebase.analytics.FirebaseAnalytics.Param.ITEM_NAME
+import com.google.firebase.analytics.FirebaseAnalytics.Param.SCREEN_CLASS
+import com.google.firebase.analytics.FirebaseAnalytics.Param.SCREEN_NAME
+import com.google.firebase.analytics.FirebaseAnalytics.Param.SEARCH_TERM
+import com.google.firebase.analytics.FirebaseAnalytics.Param.VALUE
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
@@ -51,7 +56,7 @@ class Tracker @Inject constructor() {
 
     fun favorite(barcodeItem: BarcodeItem, isFavorite: Boolean) {
         val bundle = basicBundle(barcodeItem)
-        val paramValue = if(isFavorite) ADD_FAVORITE else REMOVE_UNFAVORITE
+        val paramValue = if (isFavorite) ADD_FAVORITE else REMOVE_UNFAVORITE
 
         bundle.apply {
             putString(VALUE, paramValue)
@@ -121,7 +126,6 @@ class Tracker @Inject constructor() {
     fun tutorialComplete() {
         Firebase.analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
     }
-
 }
 
 const val SCREEN_APP_INTRO = "AppIntro"

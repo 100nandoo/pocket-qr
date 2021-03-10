@@ -1,6 +1,9 @@
 package com.hapley.pocketqr.db
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import com.hapley.pocketqr.common.BaseDao
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import kotlinx.coroutines.flow.Flow

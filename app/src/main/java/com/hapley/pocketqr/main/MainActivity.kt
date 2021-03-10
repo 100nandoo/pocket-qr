@@ -20,12 +20,12 @@ import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hapley.core.ui.helper.viewBinding
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.databinding.ActivityMainBinding
 import com.hapley.pocketqr.features.barcode.domain.URL
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.features.barcode.ui.toShortcutInfo
-import com.hapley.core.ui.helper.viewBinding
 import com.hapley.pocketqr.util.PocketQrUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -104,7 +104,6 @@ class MainActivity : AppCompatActivity() {
             val shortcutManager = getSystemService<ShortcutManager>()
             shortcutManager?.dynamicShortcuts = list
         }
-
     }
 
     private fun actionOpen(barcodeItem: BarcodeItem) {
@@ -119,7 +118,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     actionIntentViewWrapper(barcodeItem)
                 }
-
             }
             else -> {
                 actionIntentViewWrapper(barcodeItem)

@@ -2,11 +2,21 @@ package com.hapley.pocketqr.di
 
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
-import com.hapley.pocketqr.features.barcode.domain.*
-import khronos.*
+import com.hapley.pocketqr.features.barcode.domain.CONTACT
+import com.hapley.pocketqr.features.barcode.domain.EMAIL
+import com.hapley.pocketqr.features.barcode.domain.ISBN
+import com.hapley.pocketqr.features.barcode.domain.PHONE
+import com.hapley.pocketqr.features.barcode.domain.URL
+import com.hapley.pocketqr.features.barcode.domain.WIFI
+import khronos.Dates
+import khronos.days
+import khronos.hours
+import khronos.month
+import khronos.months
+import khronos.week
+import khronos.year
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 class MockDataGenerator @Inject constructor(private val barcodeRepository: BarcodeRepository) {
@@ -34,11 +44,12 @@ class MockDataGenerator @Inject constructor(private val barcodeRepository: Barco
             add(
                 BarcodeEntity(
                     "BEGIN:VCARD\n" +
-                            "VERSION:3.0\n" +
-                            "N:Doe;John\n" +
-                            "FN:John Doe\n" +
-                            "TEL;TYPE=voice,work,pref:98123456\n" +
-                            "END:VCARD", "", "John Doe", 3.months.ago.time, 256, CONTACT, false, 0
+                        "VERSION:3.0\n" +
+                        "N:Doe;John\n" +
+                        "FN:John Doe\n" +
+                        "TEL;TYPE=voice,work,pref:98123456\n" +
+                        "END:VCARD",
+                    "", "John Doe", 3.months.ago.time, 256, CONTACT, false, 0
                 )
             )
         }

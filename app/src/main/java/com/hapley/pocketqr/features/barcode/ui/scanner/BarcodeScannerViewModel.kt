@@ -2,13 +2,23 @@ package com.hapley.pocketqr.features.barcode.ui.scanner
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hapley.pocketqr.features.barcode.domain.*
+import com.hapley.pocketqr.features.barcode.domain.Barcode
+import com.hapley.pocketqr.features.barcode.domain.BarcodeType
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
+import com.hapley.pocketqr.features.barcode.domain.CONTACT
+import com.hapley.pocketqr.features.barcode.domain.EMAIL
+import com.hapley.pocketqr.features.barcode.domain.GEO
+import com.hapley.pocketqr.features.barcode.domain.ISBN
+import com.hapley.pocketqr.features.barcode.domain.PHONE
+import com.hapley.pocketqr.features.barcode.domain.SMS
+import com.hapley.pocketqr.features.barcode.domain.UNKNOWN
+import com.hapley.pocketqr.features.barcode.domain.URL
+import com.hapley.pocketqr.features.barcode.domain.WIFI
 import com.hapley.pocketqr.util.PocketQrUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 import com.google.mlkit.vision.barcode.Barcode as MlKitBarcode
 
@@ -27,20 +37,20 @@ class BarcodeScannerViewModel @Inject constructor(private val barcodeUseCase: Ba
         }
     }
 
-    fun convertToDomain(mlKitBarcode: MlKitBarcode, id: Int): Barcode?{
-       return mlKitBarcode.rawValue?.let {
-           Barcode(
-               id = id,
-               rawValue = it,
-               label = pocketQrUtil.extractSafeEntryLabel(it),
-               displayValue = mlKitBarcode.displayValue ?: "",
-               created = Date().time,
-               format = mlKitBarcode.format,
-               type = mlKitBarcode.generateType(),
-               isFavorite = false,
-               clickCount = 0
-           )
-       }
+    fun convertToDomain(mlKitBarcode: MlKitBarcode, id: Int): Barcode? {
+        return mlKitBarcode.rawValue?.let {
+            Barcode(
+                id = id,
+                rawValue = it,
+                label = pocketQrUtil.extractSafeEntryLabel(it),
+                displayValue = mlKitBarcode.displayValue ?: "",
+                created = Date().time,
+                format = mlKitBarcode.format,
+                type = mlKitBarcode.generateType(),
+                isFavorite = false,
+                clickCount = 0
+            )
+        }
     }
 }
 

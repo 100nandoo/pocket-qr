@@ -8,7 +8,6 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Migrate rv adapter to epoxy
 - [ ] Setup documentation using [docusaurus](https://v2.docusaurus.io/docs/)
 - [ ] Widget
 - [ ] Screen App Flow
@@ -65,3 +64,4 @@ Pocket QR app
 - [x] Update room usage to use flow
 - [x] View Binding
 - [x] Create core module
+- [x] Migrate rv adapter to epoxy

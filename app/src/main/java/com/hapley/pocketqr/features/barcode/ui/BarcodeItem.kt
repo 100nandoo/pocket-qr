@@ -6,15 +6,26 @@ import android.content.pm.ShortcutInfo
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
-import android.text.format.DateUtils.*
+import android.text.format.DateUtils.FORMAT_ABBREV_ALL
+import android.text.format.DateUtils.MINUTE_IN_MILLIS
+import android.text.format.DateUtils.getRelativeTimeSpanString
 import androidx.annotation.DrawableRes
 import androidx.core.view.isInvisible
 import com.hapley.core.ui.helper.ViewBindingKotlinModel
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.databinding.BarcodeHistoryItemBinding
-import com.hapley.pocketqr.features.barcode.domain.*
+import com.hapley.pocketqr.features.barcode.domain.Barcode
+import com.hapley.pocketqr.features.barcode.domain.BarcodeType
+import com.hapley.pocketqr.features.barcode.domain.CONTACT
+import com.hapley.pocketqr.features.barcode.domain.EMAIL
+import com.hapley.pocketqr.features.barcode.domain.GEO
+import com.hapley.pocketqr.features.barcode.domain.ISBN
+import com.hapley.pocketqr.features.barcode.domain.PHONE
+import com.hapley.pocketqr.features.barcode.domain.SMS
+import com.hapley.pocketqr.features.barcode.domain.URL
+import com.hapley.pocketqr.features.barcode.domain.WIFI
 import com.hapley.pocketqr.main.MainActivity
-import java.util.*
+import java.util.Date
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-28.

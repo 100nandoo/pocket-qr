@@ -19,7 +19,12 @@ import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.main.MainViewModel
 import com.hapley.pocketqr.util.PocketQrUtil
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.*
+import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.iv_down
+import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.tv_copy
+import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.tv_detail
+import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.tv_favorite
+import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.tv_open
+import kotlinx.android.synthetic.main.barcode_history_bottom_sheet.tv_share
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -66,9 +71,12 @@ class ActionBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun subscribeUi() {
-        viewModel.barcodeLiveData.observe(viewLifecycleOwner, {
-            initUi(it)
-        })
+        viewModel.barcodeLiveData.observe(
+            viewLifecycleOwner,
+            {
+                initUi(it)
+            }
+        )
     }
 
     private fun initUi(barcodeItem: BarcodeItem) {

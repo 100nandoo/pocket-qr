@@ -5,17 +5,12 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.annotation.DrawableRes
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_HISTORY
@@ -51,7 +46,8 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
             return true
         }
 
-        override fun onQueryTextChange(s: String): Boolean {viewModel.calculate(s)
+        override fun onQueryTextChange(s: String): Boolean {
+            viewModel.calculate(s)
             tracker.search(s)
             return true
         }
@@ -130,21 +126,24 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
     }
 
     private fun subscribeUi() {
-        viewModel.barcodeListLiveData.observe(viewLifecycleOwner, { barcodeItemList ->
-            if (barcodeItemList.isEmpty()) {
-                binding.viewSwitcher.showNext()
-            } else {
-                binding.epoxyRvBarcodeHistory.withModels {
-                    barcodeItemList.forEach { barcodeItemViewBinding ->
-                        barcodeItemViewBinding.listener = barcodeItemListener
+        viewModel.barcodeListLiveData.observe(
+            viewLifecycleOwner,
+            { barcodeItemList ->
+                if (barcodeItemList.isEmpty()) {
+                    binding.viewSwitcher.showNext()
+                } else {
+                    binding.epoxyRvBarcodeHistory.withModels {
+                        barcodeItemList.forEach { barcodeItemViewBinding ->
+                            barcodeItemViewBinding.listener = barcodeItemListener
 
-                        barcodeItemViewBinding
-                            .id(barcodeItemViewBinding.id)
-                            .addTo(this)
+                            barcodeItemViewBinding
+                                .id(barcodeItemViewBinding.id)
+                                .addTo(this)
+                        }
                     }
                 }
             }
-        })
+        )
     }
 
     private fun actionShowBottomSheet(id: Int) {
@@ -162,5 +161,4 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
     private fun initSwipe() {
         val barcodeHistoryAdapterHelper = BarcodeHistoryAdapterHelper(binding.epoxyRvBarcodeHistory, actionDelete)
     }
-
 }

@@ -11,12 +11,16 @@ import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.domain.Barcode
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
-import com.hapley.pocketqr.ui.settings.*
+import com.hapley.pocketqr.ui.settings.ALPHABETICAL
+import com.hapley.pocketqr.ui.settings.MOST_FREQUENT
+import com.hapley.pocketqr.ui.settings.RECENT
+import com.hapley.pocketqr.ui.settings.SettingsFragment
+import com.hapley.pocketqr.ui.settings.SortMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 import kotlin.Comparator
 

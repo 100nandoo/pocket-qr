@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
-import androidx.camera.core.*
+import androidx.camera.core.CameraControl
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -99,7 +102,8 @@ class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
                     .also {
                         it.setAnalyzer(
                             ContextCompat.getMainExecutor(requireContext()),
-                            BarcodeAnalyzer(scanner, pocketQrUtil) { handleBarcode(it) })
+                            BarcodeAnalyzer(scanner, pocketQrUtil) { handleBarcode(it) }
+                        )
                     }
 
                 try {
@@ -112,7 +116,6 @@ class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
                     preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
                     setUpPinchToZoom(camera)
-
                 } catch (e: Exception) {
                     tracker.recordException("1. Bind camera\n2. Setup camera control\n3. Set surface provider.", e)
                     Timber.e(e)
@@ -131,7 +134,6 @@ class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
                 tracker.zoom(slider.value)
             }
         })
-
     }
 
     private fun setUpPinchToZoom(camera: Camera) {
@@ -182,5 +184,4 @@ class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
                 .show()
         }
     }
-
 }
