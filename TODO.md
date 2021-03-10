@@ -8,13 +8,14 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Setup documentation using [docusaurus](https://v2.docusaurus.io/docs/)
+- [ ] In app review
 - [ ] Widget
 - [ ] Screen App Flow
 - [ ] Github action for release build
+- [ ] Github action to spotless check merge request commit
 - [ ] Github pages for documentation
+- [ ] Setup documentation using [docusaurus](https://v2.docusaurus.io/docs/)
 - [ ] Implement new design
-- [ ] In app review
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
