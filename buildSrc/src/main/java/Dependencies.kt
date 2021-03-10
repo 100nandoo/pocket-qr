@@ -23,26 +23,26 @@ object Versions {
     val coroutineGuava = "1.4.2"
     val gradle = "4.1.2"
     val gms = "4.3.5"
-    val crashlyticsGradle = "2.5.0"
-    val perfPlugin = "1.3.4"
+    val crashlyticsGradle = "2.5.1"
+    val perfPlugin = "1.3.5"
 
     object Android {
         val appCompat = "1.2.0"
         val browser = "1.3.0"
-        val cameraX = "1.0.0-rc02"
-        val cameraView = "1.0.0-alpha21"
+        val cameraX = "1.0.0-rc03"
+        val cameraView = "1.0.0-alpha22"
         val constraintLayout = "2.0.4"
         val core = "1.3.2"
         val hilt = "2.33-beta"
         val lifecycle = "2.2.0"
-        val material = "1.2.0"
+        val material = "1.3.0"
         val navigation = "2.3.3"
         val preference = "1.1.1"
         val room = "2.2.6"
     }
 
     object Firebase {
-        val bom = "26.5.0"
+        val bom = "26.6.0"
         val qrCode = "16.0.3"
     }
 
