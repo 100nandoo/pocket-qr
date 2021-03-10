@@ -37,7 +37,7 @@ allprojects {
             targetExclude("$buildDir/**/*.kt")
             targetExclude('bin/**/*.kt')
 
-            ktlint("0.40.0")
+            ktlint(Versions.ktlint)
         }
     }
 }

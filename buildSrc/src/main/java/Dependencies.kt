@@ -25,6 +25,7 @@ object Versions {
     val gms = "4.3.5"
     val crashlyticsGradle = "2.5.1"
     val perfPlugin = "1.3.5"
+    val ktlint = "0.4.0"
 
     object Android {
         val appCompat = "1.2.0"
