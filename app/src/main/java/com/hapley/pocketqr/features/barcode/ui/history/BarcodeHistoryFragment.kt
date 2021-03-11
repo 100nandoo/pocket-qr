@@ -20,6 +20,7 @@ import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItemListener
 import com.hapley.pocketqr.ui.settings.Mapper
 import com.hapley.pocketqr.util.PocketQrUtil
+import com.hapley.pocketqr.wrapper.ReviewWrapper
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -35,6 +36,9 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
 
     @Inject
     lateinit var pocketQrUtil: PocketQrUtil
+
+    @Inject
+    lateinit var reviewWrapper: ReviewWrapper
 
     @Inject
     lateinit var tracker: Tracker
@@ -72,6 +76,7 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
         lifecycleScope.launch {
             delay(2_000L)
             tracker.trackScreen(className, screenName)
+            askForReview()
         }
     }
 
@@ -156,6 +161,10 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
                 viewModel.deleteBarcode(barcodeItem)
             }
         }
+    }
+
+    private suspend fun askForReview() {
+        reviewWrapper.askForReview(requireActivity())
     }
 
     private fun initSwipe() {

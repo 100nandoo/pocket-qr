@@ -6,6 +6,8 @@ import android.content.ClipboardManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.view.View
@@ -22,16 +24,23 @@ import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
+import com.hapley.pocketqr.BuildConfig
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.common.AppPreferences
 import com.hapley.pocketqr.common.Tracker
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.util.Date
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class PocketQrUtil @Inject constructor(@ApplicationContext private val context: Context, private val clipboardManager: ClipboardManager, private val tracker: Tracker) {
+class PocketQrUtil @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val clipboardManager: ClipboardManager,
+    private val tracker: Tracker
+) {
 
     companion object {
         const val SAFE_ENTRY_REGEX = "-([A-Z]){2}\\w+"
@@ -172,15 +181,15 @@ class PocketQrUtil @Inject constructor(@ApplicationContext private val context: 
     }
 
     fun isProbablyAnEmulator() = Build.FINGERPRINT.startsWith("generic") ||
-        Build.FINGERPRINT.startsWith("unknown") ||
-        Build.MODEL.contains("google_sdk") ||
-        Build.MODEL.contains("Emulator") ||
-        Build.MODEL.contains("Android SDK built for x86") ||
-        Build.BOARD == "QC_Reference_Phone" ||
-        Build.MANUFACTURER.contains("Genymotion") ||
-        Build.HOST.startsWith("Build") ||
-        (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic")) ||
-        "google_sdk" == Build.PRODUCT
+            Build.FINGERPRINT.startsWith("unknown") ||
+            Build.MODEL.contains("google_sdk") ||
+            Build.MODEL.contains("Emulator") ||
+            Build.MODEL.contains("Android SDK built for x86") ||
+            Build.BOARD == "QC_Reference_Phone" ||
+            Build.MANUFACTURER.contains("Genymotion") ||
+            Build.HOST.startsWith("Build") ||
+            (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic")) ||
+            "google_sdk" == Build.PRODUCT
 
     fun extractSafeEntryLabel(url: String): String {
         return if (url.contains("temperaturepass.ndi-api.gov.sg", true) || url.contains("www.safeentry-qr.gov.sg", true)) {
@@ -188,5 +197,18 @@ class PocketQrUtil @Inject constructor(@ApplicationContext private val context: 
             val result = regex.find(url)
             result?.value?.replace("-", " ")?.trim() ?: ""
         } else ""
+    }
+
+    fun packageName(): String {
+        return BuildConfig.APPLICATION_ID
+    }
+
+    fun firstInstallTime(): Date? {
+        val packageInfoResult = runCatching { context.packageManager.getPackageInfo(packageName(), PackageManager.GET_PERMISSIONS) }
+        packageInfoResult.getOrNull()?.let { packageInfo: PackageInfo ->
+            val installTimeMillis = packageInfo.firstInstallTime
+            return Date(installTimeMillis)
+        }
+        return null
     }
 }
