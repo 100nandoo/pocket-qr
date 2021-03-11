@@ -93,6 +93,8 @@ dependencies {
     implementation AndroidLibraries.navigationFrag
     implementation AndroidLibraries.navigation
 
+    implementation AndroidLibraries.playCore
+    implementation AndroidLibraries.playCoreKtx
     implementation AndroidLibraries.preference
 
     implementation AndroidLibraries.roomRuntime

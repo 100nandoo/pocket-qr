@@ -38,6 +38,8 @@ object Versions {
         val lifecycle = "2.2.0"
         val material = "1.3.0"
         val navigation = "2.3.3"
+        val playCore = "1.10.0"
+        val playCoreKtx = "1.8.1"
         val preference = "1.1.1"
         val room = "2.2.6"
     }
@@ -139,6 +141,8 @@ object AndroidLibraries {
     val navigationFrag = "androidx.navigation:navigation-fragment-ktx:${Versions.Android.navigation}"
     val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.Android.navigation}"
 
+    val playCore = "com.google.android.play:core:${Versions.Android.playCore}"
+    val playCoreKtx = "com.google.android.play:core-ktx:${Versions.Android.playCoreKtx}"
     val preference = "androidx.preference:preference-ktx:${Versions.Android.preference}"
 
     val roomRuntime = "androidx.room:room-runtime:${Versions.Android.room}"
