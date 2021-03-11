@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+Version 0.8.13 *(18 Feb 2021)*
+----------------------------
+ * New: Update dependencies
+ * New: Migrate from Kotlin synthetic to viewBinding
+ * New: Migrate from FastAdapter to Epoxy
+ * New: Add Spotless integration
+ * New: Add In-App Review
+
 Version 0.8.10 *(18 Feb 2021)*
 ----------------------------
  * New: Update dependencies
