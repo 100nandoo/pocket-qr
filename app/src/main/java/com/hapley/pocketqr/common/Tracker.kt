@@ -16,10 +16,14 @@ import com.google.firebase.ktx.Firebase
 import com.hapley.pocketqr.features.barcode.domain.getBarcodeTypeName
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.SortMode
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 class Tracker @Inject constructor() {
     companion object {
+        const val EVENT_ASK_FOR_REVIEW = "ask_for_review"
         const val EVENT_COPY = "copy_to_clipboard"
         const val EVENT_DELETE = "delete"
         const val EVENT_FAVORITE = "favorite"
@@ -27,11 +31,15 @@ class Tracker @Inject constructor() {
         const val EVENT_SORT = "sort"
         const val EVENT_ZOOM = "zoom"
 
+        const val DATE = "date"
+        const val READABLE_DATE = "readable_date"
+
         const val ZOOM_IN = "zoom_in"
         const val ZOOM_OUT = "zoom_out"
 
         const val ADD_FAVORITE = "add_favorite"
         const val REMOVE_UNFAVORITE = "remove_favorite"
+
     }
 
     fun recordException(message: String, exception: Exception) {
@@ -42,6 +50,16 @@ class Tracker @Inject constructor() {
     private fun basicBundle(barcodeItem: BarcodeItem): Bundle = Bundle().apply {
         putString(ITEM_NAME, barcodeItem.title)
         putString(CONTENT_TYPE, barcodeItem.barcodeType.getBarcodeTypeName())
+    }
+
+    fun askForReview(date: Date) {
+        val bundle = Bundle().apply {
+            val readableDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ssZ", Locale.ENGLISH).format(date)
+            putString(DATE, date.toString())
+            putString(READABLE_DATE, readableDate)
+        }
+
+        Firebase.analytics.logEvent(EVENT_ASK_FOR_REVIEW, bundle)
     }
 
     fun copy(barcodeItem: BarcodeItem) {
