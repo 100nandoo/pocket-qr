@@ -104,7 +104,7 @@ class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
                     .also {
                         it.setAnalyzer(
                             ContextCompat.getMainExecutor(requireContext()),
-                            BarcodeAnalyzer(scanner, pocketQrUtil) { handleBarcode(it) }
+                            BarcodeAnalyzer(scanner, pocketQrUtil) { barcode ->  handleBarcode(barcode) }
                         )
                     }
 

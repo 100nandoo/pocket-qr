@@ -86,7 +86,6 @@ dependencies {
 
     implementation AndroidLibraries.material
 
-    implementation AndroidLibraries.lifecycleExt
     implementation AndroidLibraries.lifecycleLiveDataKtx
     implementation AndroidLibraries.viewModel
 

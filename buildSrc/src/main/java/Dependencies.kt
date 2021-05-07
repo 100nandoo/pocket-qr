@@ -3,7 +3,7 @@ object Misc {
     val compileSdk = 30
     val minSdk = 21
     val targetSdk = 30
-    val buildTools = "30.0.1"
+    val buildTools = "30.0.2"
 }
 
 object Modules {
@@ -18,53 +18,53 @@ object Releases {
 }
 
 object Versions {
-    val kotlin = "1.4.31"
-    val coroutinePlayServices = "1.4.2"
-    val coroutineGuava = "1.4.2"
-    val gradle = "4.1.2"
+    val kotlin = "1.5.0"
+    val coroutinePlayServices = "1.4.3"
+    val coroutineGuava = "1.4.3"
+    val gradle = "4.2.0"
     val gms = "4.3.5"
-    val crashlyticsGradle = "2.5.1"
+    val crashlyticsGradle = "2.5.2"
     val perfPlugin = "1.3.5"
     val ktlint = "0.4.0"
 
     object Android {
         val appCompat = "1.2.0"
         val browser = "1.3.0"
-        val cameraX = "1.0.0-rc03"
-        val cameraView = "1.0.0-alpha22"
+        val cameraX = "1.0.0"
+        val cameraView = "1.0.0-alpha24"
         val constraintLayout = "2.0.4"
         val core = "1.3.2"
-        val hilt = "2.33-beta"
-        val lifecycle = "2.2.0"
+        val hilt = "2.35.1"
+        val lifecycle = "2.3.1"
         val material = "1.3.0"
-        val navigation = "2.3.3"
+        val navigation = "2.3.5"
         val playCore = "1.10.0"
         val playCoreKtx = "1.8.1"
         val preference = "1.1.1"
-        val room = "2.2.6"
+        val room = "2.3.0"
     }
 
     object Firebase {
-        val bom = "26.6.0"
-        val qrCode = "16.0.3"
+        val bom = "27.1.0"
+        val qrCode = "16.1.1"
     }
 
     val appIntro = "6.1.0"
 
     //    val assent = "3.0.0-RC4"
-    val coil = "1.1.1"
-    val epoxy = "4.4.1"
+    val coil = "1.2.1"
+    val epoxy = "4.5.0"
 
     val khronos = "0.9.0"
 
     val koptional = "1.7.0"
 
-    val lottie = "3.6.0"
+    val lottie = "3.7.0"
 
     val materialValues = "1.1.1"
 
     val awesomeQr = "1.2.0"
-    val rvDivider = "3.4.0"
+    val rvDivider = "3.5.0"
     val timber = "4.7.1"
     val viewBindingDelegate = "1.0.0"
 
@@ -74,7 +74,7 @@ object Versions {
     val junitExt = "1.1.1"
 
     // Debug
-    val leakCanary = "2.6"
+    val leakCanary = "2.7"
 }
 
 object Libraries {
@@ -134,7 +134,6 @@ object AndroidLibraries {
 
     val material = "com.google.android.material:material:${Versions.Android.material}"
 
-    val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.Android.lifecycle}"
     val lifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Android.lifecycle}"
     val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
 
