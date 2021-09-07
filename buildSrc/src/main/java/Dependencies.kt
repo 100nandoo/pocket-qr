@@ -13,30 +13,30 @@ object Modules {
 }
 
 object Releases {
-    val versionCode = 18
-    val versionName = "0.8.13"
+    val versionCode = 19
+    val versionName = "0.8.14"
 }
 
 object Versions {
-    val kotlin = "1.5.0"
-    val coroutinePlayServices = "1.4.3"
-    val coroutineGuava = "1.4.3"
+    val kotlin = "1.5.30"
+    val coroutinePlayServices = "1.5.2"
+    val coroutineGuava = "1.5.2"
     val gradle = "4.2.0"
-    val gms = "4.3.5"
-    val crashlyticsGradle = "2.5.2"
-    val perfPlugin = "1.3.5"
+    val gms = "4.3.10"
+    val crashlyticsGradle = "2.7.1"
+    val perfPlugin = "1.4.0"
     val ktlint = "0.4.0"
 
     object Android {
-        val appCompat = "1.2.0"
+        val appCompat = "1.3.1"
         val browser = "1.3.0"
-        val cameraX = "1.0.0"
-        val cameraView = "1.0.0-alpha24"
-        val constraintLayout = "2.0.4"
-        val core = "1.3.2"
-        val hilt = "2.35.1"
+        val cameraX = "1.0.1"
+        val cameraView = "1.0.0-alpha28"
+        val constraintLayout = "2.1.0"
+        val core = "1.6.0"
+        val hilt = "2.38.1"
         val lifecycle = "2.3.1"
-        val material = "1.3.0"
+        val material = "1.4.0"
         val navigation = "2.3.5"
         val playCore = "1.10.0"
         val playCoreKtx = "1.8.1"
@@ -45,31 +45,31 @@ object Versions {
     }
 
     object Firebase {
-        val bom = "27.1.0"
-        val qrCode = "16.1.1"
+        val bom = "28.4.0"
+        val qrCode = "17.0.0"
     }
 
     val appIntro = "6.1.0"
 
     //    val assent = "3.0.0-RC4"
-    val coil = "1.2.1"
-    val epoxy = "4.5.0"
+    val coil = "1.3.2"
+    val epoxy = "4.6.2"
 
     val khronos = "0.9.0"
 
     val koptional = "1.7.0"
 
-    val lottie = "3.7.0"
+    val lottie = "4.1.0"
 
     val materialValues = "1.1.1"
 
     val awesomeQr = "1.2.0"
     val rvDivider = "3.5.0"
-    val timber = "4.7.1"
+    val timber = "5.0.1"
     val viewBindingDelegate = "1.0.0"
 
     // Tests
-    val espresso = "3.2.0"
+    val espresso = "3.4.0"
     val junit = "4.13"
     val junitExt = "1.1.1"
 

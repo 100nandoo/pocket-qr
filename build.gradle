@@ -26,8 +26,8 @@ plugins {
 allprojects {
     repositories {
         google()
-        jcenter()
         maven { url "https://jitpack.io" }
+        jcenter()
     }
 
     apply plugin: 'com.diffplug.spotless'

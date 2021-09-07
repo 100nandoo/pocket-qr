@@ -77,7 +77,7 @@ limitations under the License.
 
 <!-- Other -->
 [AppIntro]: https://github.com/AppIntro/AppIntro
-[Epoxy Adapter]: https://github.com/airbnb/epoxy
+[Epoxy]: https://github.com/airbnb/epoxy
 [Khronos]: http://hotchemi.github.io/khronos/
 [Koptional]: https://github.com/gojuno/koptional
 [Leak Canary]: https://square.github.io/leakcanary/

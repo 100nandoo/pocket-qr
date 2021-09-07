@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.8.14 *(7 Sep 2021)*
+----------------------------
+* New: Update dependencies
+* New: Update MAD Score
+
 Version 0.8.13 *(18 Feb 2021)*
 ----------------------------
  * New: Update dependencies

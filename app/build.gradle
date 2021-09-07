@@ -59,6 +59,10 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {

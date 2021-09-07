@@ -8,7 +8,7 @@ Pocket QR app
 
 ## Todo
 
-- [ ] In app review
+- [ ] Camera permission checking on barcode scanner fragment
 - [ ] Widget
 - [ ] Screen App Flow
 - [ ] Github action for release build
@@ -66,3 +66,4 @@ Pocket QR app
 - [x] View Binding
 - [x] Create core module
 - [x] Migrate rv adapter to epoxy
+- [x] In app review
