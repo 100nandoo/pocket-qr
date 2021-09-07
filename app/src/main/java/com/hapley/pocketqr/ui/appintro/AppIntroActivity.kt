@@ -11,10 +11,10 @@ import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroFragment
 import com.github.appintro.AppIntroPageTransformerType
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.hapley.pocketqr.main.MainActivity
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_APP_INTRO
 import com.hapley.pocketqr.common.Tracker
+import com.hapley.pocketqr.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -84,7 +84,6 @@ class AppIntroActivity : AppIntro() {
             slideNumber = 4,
             required = true
         )
-
     }
 
     override fun onResume() {
@@ -117,8 +116,10 @@ class AppIntroActivity : AppIntro() {
     }
 
     private fun showSystemAppDetailsPage() {
-        startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-            data = Uri.parse("package:$packageName")
-        })
+        startActivity(
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.parse("package:$packageName")
+            }
+        )
     }
 }

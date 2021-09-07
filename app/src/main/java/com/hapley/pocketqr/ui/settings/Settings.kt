@@ -13,7 +13,6 @@ const val RECENT = "recent"
 const val MOST_FREQUENT = "most_frequent"
 const val ALPHABETICAL = "alphabetical"
 
-
 @Retention(AnnotationRetention.SOURCE)
 @StringDef(value = [FOLLOW_SYSTEM, DARK, LIGHT], open = false)
 annotation class NightMode
@@ -34,12 +33,12 @@ object Mapper {
     }
 
     @SortMode
-    fun menuItemIdToSortMode(@IdRes menuItemId: Int): String {
+    fun menuItemIdToSortMode(@IdRes menuItemId: Int): String? {
         return when (menuItemId) {
             R.id.item_recent -> RECENT
             R.id.item_most_frequent -> MOST_FREQUENT
             R.id.item_alphabetical -> ALPHABETICAL
-            else -> RECENT
+            else -> null
         }
     }
 

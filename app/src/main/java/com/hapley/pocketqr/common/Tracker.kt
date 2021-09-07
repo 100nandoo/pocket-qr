@@ -4,17 +4,26 @@ import android.os.Bundle
 import androidx.annotation.FloatRange
 import androidx.annotation.StringDef
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.FirebaseAnalytics.Param.*
+import com.google.firebase.analytics.FirebaseAnalytics.Param.CONTENT_TYPE
+import com.google.firebase.analytics.FirebaseAnalytics.Param.ITEM_NAME
+import com.google.firebase.analytics.FirebaseAnalytics.Param.SCREEN_CLASS
+import com.google.firebase.analytics.FirebaseAnalytics.Param.SCREEN_NAME
+import com.google.firebase.analytics.FirebaseAnalytics.Param.SEARCH_TERM
+import com.google.firebase.analytics.FirebaseAnalytics.Param.VALUE
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
 import com.hapley.pocketqr.features.barcode.domain.getBarcodeTypeName
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.ui.settings.SortMode
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 class Tracker @Inject constructor() {
     companion object {
+        const val EVENT_ASK_FOR_REVIEW = "ask_for_review"
         const val EVENT_COPY = "copy_to_clipboard"
         const val EVENT_DELETE = "delete"
         const val EVENT_FAVORITE = "favorite"
@@ -22,11 +31,15 @@ class Tracker @Inject constructor() {
         const val EVENT_SORT = "sort"
         const val EVENT_ZOOM = "zoom"
 
+        const val DATE = "date"
+        const val READABLE_DATE = "readable_date"
+
         const val ZOOM_IN = "zoom_in"
         const val ZOOM_OUT = "zoom_out"
 
         const val ADD_FAVORITE = "add_favorite"
         const val REMOVE_UNFAVORITE = "remove_favorite"
+
     }
 
     fun recordException(message: String, exception: Exception) {
@@ -37,6 +50,16 @@ class Tracker @Inject constructor() {
     private fun basicBundle(barcodeItem: BarcodeItem): Bundle = Bundle().apply {
         putString(ITEM_NAME, barcodeItem.title)
         putString(CONTENT_TYPE, barcodeItem.barcodeType.getBarcodeTypeName())
+    }
+
+    fun askForReview(date: Date) {
+        val bundle = Bundle().apply {
+            val readableDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ssZ", Locale.ENGLISH).format(date)
+            putString(DATE, date.toString())
+            putString(READABLE_DATE, readableDate)
+        }
+
+        Firebase.analytics.logEvent(EVENT_ASK_FOR_REVIEW, bundle)
     }
 
     fun copy(barcodeItem: BarcodeItem) {
@@ -51,7 +74,7 @@ class Tracker @Inject constructor() {
 
     fun favorite(barcodeItem: BarcodeItem, isFavorite: Boolean) {
         val bundle = basicBundle(barcodeItem)
-        val paramValue = if(isFavorite) ADD_FAVORITE else REMOVE_UNFAVORITE
+        val paramValue = if (isFavorite) ADD_FAVORITE else REMOVE_UNFAVORITE
 
         bundle.apply {
             putString(VALUE, paramValue)
@@ -121,7 +144,6 @@ class Tracker @Inject constructor() {
     fun tutorialComplete() {
         Firebase.analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
     }
-
 }
 
 const val SCREEN_APP_INTRO = "AppIntro"

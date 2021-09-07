@@ -8,18 +8,19 @@ Pocket QR app
 
 ## Todo
 
-- [ ] Create core module
+- [ ] Camera permission checking on barcode scanner fragment
 - [ ] Widget
 - [ ] Screen App Flow
 - [ ] Github action for release build
+- [ ] Github action to spotless check merge request commit
 - [ ] Github pages for documentation
+- [ ] Setup documentation using [docusaurus](https://v2.docusaurus.io/docs/)
 - [ ] Implement new design
-- [ ] In app review
 - [ ] Google assistant action
 - [ ] Integrate cyanea library
 - [ ] Find a way to generate userId for crash report
 - [ ] Monitor specific code (performance)
-- [ ] View Binding
+- [ ] Write test
 - [ ] Donation
 - [x] Support multi QR Code format (wifi, etc)
 - [x] Room Database for QR Code
@@ -61,3 +62,8 @@ Pocket QR app
 - [x] Multi module support
 - [x] Add filter functionality
 - [x] Full screen QR Code
+- [x] Update room usage to use flow
+- [x] View Binding
+- [x] Create core module
+- [x] Migrate rv adapter to epoxy
+- [x] In app review

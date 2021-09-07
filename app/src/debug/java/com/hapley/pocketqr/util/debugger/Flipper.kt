@@ -13,7 +13,7 @@ import com.facebook.soloader.SoLoader
 class Flipper(app: Application) {
     init {
         SoLoader.init(app, false)
-        if(FlipperUtils.shouldEnableFlipper(app)){
+        if (FlipperUtils.shouldEnableFlipper(app)) {
             AndroidFlipperClient.getInstance(app).apply {
                 addPlugin(InspectorFlipperPlugin(app, DescriptorMapping.withDefaults()))
                 addPlugin(DatabasesFlipperPlugin(app))

@@ -22,7 +22,7 @@ A blazing fast QR code scanner powered by [Firebase MLKit].
 
 ### Other
 - [AppIntro] - carousell app onboarding
-- [Fast Adapter] - recyclerView adapter
+- [Epoxy] - recyclerView adapter
 - [Khronos] - intuitive date extensions
 - [Koptional] - optional type value
 - [Leak Canary] - memory leak detection
@@ -41,14 +41,11 @@ A blazing fast QR code scanner powered by [Firebase MLKit].
 
 
 ## MAD Score
-
-<details>
-  <summary>Click to expand!</summary>
-
-  ![summary](./github/summary.png)
-  ![kotlin](./github/kotlin.png)
-  ![jetpack](./github/jetpack.png)
-</details>
+![summary](./github/summary.png)
+![kotlin](./github/kotlin.png)
+![jetpack](./github/jetpack.png)
+![studio](./github/studio.png)
+![studio](./github/app_bundle.png)
 
 
 # License
@@ -80,7 +77,7 @@ limitations under the License.
 
 <!-- Other -->
 [AppIntro]: https://github.com/AppIntro/AppIntro
-[Fast Adapter]: https://github.com/mikepenz/FastAdapter
+[Epoxy]: https://github.com/airbnb/epoxy
 [Khronos]: http://hotchemi.github.io/khronos/
 [Koptional]: https://github.com/gojuno/koptional
 [Leak Canary]: https://square.github.io/leakcanary/

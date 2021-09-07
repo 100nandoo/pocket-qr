@@ -8,6 +8,10 @@ android {
     compileSdkVersion Misc.compileSdk
     buildToolsVersion Misc.buildTools
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         minSdkVersion Misc.minSdk
         targetSdkVersion Misc.targetSdk

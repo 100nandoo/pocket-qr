@@ -13,8 +13,8 @@
         <item name="colorSecondary">@color/orange_200</item>
         <item name="colorSecondaryVariant">@color/orange_500</item>
 
-        <item name="android:colorBackground">@color/material_color_white</item>
-        <item name="colorSurface">@color/material_color_grey_200</item>
+        <item name="android:colorBackground">@color/material_color_grey_200</item>
+        <item name="colorSurface">@color/white</item>
         <item name="colorError">@color/red_600</item>
 
         <item name="colorOnPrimary">@color/primaryTextColor</item>
@@ -46,16 +46,6 @@
 
     <style name="Base.Theme.Pocket" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
-    </style>
-
-    <style name="ThemeOverlay.AppTheme.Card" parent="">
-        <item name="colorSurface">@color/material_color_white</item>
-        <item name="colorOnSurface">@color/black_900</item>
-    </style>
-
-    <style name="Widget.AppTheme.HistoryCardView" parent="Widget.MaterialComponents.CardView">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.AppTheme.Card</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.AppTheme.MediumComponent</item>
     </style>
 
 </resources>

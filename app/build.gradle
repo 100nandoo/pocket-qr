@@ -11,8 +11,12 @@ plugins {
     id 'com.google.firebase.firebase-perf'
 }
 apply from: '../android_commons.gradle'
+import org.apache.tools.ant.taskdefs.condition.Os
 
 def keystorePropertiesFile = file("../../signing/keystore.properties")
+if (Os.isFamily(Os.FAMILY_WINDOWS)){
+    keystorePropertiesFile = file("..\\..\\signing\\keystore.properties")
+}
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
@@ -55,12 +59,17 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(Modules.preview)
+    implementation project(Modules.core)
 
     implementation KotlinLibraries.kotlin
     implementation KotlinLibraries.coroutineGuava
@@ -85,12 +94,14 @@ dependencies {
 
     implementation AndroidLibraries.material
 
-    implementation AndroidLibraries.lifecycleExt
+    implementation AndroidLibraries.lifecycleLiveDataKtx
     implementation AndroidLibraries.viewModel
 
     implementation AndroidLibraries.navigationFrag
     implementation AndroidLibraries.navigation
 
+    implementation AndroidLibraries.playCore
+    implementation AndroidLibraries.playCoreKtx
     implementation AndroidLibraries.preference
 
     implementation AndroidLibraries.roomRuntime
@@ -117,11 +128,9 @@ dependencies {
     // Coil Image Loader
     implementation Libraries.coil
 
-    // Fast adapter
-    implementation Libraries.fastAdapter
-    implementation Libraries.fastAdapterDiff
-    implementation Libraries.fastAdapterUi
-    implementation Libraries.fastAdapterUtils
+    // Epoxy
+    implementation Libraries.epoxy
+    kapt Libraries.epoxyKapt
 
     // Khronos
     implementation Libraries.khronos
@@ -144,9 +153,12 @@ dependencies {
     // Timber
     implementation Libraries.timber
 
-    debugImplementation 'com.facebook.flipper:flipper:0.52.1'
-    debugImplementation 'com.facebook.soloader:soloader:0.9.0'
-    debugImplementation 'com.facebook.flipper:flipper-leakcanary-plugin:0.72.0'
+    // View Binding Delegate
+    implementation Libraries.viewBindingDelegate
+
+    debugImplementation 'com.facebook.flipper:flipper:0.83.0'
+    debugImplementation 'com.facebook.soloader:soloader:0.10.1'
+    debugImplementation 'com.facebook.flipper:flipper-leakcanary-plugin:0.83.0'
 
     /**
      * ===================== Tests =======================

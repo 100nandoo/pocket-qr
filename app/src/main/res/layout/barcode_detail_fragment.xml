@@ -157,9 +157,10 @@
             android:layout_width="@dimen/material_increment_4x"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/material_baseline_grid_5x"
-            app:layout_constraintDimensionRatio="1:1"
+            android:contentDescription="@string/qr_code"
             android:padding="@dimen/material_baseline_grid_1x"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
@@ -173,8 +174,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/material_baseline_grid_2x"
-        app:srcCompat="@drawable/ic_barcode_edit"
         android:textColor="@color/material_color_white"
-        app:tint="@color/material_color_white" />
+        app:srcCompat="@drawable/ic_barcode_edit"
+        app:tint="@color/material_color_white"
+        android:contentDescription="@string/edit" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

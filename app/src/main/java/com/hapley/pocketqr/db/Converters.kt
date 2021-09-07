@@ -1,7 +1,7 @@
 package com.hapley.pocketqr.db
 
 import androidx.room.TypeConverter
-import java.util.*
+import java.util.Calendar
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-23.

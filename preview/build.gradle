@@ -24,6 +24,8 @@ android {
 
 dependencies {
 
+    implementation project(Modules.core)
+
     implementation KotlinLibraries.kotlin
     implementation KotlinLibraries.coroutineGuava
     implementation KotlinLibraries.coroutinePlayServices
@@ -41,7 +43,7 @@ dependencies {
 
     implementation AndroidLibraries.material
 
-    implementation AndroidLibraries.lifecycleExt
+    implementation AndroidLibraries.lifecycleLiveDataKtx
     implementation AndroidLibraries.viewModel
 
     implementation AndroidLibraries.navigationFrag
@@ -59,6 +61,9 @@ dependencies {
 
     // QR Generator
     implementation Libraries.awesomeQr
+
+    // View Binding Delegate
+    implementation Libraries.viewBindingDelegate
 
     /**
      * ===================== Tests =======================

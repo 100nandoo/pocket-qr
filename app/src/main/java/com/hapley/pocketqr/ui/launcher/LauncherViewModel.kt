@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LauncherViewModel @Inject constructor(private val appPreferences: AppPreferences): ViewModel() {
+class LauncherViewModel @Inject constructor(private val appPreferences: AppPreferences) : ViewModel() {
 
     var showTutorial: Boolean
         get() = appPreferences.settings.getBoolean(SettingsFragment.BARCODE_APP_INTRODUCTION, true)

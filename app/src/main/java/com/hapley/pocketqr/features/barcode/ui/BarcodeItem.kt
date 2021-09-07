@@ -6,19 +6,26 @@ import android.content.pm.ShortcutInfo
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
-import android.text.format.DateUtils.*
-import android.view.View
+import android.text.format.DateUtils.FORMAT_ABBREV_ALL
+import android.text.format.DateUtils.MINUTE_IN_MILLIS
+import android.text.format.DateUtils.getRelativeTimeSpanString
 import androidx.annotation.DrawableRes
 import androidx.core.view.isInvisible
+import com.hapley.core.ui.helper.ViewBindingKotlinModel
 import com.hapley.pocketqr.R
-import com.hapley.pocketqr.features.barcode.domain.*
+import com.hapley.pocketqr.databinding.BarcodeHistoryItemBinding
+import com.hapley.pocketqr.features.barcode.domain.Barcode
+import com.hapley.pocketqr.features.barcode.domain.BarcodeType
+import com.hapley.pocketqr.features.barcode.domain.CONTACT
+import com.hapley.pocketqr.features.barcode.domain.EMAIL
+import com.hapley.pocketqr.features.barcode.domain.GEO
+import com.hapley.pocketqr.features.barcode.domain.ISBN
+import com.hapley.pocketqr.features.barcode.domain.PHONE
+import com.hapley.pocketqr.features.barcode.domain.SMS
+import com.hapley.pocketqr.features.barcode.domain.URL
+import com.hapley.pocketqr.features.barcode.domain.WIFI
 import com.hapley.pocketqr.main.MainActivity
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.items.AbstractItem
-import com.mikepenz.fastadapter.swipe.IDrawerSwipeableViewHolder
-import com.mikepenz.fastadapter.swipe.ISwipeable
-import kotlinx.android.synthetic.main.barcode_history_item.view.*
-import java.util.*
+import java.util.Date
 
 /**
  * Created by Fernando Fransisco Halim on 2020-01-28.
@@ -28,7 +35,11 @@ enum class BarcodeItemView(val id: Int) {
     UNKNOWN(0)
 }
 
-open class BarcodeItem(
+interface BarcodeItemListener {
+    fun clickListener(id: Int)
+}
+
+data class BarcodeItem(
     val id: Long,
     var title: String,
     val subtitle: String,
@@ -38,7 +49,9 @@ open class BarcodeItem(
     val rawValue: String,
     val isFavorite: Boolean,
     val clickCount: Int
-) : AbstractItem<BarcodeItem.ViewHolder>(), ISwipeable {
+) : ViewBindingKotlinModel<BarcodeHistoryItemBinding>(R.layout.barcode_history_item) {
+
+    lateinit var listener: BarcodeItemListener
 
     constructor(barcode: Barcode) : this(
         barcode.id.toLong(),
@@ -52,37 +65,15 @@ open class BarcodeItem(
         clickCount = barcode.clickCount
     )
 
-    class ViewHolder(view: View) : FastAdapter.ViewHolder<BarcodeItem>(view), IDrawerSwipeableViewHolder {
+    override fun BarcodeHistoryItemBinding.bind() {
+        ivIcon.setImageResource(icon)
+        tvLabel.text = title
+        tvCreatedAt.text = getRelativeTimeSpanString(created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)
+        tvSubtitle.text = subtitle
+        ivFavorite.isInvisible = isFavorite.not()
 
-        override fun bindView(item: BarcodeItem, payloads: List<Any>) {
-            itemView.iv_icon.setImageResource(item.icon)
-            itemView.tv_label.text = item.title
-            itemView.tv_created_at.text = getRelativeTimeSpanString(item.created.time, Date().time, MINUTE_IN_MILLIS, FORMAT_ABBREV_ALL)
-            itemView.tv_subtitle.text = item.subtitle
-            itemView.iv_favorite.isInvisible = item.isFavorite.not()
-        }
-
-        override fun unbindView(item: BarcodeItem) = Unit
-
-        override val swipeableView: View
-            get() = itemView.cl_history_item
+        cardHistoryItem.setOnClickListener { listener.clickListener(id.toInt()) }
     }
-
-    override var identifier: Long
-        get() = id
-        set(_) {}
-
-    override val layoutRes: Int
-        get() = R.layout.barcode_history_item
-
-    override val type: Int
-        get() = BarcodeItemView.BARCODE.id
-
-    override fun getViewHolder(v: View): ViewHolder {
-        return ViewHolder(v)
-    }
-
-    override val isSwipeable: Boolean = true
 }
 
 fun Int.getIcon(): Int {

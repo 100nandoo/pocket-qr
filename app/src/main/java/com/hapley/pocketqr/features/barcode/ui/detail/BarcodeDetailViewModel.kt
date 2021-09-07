@@ -1,7 +1,10 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
 import androidx.core.content.edit
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.hapley.pocketqr.common.AppPreferences
 import com.hapley.pocketqr.features.barcode.domain.BarcodeUseCase
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
@@ -9,6 +12,7 @@ import com.hapley.pocketqr.ui.settings.SettingsFragment
 import com.hapley.preview.ui.PreviewItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,11 +29,11 @@ class BarcodeDetailViewModel @Inject constructor(val barcodeUseCase: BarcodeUseC
         }
 
     val barcodeLiveData: LiveData<BarcodeItem> by lazy {
-        Transformations.map(barcodeUseCase.getByIdLiveData(id)) { barcode -> BarcodeItem(barcode) }
+        barcodeUseCase.getByIdFlow(id).map { barcode -> BarcodeItem(barcode) }.asLiveData()
     }
 
     val previewLiveData: LiveData<PreviewItem> by lazy {
-        barcodeUseCase.getPreviewLiveDataById(id)
+        barcodeUseCase.getPreviewByIdFlow(id).asLiveData()
     }
 
     fun submit(label: String) {

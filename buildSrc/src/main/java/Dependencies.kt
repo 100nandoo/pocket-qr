@@ -3,73 +3,78 @@ object Misc {
     val compileSdk = 30
     val minSdk = 21
     val targetSdk = 30
-    val buildTools = "30.0.1"
+    val buildTools = "30.0.2"
 }
 
 object Modules {
     val app = ":app"
+    var core = ":core"
     val preview = ":preview"
 }
 
 object Releases {
-    val versionCode = 14
-    val versionName = "0.8.9"
+    val versionCode = 19
+    val versionName = "0.8.14"
 }
 
 object Versions {
-    val kotlin = "1.4.21"
-    val coroutinePlayServices = "1.4.2"
-    val coroutineGuava = "1.4.2"
-    val gradle = "4.1.2"
-    val gms = "4.3.3"
-    val crashlyticsGradle = "2.3.0"
-    val perfPlugin = "1.3.1"
+    val kotlin = "1.5.30"
+    val coroutinePlayServices = "1.5.2"
+    val coroutineGuava = "1.5.2"
+    val gradle = "4.2.0"
+    val gms = "4.3.10"
+    val crashlyticsGradle = "2.7.1"
+    val perfPlugin = "1.4.0"
+    val ktlint = "0.4.0"
 
     object Android {
-        val appCompat = "1.2.0"
+        val appCompat = "1.3.1"
         val browser = "1.3.0"
-        val cameraX = "1.0.0-beta12"
-        val cameraView = "1.0.0-alpha18"
-        val constraintLayout = "2.0.4"
-        val core = "1.3.2"
-        val hilt = "2.31.2-alpha"
-        val lifecycle = "2.2.0"
-        val material = "1.2.0"
-        val navigation = "2.3.2"
+        val cameraX = "1.0.1"
+        val cameraView = "1.0.0-alpha28"
+        val constraintLayout = "2.1.0"
+        val core = "1.6.0"
+        val hilt = "2.38.1"
+        val lifecycle = "2.3.1"
+        val material = "1.4.0"
+        val navigation = "2.3.5"
+        val playCore = "1.10.0"
+        val playCoreKtx = "1.8.1"
         val preference = "1.1.1"
-        val room = "2.2.6"
+        val room = "2.3.0"
     }
 
     object Firebase {
-        val bom = "26.3.0"
-        val qrCode = "16.0.3"
+        val bom = "28.4.0"
+        val qrCode = "17.0.0"
     }
 
-    val appIntro = "6.0.0"
+    val appIntro = "6.1.0"
 
     //    val assent = "3.0.0-RC4"
-    val coil = "1.1.1"
-    val fastAdapter = "5.3.2"
+    val coil = "1.3.2"
+    val epoxy = "4.6.2"
 
     val khronos = "0.9.0"
 
     val koptional = "1.7.0"
 
-    val lottie = "3.5.0"
+    val lottie = "4.1.0"
 
     val materialValues = "1.1.1"
 
     val awesomeQr = "1.2.0"
-    val rvDivider = "3.3.0"
-    val timber = "4.7.1"
+    val rvDivider = "3.5.0"
+    val timber = "5.0.1"
+    val viewBindingDelegate = "1.0.0"
 
     // Tests
-    val espresso = "3.2.0"
+    val espresso = "3.4.0"
     val junit = "4.13"
     val junitExt = "1.1.1"
 
     // Debug
-    val leakCanary = "2.6"
+    val leakCanary = "2.7"
 }
 
 object Libraries {
@@ -78,10 +83,8 @@ object Libraries {
 
     val coil = "io.coil-kt:coil:${Versions.coil}"
 
-    val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
-    val fastAdapterDiff = "com.mikepenz:fastadapter-extensions-diff:${Versions.fastAdapter}"
-    val fastAdapterUi = "com.mikepenz:fastadapter-extensions-ui:${Versions.fastAdapter}"
-    val fastAdapterUtils = "com.mikepenz:fastadapter-extensions-utils:${Versions.fastAdapter}"
+    val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
+    val epoxyKapt = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
 
     val khronos = "com.github.hotchemi:khronos:${Versions.khronos}"
 
@@ -94,6 +97,7 @@ object Libraries {
     val awesomeQr = "com.github.SumiMakito:AwesomeQRCode:${Versions.awesomeQr}"
     val rvDivider = "com.github.fondesa:recycler-view-divider:${Versions.rvDivider}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    val viewBindingDelegate = "com.github.Zhuinden:fragmentviewbindingdelegate-kt:${Versions.viewBindingDelegate}"
 }
 
 object TestLibraries {
@@ -130,12 +134,14 @@ object AndroidLibraries {
 
     val material = "com.google.android.material:material:${Versions.Android.material}"
 
-    val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.Android.lifecycle}"
+    val lifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Android.lifecycle}"
     val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
 
     val navigationFrag = "androidx.navigation:navigation-fragment-ktx:${Versions.Android.navigation}"
     val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.Android.navigation}"
 
+    val playCore = "com.google.android.play:core:${Versions.Android.playCore}"
+    val playCoreKtx = "com.google.android.play:core-ktx:${Versions.Android.playCoreKtx}"
     val preference = "androidx.preference:preference-ktx:${Versions.Android.preference}"
 
     val roomRuntime = "androidx.room:room-runtime:${Versions.Android.room}"

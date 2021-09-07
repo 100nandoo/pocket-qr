@@ -11,25 +11,30 @@ import androidx.browser.customtabs.CustomTabsSession
 import androidx.core.content.getSystemService
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hapley.core.ui.helper.viewBinding
 import com.hapley.pocketqr.R
+import com.hapley.pocketqr.databinding.ActivityMainBinding
 import com.hapley.pocketqr.features.barcode.domain.URL
 import com.hapley.pocketqr.features.barcode.ui.BarcodeItem
 import com.hapley.pocketqr.features.barcode.ui.toShortcutInfo
 import com.hapley.pocketqr.util.PocketQrUtil
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val binding by viewBinding(ActivityMainBinding::inflate)
 
     init {
         lifecycleScope.launch {
@@ -66,8 +71,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        setSupportActionBar(main_toolbar)
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.barcode_scanner_fragment,
@@ -75,12 +80,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.settings_fragment
             )
         )
-        main_toolbar.setupWithNavController(navController, appBarConfiguration)
-        bottom_nav.setupWithNavController(navController)
+
+        findViewById<MaterialToolbar>(R.id.main_toolbar).apply {
+            setSupportActionBar(this)
+            setupWithNavController(navController, appBarConfiguration)
+        }
+
+        findViewById<BottomNavigationView>(R.id.bottom_nav).setupWithNavController(navController)
     }
 
     private fun subscribeUi() {
-        viewModel.starredBarcodesLiveData.observe(this) {
+        viewModel.starredBarcodeListLiveData.observe(this) {
             updateDynamicShortcut(it.mapNotNull { barcodeItem -> barcodeItem.toShortcutInfo(this@MainActivity) })
         }
 
@@ -89,23 +99,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    override fun onStop() {
-        super.onStop()
-//        val connectionTemp = connection
-//        if (connectionTemp is Some) {
-//            unbindService(connectionTemp.value)
-//            connection = None
-//            session = None
-//        }
-    }
-
     private fun updateDynamicShortcut(list: List<ShortcutInfo>) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             val shortcutManager = getSystemService<ShortcutManager>()
             shortcutManager?.dynamicShortcuts = list
         }
-
     }
 
     private fun actionOpen(barcodeItem: BarcodeItem) {
@@ -120,7 +118,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     actionIntentViewWrapper(barcodeItem)
                 }
-
             }
             else -> {
                 actionIntentViewWrapper(barcodeItem)
