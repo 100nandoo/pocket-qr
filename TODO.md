@@ -9,6 +9,7 @@ Pocket QR app
 ## Todo
 
 - [ ] Camera permission checking on barcode scanner fragment
+- [ ] Keyboard Animation [medium article](https://medium.com/androiddevelopers/animating-your-keyboard-fb776a8fb66d)
 - [ ] Widget
 - [ ] Screen App Flow
 - [ ] Github action for release build
