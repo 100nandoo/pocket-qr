@@ -11,8 +11,12 @@ plugins {
     id 'com.google.firebase.firebase-perf'
 }
 apply from: '../android_commons.gradle'
+import org.apache.tools.ant.taskdefs.condition.Os
 
 def keystorePropertiesFile = file("../../signing/keystore.properties")
+if (Os.isFamily(Os.FAMILY_WINDOWS)){
+    keystorePropertiesFile = file("..\\..\\signing\\keystore.properties")
+}
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
