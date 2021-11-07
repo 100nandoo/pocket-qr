@@ -18,42 +18,42 @@ object Releases {
 }
 
 object Versions {
-    val kotlin = "1.5.30"
+    val kotlin = "1.5.31"
     val coroutinePlayServices = "1.5.2"
     val coroutineGuava = "1.5.2"
-    val gradle = "4.2.0"
+    val gradle = "7.0.3"
     val gms = "4.3.10"
-    val crashlyticsGradle = "2.7.1"
+    val crashlyticsGradle = "2.8.0"
     val perfPlugin = "1.4.0"
     val ktlint = "0.4.0"
 
     object Android {
         val appCompat = "1.3.1"
         val browser = "1.3.0"
-        val cameraX = "1.0.1"
+        val cameraX = "1.0.2"
         val cameraView = "1.0.0-alpha28"
         val constraintLayout = "2.1.0"
         val core = "1.6.0"
-        val hilt = "2.38.1"
+        val hilt = "2.40"
         val lifecycle = "2.3.1"
         val material = "1.4.0"
         val navigation = "2.3.5"
-        val playCore = "1.10.0"
+        val playCore = "1.10.2"
         val playCoreKtx = "1.8.1"
         val preference = "1.1.1"
         val room = "2.3.0"
     }
 
     object Firebase {
-        val bom = "28.4.0"
+        val bom = "29.0.0"
         val qrCode = "17.0.0"
     }
 
     val appIntro = "6.1.0"
 
     //    val assent = "3.0.0-RC4"
-    val coil = "1.3.2"
-    val epoxy = "4.6.2"
+    val coil = "1.4.0"
+    val epoxy = "4.6.3"
 
     val khronos = "0.9.0"
 
@@ -70,8 +70,8 @@ object Versions {
 
     // Tests
     val espresso = "3.4.0"
-    val junit = "4.13"
-    val junitExt = "1.1.1"
+    val junit = "4.13.2"
+    val junitExt = "1.1.3"
 
     // Debug
     val leakCanary = "2.7"

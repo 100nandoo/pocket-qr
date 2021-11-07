@@ -8,9 +8,13 @@ Pocket QR app
 
 ## Todo
 
+- [ ] target compatibility Java 11 
 - [ ] Camera permission checking on barcode scanner fragment
+- [ ] Fix Warning Message
 - [ ] Keyboard Animation [medium article](https://medium.com/androiddevelopers/animating-your-keyboard-fb776a8fb66d)
 - [ ] Widget
+- [ ] Migrate to Square Logcat
+- [ ] Target SDK 31
 - [ ] Screen App Flow
 - [ ] Github action for release build
 - [ ] Github action to spotless check merge request commit
