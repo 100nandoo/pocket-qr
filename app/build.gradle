@@ -141,9 +141,6 @@ dependencies {
     // Lottie
     implementation Libraries.lottie
 
-    // Material Value
-    implementation Libraries.materialValues
-
     // QR Generator
     implementation Libraries.awesomeQr
 

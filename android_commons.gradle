@@ -6,7 +6,6 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion Misc.compileSdk
-    buildToolsVersion Misc.buildTools
 
     buildFeatures {
         viewBinding true

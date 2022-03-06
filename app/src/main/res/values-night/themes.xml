@@ -16,8 +16,8 @@
 
         <item name="colorOnPrimary">@color/black_900</item>
         <item name="colorOnSecondary">@color/black_900</item>
-        <item name="colorOnBackground">@color/material_color_white</item>
-        <item name="colorOnSurface">@color/material_color_white</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="colorOnError">@color/black_900</item>
 
         <item name="actionModeBackground">?attr/colorSurface</item>

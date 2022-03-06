@@ -13,7 +13,7 @@
         <item name="colorSecondary">@color/orange_200</item>
         <item name="colorSecondaryVariant">@color/orange_500</item>
 
-        <item name="android:colorBackground">@color/material_color_grey_200</item>
+        <item name="android:colorBackground">@color/grey</item>
         <item name="colorSurface">@color/white</item>
         <item name="colorError">@color/red_600</item>
 

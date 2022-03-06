@@ -24,7 +24,6 @@ A blazing fast QR code scanner powered by [Firebase MLKit].
 - [AppIntro] - carousell app onboarding
 - [Epoxy] - recyclerView adapter
 - [Khronos] - intuitive date extensions
-- [Koptional] - optional type value
 - [Leak Canary] - memory leak detection
 - [Lottie] - lottie animation
 - [RecyclerView Divider] - recyclerView divider
@@ -79,7 +78,6 @@ limitations under the License.
 [AppIntro]: https://github.com/AppIntro/AppIntro
 [Epoxy]: https://github.com/airbnb/epoxy
 [Khronos]: http://hotchemi.github.io/khronos/
-[Koptional]: https://github.com/gojuno/koptional
 [Leak Canary]: https://square.github.io/leakcanary/
 [Lottie]: http://airbnb.io/lottie/#/android
 [Timber]: https://github.com/JakeWharton/timber

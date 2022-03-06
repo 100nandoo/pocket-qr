@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="baseline_grid_1x">8dp</dimen>
+    <dimen name="baseline_grid_2x">16dp</dimen>
+    <dimen name="baseline_grid_3x">24dp</dimen>
+    <dimen name="baseline_grid_4x">32dp</dimen>
+    <dimen name="baseline_grid_5x">40dp</dimen>
+
+    <dimen name="increment_3x">168dp</dimen>
+    <dimen name="increment_4x">224dp</dimen>
+    <dimen name="increment_5x">280dp</dimen>
+
+
 </resources>

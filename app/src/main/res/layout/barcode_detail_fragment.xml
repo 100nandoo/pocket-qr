@@ -18,8 +18,8 @@
             style="@style/TextAppearance.AppTheme.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
-            android:layout_marginTop="@dimen/material_baseline_grid_2x"
+            android:layout_marginHorizontal="@dimen/baseline_grid_2x"
+            android:layout_marginTop="@dimen/baseline_grid_2x"
             android:text="@string/label"
             app:layout_constraintBottom_toTopOf="@id/tv_label"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             style="@style/TextAppearance.AppTheme.Headline4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
+            android:layout_marginHorizontal="@dimen/baseline_grid_2x"
             android:ellipsize="marquee"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
             android:id="@+id/card_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/material_baseline_grid_2x"
+            android:layout_margin="@dimen/baseline_grid_2x"
             app:layout_constraintBottom_toTopOf="@id/divider_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="@dimen/material_baseline_grid_1x">
+                    android:padding="@dimen/baseline_grid_1x">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_scanned_date_header"
@@ -82,7 +82,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="@dimen/material_baseline_grid_1x"
+                    android:layout_marginVertical="@dimen/baseline_grid_1x"
                     android:background="@color/divider" />
 
                 <LinearLayout
@@ -91,7 +91,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="@dimen/material_baseline_grid_1x">
+                    android:padding="@dimen/baseline_grid_1x">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_click_count_header"
@@ -117,8 +117,8 @@
             android:id="@+id/divider_details"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
-            android:layout_marginVertical="@dimen/material_baseline_grid_2x"
+            android:layout_marginHorizontal="@dimen/baseline_grid_2x"
+            android:layout_marginVertical="@dimen/baseline_grid_2x"
             android:background="@color/divider"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/card_view" />
@@ -128,9 +128,9 @@
             style="@style/TextAppearance.AppTheme.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/material_baseline_grid_2x"
-            android:layout_marginTop="@dimen/material_baseline_grid_2x"
-            android:layout_marginEnd="@dimen/material_baseline_grid_2x"
+            android:layout_marginStart="@dimen/baseline_grid_2x"
+            android:layout_marginTop="@dimen/baseline_grid_2x"
+            android:layout_marginEnd="@dimen/baseline_grid_2x"
             android:text="@string/detail"
             app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +143,7 @@
             style="@style/TextAppearance.AppTheme.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/material_baseline_grid_2x"
+            android:layout_marginHorizontal="@dimen/baseline_grid_2x"
             android:background="?attr/selectableItemBackground"
             android:focusable="true"
             app:layout_constraintBottom_toTopOf="@id/iv_qrcode"
@@ -154,11 +154,11 @@
 
         <ImageView
             android:id="@+id/iv_qrcode"
-            android:layout_width="@dimen/material_increment_4x"
+            android:layout_width="@dimen/increment_4x"
             android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/material_baseline_grid_5x"
+            android:layout_marginVertical="@dimen/baseline_grid_5x"
             android:contentDescription="@string/qr_code"
-            android:padding="@dimen/material_baseline_grid_1x"
+            android:padding="@dimen/baseline_grid_1x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -173,10 +173,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/material_baseline_grid_2x"
-        android:textColor="@color/material_color_white"
+        android:layout_margin="@dimen/baseline_grid_2x"
+        android:textColor="@color/white"
         app:srcCompat="@drawable/ic_barcode_edit"
-        app:tint="@color/material_color_white"
+        app:tint="@color/white"
         android:contentDescription="@string/edit" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

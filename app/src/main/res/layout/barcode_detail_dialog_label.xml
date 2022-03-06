@@ -11,7 +11,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/material_baseline_grid_2x">
+        android:layout_margin="@dimen/baseline_grid_2x">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText"

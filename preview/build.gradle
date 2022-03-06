@@ -56,9 +56,6 @@ dependencies {
     // Coil Image Loader
     implementation Libraries.coil
 
-    // Material Value
-    implementation Libraries.materialValues
-
     // QR Generator
     implementation Libraries.awesomeQr
 

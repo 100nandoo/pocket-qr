@@ -61,8 +61,6 @@ object Versions {
 
     val lottie = "4.1.0"
 
-    val materialValues = "1.1.1"
-
     val awesomeQr = "1.2.0"
     val rvDivider = "3.5.0"
     val timber = "5.0.1"
@@ -91,8 +89,6 @@ object Libraries {
     val koptional = "com.gojuno.koptional:koptional:${Versions.koptional}"
 
     val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
-
-    val materialValues = "blue.aodev:material-values:${Versions.materialValues}"
 
     val awesomeQr = "com.github.SumiMakito:AwesomeQRCode:${Versions.awesomeQr}"
     val rvDivider = "com.github.fondesa:recycler-view-divider:${Versions.rvDivider}"

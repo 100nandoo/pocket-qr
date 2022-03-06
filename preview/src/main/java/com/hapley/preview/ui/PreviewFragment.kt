@@ -56,8 +56,8 @@ class PreviewFragment : Fragment() {
                 patternScale = 1f
                 color = Color(
                     auto = false,
-                    background = ContextCompat.getColor(requireContext(), R.color.material_color_white),
-                    light = ContextCompat.getColor(requireContext(), R.color.material_color_white),
+                    background = ContextCompat.getColor(requireContext(), R.color.white),
+                    light = ContextCompat.getColor(requireContext(), R.color.white),
                     dark = ContextCompat.getColor(requireContext(), R.color.black_900)
                 )
             }
