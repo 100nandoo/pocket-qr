@@ -18,7 +18,7 @@ A blazing fast QR code scanner powered by [Firebase MLKit].
 - [Firebase MLKit] for QR code detection
 - [CameraX] - camera surface and control
 - [Coil] - loading images
-- [Awesome QR] - generate QR code image
+- [Zxing Android] - generate QR code image
 
 ### Other
 - [AppIntro] - carousell app onboarding
@@ -70,7 +70,7 @@ limitations under the License.
 [Coroutines]: https://github.com/Kotlin/kotlinx.coroutines
 [Coroutines Play Services]: https://github.com/Kotlin/kotlinx.coroutines/tree/master/integration/kotlinx-coroutines-play-services
 [Coroutines Guava]: https://github.com/Kotlin/kotlinx.coroutines/tree/master/integration/kotlinx-coroutines-guava
-[Awesome QR]: https://github.com/SumiMakito/AwesomeQRCode
+[Zxing Android]: https://github.com/journeyapps/zxing-android-embedded
 [Coil]: https://coil-kt.github.io/coil/
 [CameraX]: https://developer.android.com/training/camerax
 

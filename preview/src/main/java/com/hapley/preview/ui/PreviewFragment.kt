@@ -1,19 +1,18 @@
 package com.hapley.preview.ui
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.github.sumimakito.awesomeqr.option.RenderOption
-import com.github.sumimakito.awesomeqr.option.color.Color
+import com.google.zxing.BarcodeFormat
 import com.hapley.preview.R
 import com.hapley.preview.databinding.PreviewFragmentBinding
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,20 +49,10 @@ class PreviewFragment : Fragment() {
 
     private fun initUi() {
         try {
-            val renderOption = RenderOption().apply {
-                content = viewModel.previewItem.rawValue
-                borderWidth = 16
-                patternScale = 1f
-                color = Color(
-                    auto = false,
-                    background = ContextCompat.getColor(requireContext(), R.color.white),
-                    light = ContextCompat.getColor(requireContext(), R.color.white),
-                    dark = ContextCompat.getColor(requireContext(), R.color.black_900)
-                )
-            }
-            val result = AwesomeQrRenderer.render(renderOption)
+            val barcodeEncoder = BarcodeEncoder()
+            val bitmap: Bitmap = barcodeEncoder.encodeBitmap(viewModel.previewItem.rawValue, BarcodeFormat.QR_CODE, 400, 400)
 
-            binding.imageView.load(result.bitmap)
+            binding.imageView.load(bitmap)
 
         } catch (e: Exception) {
             e.printStackTrace()

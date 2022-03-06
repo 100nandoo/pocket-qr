@@ -139,7 +139,7 @@ dependencies {
     implementation Libraries.lottie
 
     // QR Generator
-    implementation(files("./libs/AwesomeQRCode-1.2.0.aar"))
+    implementation(Libraries.zxingAndroid)
 
     // RecyclerView Divider
     implementation Libraries.rvDivider

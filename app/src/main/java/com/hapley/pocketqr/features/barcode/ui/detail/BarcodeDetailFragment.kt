@@ -1,5 +1,6 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -11,11 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.github.sumimakito.awesomeqr.option.RenderOption
-import com.github.sumimakito.awesomeqr.option.color.Color
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.zxing.BarcodeFormat
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
@@ -23,11 +22,13 @@ import com.hapley.pocketqr.databinding.BarcodeDetailDialogLabelBinding
 import com.hapley.pocketqr.databinding.BarcodeDetailFragmentBinding
 import com.hapley.preview.ui.PreviewFragment
 import com.hapley.preview.ui.PreviewItem
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
@@ -93,20 +94,10 @@ class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
             binding.tvClickCount.text = it.clickCount.toString()
             binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
             try {
-                val renderOption = RenderOption().apply {
-                    content = it.rawValue
-                    borderWidth = 16
-                    patternScale = 1f
-                    color = Color(
-                        auto = false,
-                        background = ContextCompat.getColor(requireContext(), R.color.white),
-                        light = ContextCompat.getColor(requireContext(), R.color.white),
-                        dark = ContextCompat.getColor(requireContext(), R.color.black_900)
-                    )
-                }
-                val result = AwesomeQrRenderer.render(renderOption)
+                val barcodeEncoder = BarcodeEncoder()
+                val bitmap: Bitmap = barcodeEncoder.encodeBitmap(it.rawValue, BarcodeFormat.QR_CODE, 200, 200)
 
-                binding.ivQrcode.load(result.bitmap)
+                binding.ivQrcode.load(bitmap)
             } catch (e: Exception) {
                 e.printStackTrace()
                 tracker.recordException("Convert rawValue into QR Code Bitmap", e)

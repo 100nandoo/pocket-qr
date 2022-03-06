@@ -57,7 +57,7 @@ dependencies {
     implementation Libraries.coil
 
     // QR Generator
-    implementation(files("./libs/AwesomeQRCode-1.2.0.aar"))
+    implementation(Libraries.zxingAndroid)
 
     // View Binding Delegate
     implementation(files("./libs/fragmentviewbindingdelegate-kt-1.0.0.aar"))

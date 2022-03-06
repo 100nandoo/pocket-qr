@@ -59,10 +59,9 @@ object Versions {
 
     val lottie = "4.1.0"
 
-    val awesomeQr = "1.2.0"
     val rvDivider = "3.5.0"
     val timber = "5.0.1"
-    val viewBindingDelegate = "1.0.0"
+    val zxingAndroid = "4.3.0"
 
     // Tests
     val espresso = "3.4.0"
@@ -86,10 +85,10 @@ object Libraries {
 
     val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
 
-    val awesomeQr = "com.github.SumiMakito:AwesomeQRCode:${Versions.awesomeQr}"
     val rvDivider = "com.github.fondesa:recycler-view-divider:${Versions.rvDivider}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-    val viewBindingDelegate = "com.github.Zhuinden:fragmentviewbindingdelegate-kt:${Versions.viewBindingDelegate}"
+
+    val zxingAndroid = "com.journeyapps:zxing-android-embedded:${Versions.zxingAndroid}"
 }
 
 object TestLibraries {
