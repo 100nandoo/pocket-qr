@@ -48,7 +48,7 @@ A blazing fast QR code scanner powered by [Firebase MLKit].
 
 
 # License
-```xml
+```
 Designed and developed by 2020 100nandoo (Fernando Fransisco Halim)
 
 Licensed under the Apache License, Version 2.0 (the "License");
