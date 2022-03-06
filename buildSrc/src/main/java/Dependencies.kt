@@ -36,7 +36,7 @@ object Versions {
         const val hilt = "2.40"
         const val lifecycle = "2.4.1"
         const val material = "1.4.0"
-        const val navigation = "2.3.5"
+        const val navigation = "2.4.1"
         const val playCore = "1.10.3"
         const val playCoreKtx = "1.8.1"
         const val preference = "1.2.0"
@@ -69,7 +69,7 @@ object Versions {
     const val junitExt = "1.1.3"
 
     // Debug
-    const val leakCanary = "2.7"
+    const val leakCanary = "2.8.1"
 }
 
 object Libraries {
