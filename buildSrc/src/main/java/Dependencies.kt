@@ -1,9 +1,8 @@
 object Misc {
     val appId = "com.hapley.pocketqr"
-    val compileSdk = 30
-    val minSdk = 21
-    val targetSdk = 30
-    val buildTools = "30.0.2"
+    val compileSdk = 31
+    val minSdk = 24
+    val targetSdk = 31
 }
 
 object Modules {
@@ -18,34 +17,34 @@ object Releases {
 }
 
 object Versions {
-    val kotlin = "1.5.31"
-    val coroutinePlayServices = "1.5.2"
-    val coroutineGuava = "1.5.2"
-    val gradle = "7.0.3"
+    val kotlin = "1.6.10"
+    val coroutinePlayServices = "1.6.0"
+    val coroutineGuava = "1.6.0"
+    val gradle = "7.1.2"
     val gms = "4.3.10"
-    val crashlyticsGradle = "2.8.0"
-    val perfPlugin = "1.4.0"
+    val crashlyticsGradle = "2.8.1"
+    val perfPlugin = "1.4.1"
     val ktlint = "0.4.0"
 
     object Android {
-        val appCompat = "1.3.1"
-        val browser = "1.3.0"
+        val appCompat = "1.4.1"
+        val browser = "1.4.0"
         val cameraX = "1.0.2"
         val cameraView = "1.0.0-alpha28"
-        val constraintLayout = "2.1.0"
-        val core = "1.6.0"
+        val constraintLayout = "2.1.3"
+        val core = "1.7.0"
         val hilt = "2.40"
-        val lifecycle = "2.3.1"
+        val lifecycle = "2.4.1"
         val material = "1.4.0"
         val navigation = "2.3.5"
-        val playCore = "1.10.2"
+        val playCore = "1.10.3"
         val playCoreKtx = "1.8.1"
-        val preference = "1.1.1"
+        val preference = "1.2.0"
         val room = "2.3.0"
     }
 
     object Firebase {
-        val bom = "29.0.0"
+        val bom = "29.1.0"
         val qrCode = "17.0.0"
     }
 

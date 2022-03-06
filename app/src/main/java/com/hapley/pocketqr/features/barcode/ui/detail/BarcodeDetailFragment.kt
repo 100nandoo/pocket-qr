@@ -85,34 +85,33 @@ class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
 
     private fun subscribeUi() {
         viewModel.barcodeLiveData.observe(
-            viewLifecycleOwner,
-            {
-                binding.tvLabel.text = it.title
-                binding.tvLabel.isSelected = true
-                binding.tvSubtitle.text = it.subtitle
-                binding.tvClickCount.text = it.clickCount.toString()
-                binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
-                try {
-                    val renderOption = RenderOption().apply {
-                        content = it.rawValue
-                        borderWidth = 16
-                        patternScale = 1f
-                        color = Color(
-                            auto = false,
-                            background = ContextCompat.getColor(requireContext(), R.color.white),
-                            light = ContextCompat.getColor(requireContext(), R.color.white),
-                            dark = ContextCompat.getColor(requireContext(), R.color.black_900)
-                        )
-                    }
-                    val result = AwesomeQrRenderer.render(renderOption)
-
-                    binding.ivQrcode.load(result.bitmap)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    tracker.recordException("Convert rawValue into QR Code Bitmap", e)
+            viewLifecycleOwner
+        ) {
+            binding.tvLabel.text = it.title
+            binding.tvLabel.isSelected = true
+            binding.tvSubtitle.text = it.subtitle
+            binding.tvClickCount.text = it.clickCount.toString()
+            binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
+            try {
+                val renderOption = RenderOption().apply {
+                    content = it.rawValue
+                    borderWidth = 16
+                    patternScale = 1f
+                    color = Color(
+                        auto = false,
+                        background = ContextCompat.getColor(requireContext(), R.color.white),
+                        light = ContextCompat.getColor(requireContext(), R.color.white),
+                        dark = ContextCompat.getColor(requireContext(), R.color.black_900)
+                    )
                 }
+                val result = AwesomeQrRenderer.render(renderOption)
+
+                binding.ivQrcode.load(result.bitmap)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                tracker.recordException("Convert rawValue into QR Code Bitmap", e)
             }
-        )
+        }
 
         viewModel.previewLiveData.observe(viewLifecycleOwner) { previewItem ->
             binding.ivQrcode.setOnClickListener {

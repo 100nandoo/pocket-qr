@@ -57,10 +57,10 @@ dependencies {
     implementation Libraries.coil
 
     // QR Generator
-    implementation Libraries.awesomeQr
+    implementation(files("./libs/AwesomeQRCode-1.2.0.aar"))
 
     // View Binding Delegate
-    implementation Libraries.viewBindingDelegate
+    implementation(files("./libs/fragmentviewbindingdelegate-kt-1.0.0.aar"))
 
     /**
      * ===================== Tests =======================

@@ -139,7 +139,7 @@ dependencies {
     implementation Libraries.lottie
 
     // QR Generator
-    implementation Libraries.awesomeQr
+    implementation(files("./libs/AwesomeQRCode-1.2.0.aar"))
 
     // RecyclerView Divider
     implementation Libraries.rvDivider
@@ -148,7 +148,7 @@ dependencies {
     implementation Libraries.timber
 
     // View Binding Delegate
-    implementation Libraries.viewBindingDelegate
+    implementation(files("./libs/fragmentviewbindingdelegate-kt-1.0.0.aar"))
 
     debugImplementation 'com.facebook.flipper:flipper:0.83.0'
     debugImplementation 'com.facebook.soloader:soloader:0.10.1'
