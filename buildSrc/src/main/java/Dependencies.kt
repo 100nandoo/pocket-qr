@@ -57,7 +57,6 @@ object Versions {
 
     val khronos = "0.9.0"
 
-    val koptional = "1.7.0"
 
     val lottie = "4.1.0"
 
@@ -85,8 +84,6 @@ object Libraries {
     val epoxyKapt = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
 
     val khronos = "com.github.hotchemi:khronos:${Versions.khronos}"
-
-    val koptional = "com.gojuno.koptional:koptional:${Versions.koptional}"
 
     val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
 

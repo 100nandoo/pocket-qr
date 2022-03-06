@@ -20,8 +20,6 @@ import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.browser.customtabs.CustomTabsSession
 import androidx.camera.core.ImageProxy
 import androidx.core.content.ContextCompat
-import com.gojuno.koptional.Optional
-import com.gojuno.koptional.toOptional
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
 import com.hapley.pocketqr.BuildConfig
@@ -138,13 +136,13 @@ class PocketQrUtil @Inject constructor(
             .launchUrl(context, uri)
     }
 
-    fun stringToOptionalUri(string: String?): Optional<Uri> {
+    fun stringToUri(string: String?): Uri? {
         return try {
             Uri.parse(string)
         } catch (e: Exception) {
             tracker.recordException("Parse Url to Uri", e)
             null
-        }.toOptional()
+        }
     }
 
     suspend fun initCustomTabConnection(context: Context): Pair<CustomTabsServiceConnection?, CustomTabsSession> {

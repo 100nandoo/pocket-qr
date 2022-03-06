@@ -135,9 +135,6 @@ dependencies {
     // Khronos
     implementation Libraries.khronos
 
-    // Koptional
-    implementation Libraries.koptional
-
     // Lottie
     implementation Libraries.lottie
 
