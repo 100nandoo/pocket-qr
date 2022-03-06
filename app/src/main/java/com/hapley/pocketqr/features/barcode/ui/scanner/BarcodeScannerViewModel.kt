@@ -29,7 +29,7 @@ class BarcodeScannerViewModel @Inject constructor(private val barcodeUseCase: Ba
 
     fun insertBarcode(mlKitBarcode: MlKitBarcode) {
         viewModelScope.launch(Dispatchers.Main) {
-            tempRawValue = mlKitBarcode.rawValue.toString()
+            tempRawValue = mlKitBarcode.rawValue?.toString()
 
             viewModelScope.launch(Dispatchers.IO) {
                 val availableId = barcodeUseCase.getLastId() + 1

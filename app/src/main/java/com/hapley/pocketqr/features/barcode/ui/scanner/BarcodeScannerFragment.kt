@@ -77,18 +77,17 @@ class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
         return inflater.inflate(R.layout.barcode_scanner_fragment, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupCameraAndQrCodeDetector()
+    }
+
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch {
             delay(2_000L)
             tracker.trackScreen(className, screenName)
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        setupCameraAndQrCodeDetector()
     }
 
     private fun setupCameraAndQrCodeDetector() {
@@ -170,21 +169,23 @@ class BarcodeScannerFragment : Fragment(R.layout.barcode_scanner_fragment) {
 
     private fun handleBarcode(barcode: Barcode) {
         lifecycleScope.launch(Dispatchers.Main){
-            val rawValue = barcode.rawValue.toString()
+            val rawValue = barcode.rawValue?.toString()
             Timber.d("Barcode raw value : $rawValue")
 
-            if (viewModel.tempRawValue != rawValue) {
-                viewModel.insertBarcode(barcode)
+            rawValue?.let {
+                if (viewModel.tempRawValue != rawValue) {
+                    viewModel.insertBarcode(barcode)
 
-                val barcodeItem = viewModel.convertToDomain(barcode, 0)?.let { BarcodeItem(it) }
+                    val barcodeItem = viewModel.convertToDomain(barcode, 0)?.let { BarcodeItem(it) }
 
-                barcodeItem?.let {
-                    tracker.scan(barcodeItem)
+                    barcodeItem?.let {
+                        tracker.scan(barcodeItem)
+                    }
+
+                    Snackbar.make(binding.qrCodeParent, rawValue, Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.open)) { mainViewModel.actionOpenUrl(barcodeItem) }
+                        .show()
                 }
-
-                Snackbar.make(binding.qrCodeParent, rawValue, Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.open)) { mainViewModel.actionOpenUrl(barcodeItem) }
-                    .show()
             }
         }
     }

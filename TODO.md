@@ -8,8 +8,8 @@ Pocket QR app
 
 ## Todo
 
+- [ ] Migrate to Navigation Kotlin DSL
 - [ ] Camera permission checking on barcode scanner fragment
-- [ ] Fix Warning Message
 - [ ] Keyboard Animation [medium article](https://medium.com/androiddevelopers/animating-your-keyboard-fb776a8fb66d)
 - [ ] Widget
 - [ ] Migrate to Square Logcat
@@ -72,3 +72,4 @@ Pocket QR app
 - [x] Migrate rv adapter to epoxy
 - [x] In app review
 - [x] target compatibility Java 11 
+- [x] Fix Warning Message

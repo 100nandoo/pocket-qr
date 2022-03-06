@@ -89,8 +89,8 @@ class BarcodeHistoryViewModel @Inject constructor(private val barcodeUseCase: Ba
                 .collect {
                     val result = if (searchQuery.isBlank()) it
                     else it.filter { barcodeItem ->
-                        barcodeItem.title.toLowerCase(Locale.getDefault())
-                            .contains(searchQuery.toLowerCase(Locale.getDefault()))
+                        barcodeItem.title.lowercase()
+                            .contains(searchQuery.lowercase())
                     }
                     _barcodeListLiveData.postValue(result)
                 }
