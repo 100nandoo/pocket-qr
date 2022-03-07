@@ -30,16 +30,15 @@ class PreviewFragment : Fragment() {
         return inflater.inflate(R.layout.preview_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initArgs()
         initUi()
     }
 
     private fun initArgs() {
         val previewItem = arguments?.getParcelable<PreviewItem>(PREVIEW_ITEM)
-        if(previewItem != null){
+        if (previewItem != null) {
             viewModel.previewItem = previewItem
         } else {
             findNavController().popBackStack()
