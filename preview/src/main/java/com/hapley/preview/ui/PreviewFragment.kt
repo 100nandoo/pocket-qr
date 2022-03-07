@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.hapley.preview.databinding.PreviewFragmentBinding
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class PreviewFragment : Fragment() {
@@ -47,11 +49,14 @@ class PreviewFragment : Fragment() {
 
     private fun initUi() {
         try {
-            val barcodeEncoder = BarcodeEncoder()
-            val bitmap: Bitmap = barcodeEncoder.encodeBitmap(viewModel.previewItem.rawValue, viewModel.previewItem.zxingFormat, 400, 400)
+            val previewItem = viewModel.previewItem
+            (binding.imageView.layoutParams as ConstraintLayout.LayoutParams).dimensionRatio = "${previewItem.ratio.first}:${previewItem.ratio.second}"
+            val height = 400
+            val width = (height * previewItem.ratio.first).roundToInt()
+
+            val bitmap: Bitmap = BarcodeEncoder().encodeBitmap(previewItem.rawValue, previewItem.zxingFormat, width, height)
 
             binding.imageView.load(bitmap)
-
         } catch (e: Exception) {
             e.printStackTrace()
 //            tracker.recordException("Convert rawValue into QR Code Bitmap", e)

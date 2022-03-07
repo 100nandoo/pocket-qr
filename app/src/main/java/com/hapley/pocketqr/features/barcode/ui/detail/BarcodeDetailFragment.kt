@@ -96,8 +96,8 @@ class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
             binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
             try {
                 (binding.ivQrcode.layoutParams as ConstraintLayout.LayoutParams).dimensionRatio = "${it.ratio.first}:${it.ratio.second}"
-                val width = (binding.ivQrcode.height * it.ratio.first).roundToInt()
-                val height = binding.ivQrcode.height
+                val height = 300
+                val width = (height * it.ratio.first).roundToInt()
 
                 val bitmap: Bitmap = BarcodeEncoder().encodeBitmap(it.rawValue, it.zxingFormat, width, height)
 
