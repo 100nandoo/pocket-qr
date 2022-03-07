@@ -43,11 +43,17 @@ class BarcodeUseCase @Inject constructor(private val barcodeRepository: BarcodeR
 
     fun getPreviewById(id: Int): PreviewItem {
         val barcodeEntity = barcodeRepository.getById(id)
-        return PreviewItem(barcodeEntity.label, barcodeEntity.rawValue)
+        val zxingFormat = BarcodeItem.toZxingFormat(barcodeEntity.format)
+        val ratio = BarcodeItem.getRatio(barcodeEntity.format)
+        return PreviewItem(barcodeEntity.label, barcodeEntity.rawValue, zxingFormat, ratio)
     }
 
     fun getPreviewByIdFlow(id: Int): Flow<PreviewItem> {
-        return barcodeRepository.getByIdFlow(id).map { entity -> PreviewItem(entity.label, entity.rawValue) }
+        return barcodeRepository.getByIdFlow(id).map { entity ->
+            val zxingFormat = BarcodeItem.toZxingFormat(entity.format)
+            val ratio = BarcodeItem.getRatio(entity.format)
+            PreviewItem(entity.label, entity.rawValue, zxingFormat, ratio)
+        }
     }
 
     fun getLastId(): Int {

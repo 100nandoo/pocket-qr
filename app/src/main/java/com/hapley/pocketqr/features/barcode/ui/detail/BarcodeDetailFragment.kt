@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,7 +14,6 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.zxing.BarcodeFormat
 import com.hapley.pocketqr.R
 import com.hapley.pocketqr.common.SCREEN_DETAIL
 import com.hapley.pocketqr.common.Tracker
@@ -28,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 
 @AndroidEntryPoint
@@ -94,8 +94,11 @@ class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
             binding.tvClickCount.text = it.clickCount.toString()
             binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
             try {
-                val barcodeEncoder = BarcodeEncoder()
-                val bitmap: Bitmap = barcodeEncoder.encodeBitmap(it.rawValue, BarcodeFormat.QR_CODE, 200, 200)
+                (binding.ivQrcode.layoutParams as ConstraintLayout.LayoutParams).dimensionRatio = "${it.ratio.first}:${it.ratio.second}"
+                val width = (binding.ivQrcode.height * it.ratio.first).roundToInt()
+                val height = binding.ivQrcode.height
+
+                val bitmap: Bitmap = BarcodeEncoder().encodeBitmap(it.rawValue, it.zxingFormat, width, height)
 
                 binding.ivQrcode.load(bitmap)
             } catch (e: Exception) {

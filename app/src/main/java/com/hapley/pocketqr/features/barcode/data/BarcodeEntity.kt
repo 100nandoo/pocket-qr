@@ -2,6 +2,7 @@ package com.hapley.pocketqr.features.barcode.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.hapley.pocketqr.features.barcode.domain.BarcodeFormat
 import com.hapley.pocketqr.features.barcode.domain.BarcodeType
 
 /**
@@ -14,10 +15,13 @@ data class BarcodeEntity(
     val label: String,
     val displayValue: String,
     val created: Long,
+
+    @BarcodeFormat
     val format: Int,
 
     @BarcodeType
     val type: Int,
+
     val isFavorite: Boolean,
     val clickCount: Int
 ) {
