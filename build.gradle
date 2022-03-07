@@ -3,7 +3,7 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -27,7 +27,7 @@ allprojects {
     repositories {
         google()
         maven { url "https://jitpack.io" }
-        jcenter()
+        mavenCentral()
     }
 
     apply plugin: 'com.diffplug.spotless'

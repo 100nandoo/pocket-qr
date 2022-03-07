@@ -11,7 +11,7 @@
         android:id="@+id/epoxy_rv_barcode_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="@dimen/material_baseline_grid_1x" />
+        android:paddingVertical="@dimen/baseline_grid_1x" />
 
     <LinearLayout
         android:id="@+id/ll_empty"
@@ -21,8 +21,8 @@
         android:orientation="vertical">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="@dimen/material_increment_5x"
-            android:layout_height="@dimen/material_increment_5x"
+            android:layout_width="@dimen/increment_5x"
+            android:layout_height="@dimen/increment_5x"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/empty_box" />
@@ -31,7 +31,7 @@
             style="@style/TextAppearance.AppTheme.Headline5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/material_baseline_grid_2x"
+            android:padding="@dimen/baseline_grid_2x"
             android:text="@string/you_have_no_scanned_item"
             android:textAlignment="center" />
     </LinearLayout>

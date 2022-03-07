@@ -135,17 +135,11 @@ dependencies {
     // Khronos
     implementation Libraries.khronos
 
-    // Koptional
-    implementation Libraries.koptional
-
     // Lottie
     implementation Libraries.lottie
 
-    // Material Value
-    implementation Libraries.materialValues
-
     // QR Generator
-    implementation Libraries.awesomeQr
+    implementation(Libraries.zxingAndroid)
 
     // RecyclerView Divider
     implementation Libraries.rvDivider
@@ -154,11 +148,7 @@ dependencies {
     implementation Libraries.timber
 
     // View Binding Delegate
-    implementation Libraries.viewBindingDelegate
-
-    debugImplementation 'com.facebook.flipper:flipper:0.83.0'
-    debugImplementation 'com.facebook.soloader:soloader:0.10.1'
-    debugImplementation 'com.facebook.flipper:flipper-leakcanary-plugin:0.83.0'
+    implementation(files("./libs/fragmentviewbindingdelegate-kt-1.0.0.aar"))
 
     /**
      * ===================== Tests =======================

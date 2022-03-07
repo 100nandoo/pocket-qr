@@ -14,10 +14,6 @@ import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.gojuno.koptional.None
-import com.gojuno.koptional.Optional
-import com.gojuno.koptional.Some
-import com.gojuno.koptional.toOptional
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hapley.core.ui.helper.viewBinding
@@ -43,11 +39,12 @@ class MainActivity : AppCompatActivity() {
                     pocketQrUtil.initCustomTabConnection(this@MainActivity)
                 } catch (E: Exception) {
                     null
-                }.toOptional()
+                }
 
-                if (result is Some) {
-                    connection = result.value.first.toOptional()
-                    session = result.value.second.toOptional()
+                if (result != null) {
+                    if(result.first != null)
+                    connection = result.first
+                    session = result.second
                 }
             }
         }
@@ -58,8 +55,8 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var pocketQrUtil: PocketQrUtil
 
-    private var connection: Optional<CustomTabsServiceConnection> = None
-    var session: Optional<CustomTabsSession> = None
+    private var connection: CustomTabsServiceConnection? = null
+    var session: CustomTabsSession? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,11 +106,11 @@ class MainActivity : AppCompatActivity() {
     private fun actionOpen(barcodeItem: BarcodeItem) {
         when (barcodeItem.barcodeType) {
             URL -> {
-                val uri = pocketQrUtil.stringToOptionalUri(barcodeItem.rawValue)
+                val uri = pocketQrUtil.stringToUri(barcodeItem.rawValue)
                 val session = session
 
-                if (uri is Some && session is Some) {
-                    pocketQrUtil.launchCustomTab(this, session.value, uri.value)
+                if (uri != null && session != null) {
+                    pocketQrUtil.launchCustomTab(this, session, uri)
                     viewModel.incrementClickCount(barcodeItem.id.toInt())
                 } else {
                     actionIntentViewWrapper(barcodeItem)

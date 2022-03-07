@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 0.9.0 *(3 Mar 2022)*
+----------------------------
+* New: Update dependencies
+* New: Update to latest Kotlin version
+* New: Support more barcode type (EAN)
+* New: Remove some 3rd party libs (Material Values, Koptional, AwesomeQR, Flipper)
+
 Version 0.8.14 *(7 Sep 2021)*
 ----------------------------
 * New: Update dependencies

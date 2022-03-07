@@ -3,8 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/drawable-v23/splash_screen_background.xml" value="0.176" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/drawable-v24/ic_hapley.xml" value="0.176" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/drawable/background_gradient_blue.xml" value="0.176" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/drawable/background_gradient_orange.xml" value="0.176" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/drawable/background_gradient_purple.xml" value="0.176" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/drawable/ic_hapley.xml" value="0.176" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/drawable/splash_screen_background.xml" value="0.176" />
         <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/layout/activity_main.xml" value="0.19655521783181357" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/layout/barcode_detail_dialog_label.xml" value="0.283595922150139" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/layout/barcode_detail_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/layout/barcode_history_bottom_sheet.xml" value="0.2140625" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/layout/barcode_history_item.xml" value="0.2140625" />
         <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/app/src/main/res/layout/barcode_scanner_fragment.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/Nandoo/Documents/Codes/pocket-qr/preview/src/main/res/layout/preview_fragment.xml" value="0.2140625" />
       </map>
     </option>
   </component>

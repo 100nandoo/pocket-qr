@@ -7,6 +7,10 @@
     <color name="blue_600">#1e88e5</color> <!--Color primary variant (dark)-->
     <color name="blue_700">#1976d2</color> <!--Color primary variant (light)-->
 
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="green_700">#388E3C</color>
+
     <color name="colorPrimary">#2196f3</color>
     <color name="colorSecondary">#ffcc80</color>
 
@@ -14,12 +18,19 @@
 
     <color name="white">#FFFFFF</color>
 
+    <color name="grey">#EEEEEE</color>
+
     <color name="primaryTextColor">#FFFFFF</color>
     <color name="secondaryTextColor">#FFFFFF</color>
     <color name="colorOnSurface">#33312E</color>
 
     <color name="orange_200">#ffcc80</color> <!--Color secondary-->
     <color name="orange_500">#ff9800</color> <!--Color secondary variant-->
+    <color name="orange_700">#F57C00</color>
+
+    <color name="purple_200">#CE93D8</color> <!--Color secondary-->
+    <color name="purple_500">#9C27B0</color> <!--Color secondary variant-->
+    <color name="purple_700">#7B1FA2</color>
 
     <color name="black_700">#303030</color>
     <color name="black_800">#212121</color>

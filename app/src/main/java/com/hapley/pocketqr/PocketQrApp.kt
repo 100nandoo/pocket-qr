@@ -9,7 +9,6 @@ import com.hapley.pocketqr.ui.settings.FOLLOW_SYSTEM
 import com.hapley.pocketqr.ui.settings.Mapper
 import com.hapley.pocketqr.ui.settings.SettingsFragment
 import com.hapley.pocketqr.util.BuildUtil
-import com.hapley.pocketqr.util.debugger.Flipper
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -30,8 +29,6 @@ class PocketQrApp : Application() {
         }
 
         Logging.init()
-
-        Flipper(this)
 
         setNightMode()
     }

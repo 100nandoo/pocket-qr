@@ -56,14 +56,11 @@ dependencies {
     // Coil Image Loader
     implementation Libraries.coil
 
-    // Material Value
-    implementation Libraries.materialValues
-
     // QR Generator
-    implementation Libraries.awesomeQr
+    implementation(Libraries.zxingAndroid)
 
     // View Binding Delegate
-    implementation Libraries.viewBindingDelegate
+    implementation(files("./libs/fragmentviewbindingdelegate-kt-1.0.0.aar"))
 
     /**
      * ===================== Tests =======================

@@ -1,21 +1,21 @@
 package com.hapley.preview.ui
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.github.sumimakito.awesomeqr.option.RenderOption
-import com.github.sumimakito.awesomeqr.option.color.Color
 import com.hapley.preview.R
 import com.hapley.preview.databinding.PreviewFragmentBinding
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class PreviewFragment : Fragment() {
@@ -32,16 +32,15 @@ class PreviewFragment : Fragment() {
         return inflater.inflate(R.layout.preview_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initArgs()
         initUi()
     }
 
     private fun initArgs() {
         val previewItem = arguments?.getParcelable<PreviewItem>(PREVIEW_ITEM)
-        if(previewItem != null){
+        if (previewItem != null) {
             viewModel.previewItem = previewItem
         } else {
             findNavController().popBackStack()
@@ -50,21 +49,14 @@ class PreviewFragment : Fragment() {
 
     private fun initUi() {
         try {
-            val renderOption = RenderOption().apply {
-                content = viewModel.previewItem.rawValue
-                borderWidth = 16
-                patternScale = 1f
-                color = Color(
-                    auto = false,
-                    background = ContextCompat.getColor(requireContext(), R.color.material_color_white),
-                    light = ContextCompat.getColor(requireContext(), R.color.material_color_white),
-                    dark = ContextCompat.getColor(requireContext(), R.color.black_900)
-                )
-            }
-            val result = AwesomeQrRenderer.render(renderOption)
+            val previewItem = viewModel.previewItem
+            (binding.imageView.layoutParams as ConstraintLayout.LayoutParams).dimensionRatio = "${previewItem.ratio.first}:${previewItem.ratio.second}"
+            val height = 400
+            val width = (height * previewItem.ratio.first).roundToInt()
 
-            binding.imageView.load(result.bitmap)
+            val bitmap: Bitmap = BarcodeEncoder().encodeBitmap(previewItem.rawValue, previewItem.zxingFormat, width, height)
 
+            binding.imageView.load(bitmap)
         } catch (e: Exception) {
             e.printStackTrace()
 //            tracker.recordException("Convert rawValue into QR Code Bitmap", e)

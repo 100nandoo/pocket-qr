@@ -168,6 +168,6 @@ class BarcodeHistoryFragment : Fragment(R.layout.barcode_history_fragment) {
     }
 
     private fun initSwipe() {
-        val barcodeHistoryAdapterHelper = BarcodeHistoryAdapterHelper(binding.epoxyRvBarcodeHistory, actionDelete)
+        BarcodeHistoryAdapterHelper(binding.epoxyRvBarcodeHistory, actionDelete)
     }
 }

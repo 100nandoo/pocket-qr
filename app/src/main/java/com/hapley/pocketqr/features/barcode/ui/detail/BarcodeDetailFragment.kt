@@ -1,9 +1,11 @@
 package com.hapley.pocketqr.features.barcode.ui.detail
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,9 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.github.sumimakito.awesomeqr.option.RenderOption
-import com.github.sumimakito.awesomeqr.option.color.Color
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import com.hapley.pocketqr.R
@@ -23,11 +22,14 @@ import com.hapley.pocketqr.databinding.BarcodeDetailDialogLabelBinding
 import com.hapley.pocketqr.databinding.BarcodeDetailFragmentBinding
 import com.hapley.preview.ui.PreviewFragment
 import com.hapley.preview.ui.PreviewItem
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
+
 
 @AndroidEntryPoint
 class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
@@ -61,8 +63,8 @@ class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initArgs()
         initUi()
@@ -85,34 +87,26 @@ class BarcodeDetailFragment : Fragment(R.layout.barcode_detail_fragment) {
 
     private fun subscribeUi() {
         viewModel.barcodeLiveData.observe(
-            viewLifecycleOwner,
-            {
-                binding.tvLabel.text = it.title
-                binding.tvLabel.isSelected = true
-                binding.tvSubtitle.text = it.subtitle
-                binding.tvClickCount.text = it.clickCount.toString()
-                binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
-                try {
-                    val renderOption = RenderOption().apply {
-                        content = it.rawValue
-                        borderWidth = 16
-                        patternScale = 1f
-                        color = Color(
-                            auto = false,
-                            background = ContextCompat.getColor(requireContext(), R.color.material_color_white),
-                            light = ContextCompat.getColor(requireContext(), R.color.material_color_white),
-                            dark = ContextCompat.getColor(requireContext(), R.color.black_900)
-                        )
-                    }
-                    val result = AwesomeQrRenderer.render(renderOption)
+            viewLifecycleOwner
+        ) {
+            binding.tvLabel.text = it.title
+            binding.tvLabel.isSelected = true
+            binding.tvSubtitle.text = it.subtitle
+            binding.tvClickCount.text = it.clickCount.toString()
+            binding.tvScannedDate.text = DateUtils.formatDateTime(requireContext(), it.created.time, DateUtils.FORMAT_ABBREV_ALL)
+            try {
+                (binding.ivQrcode.layoutParams as ConstraintLayout.LayoutParams).dimensionRatio = "${it.ratio.first}:${it.ratio.second}"
+                val height = 300
+                val width = (height * it.ratio.first).roundToInt()
 
-                    binding.ivQrcode.load(result.bitmap)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    tracker.recordException("Convert rawValue into QR Code Bitmap", e)
-                }
+                val bitmap: Bitmap = BarcodeEncoder().encodeBitmap(it.rawValue, it.zxingFormat, width, height)
+
+                binding.ivQrcode.load(bitmap)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                tracker.recordException("Convert rawValue into QR Code Bitmap", e)
             }
-        )
+        }
 
         viewModel.previewLiveData.observe(viewLifecycleOwner) { previewItem ->
             binding.ivQrcode.setOnClickListener {

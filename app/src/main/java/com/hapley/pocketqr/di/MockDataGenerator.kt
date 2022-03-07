@@ -2,18 +2,15 @@ package com.hapley.pocketqr.di
 
 import com.hapley.pocketqr.features.barcode.data.BarcodeEntity
 import com.hapley.pocketqr.features.barcode.data.BarcodeRepository
-import com.hapley.pocketqr.features.barcode.domain.CONTACT
-import com.hapley.pocketqr.features.barcode.domain.EMAIL
-import com.hapley.pocketqr.features.barcode.domain.ISBN
-import com.hapley.pocketqr.features.barcode.domain.PHONE
-import com.hapley.pocketqr.features.barcode.domain.URL
-import com.hapley.pocketqr.features.barcode.domain.WIFI
+import com.hapley.pocketqr.features.barcode.domain.*
 import khronos.Dates
+import khronos.day
 import khronos.days
 import khronos.hours
 import khronos.month
 import khronos.months
 import khronos.week
+import khronos.weeks
 import khronos.year
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -52,6 +49,12 @@ class MockDataGenerator @Inject constructor(private val barcodeRepository: Barco
                     "", "John Doe", 3.months.ago.time, 256, CONTACT, false, 0
                 )
             )
+            add(BarcodeEntity("12345678", "Code 39", "12345678", 3.hours.ago.time, CODE_39, UNKNOWN, false, 0))
+            add(BarcodeEntity("12812345", "Code 128", "12345678", 6.hours.ago.time, CODE_128, UNKNOWN, false, 0))
+            add(BarcodeEntity("09312345", "Code 93", "12345678", 10.hours.ago.time, CODE_93, UNKNOWN, false, 0))
+            add(BarcodeEntity("12345678901234", "Codebar", "12345678", 10.hours.ago.time, CODEBAR, UNKNOWN, false, 0))
+            add(BarcodeEntity("042100005264", "UPC-A", "042100005264", 3.day.ago.time, UPC_A, UNKNOWN, false, 0))
+            add(BarcodeEntity("12345678", "UPC-E", "12345678", 1.day.ago.time, UPC_E, UNKNOWN, false, 0))
         }
     }
 }
